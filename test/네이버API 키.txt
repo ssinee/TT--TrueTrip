@@ -1,0 +1,15 @@
+==============
+파파고 SMT
+client ID
+3hz9dJ1yFVeXaQbtXqbB
+
+client secret 
+fWiCb8lpZH
+
+파파고 NMT
+6EwrCUti3lul5Bue3G4g
+u0fndz6mrM
+
+
+SMT 통계기반, NMT 신경망기반
+NMT가 더 잘 맞는듯.
