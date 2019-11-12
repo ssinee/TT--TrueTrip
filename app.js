@@ -14,15 +14,15 @@ mongoose.Promise = global.Promise;
 
 // CONNECT TO MONGODB SERVER
 
-// mongoose.connect('mongodb://localhost:27017/vovavoca', {
-//
-//   authSource: "admin",
-//   useNewUrlParser:true,
-//   useUnifiedTopology:true
-// } ).then(() => console.log('Successfully connected to mongodb'))
-//     .catch(e => console.error(e));
-// mongoose.set('useCreateIndex', true);
-// mongoose.set('useFindAndModify', false);
+mongoose.connect('mongodb://localhost:27017/vovavoca', {
+
+  authSource: "admin",
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+} ).then(() => console.log('Successfully connected to mongodb'))
+    .catch(e => console.error(e));
+mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 // app.use('/dataset',express.static('dataset'));
 app.use(express.static('views'))
