@@ -1,8 +1,11 @@
 const express = require('express');
+const socket=require('socket.io');
+const http = require('http');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+
 const app = express();
 const ejs = require('ejs');
 var logger = require('morgan');

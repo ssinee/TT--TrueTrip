@@ -29,6 +29,7 @@
     "nodemon": "^1.19.4",
     "pug": "^2.0.4",
     "saslprep": "^1.0.3",
+    "socket.io": "^2.3.0",
     "soundex": "^0.2.1",
     "soundex-encode": "^0.1.2"
   }
