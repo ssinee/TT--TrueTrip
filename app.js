@@ -9,6 +9,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const ejs = require('ejs');
 var logger = require('morgan');
+var path = require('path');
+var expressSession = require('express-session');
 
 // Passport Config
 app.use(logger('dev'));
@@ -17,7 +19,7 @@ mongoose.Promise = global.Promise;
 
 // CONNECT TO MONGODB SERVER
 
-mongoose.connect('mongodb://localhost:27017/vovavoca', {
+mongoose.connect('mongodb://localhost:27017/UserInfo', {
 
   authSource: "admin",
   useNewUrlParser:true,
@@ -35,8 +37,7 @@ app.use(express.static('scss'))
 app.use(express.static('vendor'))
 // EJS
 
-app.set('view engine', 'html')
-app.engine('html', ejs.renderFile)
+app.set('view engine', 'ejs');
 
 // Express body parser
 app.use(bodyParser.json());
@@ -66,7 +67,15 @@ app.use(function(req, res, next) {
 
 
 // Routes
+var loginRouter = require('./routes/login.js');
+
 app.use('/', require('./routes/index.js'));
+app.use('/login',loginRouter);
+
+//로그인화면에서 register 누르면 planner와 traveler 중 하나 선택하는 페이지로 이동
+app.post('/select', function(req, res, next) {
+  res.render('selectUserType', { title: 'Express' });
+})
 
 const PORT = process.env.PORT || 5020;
 
