@@ -1,46 +1,54 @@
 const express = require('express');
-const socket=require('socket.io');
-const http = require('http');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-
+const static=require('serve-static');
+const path=require('path')
 const app = express();
 const ejs = require('ejs');
 var logger = require('morgan');
+var multer=require('multer');
+const DBData=require('./models/DBData');
+const fs= require('fs');
 
 // Passport Config
 app.use(logger('dev'));
 // Connect to MongoDB
 mongoose.Promise = global.Promise;
 
+app.use(bodyParser.urlencoded({
+  extended:true
+}));
+app.use(bodyParser.json())
+
 // CONNECT TO MONGODB SERVER
 
-mongoose.connect('mongodb://localhost:27017/vovavoca', {
+mongoose.connect('mongodb://localhost:27017/TT', {
 
   authSource: "admin",
   useNewUrlParser:true,
   useUnifiedTopology:true
 } ).then(() => console.log('Successfully connected to mongodb'))
     .catch(e => console.error(e));
+
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
-
-// app.use('/dataset',express.static('dataset'));
+app.use(express.static('node_modules'))
 app.use(express.static('views'))
 app.use(express.static('css'))
 app.use(express.static('js'))
 app.use(express.static('scss'))
 app.use(express.static('vendor'))
-// EJS
+app.use(express.static('img'))
+app.use('/upload', express.static('./upload'))
 
-app.set('view engine', 'html')
+// EJS
+// app.set('view engine', 'html')
+
 app.engine('html', ejs.renderFile)
 
-// Express body parser
-app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }));
+
 
 // Express session
 app.use(session({
@@ -67,6 +75,10 @@ app.use(function(req, res, next) {
 
 // Routes
 app.use('/', require('./routes/index.js'));
+app.use('/', require('./routes/upload.js'));
+app.use('/', require('./routes/showTheme.js'));
+
+
 
 const PORT = process.env.PORT || 5020;
 
