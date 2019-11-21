@@ -94,10 +94,7 @@ var isAuthenticated = function (req, res, next) {
 
 
 // Routes
-var loginRouter = require('./routes/login');
-var registerRouter = require('./routes/register');
-var addTravelerRouter = require('./routes/addTraveler');
-var addPlannerRouter = require('./routes/addPlanner');
+
 var passportRouter=require('./routes/passport');
 
 // app.get('/profile',isAuthenticated,function(req, res, next) {
@@ -105,15 +102,7 @@ var passportRouter=require('./routes/passport');
 // })
 app.use('/', require('./routes/index.js'));
 app.use('/',passportRouter);
-// app.use('/',loginRouter);
-app.use('/',registerRouter);
-// app.use('/',addTravelerRouter);
-// app.use('/',addPlannerRouter);
 
-//로그인화면에서 register 누르면 planner와 traveler 중 하나 선택하는 페이지로 이동
-app.post('/select', function(req, res, next) {
-  res.render('selectUserType', { title: 'Express' });
-})
 
 const PORT = process.env.PORT || 5020;
 

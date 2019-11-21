@@ -18,9 +18,24 @@ var noPermission = function(req,res){
     req.flash("errors", {login:"You don't have permission"});
     req.logout();
     res.redirect("/login");
-}
+};
 
+router.post('/select', function(req, res, next) {
+    res.render('selectUserType', { title: 'Express' });
+});
 
+router.post('/register', function(req, res, next) {
+
+    var user_type =req.body.temp1;
+    // console.log(user_type);
+    if(user_type=="Planner"){
+        res.render('plannerRegister', { title: 'Express' });
+    }
+    else{
+        res.render('travelerRegister', { title: 'Express' });
+    }
+
+});
 
 router.get('/profile',isAuthenticated, function (req, res) {
     res.render('profile',{
@@ -66,28 +81,6 @@ router.route('/addPlanner').post(passport.authenticate('local-planner', {
     failureFlash : true
 }));
 
-// router.route('/profile').get(function(req, res) {
-//     console.log('/profile 패스 요청됨.');
-//
-//     // 인증된 경우, req.user 객체에 사용자 정보 있으며, 인증안된 경우 req.user는 false값임
-//     console.log('req.user 객체의 값');
-//     console.dir(req.user);
-//
-//     // 인증 안된 경우
-//     if (!req.user) {
-//         console.log('사용자 인증 안된 상태임.');
-//         res.redirect('/');
-//         return;
-//     }
-//
-//     // 인증된 경우
-//     console.log('사용자 인증된 상태임.');
-//     if (Array.isArray(req.user)) {
-//         res.render('profile.ejs', {user: req.user[0]._doc});
-//     } else {
-//         res.render('profile.ejs', {user: req.user});
-//     }
-// });
 
 // 로그아웃 - 로그아웃 요청 시 req.logout() 호출함
 router.route('/logout').get(function(req, res) {
