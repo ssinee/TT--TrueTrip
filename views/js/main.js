@@ -82,6 +82,14 @@
         $(this).addClass('active');
     });
 
+
+
+    $(".filter-left .category-theme-filter .category-option .co-item label").on('click', function () {
+        $(".filter-left .category-theme-filter .category-option .co-item label").removeClass('active');
+        $(this).addClass('active');
+    });
+
+
     $(".filter-left .rating-filter .rating-option .ro-item label").on('click', function () {
         $(".filter-left .rating-filter .rating-option .ro-item label").removeClass('active');
         $(this).addClass('active');

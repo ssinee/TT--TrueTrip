@@ -1244,6 +1244,64 @@ ol {
   Filter Section
 -----------------------*/
 
+
+
+
+
+.filter-section {
+	padding-top: 0;
+	padding-bottom: 120px;
+}
+
+.filter-left .category-theme-filter {
+	margin-bottom: 60px;
+}
+
+.filter-left .category-theme-filter h3 {
+	color: #242424;
+	font-weight: 700;
+	margin-bottom: 32px;
+}
+
+.filter-left .category-theme-filter .category-option .co-item input {
+	visibility: hidden;
+	position: absolute;
+}
+
+.filter-left .category-theme-filter .category-option .co-item label {
+	color: #787878;
+	font-size: 18px;
+	line-height: 32px;
+	letter-spacing: 0.2px;
+	padding-left: 28px;
+	position: relative;
+	cursor: pointer;
+}
+
+.filter-left .category-theme-filter .category-option .co-item label.active:after {
+	background: #FF5581;
+	border-color: #FF5581;
+}
+
+.filter-left .category-theme-filter .category-option .co-item label:after {
+	position: absolute;
+	left: 0;
+	top: 9px;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #CCCCCC;
+	content: "";
+}
+
+
+
+
+
+
+
+
+
+
 .filter-section {
 	padding-top: 0;
 	padding-bottom: 120px;

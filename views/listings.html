@@ -23,39 +23,95 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script>
+        var content;
+        var contentString = "";
+        var stringArr = new Array();
+        var pagenum = 1;
         $(document).ready(function () {
-            var content;
-            var string = "";
+            contentString = "";
+            stringArr=[];
+            pagenum=1;
+            var theme = $(":input:radio[name=the]:checked").val();
+            var posting = $.post('/showtheme', {'theme': theme})
+            posting.done(function (data) {
+                content = data.data
+
+                for (var i = 0; i < content.length; i++) {
+
+                    contentString +=
+                        "<div class=\"col-lg-4 col-sm-6\" >" +
+                        "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+                        "                            <div class=\"arrange-pic\">" +
+                        "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                        "                            <div class=\"rating\">4.9</div>" +
+                        "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
+                        "                            </div>" +
+                        "                            <div class=\"arrange-text\">" +
+                        "                            <h5>" + content[i].title + "</h5>" +
+                        "                        <span>" + content[i].location + "</span>" +
+                        "                        <p>Fusce urna quam, euismod sit</p>" +
+                        "                        <div class=\"open tomorrow\">Opens Tomorow at 10am</div>" +
+                        "                        </div>" +
+                        "                       </a>" +
+                        "                     </div>"
+                    if ((i > 0 && i % 9 == 0) || i==content.length){
+                        stringArr[pagenum] = contentString;
+                        console.log("pagennum")
+                        console.log(pagenum)
+                        pagenum++;
+                        contentString = ""
+                    }
+                }
+                $('#showhere').html(stringArr[1]);
+            });
+
             $('input[name="the"]').click(function () {
-                var string = "";
+                contentString = "";
+                stringArr=[];
+                pagenum=1;
                 var theme = $(":input:radio[name=the]:checked").val();
+
                 var posting = $.post('/showtheme', {'theme': theme})
                 posting.done(function (data) {
                     content = data.data
-                    for (var i = 0; i < content.length; i+=3) {
-                        string+=
+                    console.log(data.length)
+                    for (var i = 0; i < content.length; i++) {
+
+                        contentString +=
                             "<div class=\"col-lg-4 col-sm-6\" >" +
                             "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
                             "                            <div class=\"arrange-pic\">" +
-                            "                            <img src=\'"+content[i].path +"' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                            "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
                             "                            <div class=\"rating\">4.9</div>" +
-                            "                            <div class=\"tic-text\">"+content[i].author+"</div>" +
+                            "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
                             "                            </div>" +
                             "                            <div class=\"arrange-text\">" +
-                            "                            <h5>"+content[i].title+"</h5>" +
-                            "                        <span>"+content[i].location+"</span>" +
+                            "                            <h5>" + content[i].title + "</h5>" +
+                            "                        <span>" + content[i].location + "</span>" +
                             "                        <p>Fusce urna quam, euismod sit</p>" +
                             "                        <div class=\"open tomorrow\">Opens Tomorow at 10am</div>" +
                             "                        </div>" +
                             "                       </a>" +
                             "                     </div>"
-                        string.replace(/\n/g,"");
-                        string.replace(/\r/g,"");
+                        if ((i > 0 && i % 9 == 0) || i==content.length){
+                            stringArr[pagenum] = contentString;
+                            console.log("pagennum")
+                            console.log(pagenum)
+                            pagenum++;
+                            contentString = ""
+                        }
                     }
-                    $('#showhere').html(string).whiteSpace;
-                })
+                    $('#showhere').html(stringArr[1]);
+                });
+
+            });
+
+            $('.pagination-num a').click(function () {
+                var pagenum_ = parseInt($(this).text());
+                $('#showhere').html(stringArr[pagenum_]);
             });
         });
+
     </script>
 </head>
 
@@ -138,24 +194,26 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="filter-left">
+
+
                     <div class="category-filter">
                         <h3>Category Filter</h3>
                         <div class="category-option">
                             <form id="themeForm" action="/showtheme" method="post">
                                 <div class="co-item">
-                                    <label class="active"><input type="radio" name="the" value="모두">모두</label>
+                                    <label class="active"><input type="radio" name="the" value="모두" checked>모두</label>
                                 </div>
                                 <div class="co-item">
-                                    <label> <input type="radio" name="the" value="쇼핑">음식</label>
+                                    <label> <input type="radio" name="the" value="음식">음식</label>
                                 </div>
                                 <div class="co-item">
                                     <label><input type="radio" name="the" value="카페">카페</label>
                                 </div>
                                 <div class="co-item">
-                                    <label><input type="radio" name="the" value="사진">쇼핑</label>
+                                    <label><input type="radio" name="the" value="쇼핑">쇼핑</label>
                                 </div>
                                 <div class="co-item">
-                                    <label><input type="radio" name="the" value="음식">사진</label>
+                                    <label><input type="radio" name="the" value="사진">사진</label>
                                 </div>
                                 <div class="co-item">
                                     <label><input type="radio" name="the" value="액티비티">액티비티</label>
@@ -166,6 +224,10 @@
                             </form>
                         </div>
                     </div>
+
+
+
+
                     <div class="rating-filter">
                         <h3>Ratings</h3>
                         <div class="rating-option">
@@ -272,12 +334,13 @@
 
                     <!--                    finish listing-->
 
-
                     <div class="col-lg-12 text-right">
                         <div class="pagination-num">
-                            <a href="#">01</a>
-                            <a href="#">02</a>
-                            <a href="#">03</a>
+                            <a href="javascript:void (0)" value="1" id="check">01</a>
+                            <a href="javascript:void (0)" value="2">02</a>
+                            <a href="javascript:void (0)" value="3">03</a>
+                            <a href="javascript:void (0)" value="4">04</a>
+                            <a href="javascript:void (0)" value="5">05</a>
                         </div>
                     </div>
                 </div>
