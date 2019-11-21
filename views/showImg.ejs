@@ -14,7 +14,6 @@
                 console.log("in the function")
                 var string = "";
                 var theme = $(":input:radio[name=the]:checked").val();
-                console.log(theme);
                 var posting = $.post('/showtheme', {'theme': theme})
                 posting.done(function (data) {
                     content = data.data

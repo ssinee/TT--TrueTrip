@@ -77,6 +77,7 @@ app.use(function(req, res, next) {
 app.use('/', require('./routes/index.js'));
 app.use('/', require('./routes/upload.js'));
 app.use('/', require('./routes/showTheme.js'));
+app.use('/', require('./routes/showPlannersImage'));
 
 
 

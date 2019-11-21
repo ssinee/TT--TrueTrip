@@ -26,8 +26,13 @@ router.get('/showimg', (req, res)=>{
     res.render('../views/showImg.ejs')
 })
 
+router.get('/guide', (req, res)=>{
+    res.render('../views/guidepageTest.html')
+})
 
 router.get('/upload', (req, res)=>{
     res.render('../views/image_upload.html');
 })
+
+
 module.exports = router;
