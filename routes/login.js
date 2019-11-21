@@ -3,39 +3,39 @@ var router = express.Router();
 var mongoose=require("mongoose");
 var User=mongoose.model('users');
 var Planner=mongoose.model('planners');
-var passport = require('../config/passport');
 
 
-router.post('/login',function(req, res,next) {
-        console.log('/login 호출됨.');
-    var isValid=true;
-    var errors={};
-
-    // 요청 파라미터 확인
-    var paramId = req.body.id || req.query.id;
-    var paramPassword = req.body.pw || req.query.pw;
-
-    console.log('요청 파라미터 : ' + paramId + ', ' + paramPassword);
-    if(!paramId){
-        isValid = false;
-        errors.id = "Id is required!";
-    }
-    if(!paramPassword){
-        isValid = false;
-        errors.pw = "Password is required!";
-    }
-
-    if(isValid){
-        next();
-    } else{
-        req.flash("errors",errors);
-        // res.redirect("/");
-    }
-    },
-    passport.authenticate("local-login",{
-        successRedirect:"/",
-        failureRedirect:"/login"}
-    ));
+//
+// router.post('/login',function(req, res,next) {
+//         console.log('/login 호출됨.');
+//     var isValid=true;
+//     var errors={};
+//
+//     // 요청 파라미터 확인
+//     var paramId = req.body.id || req.query.id;
+//     var paramPassword = req.body.pw || req.query.pw;
+//
+//     console.log('요청 파라미터 : ' + paramId + ', ' + paramPassword);
+//     if(!paramId){
+//         isValid = false;
+//         errors.id = "Id is required!";
+//     }
+//     if(!paramPassword){
+//         isValid = false;
+//         errors.pw = "Password is required!";
+//     }
+//
+//     if(isValid){
+//         next();
+//     } else{
+//         req.flash("errors",errors);
+//         // res.redirect("/");
+//     }
+//     },
+//     passport.authenticate("local-login",{
+//         successRedirect:"/",
+//         failureRedirect:"/login"}
+//     ));
 
 //
 //     // 데이터베이스 객체가 초기화된 경우, authUser 함수 호출하여 사용자 인증
