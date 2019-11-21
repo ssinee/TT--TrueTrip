@@ -1,10 +1,28 @@
+<!-- 게시글을 클릭시 팝업으로 띄워준다.-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="utf-8">
+    <title>postingDetail.html</title>
+
+    <script language="javascript">
+        function showPopup() {
+            // 팝업이 중앙에 뜨도록
+            var popupX = (window.screen.width / 2) - (1300 / 2);
+            var popupY= (window.screen.height / 2) - (600 / 2);
+            window.open('popup.html', 'a', 'status=no, height=600, width=1300, left='+ popupX + ', top='+ popupY);
+        }
+    </script>
 </head>
+
+
+
 <body>
-$END$
+
+<!--게시글 누르면 팝업창 뜨게-->
+    <input type="button" value='글제목' onclick="showPopup();" />
+
 </body>
+
 </html>
