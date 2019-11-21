@@ -3,9 +3,9 @@ var router = express.Router();
 var mongoose=require("mongoose");
 var User=mongoose.model('users');
 
-router.post('/', function(req, res, next) {
+router.post('/addTraveler', function(req, res, next) {
 
-    console.log('/process/addTraveler 호출됨.');
+    console.log('/addTraveler 호출됨.');
 
     var paramId = req.body.id || req.query.id;
     var paramPassword = req.body.pw || req.query.pw;

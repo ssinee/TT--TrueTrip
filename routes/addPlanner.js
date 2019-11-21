@@ -4,7 +4,7 @@ var mongoose=require("mongoose");
 
 var Planner=mongoose.model('planners');
 
-router.post('/', function(req, res, next) {
+router.post('/addPlanner', function(req, res, next) {
 
     console.log('/addPlanner 호출됨.');
 

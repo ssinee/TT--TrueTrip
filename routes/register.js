@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/', function(req, res, next) {
+router.post('/register', function(req, res, next) {
 
     var user_type =req.body.temp1;
     // console.log(user_type);
