@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 sessions
-UserInfo
+UserInfo/
+database/
 *.json
 /bin/
 

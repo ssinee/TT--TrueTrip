@@ -83,23 +83,12 @@ app.use(function(req,res,next){
   res.locals.currentUser = req.user;
   next();
 });
-var isAuthenticated = function (req, res, next) {
-    if (req.isAuthenticated()){
-        console.log('isauthenticated');
-        return next();
-    }
-    console.log('인증안됨');
-    res.redirect('/main');
-};
 
 
 // Routes
 
 var passportRouter=require('./routes/passport');
 
-// app.get('/profile',isAuthenticated,function(req, res, next) {
-//     res.send(req.user)
-// })
 app.use('/', require('./routes/index.js'));
 app.use('/',passportRouter);
 
