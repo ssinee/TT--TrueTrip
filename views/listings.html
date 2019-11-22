@@ -20,6 +20,14 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
+    <style>
+        .postpic{
+            height: 250px;
+            max-width:100%;
+            width: auto;
+        }
+        .postpic:hover{border:2px; solid:blue; border-radius: 100px;}
+    </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script>
@@ -42,7 +50,7 @@
                         "<div class=\"col-lg-4 col-sm-6\" >" +
                         "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
                         "                            <div class=\"arrange-pic\">" +
-                        "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                        "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
                         "                            <div class=\"rating\">4.9</div>" +
                         "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
                         "                            </div>" +
@@ -76,7 +84,6 @@
                     content = data.data
                     console.log(data.length)
                     for (var i = 0; i < content.length; i++) {
-
                         contentString +=
                             "<div class=\"col-lg-4 col-sm-6\" >" +
                             "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +

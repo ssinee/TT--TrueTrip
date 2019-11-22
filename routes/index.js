@@ -33,7 +33,7 @@ router.get('/showimg', (req, res)=>{
 })
 
 router.get('/guide', (req, res)=>{
-    res.render('../views/guidepageTest.html')
+    res.render('../views/guidepageTesting.html')
 })
 
 router.get('/upload', (req, res)=>{
