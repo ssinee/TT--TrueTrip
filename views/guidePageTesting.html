@@ -2,59 +2,63 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Yoga Studio Template">
-    <meta name="keywords" content="Yoga, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Local Directory | Template</title>
+<meta charset="UTF-8">
+<meta name="description" content="Yoga Studio Template">
+<meta name="keywords" content="Yoga, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>guidepageTest</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var content;
-            var User_ID = $('#UserID').text();
-            var postsArr = ""
+<!-- Css Styles -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<style>
 
-            var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+.postpic{
+    height: 250px;
+    max-width:100%;
+    width: auto;
+}
+</style>
 
-            posting.done(function (data) {
-                content = data.data
+<script>
+    $(document).ready(function () {
+        var content;
+        var User_ID = $('#UserID').text();
+        var postsArr = ""
 
-                for (var i = 0; i < content.length; i++) {
-                    postsArr +=
-                        "<div class=\"col-lg-4 col-sm-6\" >" +
-                        "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
-                        "                            <div class=\"arrange-pic\">" +
-                        "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
-                        "                            </div>" +
-                        "                            <div class=\"arrange-text\">" +
-                        "                            <h5>" + content[i].title + "</h5>" +
-                        "                        </div>" +
-                        "                       </a>" +
-                        "                     </div>"
-                }
-                $('#showPlannerImages').html(postsArr)
+        var posting = $.post('/showPlannersImage', {'UserID': User_ID})
 
-            })
+        posting.done(function (data) {
+            content = data.data
 
-
+            for (var i = 0; i < content.length; i++) {
+                postsArr +=
+                    "<div class=\"col-lg-4 col-sm-6\" >" +
+                    "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+                    "                            <div class=\"arrange-pic\">" +
+                    "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                    "                            </div>" +
+                    "                            <div class=\"arrange-text\">" +
+                    "                            <h5>" + content[i].title + "</h5>" +
+                    "                        </div>" +
+                    "                       </a>" +
+                    "                     </div>"
+            }
+            $('#showPlannerImages').html(postsArr)
         })
-
-
-    </script>
+    })
+</script>
 </head>
 
 <body>
@@ -91,25 +95,26 @@
 <!-- Header End -->
 
 <!-- Hero Section Begin -->
-<div class="hero-listing set-bg" data-setbg="img/hero_listing.jpg">
-</div>
+<!--<div class="hero-listing set-bg" data-setbg="img/wallpaper_1.jpg">-->
+<!--</div>-->
 <!-- Hero Section End -->
 
 <!-- About Secton Begin -->
 <section class="about-section">
 
-    <div class="about-item">
+    <div class="about-item" style="padding-top: 100px;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4" style="max-width: 28%; padding-right: 40px;">
                     <div class="about-right">
                         <div class="contact-info" style="padding-top: 100px">
-                            <div class="map">
-                                <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26440.72384129847!2d-118.24906619231132!3d34.06719475913053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c659f50c318d%3A0xe2ffb80a9d3820ae!2sChinatown%2C%20Los%20Angeles%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1570213740685!5m2!1sen!2sbd"
-                                        height="385" style="border:0;" allowfullscreen="">
-                                </iframe>
-                                <img src="img/pin.png" alt="">
+                            <div class="map" style="border:1px solid #CACDD6; ">
+                                <!--                                <iframe-->
+                                <!--                                        src="img/증명사진.jpg" -->
+                                <!--                                        height="385" width="380" size="100%" style="border:1px;" allowfullscreen="">-->
+                                <!--                                </iframe>-->
+                                <!--                                <img src="img/pin.png" alt="">-->
+                                <img src="img/model.jpg" alt="" style="height:inherit;">
                             </div>
                             <div class="contact-text">
                                 <h4 id="UserID">ssinee</h4>
@@ -138,44 +143,54 @@
 
                 <div class="col-lg-8">
                     <div class="about-left">
-                        <div class="intro-item">
+                        <div class="intro-item" style="height:100px">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="about-intro">
-                                            <div class="rating">4.9</div>
-                                            <div class="intro-text">
-                                                <h2>Trocadero Restaurant</h2>
-                                                <p>Explore some of the best places in the world</p>
-                                                <div class="open">Opens Tomorow at 10am</div>
-                                                <div class="closed">Closed now</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 offset-lg-1">
-                                        <div class="intro-share">
-                                            <div class="share-btn">
-                                                <a href="#" class="share">Share</a>
-                                                <a href="#">Submit a Review</a>
-                                            </div>
-                                            <div class="share-icon">
-                                                <a href="#"><i class="fa fa-map-marker"></i></a>
-                                                <a href="#"><i class="fa fa-book"></i></a>
-                                                <a href="#"><i class="fa fa-hand-o-right"></i></a>
-                                                <a href="#"><i class="fa fa-user-o"></i></a>
-                                                <a href="#"><i class="fa fa-star-o"></i></a>
-                                            </div>
-                                        </div>
+                                    <!--                                    <div class="col-lg-7">-->
+                                    <!--                                        <div class="about-intro">-->
+                                    <!--                                            <div class="rating">4.9</div>-->
+                                    <!--                                            <div class="intro-text">-->
+                                    <!--                                                <h2>Trocadero Restaurant</h2>-->
+                                    <!--                                                <p>Explore some of the best places in the world</p>-->
+                                    <!--                                                <div class="open">Opens Tomorow at 10am</div>-->
+                                    <!--                                                <div class="closed">Closed now</div>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <div class="col-lg-4 offset-lg-1">-->
+                                    <!--                                        <div class="intro-share">-->
+                                    <!--                                            <div class="share-btn">-->
+                                    <!--                                                <a href="#" class="share">Share</a>-->
+                                    <!--                                                <a href="#">Submit a Review</a>-->
+                                    <!--                                            </div>-->
+                                    <!--                                            <div class="share-icon">-->
+                                    <!--                                                <a href="#"><i class="fa fa-map-marker"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-book"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-hand-o-right"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-user-o"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-star-o"></i></a>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="col-lg-4 offset-lg-1"
+                                 style="margin-left:200px; max-width: 50%; padding-right:0px">
+                                <div class="intro-share">
+                                    <div class="share-btn" style="width: 500px;">
+                                        <a href="#" class="share">Select</a>
+                                        <a href="#">Request</a>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
 
                         <!--                        show images here -->
                         <!--                        contents-->
 
-                        <div class ="row" id="showPlannerImages">
+                        <div class="row" id="showPlannerImages">
 
                         </div>
 
@@ -194,8 +209,10 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <h5>“A Great Place”</h5>
-                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae
-                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus. Class
+                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
+                                    vitae
+                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
+                                    Class
                                     aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
                                     himenaeos. </p>
                                 <div class="client-text">
@@ -212,8 +229,10 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <h5>“The best food in town”</h5>
-                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae
-                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus. Class
+                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
+                                    vitae
+                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
+                                    Class
                                     aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
                                     himenaeos. </p>
                                 <div class="client-text">

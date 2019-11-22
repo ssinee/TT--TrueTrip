@@ -24,13 +24,14 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
     var textinput=req.body.text
     var theme=req.body.theme
     var path=fileObj.path;
-
-console.log(theme.length);
+    var selectTheme="";
 
 
 //추출한 데이터를 object에 담음
     for(var i =0;i<theme.length;i++){
-        var obj={"author": userID, "title": title,"location":location,"text":textinput, "theme":theme[i], "orgFileName":orgFileName, "saveFileName":saveFileName, "path": path}
+        if(typeof theme=="string") selectTheme=theme;
+        else selectTheme=theme[i];
+        var obj={"author": userID, "title": title,"location":location,"text":textinput, "theme":selectTheme, "orgFileName":orgFileName, "saveFileName":saveFileName, "path": path}
         //DBdata 객체에 담음 (DBdata 는 moongoose의 schema를 모델화한 객체)
         var newData=new DBData(obj);
         newData.save(function(err){
