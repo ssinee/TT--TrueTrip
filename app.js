@@ -3,16 +3,27 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const static=require('serve-static');
-const path=require('path')
+
+var passport = require('passport');
 const app = express();
 const ejs = require('ejs');
 var logger = require('morgan');
+
+const static=require('serve-static');
+const path=require('path')
 var multer=require('multer');
 const DBData=require('./models/DBData');
+const User= require('./model/usermodel');
+const Planner=require('./model/plannermodel');
 const fs= require('fs');
 
+
 // Passport Config
+
+
+// const LocalStrategy = require('passport-local').Strategy;
+// const passportConfig = require('config/passport');
+
 app.use(logger('dev'));
 // Connect to MongoDB
 mongoose.Promise = global.Promise;
@@ -25,7 +36,6 @@ app.use(bodyParser.json())
 // CONNECT TO MONGODB SERVER
 
 mongoose.connect('mongodb://localhost:27017/TT', {
-
   authSource: "admin",
   useNewUrlParser:true,
   useUnifiedTopology:true
@@ -34,6 +44,7 @@ mongoose.connect('mongodb://localhost:27017/TT', {
 
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
+
 app.use(express.static('node_modules'))
 app.use(express.static('views'))
 app.use(express.static('css'))
@@ -45,20 +56,24 @@ app.use('/upload', express.static('./upload'))
 
 // EJS
 // app.set('view engine', 'html')
-
+app.set('view engine', 'ejs');
 app.engine('html', ejs.renderFile)
 
 
 
 // Express session
 app.use(session({
+  key: 'my',
   secret: '1@%24^%$3^*&98&^%$', // 쿠키에 저장할 connect.sid값을 암호화할 키값 입력
   resave: false,                //세션 아이디를 접속할때마다 새롭게 발급하지 않음
-  saveUninitialized: false,      //세션 아이디를 실제 사용하기전에는 발급하지 않음
+  saveUninitialized: true,      //세션 아이디를 실제 사용하기전에는 발급하지 않음
   cookie:{
-    maxAge: 1000 * 60 * 60 * 24   //24시간 만기
+    maxAge: 1000 * 60 * 60 * 24 //24시간 만기
   }
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Connect flash
 app.use(flash());
@@ -72,12 +87,20 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(function(req,res,next){
+  res.locals.isAuthenticated = req.isAuthenticated();
+  res.locals.currentUser = req.user;
+  next();
+});
+
 
 // Routes
 app.use('/', require('./routes/index.js'));
+app.use('/', require('./routes/passport'));
 app.use('/', require('./routes/upload.js'));
 app.use('/', require('./routes/showTheme.js'));
 app.use('/', require('./routes/showPlannersImage'));
+
 
 
 

@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+
+var meanArr= new Array();
+var wordArr= new Array();
+var strstr= new Array();
+
 const mongoose = require('mongoose');
+
 
 // Main Page
 //req=클라이언트에서 전달된 데이터와 정보
