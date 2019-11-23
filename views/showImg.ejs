@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            var content;
+            var string = "";
+            $('input[name="the"]').click(function () {
+                console.log("in the function")
+                var string = "";
+                var theme = $(":input:radio[name=the]:checked").val();
+                var posting = $.post('/showtheme', {'theme': theme})
+                posting.done(function (data) {
+                    content = data.data
+                    console.log(content.length)
+                    for (var i = 0; i < content.length; i++) {
+                        string += "<img src='" + content[i].path + "'></img>";
+                    }
+                    $('#showhere').html(string);
+
+
+                    "<div class=\"col-lg-4 col-sm-6\">\n" +
+                    "                            <a class=\"arrange-items\" href=\"single-listing.html\">\n" +
+                    "                            <div class=\"arrange-pic\" >" +
+                    "                            <div style=\"width:100; height:100\">"
+                    "                            <img src=\'" + content[i].path + "' alt=\"\" >\n" +
+                    "                            </div>" +
+                    "                            <div class=\"rating\">4.9</div>\n" +
+                    "                            <div class=\"tic-text\">" + content[i].author + "</div>\n" +
+                    "                            </div>\n" +
+                    "                            <div class=\"arrange-text\">\n" +
+                    "                            <h5>" + content[i].title + "</h5>\n" +
+                    "                        <span>" + content[i].location + "</span>\n" +
+                    "                        <p>Fusce urna quam, euismod sit</p>\n" +
+                    "                        <div class=\"open tomorrow\">Opens Tomorow at 10am</div>\n" +
+                    "                        </div>\n" +
+                    "                       </a>\n" +
+                    "                     </div>"
+                })
+            });
+        });
+    </script>
+</head>
+<body>
+
+<form id="themeForm" action="/showtheme" method="post">
+    <label><input id="쇼핑" type="radio" name="the" value="쇼핑">쇼핑</label>
+    <label><input id="카페" type="radio" name="the" value="카페">카페</label>
+    <label><input id="사진" type="radio" name="the" value="사진">사진</label>
+    <label><input id="음식" type="radio" name="the" value="음식">음식</label>
+    <label><input id="액티비티" type="radio" name="the" value="액티비티">액티비티</label>
+    <label><input id="유명명소" type="radio" name="the" value="유명명소">유명명소</label>
+</form>
+
+<div id="showhere"></div>
+</body>
+
+
+</html>

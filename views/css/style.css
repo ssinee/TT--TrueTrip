@@ -1824,8 +1824,12 @@ ol {
 
 .about-right .contact-info .map img {
 	position: absolute;
-	left: calc(50% - 25px);
-	top: calc(50% - 38px);
+	left: auto;
+	right: auto;
+	top: auto;
+
+	/*left: calc(50% - 25px);*/
+	/*top: calc(50% - 38px);*/
 }
 
 .about-right .contact-info .contact-text {
