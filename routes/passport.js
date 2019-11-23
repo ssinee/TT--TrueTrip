@@ -52,12 +52,12 @@ router.get('/mypage',isAuthenticated,function (req, res) {
 
 router.route('/login').get(function(req, res) {
     console.log('/login 패스 요청됨.');
-    res.render('login.html', {message: req.flash('loginMessage')});
+    res.render('login.ejs', {message: req.flash('loginMessage')});
 });
 
 router.route('/login').post(passport.authenticate('local-login', {
     successRedirect : '/profile',
-    failureRedirect : '/login.html',
+    failureRedirect : '/login.ejs',
     failureFlash : true
 }));
 

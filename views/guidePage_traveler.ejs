@@ -2,63 +2,123 @@
 <html lang="zxx">
 
 <head>
-<meta charset="UTF-8">
-<meta name="description" content="Yoga Studio Template">
-<meta name="keywords" content="Yoga, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>guidepageTest</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>guidepageTest</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 
-<!-- Css Styles -->
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="css/style.css" type="text/css">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<style>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <style>
+        .activeimgcolor {
+            border: 5px solid #FF5581;
+        }
 
-.postpic{
-    height: 250px;
-    max-width:100%;
-    width: auto;
-}
-</style>
+        .postpic {
+            height: 250px;
+            max-width: 100%;
+            width: auto;
+        }
 
-<script>
-    $(document).ready(function () {
-        var content;
-        var User_ID = $('#UserID').text();
-        var postsArr = ""
+        .postpic:hover {
+            border: 2px solid #FF5581;
+        }
 
-        var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+        .postpic:active {
+            border: 5px solid #FF5581;
 
-        posting.done(function (data) {
-            content = data.data
 
-            for (var i = 0; i < content.length; i++) {
-                postsArr +=
-                    "<div class=\"col-lg-4 col-sm-6\" >" +
-                    "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
-                    "                            <div class=\"arrange-pic\">" +
-                    "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
-                    "                            </div>" +
-                    "                            <div class=\"arrange-text\">" +
-                    "                            <h5>" + content[i].title + "</h5>" +
-                    "                        </div>" +
-                    "                       </a>" +
-                    "                     </div>"
-            }
-            $('#showPlannerImages').html(postsArr)
+        }
+
+        .postpicActive {
+            border: 5px solid #FF5581;
+            height: 250px;
+            max-width: 100%;
+            width: auto;
+        }
+
+    </style>
+    <script language="javascript">
+        function showPopup() {
+            var popupX = (window.screen.width / 2) - (1300 / 2);
+            var popupY= (window.screen.height / 2) - (600 / 2);
+            window.open('popup', 'a', 'status=no, height=421, width=591');
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var content;
+            var User_ID = $('#UserID').text();
+            var postsArr = ""
+            var postTitle=""
+
+            var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+
+            posting.done(function (data) {
+                content = data.data
+
+                for (var i = 0; i < content.length; i++) {
+                    postsArr +=
+                        "<div class=\"col-lg-4 col-sm-6\" >" +
+                        "                            <a class=\"arrange-items\">" +
+                        "                            <div class=\"arrange-pic\">" +
+                        "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
+                        "                            </div>" +
+                        "                            <div class=\"arrange-text\">" +
+                        "                            <h5 class='posttitle'>" + content[i].title + "</h5>" +
+                        "                        </div>" +
+                        "                       </a>" +
+                        "                     </div>"
+                }
+                $('#showPlannerImages').html(postsArr)
+            })
+
+            $('#showPlannerImages').on('click', 'img', function (event) {
+                $(this).toggleClass('postpicActive')
+                // $(this).css("border", "5px solid #FF5581")
+            })
+
+            $('#showPlannerImages').on('click', 'h5',function(event){
+                postTitle=$(this).text()
+                console.log(postTitle)
+                $.ajax({
+                    type:"GET",
+                    url:"/showpopup",
+                    data:{
+                        User_ID: User_ID,
+                        Title: postTitle
+                    }
+                }).done(function(result){
+                    if(result==='1'){
+                        console.log("functionscucces")
+                        location.href="/setpopup";
+                    }
+                });
+                //
+                // console.log(postTitle)
+                // $.post('/showpopup', {'User_ID':User_ID, 'Title':postTitle})
+                // showPopup()
+            })
+
+
+
         })
-    })
-</script>
+
+    </script>
 </head>
 
 <body>
@@ -69,28 +129,7 @@
 
 <!-- Header Section Begin -->
 <header class="header-section listings">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href="./index.html"><img style="width:180px; height:65px" src="img/yeah.png" alt=""></a>
-        </div>
-        <nav class="main-menu mobile-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="listings.html">Explore</a></li>
-                <li><a href="how-it-works.html">More Cities</a></li>
-                <li><a href="blog.html">News</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-            <div class="user-access">
-                <a href="#">Register/</a>
-                <a href="#">Login</a>
-            </div>
-            <a href="#" class="primary-btn">Add Listing</a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-    </div>
+    <% include ./header.html %>
 </header>
 <!-- Header End -->
 
@@ -175,15 +214,15 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 offset-lg-1"
-                                 style="margin-left:200px; max-width: 50%; padding-right:0px">
-                                <div class="intro-share">
+                                 style="margin-left:0px; max-width: 50%; padding-right:0px; padding-left:0px">
+                                <div class="intro-share" style="text-align: left">
                                     <div class="share-btn" style="width: 500px;">
-                                        <a href="#" class="share">Select</a>
+
                                         <a href="#">Request</a>
+                                        <input type="button" value='글제목' onclick="showPopup();" />
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
 
