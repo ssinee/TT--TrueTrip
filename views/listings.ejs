@@ -48,7 +48,7 @@
 
                     contentString +=
                         "<div class=\"col-lg-4 col-sm-6\" >" +
-                        "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+                        "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
                         "                            <div class=\"arrange-pic\">" +
                         "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
                         "                            <div class=\"rating\">4.9</div>" +
@@ -86,7 +86,7 @@
                     for (var i = 0; i < content.length; i++) {
                         contentString +=
                             "<div class=\"col-lg-4 col-sm-6\" >" +
-                            "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+                            "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
                             "                            <div class=\"arrange-pic\">" +
                             "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
                             "                            <div class=\"rating\">4.9</div>" +
@@ -130,28 +130,7 @@
 
 <!-- Header Section Begin -->
 <header class="header-section listings">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href="./index.html"><img style="width:180px; height:65px" src="img/yeah.png" alt=""></a>
-        </div>
-        <nav class="main-menu mobile-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="how-it-works.html">Explore</a></li>
-                <li class="active"><a href="listings.html">More Cities</a></li>
-                <li><a href="blog.html">News</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-            <div class="user-access">
-                <a href="#">Register/</a>
-                <a href="#">Login</a>
-            </div>
-            <a href="#" class="primary-btn">Add Listing</a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-    </div>
+    <% include ./header.html %>
 </header>
 <!-- Header End -->
 

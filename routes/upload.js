@@ -9,12 +9,11 @@ let upload=multer({
 })
 
 uploadRouter.get('/test', function(req,res, next){
-    res.render('image_upload.html')
+    res.render('image_upload.ejs')
 });
 
 uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
-    console.log(req.file)
-    console.log(req.body)
+
     var userID=req.body.author//글 작성자 id 가져오기
     var title=req.body.title//글의 title
     var fileObj=req.file//multer 모듈로 req.files

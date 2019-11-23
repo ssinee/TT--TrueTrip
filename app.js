@@ -100,7 +100,7 @@ app.use('/', require('./routes/passport'));
 app.use('/', require('./routes/upload.js'));
 app.use('/', require('./routes/showTheme.js'));
 app.use('/', require('./routes/showPlannersImage'));
-
+app.use('/', require('./routes/showpopup'));
 
 
 
