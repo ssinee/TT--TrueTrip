@@ -270,14 +270,3 @@ passport.deserializeUser(function(user, done) {
 });
 
 module.exports = router;
-
-// function checkPermission(req, res, next){
-//     var paramid=req.body.id;
-//     Planner.findOne({id:paramid}, function(err, user){
-//         if(err) return res.json(err);
-//         if(user.id != req.user.id) return noPermission(req, res);
-//
-//         next();
-//     });
-// }
-//

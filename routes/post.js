@@ -3,7 +3,6 @@ var router = express.Router();
 var mongoose=require("mongoose");
 
 var Planner=mongoose.model('planners');
-// var Post=mongoose.model('PostData');
 
 // router.get("/post",function(req,res){
 //     PlannerPost.find({})
@@ -25,8 +24,8 @@ var Planner=mongoose.model('planners');
 //         res.redirect("/posts");
 //     });
 // });
-//
 // router.get("/post/:id", function(req, res){
+//
 //     PlannerPost.findOne({_id:req.params.id}) // 3
 //         .populate("author")               // 3
 //         .exec(function(err, post){        // 3
