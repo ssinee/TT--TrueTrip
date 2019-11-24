@@ -6,6 +6,7 @@ var User=mongoose.model('users');
 var Planner=mongoose.model('planners');
 var passport = require('passport');
 
+
 var isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()){
         console.log('isauthenticated');
@@ -19,6 +20,8 @@ var noPermission = function(req,res){
     req.logout();
     res.redirect("/login");
 };
+
+
 
 router.post('/select', function(req, res, next) {
     res.render('selectUserType', { title: 'Express' });
@@ -43,13 +46,19 @@ router.get('/profile',isAuthenticated, function (req, res) {
         user_info: req.user
     })
 });
-router.get('/mypage',isAuthenticated,function (req, res) {
-    res.render('mypage',{
+
+// router.get('/mypage',isAuthenticated,function (req, res) {
+//     res.render('mypage',{
+//         title: 'My Info',
+//         user_info: req.user
+//     })
+// });
+router.get('/mypage',function (req, res) {
+    res.render('plannerpage',{
         title: 'My Info',
         user_info: req.user
     })
 });
-
 router.route('/login').get(function(req, res) {
     console.log('/login 패스 요청됨.');
     res.render('login.html', {message: req.flash('loginMessage')});
@@ -261,3 +270,14 @@ passport.deserializeUser(function(user, done) {
 });
 
 module.exports = router;
+
+// function checkPermission(req, res, next){
+//     var paramid=req.body.id;
+//     Planner.findOne({id:paramid}, function(err, user){
+//         if(err) return res.json(err);
+//         if(user.id != req.user.id) return noPermission(req, res);
+//
+//         next();
+//     });
+// }
+//

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>guidepageTest</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <style>
+
+        .postpic{
+            height: 250px;
+            max-width:100%;
+            width: auto;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            var content;
+            var User_ID = $('#UserID').text();
+            var postsArr = ""
+
+            var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+
+            posting.done(function (data) {
+                content = data.data
+
+                for (var i = 0; i < content.length; i++) {
+                    postsArr +=
+                        "<div class=\"col-lg-4 col-sm-6\" >" +
+                        "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+                        "                            <div class=\"arrange-pic\">" +
+                        "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                        "                            </div>" +
+                        "                            <div class=\"arrange-text\">" +
+                        "                            <h5>" + content[i].title + "</h5>" +
+                        "                        </div>" +
+                        "                       </a>" +
+                        "                     </div>"
+                }
+                $('#showPlannerImages').html(postsArr)
+            })
+        })
+    </script>
+</head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header-section listings">
+    <div class="container-fluid">
+        <div class="logo">
+            <a href="./index.html"><img style="width:180px; height:65px" src="img/yeah.png" alt=""></a>
+        </div>
+        <nav class="main-menu mobile-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listings.html">Explore</a></li>
+                <li><a href="how-it-works.html">More Cities</a></li>
+                <li><a href="blog.html">News</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="user-access">
+                <a href="#">Register/</a>
+                <a href="#">Login</a>
+            </div>
+            <a href="#" class="primary-btn">Add Listing</a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Hero Section Begin -->
+<!--<div class="hero-listing set-bg" data-setbg="img/wallpaper_1.jpg">-->
+<!--</div>-->
+<!-- Hero Section End -->
+
+<!-- About Secton Begin -->
+<section class="about-section">
+
+    <div class="about-item" style="padding-top: 100px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4" style="max-width: 28%; padding-right: 40px;">
+                    <div class="about-right">
+                        <div class="contact-info" style="padding-top: 100px">
+                            <div class="map" style="border:1px solid #CACDD6; ">
+                                <!--                                <iframe-->
+                                <!--                                        src="img/증명사진.jpg" -->
+                                <!--                                        height="385" width="380" size="100%" style="border:1px;" allowfullscreen="">-->
+                                <!--                                </iframe>-->
+                                <!--                                <img src="img/pin.png" alt="">-->
+                                <img src="" alt="" style="height:inherit;">
+                            </div>
+                            <div class="contact-text">
+                                <!--                                <h4 id="UserID">ssinee</h4>-->
+                                <!--                                <span>Can show you the best city in Suwon</span>-->
+                                <!--                                <ul>-->
+                                <!--                                    <li>+82 010 1234 1234</li>-->
+                                <!--                                    <li>TrueTrip@ajou.ac.kr</li>-->
+                                <!--                                </ul>-->
+                                <form>
+                                    <h5>이름 </h5>
+                                    <div style="padding:5px 20px"></div>
+                                    <h5>이메일</h5>
+                                    <div style="padding:5px 20px"></div>
+                                    <h5>관심 카테고리1</h5>
+                                    <div style="padding:5px 20px"></div>
+                                    <h5>관심 카테고리 2</h5>
+                                    <div style="padding:5px 20px"></div>
+                                    <h5>관심 카테고리 3</h5>
+                                    <div style="padding:5px 20px"></div>
+                                    <input type="text" name="region" placeholder="관심지역">
+                                    <div style="padding:5px 20px"></div>
+                                    <textarea type="text" name="introduce" placeholder="소개글"></textarea>
+                                    <input class="primary-btn" type="submit" value="save" name="save">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="working-hours">
+                            <h4>Working Hours</h4>
+                            <ul>
+                                <li>Monday<span>08:00 - 22:00</span></li>
+                                <li>Tuesday<span>08:00 - 22:00</span></li>
+                                <li>Wednesday<span>08:00 - 22:00</span></li>
+                                <li>Thursday<span>08:00 - 22:00</span></li>
+                                <li>Friday <span>08:00 - 22:00</span></li>
+                                <li>Saturday<span>08:00 - 22:00</span></li>
+                                <li>Sunday<span>Closed</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-8">
+                    <div class="about-left">
+                        <div class="intro-item" style="height:100px">
+                            <div class="container">
+                                <div class="row">
+                                    <!--                                    <div class="col-lg-7">-->
+                                    <!--                                        <div class="about-intro">-->
+                                    <!--                                            <div class="rating">4.9</div>-->
+                                    <!--                                            <div class="intro-text">-->
+                                    <!--                                                <h2>Trocadero Restaurant</h2>-->
+                                    <!--                                                <p>Explore some of the best places in the world</p>-->
+                                    <!--                                                <div class="open">Opens Tomorow at 10am</div>-->
+                                    <!--                                                <div class="closed">Closed now</div>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <div class="col-lg-4 offset-lg-1">-->
+                                    <!--                                        <div class="intro-share">-->
+                                    <!--                                            <div class="share-btn">-->
+                                    <!--                                                <a href="#" class="share">Share</a>-->
+                                    <!--                                                <a href="#">Submit a Review</a>-->
+                                    <!--                                            </div>-->
+                                    <!--                                            <div class="share-icon">-->
+                                    <!--                                                <a href="#"><i class="fa fa-map-marker"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-book"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-hand-o-right"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-user-o"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-star-o"></i></a>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="col-lg-4 offset-lg-1"
+                                 style="margin-left:200px; max-width: 50%; padding-right:0px">
+                                <div class="intro-share">
+                                    <div class="share-btn" style="width: 500px;">
+                                        <a href="#" class="share">Select</a>
+                                        <a href="#">Request</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!--                        show images here -->
+                        <!--                        contents-->
+
+                        <div class="row" id="showPlannerImages">
+
+                        </div>
+
+
+                        <div class="about-video">
+
+                        </div>
+                        <div class="client-reviews">
+                            <h3>Reviews</h3>
+                            <div class="reviews-item">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <h5>“A Great Place”</h5>
+                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
+                                    vitae
+                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
+                                    Class
+                                    aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                    himenaeos. </p>
+                                <div class="client-text">
+                                    <h5>Michael Smith</h5>
+                                    <span>March 03, 2019</span>
+                                </div>
+                            </div>
+                            <div class="reviews-item">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <h5>“The best food in town”</h5>
+                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
+                                    vitae
+                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
+                                    Class
+                                    aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                    himenaeos. </p>
+                                <div class="client-text">
+                                    <h5>Michael Smith</h5>
+                                    <span>March 03, 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About Secton End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="#" class="newslatter-form">
+                    <input type="text" placeholder="Your email address">
+                    <button type="submit">Subscribe to our Newsletter</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Usefull Links</h4>
+                    <ul>
+                        <li>About us</li>
+                        <li>Testimonials</li>
+                        <li>How it works</li>
+                        <li>Create an account</li>
+                        <li>Our Services</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li>Hotels</li>
+                        <li>Restaurant</li>
+                        <li>Spa & resorts</li>
+                        <li>Concert & Events</li>
+                        <li>Bars & Pubs</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Usefull Links</h4>
+                    <ul>
+                        <li>About us</li>
+                        <li>Testimonials</li>
+                        <li>How it works</li>
+                        <li>Create an account</li>
+                        <li>Our Services</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>From the Blog</h4>
+                    <div class="single-blog">
+                        <div class="blog-pic">
+                            <img src="img/f-blog-1.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <h6>10 Best clubs in town</h6>
+                            <span>March 27, 2019</span>
+                        </div>
+                    </div>
+                    <div class="single-blog">
+                        <div class="blog-pic">
+                            <img src="img/f-blog-2.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <h6>10 Best clubs in town</h6>
+                            <span>March 27, 2019</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row footer-bottom">
+            <div class="col-lg-5 order-2 order-lg-1">
+                <div class="copyright">
+                    <p class="text-white">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i>
+                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-7 text-center text-lg-right order-1 order-lg-2">
+                <div class="footer-menu">
+                    <a href="#">Home</a>
+                    <a href="#">Explore</a>
+                    <a href="#">More Cities</a>
+                    <a href="#">News</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>
