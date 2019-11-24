@@ -31,7 +31,31 @@
 
 <!-- Header Section Begin -->
     <header class="header-section listings">
+        <% if(isAuthenticated) { %>
+            <div class="container-fluid">
+                <div class="logo">
+                    <a href="index.ejs"><img style="width:180px; height:65px" src="img/yeah.png" alt=""></a>
+                </div>
+                <nav class="main-menu mobile-menu">
+                    <ul>
+                        <li><a href="main">Home</a></li>
+                        <li><a href="lists">Tag</a></li>
+                        <li><a href="blog.html">Planners</a></li>
+                        <li><a href="contact.html">Request</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right">
+                    <div class="user-access">
+                        <a href="/mypage">My page/</a>
+                        <a href="/logout">Logout</a>
+                    </div>
+                    <a href="#" class="primary-btn">Add Listing</a>
+                </div>
+                <div id="mobile-menu-wrap"></div>
+            </div>
+        <% } else { %>
         <% include ./header.html %>
+        <% } %>
     </header>
 <!-- Header End -->
 
