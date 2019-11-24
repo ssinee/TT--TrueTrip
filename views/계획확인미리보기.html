@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>블러 테스트 페이지</title>
+    <style>
+        .blur{
+            /*블러 세기. 클수록 뿌얘짐*/
+            filter: blur(4px);
+        }
+    </style>
+
+    <script>
+        function movetoRealPlan() {
+            location.href="realPlan.html";
+        }
+
+        function refusePlan() {
+            alert('채택을 거부했습니다.');
+
+        }
+
+    </script>
+
+</head>
+<body>
+
+<h1> 계획 확인</h1>
+
+<div class="no_blur">
+    <div id = "received_plan1">
+        <div style="border: solid black 1px;">
+            <center>
+                <h4>미리보기 내용이 들어갈 위치</h4>
+                <h4>미리보기 내용이 들어갈 위치</h4>
+
+            </center>
+        </div>
+    </div>
+
+
+</div>
+<!-- received 안에 분할된 계획을 집어넣고-->
+<div class="blur">
+    <div id="received_plan2">
+        <div style="border: solid black 1px;">
+            <center>
+                <h1>블러</h1>
+                <p>블러할 내용이 들어갈 위치.<br>
+                    ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+                    1234567890<br>
+                    가나다라마바사아자차카타파하<br>
+                </p>
+            </center>
+        </div>
+    </div>
+</div>
+<!--blur 클래스 끝-->
+<br>
+<br>
+
+<!--채택 클릭시 보이도록-->
+<div>
+    <center><input type="button" id="butt_1" value="계획채택" onclick="movetoRealPlan()">
+    <input type="button" id="butt_2" value="계획반송" onclick="refusePlan()"></center>
+</div>
+</body>
+</html>

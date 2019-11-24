@@ -28,8 +28,8 @@
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+      Navigation
+   --------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
@@ -60,23 +60,23 @@
     });
 
     /*-------------------
-		Category Select
-	--------------------- */
+      Category Select
+   --------------------- */
     $('.ca-search').niceSelect();
 
     /*-------------------
-		Local Select
-	--------------------- */
+      Local Select
+   --------------------- */
     $('.lo-search').niceSelect();
 
     /*-------------------
-		Arrange Select
-	--------------------- */
+      Arrange Select
+   --------------------- */
     $('.arrange-select select').niceSelect();
 
     /*-------------------
-		Radio Btn
-	--------------------- */
+      Radio Btn
+   --------------------- */
     $(".filter-left .category-filter .category-option .co-item label").on('click', function () {
         $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
         $(this).addClass('active');

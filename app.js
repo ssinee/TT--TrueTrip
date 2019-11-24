@@ -104,6 +104,7 @@ app.use('/', require('./routes/showTheme.js'));
 app.use('/', require('./routes/showPlannersImage'));
 
 app.use('/', require('./routes/post'));
+app.use('/', require('./routes/showpopup'));
 
 
 
