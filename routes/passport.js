@@ -53,12 +53,12 @@ router.get('/profile',isAuthenticated, function (req, res) {
 //         user_info: req.user
 //     })
 // });
-router.get('/mypage',function (req, res) {
-    res.render('plannerpage',{
-        title: 'My Info',
-        user_info: req.user
-    })
-});
+// router.get('/mypage',function (req, res) {
+//     res.render('plannerpage',{
+//         title: 'My Info',
+//         user_info: req.user
+//     })
+// });
 router.route('/login').get(function(req, res) {
     console.log('/login 패스 요청됨.');
     res.render('login.ejs', {message: req.flash('loginMessage')});

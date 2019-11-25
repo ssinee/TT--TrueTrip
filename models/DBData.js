@@ -4,7 +4,9 @@ var Schema=mongoose.Schema
 
 
 var dataSchema= new Schema({
-    author: String,
+    // author: String,
+    planner:{type:mongoose.Schema.Types.ObjectId, ref:"planners"},
+    author:String,
     title: String,
     location:String,
     text:String,
