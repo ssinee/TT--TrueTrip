@@ -53,7 +53,7 @@
                         "<div class=\"col-lg-4 col-sm-6\" >" +
                         "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
                         "                            <div class=\"arrange-pic\">" +
-                        "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                        "                            <img src=\'" + content[i].path + "' style='width:264px; height:270px' alt=\"\">" +
                         "                            <div class=\"rating\">4.9</div>" +
                         "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
                         "                            </div>" +
@@ -92,7 +92,7 @@
                             "<div class=\"col-lg-4 col-sm-6\" >" +
                             "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
                             "                            <div class=\"arrange-pic\">" +
-                            "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                            "                            <img src=\'" + content[i].path + "' style='width:264px; height:270px;' alt=\"\">" +
                             "                            <div class=\"rating\">4.9</div>" +
                             "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
                             "                            </div>" +
@@ -106,7 +106,6 @@
                             "                     </div>"
                         if ((i > 0 && i % 8 == 0) || i == content.length - 1) {
                             stringArr[pagenum] = contentString;
-                            console.log(i);
                             pagenum++;
                             contentString = ""
                         }
