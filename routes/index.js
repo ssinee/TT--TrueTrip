@@ -8,8 +8,11 @@ const mongoose = require('mongoose');
 // Main Page
 //req=클라이언트에서 전달된 데이터와 정보
 //res 클라이언트에게 응답을 위한 정보
+router.get('/', (req, res) => {
+    res.render('../views/index');
+});
 router.get('/main', (req, res) => {
-    res.render('../views/index.ejs');
+    res.render('../views/index');
 });
 
 router.get('/lists', (req,res)=>{

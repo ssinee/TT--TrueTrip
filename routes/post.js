@@ -35,7 +35,7 @@ var Planner=mongoose.model('planners');
 // });
 router.get('/mypage',function (req,res) {
     Planner.find({},function(err,post){
-        res.render('mypage',{title:'Express', post:post});
+        res.render('plannerpage',{title:'Express', post:post});
     })
 });
 
