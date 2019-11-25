@@ -128,12 +128,15 @@
 <!--                        계획하기!!!!-->
                         <div id="cont"></div><br>
                         <center><p>
-                            <input type="button" class="primary-btn" id="addRow" value="일정 추가" onclick="addRow()" />
+                            <input type="button" class="primary-btn" id="addRow" value="일정 추가" style="cursor: pointer" onclick="addRow()" />
                             <Br><br>
-                            <input type="button" class="primary-btn" id="bt" value="계획 제출" onclick="submit_plan()" />
+                            <input type="button" class="primary-btn" id="bt" value="계획 제출" style="cursor: pointer"onclick="submit_plan()" />
                         </p>
                             <ps>저장 후에 F12 콘솔창에서 확인</p>
                         </center>
+
+
+
 <!--                        계획하기 끝!!!!-->
 <!--                        아래 script에서 values를 DB에 저장하면 됩니다.-->
 
@@ -194,13 +197,13 @@
 
             if (c == 0) {           // FIRST COLUMN.
                 // ADD A BUTTON.
-                var button = document.createElement('input');
+                var button = document.createElement('img');
 
                 // SET INPUT ATTRIBUTE.
-                button.setAttribute('type', 'button');
-                button.setAttribute('value', 'X');
-
-                // ADD THE BUTTON's 'onclick' EVENT.
+                button.setAttribute('src', 'img/icon/x.jpg');
+                button.setAttribute('width', '120');
+                button.setAttribute('height', '55');
+                button.setAttribute('style', 'cursor:pointer');
                 button.setAttribute('onclick', 'removeRow(this)');
 
                 td.appendChild(button);
