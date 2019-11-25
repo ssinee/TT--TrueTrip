@@ -11,10 +11,8 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
-
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -25,12 +23,22 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
     <script language="javascript">
-        function movetoPlanner() {
-            opener.location.href = "guidepage_test.ejs";
-            self.close();
-        }
+        // function movetoPlanner() {
+        //     opener.location.href = "guidepage_test.ejs";
+        //     self.close();
+        // }
+
+        $(document).ready(function(){
+
+
+           var posting= $.get('/setpopup', {});
+           posting.done(function(data){
+               var postData="<%= PostID%>";
+
+           })
+
+        })
 
 
     </script>
@@ -59,6 +67,7 @@
 <!--chg. 이미지 사이즈따라서 테이블 사이즈가 바뀌는데 고정시켜야함.-->
 <!--작을 때는 테이블 사이즈가 정의한 대로 되는데, 클 때는 테이블 위아래가 커짐.-->
 <body style="height:400px">
+
 <!--<div class="container">-->
 <!--    <div class="row mb-110">-->
 <!--        <div class="col-lg-5">-->
@@ -85,40 +94,37 @@
             <tr>
 
                 <td class="postImg" rowspan="5" width="50%" height="100%" align="center ">
-                        <img src = "img/cats/cat.jpg" alt="" style="size: 100px; border-radius: 10px 10px 10px 10px">
+                        <img src = "<%= PostPath%>" alt="" style="size: 100px; border-radius: 10px 10px 10px 10px">
                 </td>
 
                 <td class="postPlanner" width="45%" height="7%">
-                    <a href="guidepage_test.ejs"><%= title%></a>
+                    <a href="guidepage_test.ejs"><%= PostID%></a>
                 </td>
             </tr>
 
             <tr>
-                <td class="postTitle" width="45%" height="7%"></td>
-            </tr>s
-
-            <tr>
-                <td class="postCategory" width="45%" height="7%"></td>
+                <td class="postTitle" width="45%" height="7%"><%= PostTitle%></td>
             </tr>
 
             <tr>
-                <td class="postLocation" width="45%" height="7%"></td>
+                <td class="postCategory" width="45%" height="7%"><%= PostCategory%></td>
             </tr>
 
             <tr>
-                <td class="postContents" width="45%" height="72%"></td>
+                <td class="postLocation" width="45%" height="7%"><%= PostLocation%></td>
+            </tr>
+
+            <tr>
+                <td class="postContents" width="45%" height="72%"><%= PostContents%></td>
             </tr>
         </table>
-
     <br>
 
 <div class="col-lg-4 offset-lg-1"
      style="margin-left:0px; max-width: 100%; padding-right:0px; padding-left:150px; width:770px">
     <div class="intro-share" style="text-align: center">
         <div class="share-btn" style="width: 500px; margin-bottom: 0px;">
-
             <a href="#" onclick="self.close()">Close</a>
-
         </div>
     </div>
 </div>
