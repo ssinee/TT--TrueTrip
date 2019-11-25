@@ -106,7 +106,6 @@
                 <br><div><h2>계획하기</h2></div><br>
 
 <!--                chg. 1번섹션. 요청 정보가 나오게-->
-<!--                <div class="blog-item" style="border: solid black 1px; background: yellow">-->
                 <div class="blog-item" style="border: solid black 2px;">
                     <div class="blog-text">
                         <h2>유저의 요청 사항!!! Form 긁어오기</h2>
@@ -117,33 +116,12 @@
                     </div>
                 </div>
 
-
-<!--                chg. 2번섹션. 계획 페이지-->
-<!--                <div class="blog-item" style="border: solid black 1px; background: skyblue">-->
-                <div class="blog-item" style="border: solid black 2px;">
-                    <div class="blog-text">
-                        <h2>일정표 만들기</h2><Br>
-
-
-<!--                        계획하기!!!!-->
-                        <div id="cont"></div><br>
-                        <center><p>
-                            <input type="button" id="addRow" value="일정 추가" onclick="addRow()" />
-                            <Br><br>
-                            <input type="button" id="bt" value="계획 제출" onclick="submit_plan()" />
-                        </p>
-                            <ps>저장 후에 F12 콘솔창에서 확인</p>
-                        </center>
-<!--                        계획하기 끝!!!!-->
-<!--                        아래 script에서 values를 DB에 저장하면 됩니다.-->
-
-
-
-
-<!--                        <a href="#" class="primary-btn">제출</a>-->
-<!--                        <a href="#" class="primary-btn">닫기</a>-->
-                    </div>
-                </div>
+                <center><p>
+                    <input type="button" id="fullLoad" value="나머지 계획 확인!" onclick="fullLoad()" />
+                    <Br><br>
+                </p>
+                    <input type="button" value="인쇄" onclick="print_plan()"/>
+                </center>
             </div>
         </div>
     </div>
@@ -165,7 +143,22 @@
 
     // chg. DB대신 테스트할 더미 데이터. 나중에 push 중간에 들어가는 부분들만 DB값으로 교체.
     // chg. 지금은 한 row만 했는데, 실제로는 row 수만큼 push 해야됨
+    // chg. DB에서 읽은 column의 길이(DBarrayLen)를 8로 나눠서 howManyRows에 대입
+    // chg. DBarrayLen도 동일함.
+    var DBarrayLen = 16;
+    var howManyRows=2;
     var values = new Array();
+    var cursor = 0;
+
+
+
+    // chg. 이런 느낌으로
+    // for(var i=0; i<DBarrayLen; i++){
+    //     values.push("'" + 'DBarray[i]' + "'");
+    // }
+
+
+    //얘는 테스트용 더미데이터. 2 row임.
     values.push("'" + 'a' + "'");   //시간
     values.push("'" + 'b' + "'");   //장소
     values.push("'" + '1' + "'");   //위치,교통
@@ -184,7 +177,6 @@
     values.push("'" + '1' + "'");   //플래너의 추천
     console.log(values)
 
-    // 여기서부터 계속.....
 
 
 
@@ -208,67 +200,86 @@
 
             var div = document.getElementById('req_cont');
             div.appendChild(user_Table);    // ADD THE TABLE TO YOUR WEB PAGE.
+
+
+            // 로드시에 모든 계획을 다 불러오게 한다.
+            fullLoad();
         }
 
         // ADD A NEW ROW TO THE TABLE.s
-        function addRow() {
-            var userTab = document.getElementById('user_Table');
+        function fullLoad() {
 
-            var rowCnt = userTab.rows.length;        // GET TABLE ROW COUNT.
-            var tr = userTab.insertRow(rowCnt);      // TABLE ROW.
-            tr = userTab.insertRow(rowCnt);
+            for (var k=0; k < howManyRows; k++)
+            {
+                var userTab = document.getElementById('user_Table');
 
-            for (var c = 0; c < arrHead.length; c++) {
-                var td = document.createElement('td');          // TABLE DEFINITION.
-                td = tr.insertCell(c);
+                var rowCnt = userTab.rows.length;        // GET TABLE ROW COUNT.
+                var tr = userTab.insertRow(rowCnt);      // TABLE ROW.
+                tr = userTab.insertRow(rowCnt);
 
+                for (var c = 0; c < arrHead.length; c++) {
+                    var td = document.createElement('td');          // TABLE DEFINITION.
+                    td = tr.insertCell(c);
 
-                if (c == 0) {
+                    //첫 셀
+                    if (c == 0) {
 
-                    var para = document.createElement("P");
-                    para.innerText = values[0];
-                    td.appendChild(para);
-                }
-                else if (c == 1) {
-                    // CREATE AND ADD TEXTBOX IN EACH CELL.
-                    var para = document.createElement('P');
-                    para.innerText = values[1];
-                    td.appendChild(para);
-                }
-                else if (c == 3) {
-                    // 세부사항 텍스트 에리어 추가함.
+                        var para = document.createElement("P");
+                        para.innerText = values[cursor++];
+                        td.appendChild(para);
+                    }
 
-                    var textarea1 = document.createElement("textarea");
-                    textarea1.setAttribute('type', 'textarea');
-                    textarea1.setAttribute('placeholder', '위치 및 교통 정보를 적어주세요.');
-                    td.appendChild(textarea1);
+                    //두 번째 셀
+                    else if (c == 1) {
 
-                    var textarea2 = document.createElement("textarea");
-                    textarea2.setAttribute('type', 'textarea');
-                    textarea2.setAttribute('placeholder', '이용료/경비를 적어주세요.');
-                    td.appendChild(textarea2);
+                        var para = document.createElement('P');
+                        para.innerText = values[cursor++];
+                        td.appendChild(para);
+                    }
 
-                    var textarea3 = document.createElement("textarea");
-                    textarea3.setAttribute('type', 'textarea');
-                    textarea3.setAttribute('placeholder', '개방 시간을 적어주세요.');
-                    td.appendChild(textarea3);
+                    //세 번째 셀
+                    else if (c == 2) {
 
-                    var textarea4 = document.createElement("textarea");
-                    textarea4.setAttribute('type', 'textarea');
-                    textarea4.setAttribute('placeholder', '복잡도를 적어주세요.');
-                    td.appendChild(textarea4);
+                        var textarea1 = document.createElement("textarea");
+                        textarea1.setAttribute('type', 'textarea');
+                        textarea1.setAttribute('placeholder', '위치 및 교통 정보');
+                        textarea1.innerText = values[cursor++];
+                        td.appendChild(textarea1);
 
-                    var textarea5 = document.createElement("textarea");
-                    textarea5.setAttribute('type', 'textarea');
-                    textarea5.setAttribute('placeholder', '분위기를 적어주세요.');
-                    td.appendChild(textarea5);
+                        var textarea2 = document.createElement("textarea");
+                        textarea2.setAttribute('type', 'textarea');
+                        textarea2.setAttribute('placeholder', '이용료/경비');
+                        textarea2.innerText = values[cursor++];
+                        td.appendChild(textarea2);
 
-                    var textarea6 = document.createElement("textarea");
-                    textarea6.setAttribute('type', 'textarea');
-                    textarea6.setAttribute('placeholder', '플래너의 추천을 적어주세요.');
-                    td.appendChild(textarea6);
+                        var textarea3 = document.createElement("textarea");
+                        textarea3.setAttribute('type', 'textarea');
+                        textarea3.setAttribute('placeholder', '개방 시간');
+                        textarea3.innerText = values[cursor++];
+                        td.appendChild(textarea3);
+
+                        var textarea4 = document.createElement("textarea");
+                        textarea4.setAttribute('type', 'textarea');
+                        textarea4.setAttribute('placeholder', '복잡도');
+                        textarea4.innerText = values[cursor++];
+                        td.appendChild(textarea4);
+
+                        var textarea5 = document.createElement("textarea");
+                        textarea5.setAttribute('type', 'textarea');
+                        textarea5.setAttribute('placeholder', '분위기');
+                        textarea5.innerText = values[cursor++];
+                        td.appendChild(textarea5);
+
+                        var textarea6 = document.createElement("textarea");
+                        textarea6.setAttribute('type', 'textarea');
+                        textarea6.setAttribute('placeholder', '플래너의 추천');
+                        textarea6.innerText = values[cursor++];
+                        td.appendChild(textarea6);
+                    }
                 }
             }
+
+
         }
 
         // DELETE TABLE ROW.
@@ -301,6 +312,10 @@
                 }
             }
         }
+
+    function print_plan() {
+        window.print();
+    }
 
 </script>
 
