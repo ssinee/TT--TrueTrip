@@ -54,7 +54,7 @@
     <script language="javascript">
         function showPopup() {
             var popupX = (window.screen.width / 2) - (1300 / 2);
-            var popupY= (window.screen.height / 2) - (600 / 2);
+            var popupY = (window.screen.height / 2) - (600 / 2);
             window.open('popup', 'a', 'status=no, height=421, width=591');
         }
     </script>
@@ -64,7 +64,7 @@
             var content;
             var User_ID = $('#UserID').text();
             var postsArr = ""
-            var postTitle=""
+            var postTitle = ""
 
             var posting = $.post('/showPlannersImage', {'UserID': User_ID})
 
@@ -79,7 +79,9 @@
                         "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
                         "                            </div>" +
                         "                            <div class=\"arrange-text\">" +
+                        "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
                         "                            <h5 class='posttitle'>" + content[i].title + "</h5>" +
+
                         "                        </div>" +
                         "                       </a>" +
                         "                     </div>"
@@ -92,28 +94,28 @@
                 // $(this).css("border", "5px solid #FF5581")
             })
 
-            $('#showPlannerImages').on('click', 'h5',function(event){
-                postTitle=$(this).text()
+            $('#showPlannerImages').on('click', 'h5', function (event) {
+                postTitle = $(this).text()
                 console.log(postTitle)
-                $.ajax({
-                    type:"GET",
-                    url:"/showpopup",
-                    data:{
-                        User_ID: User_ID,
-                        Title: postTitle
-                    }
-                }).done(function(result){
-                    if(result==='1'){
-                        console.log("functionscucces")
-                        location.href="/setpopup";
-                    }
-                });
-                //
-                // console.log(postTitle)
-                // $.post('/showpopup', {'User_ID':User_ID, 'Title':postTitle})
-                // showPopup()
-            })
+                console.log($(this).eq(-2).attr('class'))
+                console.log($(this).parents().eq(1).attr('class'))
+                var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
 
+                // $.ajax({
+                //     type:"GET",
+                //     url:"/showpopup",
+                //     data:{
+                //         User_ID: User_ID,
+                //         Title: postTitle,
+                //     }
+                // }).done(function(result){
+                //     if(result==='1'){
+                //         console.log("functionscucces")
+                //     }
+                // });
+                showPopup()
+
+            })
 
 
         })
@@ -140,7 +142,6 @@
 
 <!-- About Secton Begin -->
 <section class="about-section">
-
     <div class="about-item" style="padding-top: 100px;">
         <div class="container">
             <div class="row">
@@ -219,7 +220,7 @@
                                     <div class="share-btn" style="width: 500px;">
 
                                         <a href="#">Request</a>
-                                        <input type="button" value='글제목' onclick="showPopup();" />
+                                        <input type="button" value='글제목' onclick="showPopup();"/>
                                     </div>
                                 </div>
                             </div>
