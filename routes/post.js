@@ -57,7 +57,7 @@ router.post('/mypage/write',function(req,res){
             res.redirect('/');
         }
         console.log("update data");
-        res.redirect('/'+req.user.id);
+        res.redirect('/post/'+req.user.id);
     });
 });
 
@@ -67,7 +67,10 @@ router.post('/mypage/write',function(req,res){
 //         res.render('post',{title:'post',post:post});
 //     })
 // });
-router.get('/:id', function (req, res) {
+router.get('/post/:id', function (req, res) {
+    if(req.params.id==null){
+        res.render("/");
+    }
     Planner.findOne({id:req.params.id}, function (err, post) {
         res.render('plannerpage', { title: 'Post', user_info: post });
     })
