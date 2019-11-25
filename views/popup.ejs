@@ -28,19 +28,12 @@
         //     opener.location.href = "guidepage_test.ejs";
         //     self.close();
         // }
-
         $(document).ready(function(){
-
-
-           var posting= $.get('/setpopup', {});
-           posting.done(function(data){
-               var postData="<%= PostID%>";
-
-           })
-
+            var posting= $.get('/setpopup', {});
+            posting.done(function(data){
+                var postData="<%= PostID%>";
+            })
         })
-
-
     </script>
 
 
@@ -49,7 +42,6 @@
             max-width: 100%;
             height: auto;
         }
-
         table {
             /*table-layout: fixed;*/
             /*border: black;*/
@@ -90,35 +82,35 @@
 <!--    </div>-->
 <!--</div>-->
 
-        <table border="1" style="border-radius:10px 10px 10px 10px; width:770px; height:450px; margin: 10px;">
-            <tr>
+<table border="1" style="border-radius:10px 10px 10px 10px; width:770px; height:450px; margin: 10px;">
+    <tr>
 
-                <td class="postImg" rowspan="5" width="50%" height="100%" align="center ">
-                        <img src = "<%= PostPath%>" alt="" style="size: 100px; border-radius: 10px 10px 10px 10px">
-                </td>
+        <td class="postImg" rowspan="5" width="50%" height="100%" align="center ">
+            <img src = "<%= PostPath%>" alt="" style="size: 100px; border-radius: 10px 10px 10px 10px">
+        </td>
 
-                <td class="postPlanner" width="45%" height="7%">
-                    <a href="guidepage_test.ejs"><%= PostID%></a>
-                </td>
-            </tr>
+        <td class="postPlanner" width="45%" height="7%">
+            <a href="guidepage_test.ejs"><%= PostID%></a>
+        </td>
+    </tr>
 
-            <tr>
-                <td class="postTitle" width="45%" height="7%"><%= PostTitle%></td>
-            </tr>
+    <tr>
+        <td class="postTitle" width="45%" height="7%"><%= PostTitle%></td>
+    </tr>
 
-            <tr>
-                <td class="postCategory" width="45%" height="7%"><%= PostCategory%></td>
-            </tr>
+    <tr>
+        <td class="postCategory" width="45%" height="7%"><%= PostCategory%></td>
+    </tr>
 
-            <tr>
-                <td class="postLocation" width="45%" height="7%"><%= PostLocation%></td>
-            </tr>
+    <tr>
+        <td class="postLocation" width="45%" height="7%"><%= PostLocation%></td>
+    </tr>
 
-            <tr>
-                <td class="postContents" width="45%" height="72%"><%= PostContents%></td>
-            </tr>
-        </table>
-    <br>
+    <tr>
+        <td class="postContents" width="45%" height="72%"><%= PostContents%></td>
+    </tr>
+</table>
+<br>
 
 <div class="col-lg-4 offset-lg-1"
      style="margin-left:0px; max-width: 100%; padding-right:0px; padding-left:150px; width:770px">
