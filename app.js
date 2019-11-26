@@ -52,7 +52,9 @@ app.use(express.static('js'))
 app.use(express.static('scss'))
 app.use(express.static('vendor'))
 app.use(express.static('img'))
-app.use('/upload', express.static('./upload'));
+
+app.use('/upload', express.static('./upload'))
+app.use('/post/upload', express.static('./upload'))
 
 
 // app.use(express.static(path.join(__dirname,'/views')))
@@ -107,7 +109,6 @@ app.use('/', require('./routes/showPlannersImage'));
 app.use('/', require('./routes/post'));
 app.use('/', require('./routes/showpopup'));
 app.use('/', require('./routes/showPlannerList'));
-
 
 
 

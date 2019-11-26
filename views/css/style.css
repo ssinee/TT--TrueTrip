@@ -2076,19 +2076,7 @@ ol {
 	margin-bottom: 42px;
 }
 
-.contact-form input {
-	width: 100%;
-	height: 58px;
-	border: 1px solid #D0D7DB;
-	margin-bottom: 28px;
-	font-size: 14px;
-	color: #838383;
-	font-weight: 700;
-	font-style: italic;
-	padding-left: 34px;
-	-webkit-transition: all 0.3s;
-	transition: all 0.3s;
-}
+
 
 .contact-form input:focus {
 	border-color: #FF5581;

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Local Directory | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
+    <style>
+        table {
+            alignment: center;
+            border: solid 3px blue;
+            margin: auto;
+            width: 90%;
+            font: 20px "맑은 고딕";
+        }
+        th, td {
+            border: solid 3px blue;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+            alignment: center;
+            margin: auto;
+        }
+        textarea{
+            width: 90%;
+            margin: 10px;
+            align-self: center;
+            font-size: 15px;
+            height: 100px;
+            border: solid gold 2px;
+        }
+        input[type="text"] {
+            width: 100%; /* 원하는 너비 설정 */
+            height: auto; /* 높이값 초기화 */
+            line-height : normal; /* line-height 초기화 */
+            font-size: 15px;
+            font-family: inherit; /* 폰트 상속 */
+            border: 1px solid #999;
+            border-radius: 0; /* iSO 둥근모서리 제거 */
+        }
+
+
+    </style>
+</head>
+
+<body onload="user_createTable()">
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header-section listings">
+    <% include ./header.html %>
+</header>
+<!-- Header End -->
+
+
+
+<!-- Blog Section Begin -->
+<section class="blog-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <br><br>
+
+                <div class="blog-item" style="border: solid black 2px;">
+
+                    <h2>계획 확인</h2>
+                    <hr style="border: solid black 1px;">
+
+<!--                    계획 들어가는 자리-->
+                    <div class="blog-text">
+                        <div id="req_cont"></div><br>
+                    </div>
+
+
+<!--                    프린트 버튼-->
+                    <div align="right" style="margin-right: 50px; margin-bottom: 30px; margin-top: 20px;">
+                        <img src="img/icon/print.png" style="cursor:pointer" width="80px" height="80px" onclick="print_plan()"/>
+                    </div>
+                </div>
+
+
+<!--                    후기작성 섹션-->
+                <div class="blog-item" style="border: solid black 2px;">
+                    <div id="후기작성">
+                        <br>
+                        <b><h3>&nbsp;리뷰 작성</h3></b>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;리뷰 작성시 마일리지 2포인트가 적립됩니다.</p>
+
+<!--                        chg. 여기 action 바꿔줘야함.-->
+<!--                        chg. 후기DB에 stars랑 review값 저장. 유저ID, 플래너ID, 선택장소, 날짜도 저장-->
+<!--                        chg. 계획요청DB에서 후기여부를 true로.-->
+                        <form action="#" id="AAA">
+                            &nbsp;&nbsp;&nbsp;&nbsp;만족도&nbsp;&nbsp;
+                            <select name="stars">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10" selected>10</option>
+                            </select>점 / 10 점
+                            <br>
+
+                            <textarea name = "review" form="AAA" cols="40" rows="10" placeholder="이런 점이 좋았고 이런 점이 보완이 필요해요."></textarea>
+                            <br><br>
+                            <center>
+                                    <input type="submit" class="primary-btn" value="확인">
+                            </center>
+                        </form>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->
+<div class="container-fluid">
+    <div class="howit-bg">
+        <img src="img/howit-bg.png" alt="">
+    </div>
+</div>
+
+
+
+<script>
+    // ARRAY FOR HEADER.
+    var arrHead = new Array();
+    arrHead = ['시간', '장소', '세부사항'];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+
+
+    // chg. DB대신 테스트할 더미 데이터. 나중에 push 중간에 들어가는 부분들만 DB값으로 교체.
+    // chg. 지금은 한 row만 했는데, 실제로는 row 수만큼 push 해야됨
+    // chg. DB에서 읽은 column의 길이(DBarrayLen)를 8로 나눠서 howManyRows에 대입
+    // chg. DBarrayLen도 동일함.
+    var DBarrayLen = 24;
+    var howManyRows=3;
+    var values = new Array();
+    var cursor = 0;
+
+
+
+    // chg. 이런 느낌으로
+    // for(var i=0; i<DBarrayLen; i++){
+    //     values.push("'" + 'DBarray[i]' + "'");
+    // }
+
+
+    //얘는 테스트용 더미데이터. 2 row임.
+    values.push("'" + 'a' + "'");   //시간
+    values.push("'" + 'b' + "'");   //장소
+    values.push("'" + '1' + "'");   //위치,교통
+    values.push("'" + '2' + "'");   //이용료/경비
+    values.push("'" + '3' + "'");   //개방시간
+    values.push("'" + '4' + "'");   //복잡도
+    values.push("'" + '5' + "'");   //분위기
+    values.push("'" + '6' + "'");   //플래너의 추천
+    values.push("'" + 'c' + "'");   //시간
+    values.push("'" + 'd' + "'");   //장소
+    values.push("'" + '6' + "'");   //위치,교통
+    values.push("'" + '5' + "'");   //이용료/경비
+    values.push("'" + '4' + "'");   //개방시간
+    values.push("'" + '3' + "'");   //복잡도
+    values.push("'" + '2' + "'");   //분위기
+    values.push("'" + '1' + "'");   //플래너의 추천
+    values.push("'" + 'a' + "'");   //시간
+    values.push("'" + 'b' + "'");   //장소
+    values.push("'" + '1' + "'");   //위치,교통
+    values.push("'" + '2' + "'");   //이용료/경비
+    values.push("'" + '3' + "'");   //개방시간
+    values.push("'" + '4' + "'");   //복잡도
+    values.push("'" + '5' + "'");   //분위기
+    values.push("'" + '6' + "'");   //플래너의 추천
+    console.log(values);
+
+
+
+
+
+
+
+
+        // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
+        // ADD THE TABLE TO YOUR WEB PAGE.
+        function user_createTable() {
+            var user_Table = document.createElement('table');
+            user_Table.setAttribute('id', 'user_Table');            // SET THE TABLE ID.
+
+            var tr = user_Table.insertRow(-1);
+
+            for (var h = 0; h < arrHead.length; h++) {
+                var th = document.createElement('th');          // TABLE HEADER.
+                th.innerHTML = arrHead[h];
+                tr.appendChild(th);
+            }
+
+            var div = document.getElementById('req_cont');
+            div.appendChild(user_Table);    // ADD THE TABLE TO YOUR WEB PAGE.
+
+
+            // 로드시에 모든 계획을 다 불러오게 한다.
+            fullLoad();
+        }
+
+
+
+        // 모든 계획 불러오는 함수
+        function fullLoad() {
+
+            for (var k=0; k < howManyRows; k++)
+            {
+                var userTab = document.getElementById('user_Table');
+
+                var rowCnt = userTab.rows.length;        // GET TABLE ROW COUNT.
+                var tr = userTab.insertRow(rowCnt);      // TABLE ROW.
+                tr = userTab.insertRow(rowCnt);
+
+                for (var c = 0; c < arrHead.length; c++) {
+                    var td = document.createElement('td');          // TABLE DEFINITION.
+                    td = tr.insertCell(c);
+
+                    //첫 셀
+                    if (c == 0) {
+
+                        var para = document.createElement("P");
+                        para.innerText = values[cursor++];
+                        td.appendChild(para);
+                    }
+
+                    //두 번째 셀
+                    else if (c == 1) {
+
+                        var para = document.createElement('P');
+                        para.innerText = values[cursor++];
+                        td.appendChild(para);
+                    }
+
+
+                    //세 번째 셀
+                    else if (c == 2) {
+                        //텍스트 위에 들어가는 타이틀. ex) 위치, 경비...
+                        var title1 = document.createElement("h5");
+                        title1.innerText = '위치 / 교통';
+                        td.appendChild(title1);
+                        var textarea1 = document.createElement("textarea");
+                        textarea1.setAttribute('type', 'textarea');
+                        textarea1.setAttribute('placeholder', '위치 및 교통 정보');
+                        textarea1.innerText = values[cursor++];
+                        td.appendChild(textarea1);
+
+                        var textarea2 = document.createElement("textarea");
+                        var title2 = document.createElement("h5");
+                        title2.innerText = '이용료 / 경비';
+                        td.appendChild(title2);
+                        textarea2.setAttribute('type', 'textarea');
+                        textarea2.setAttribute('placeholder', '이용료/경비');
+                        textarea2.innerText = values[cursor++];
+                        td.appendChild(textarea2);
+
+
+                        var textarea3 = document.createElement("textarea");
+
+                        var title3 = document.createElement("h5");
+                        title3.innerText = '개방시간';
+                        td.appendChild(title3);
+                        textarea3.setAttribute('type', 'textarea');
+                        textarea3.setAttribute('placeholder', '개방시간');
+                        textarea3.innerText = values[cursor++];
+                        td.appendChild(textarea3);
+
+                        var textarea4 = document.createElement("textarea");
+                        var title4 = document.createElement("h5");
+                        title4.innerText = '복잡도';
+                        td.appendChild(title4);
+                        textarea4.setAttribute('type', 'textarea');
+                        textarea4.setAttribute('placeholder', '복잡도');
+                        textarea4.innerText = values[cursor++];
+                        td.appendChild(textarea4);
+
+                        var textarea5 = document.createElement("textarea");
+                        var title5 = document.createElement("h5");
+                        title5.innerText = '분위기';
+                        td.appendChild(title5);
+                        textarea5.setAttribute('type', 'textarea');
+                        textarea5.setAttribute('placeholder', '분위기');
+                        textarea5.innerText = values[cursor++];
+                        td.appendChild(textarea5);
+
+                        var textarea6 = document.createElement("textarea");
+                        var title6 = document.createElement("h5");
+                        title6.innerText = '플래너의 추천';
+                        td.appendChild(title6);
+                        textarea6.setAttribute('type', 'textarea');
+                        textarea6.setAttribute('placeholder', '플래너의 추천');
+                        textarea6.innerText = values[cursor++];
+                        td.appendChild(textarea6);
+                    }
+                }
+            }
+        }
+
+
+    function print_plan() {
+        window.print();
+    }
+
+</script>
+
+
+
+
+
+<!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>

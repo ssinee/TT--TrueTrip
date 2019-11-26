@@ -207,13 +207,107 @@
     <div class="loader"></div>
 </div>
 
-<!-- Header Section Begin -->
-<div id="preloder">
-    <div class="loader"></div>
-</div><!-- Header End -->
+
 
 <div class="hero-listing set-bg" data-setbg="img/cats/bg.jpg" style="height: 200px;">
 </div>
+
+<header class="header-section listings">
+    <% include ./header.html %>
+</header>
+<!-- Header End -->
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+<script>
+    var content;
+    var contentString = "";
+    var stringArr = new Array();
+    var pagenum = 0;
+    $(document).ready(function () {
+
+        var location = $(":input:radio[name=the]:checked").val();
+        var posting = $.post('/showlocation', {'location': location})
+
+        posting.done(function (data) {
+            content = data.data
+            for (var i = 0; i < content.length; i++) {
+                contentString +=
+                    "<div class=\"col-lg-4 col-sm-6\" >" +
+                    "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
+                    "                            <div class=\"arrange-pic\">" +
+                    "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                    "                            <div class=\"rating\">4.9</div>" +
+                    "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
+                    "                            </div>" +
+                    "                            <div class=\"arrange-text\">" +
+                    "                            <h5>" + content[i].title + "</h5>" +
+                    "                        <span>" + content[i].location + "</span>" +
+                    "                        <p>Fusce urna quam, euismod sit</p>" +
+                    "                        <div class=\"open tomorrow\">Opens Tomorow at 10am</div>" +
+                    "                        </div>" +
+                    "                       </a>" +
+                    "                     </div>"
+                if ((i > 0 && i % 8 == 0) || i == content.length - 1) {
+                    stringArr[pagenum] = contentString;
+                    console.log(i);
+                    pagenum++;
+                    contentString = ""
+                }
+            }
+            $('#showhere').html(stringArr[0]);
+        });
+
+
+        $('input[name="the"]').click(function () {
+            contentString = "";
+            stringArr = [0,];
+            pagenum = 0;
+            var theme = $(":input:radio[name=the]:checked").val();
+
+            var posting = $.post('/showtheme', {'theme': theme})
+            posting.done(function (data) {
+                content = data.data
+                console.log(data)
+
+                for (var i = 0; i < content.length; i++) {
+                    contentString +=
+                        "<div class=\"col-lg-4 col-sm-6\" >" +
+                        "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
+                        "                            <div class=\"arrange-pic\">" +
+                        "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                        "                            <div class=\"rating\">4.9</div>" +
+                        "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
+                        "                            </div>" +
+                        "                            <div class=\"arrange-text\">" +
+                        "                            <h5>" + content[i].title + "</h5>" +
+                        "                        <span>" + content[i].location + "</span>" +
+                        "                        <p>Fusce urna quam, euismod sit</p>" +
+                        "                        <div class=\"open tomorrow\">Opens Tomorow at 10am</div>" +
+                        "                        </div>" +
+                        "                       </a>" +
+                        "                     </div>"
+                    if ((i > 0 && i % 8 == 0) || i == content.length - 1) {
+                        stringArr[pagenum] = contentString;
+                        console.log(i);
+                        pagenum++;
+                        contentString = ""
+                    }
+                }
+                console.log(stringArr[0])
+                $('#showhere').html(stringArr[0]);
+            });
+        });
+
+        $('.pagination-num a').click(function () {
+            var pagenum_ = parseInt($(this).text());
+            $('#showhere').html(stringArr[pagenum_ - 1]);
+        });
+    });
+
+</script>
+
 
 
 <!-- Filter Section Begin -->
@@ -223,10 +317,12 @@
             <div class="col-lg-3">
                 <div class="filter-left">
 
-<!--                    플래너 지역 카테고리. -->
-<!--                    chg. action? 바꿔야하는데-->
-<!--                    chg. 지역 필터랑 카테고리 필터가 하나로 인식됨. 위아래 통틀어 한개만 선택가능-->
-<!--                    위치카테고리용 class="lo-item"은 co-item과 같게 정의해야함.-->
+
+                    <!--                    플래너 지역 카테고리. -->
+                    <!--                    chg. action? 바꿔야하는데-->
+                    <!--                    chg. 지역 필터랑 카테고리 필터가 하나로 인식됨. 위아래 통틀어 한개만 선택가능-->
+                    <!--                    위치카테고리용 class="lo-item"은 co-item과 같게 정의해야함.-->
+
                     <div class="location-filter">
                         <h3>지역 필터</h3>
                         <div class="location-option">
@@ -250,35 +346,37 @@
                         </div>
                     </div>
 
-<!--                    플래너 분야 카테고리-->
-                    <div class="category-filter">
-                        <h3>Category Filter</h3>
-                        <div class="category-option">
-                            <form id="themeForm" action="/showtheme" method="post">
-                                <div class="co-item">
-                                    <label class="active"><input type="radio" name="the" value="모두">모두</label>
-                                </div>
-                                <div class="co-item">
-                                    <label> <input type="radio" name="the" value="쇼핑">쇼핑</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="카페">카페</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="사진">사진</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="음식">음식</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="액티비티">액티비티</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="유명명소">유명명소</label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+
+                    <!--                    플래너 분야 카테고리-->
+<!--                    <div class="category-filter">-->
+<!--                        <h3>Category Filter</h3>-->
+<!--                        <div class="category-option">-->
+<!--                            <form id="themeForm" action="/showtheme" method="post">-->
+<!--                                <div class="co-item">-->
+<!--                                    <label class="active"><input type="radio" name="the" value="모두">모두</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label> <input type="radio" name="the" value="쇼핑">쇼핑</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="카페">카페</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="사진">사진</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="음식">음식</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="액티비티">액티비티</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="유명명소">유명명소</label>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
 
                     <div class="rating-filter">
                         <h3>Ratings</h3>
