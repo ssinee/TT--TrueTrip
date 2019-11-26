@@ -127,6 +127,7 @@
                 $('#editProfile2').hide();
                 $('#save').hide();
             })
+            $('#UserID').hide();
         })
 
         $(document).ready(function (req,res) {
@@ -135,7 +136,6 @@
             var author=""
             var postsArr = ""
             var postTitle = ""
-
             var posting = $.post('/showPlannersImage', {'UserID': User_ID})
 
             posting.done(function (data) {
@@ -288,6 +288,7 @@
                                     <div style="padding:5px 20px"></div>
                                     <h5>관심지역: <%=user_info.location%></h5>
                                     <div style="padding:5px 20px"></div>
+                                    <h5 id="UserID"><%=user_info.id%></h5>
                                     <div id="editProfile" style="padding:5px 20px">
                                         <input type="text" name="location" placeholder="관심지역">
                                     </div>
