@@ -61,19 +61,26 @@ router.post('/mypage/write',function(req,res){
     });
 });
 
-// router.get('/post/write', function(req,res){
-//     var post=new Post();
-//     PlannerPost.findOne({_id:req.params.id},function(err,post){
-//         res.render('post',{title:'post',post:post});
-//     })
-// });
+router.get('/post/write', function(req,res){
+    var post=new Post();
+    PlannerPost.findOne({_id:req.params.id},function(err,post){
+        res.render('post',{title:'post',post:post});
+    })
+});
 router.get('/post/:id', function (req, res) {
     if(req.params.id==null){
-        res.render("/");
+        res.redirect("/");
     }
-    Planner.findOne({id:req.params.id}, function (err, post) {
-        res.render('plannerpage', { title: 'Post', user_info: post });
-    })
+    else{
+        if(req.params.id=="popup"){
+            console.log("id popup 호출:");
+            res.redirect('/popup');
+        }
+        Planner.findOne({id:req.params.id}, function (err, post) {
+
+            res.render('plannerpage', { title: 'Post', user_info: post });
+        })
+    }
 });
 
 module.exports = router;

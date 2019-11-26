@@ -215,6 +215,96 @@
 
 <div class="hero-listing set-bg" data-setbg="img/cats/bg.jpg" style="height: 200px;">
 </div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+<script>
+    var content;
+    var contentString = "";
+    var stringArr = new Array();
+    var pagenum = 0;
+    $(document).ready(function () {
+
+        var location = $(":input:radio[name=the]:checked").val();
+        var posting = $.post('/showlocation', {'location': location})
+
+        posting.done(function (data) {
+            content = data.data
+            for (var i = 0; i < content.length; i++) {
+                contentString +=
+                    "<div class=\"col-lg-4 col-sm-6\" >" +
+                    "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
+                    "                            <div class=\"arrange-pic\">" +
+                    "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                    "                            <div class=\"rating\">4.9</div>" +
+                    "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
+                    "                            </div>" +
+                    "                            <div class=\"arrange-text\">" +
+                    "                            <h5>" + content[i].title + "</h5>" +
+                    "                        <span>" + content[i].location + "</span>" +
+                    "                        <p>Fusce urna quam, euismod sit</p>" +
+                    "                        <div class=\"open tomorrow\">Opens Tomorow at 10am</div>" +
+                    "                        </div>" +
+                    "                       </a>" +
+                    "                     </div>"
+                if ((i > 0 && i % 8 == 0) || i == content.length - 1) {
+                    stringArr[pagenum] = contentString;
+                    console.log(i);
+                    pagenum++;
+                    contentString = ""
+                }
+            }
+            $('#showhere').html(stringArr[0]);
+        });
+
+
+        $('input[name="the"]').click(function () {
+            contentString = "";
+            stringArr = [0,];
+            pagenum = 0;
+            var theme = $(":input:radio[name=the]:checked").val();
+
+            var posting = $.post('/showtheme', {'theme': theme})
+            posting.done(function (data) {
+                content = data.data
+                console.log(data)
+
+                for (var i = 0; i < content.length; i++) {
+                    contentString +=
+                        "<div class=\"col-lg-4 col-sm-6\" >" +
+                        "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
+                        "                            <div class=\"arrange-pic\">" +
+                        "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                        "                            <div class=\"rating\">4.9</div>" +
+                        "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
+                        "                            </div>" +
+                        "                            <div class=\"arrange-text\">" +
+                        "                            <h5>" + content[i].title + "</h5>" +
+                        "                        <span>" + content[i].location + "</span>" +
+                        "                        <p>Fusce urna quam, euismod sit</p>" +
+                        "                        <div class=\"open tomorrow\">Opens Tomorow at 10am</div>" +
+                        "                        </div>" +
+                        "                       </a>" +
+                        "                     </div>"
+                    if ((i > 0 && i % 8 == 0) || i == content.length - 1) {
+                        stringArr[pagenum] = contentString;
+                        console.log(i);
+                        pagenum++;
+                        contentString = ""
+                    }
+                }
+                console.log(stringArr[0])
+                $('#showhere').html(stringArr[0]);
+            });
+        });
+
+        $('.pagination-num a').click(function () {
+            var pagenum_ = parseInt($(this).text());
+            $('#showhere').html(stringArr[pagenum_ - 1]);
+        });
+    });
+
+</script>
 
 
 <!-- Filter Section Begin -->
