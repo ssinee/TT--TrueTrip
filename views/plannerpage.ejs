@@ -22,59 +22,95 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <style>
+<!--    <style>-->
 
-        .postpic{
+<!--        .postpic{-->
+<!--            height: 250px;-->
+<!--            max-width:100%;-->
+<!--            width: auto;-->
+<!--        }-->
+<!--    </style>-->
+    <style>
+        .activeimgcolor {
+            border: 5px solid #FF5581;
+        }
+
+        .postpic {
             height: 250px;
-            max-width:100%;
+            max-width: 100%;
             width: auto;
         }
+
+        .postpic:hover {
+            border: 2px solid #FF5581;
+        }
+
+        .postpic:active {
+            border: 5px solid #FF5581;
+
+
+        }
+
+        .postpicActive {
+            border: 5px solid #FF5581;
+            height: 250px;
+            max-width: 100%;
+            width: auto;
+        }
+
     </style>
+    <script language="javascript">
+      function showPopup() {
+            var popupX = (window.screen.width / 2) - (1300 / 2);
+            var popupY = (window.screen.height / 2) - (600 / 2);
+            window.open('popup', 'a', 'status=no, height=421, width=591');
+        }
+    </script>
 
     <script>
-        $(document).ready(function () {
-            var content;
-            var User_ID = $('#UserID').text();
-            var postsArr = ""
-
-            var posting = $.post('/showPlannersImage', {'UserID': User_ID})
-
-            posting.done(function (data) {
-                content = data.data
-
-                for (var i = 0; i < content.length; i++) {
-                    postsArr +=
-                        "<div class=\"col-lg-4 col-sm-6\" >" +
-                        "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
-                        "                            <div class=\"arrange-pic\">" +
-                        "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
-                        "                            </div>" +
-                        "                            <div class=\"arrange-text\">" +
-                        "                            <h5>" + content[i].title + "</h5>" +
-                        "                        </div>" +
-                        "                       </a>" +
-                        "                     </div>"
-                }
-                $('#showPlannerImages').html(postsArr)
-            })
-        })
-
-        // var hidden=false;
-        // function action(){
-        //     hidden =!hidden;
-        //     if(hidden){
-        //         document.getElementById('saveButton').style.visibility='visible';
-        //     } else{
-        //         document.getElementById('saveButton').style.visibility='hidden';
-        //     }
-        // }
-        // var hidden=document.getElementById('saveButton').style.visibility;
-        // function action(){
-        //     if(hidden){
-        //         document.getElementById('saveButton').style.visibility='visible';
-        //     }
-        // }
-
+        // $(document).ready(function () {
+        //     var content;
+        //     var User_ID = $('#UserID').text();
+        //     var postsArr = ""
+        //
+        //     var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+        //
+        //     posting.done(function (data) {
+        //         content = data.data
+        //
+        //         for (var i = 0; i < content.length; i++) {
+        //             postsArr +=
+        //                 "<div class=\"col-lg-4 col-sm-6\" >" +
+        //                 "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+        //                 "                            <div class=\"arrange-pic\">" +
+        //                 "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+        //                 "                            </div>" +
+        //                 "                            <div class=\"arrange-text\">" +
+        //                 "                            <h5>" + content[i].title + "</h5>" +
+        //                 "                        </div>" +
+        //                 "                       </a>" +
+        //                 "                     </div>"
+        //         }
+        //         $('#showPlannerImages').html(postsArr)
+        //     })
+        // })
+        //
+        // // var hidden=false;
+        // // function action(){
+        // //     hidden =!hidden;
+        // //     if(hidden){
+        // //         document.getElementById('saveButton').style.visibility='visible';
+        // //     } else{
+        // //         document.getElementById('saveButton').style.visibility='hidden';
+        // //     }
+        // // }
+        // // var hidden=document.getElementById('saveButton').style.visibility;
+        // // function action(){
+        // //     if(hidden){
+        // //         document.getElementById('saveButton').style.visibility='visible';
+        // //     }
+        // // }
+        //
         $(document).ready( function(){
             $('#editProfile').hide();
             $('#editProfile2').hide();
@@ -93,6 +129,70 @@
             })
         })
 
+        $(document).ready(function (req,res) {
+            var content;
+            var User_ID = $('#UserID').text();
+            var author=""
+            var postsArr = ""
+            var postTitle = ""
+
+            var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+
+            posting.done(function (data) {
+                content = data.data
+                console.log(content);
+                for (var i = 0; i < content.length; i++) {
+                    postsArr +=
+                        "<div class=\"col-lg-4 col-sm-6\" >" +
+                        "                            <a class=\"arrange-items\">" +
+                        "                            <div class=\"arrange-pic\">" +
+                        "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
+                        "                            </div>" +
+                        "                            <div class=\"arrange-text\">" +
+                        "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
+                        "                            <h5 class='posttitle'>" + content[i].title + "</h5>" +
+
+                        "                        </div>" +
+                        "                       </a>" +
+                        "                     </div>"
+                }
+                $('#showPlannerImages').html(postsArr)
+            })
+
+            $('#showPlannerImages').on('click', 'img', function (event) {
+                $(this).toggleClass('postpicActive')
+                // $(this).css("border", "5px solid #FF5581")
+            })
+
+            $('#showPlannerImages').on('click', 'h5', function (event) {
+                postTitle = $(this).text()
+                console.log(postTitle)
+                console.log($(this).eq(-2).attr('class'))
+                console.log($(this).parents().eq(1).attr('class'))
+                var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
+
+                // $.ajax({
+                //     type:"GET",
+                //     url:"/showpopup",
+                //     data:{
+                //         User_ID: User_ID,
+                //         Title: postTitle,
+                //     }
+                // }).done(function(result){
+                //     if(result==='1'){
+                //         console.log("functionscucces")
+                //     }
+                // });
+
+                showPopup()
+
+            })
+
+
+        })
+
+
+
 
     </script>
 </head>
@@ -107,29 +207,35 @@
 <header class="header-section listings">
     <div class="container-fluid">
         <div class="logo">
-            <a href="./index.html"><img style="width:180px; height:65px" src="/img/yeah.png" alt=""></a>
+            <a href="/main"><img style="width:180px; height:65px" src="/img/yeah.png" alt=""></a>
         </div>
         <nav class="main-menu mobile-menu">
+<!--            <ul>-->
+<!--                <li><a href="index.html">Home</a></li>-->
+<!--                <li><a href="listings.html">Explore</a></li>-->
+<!--                <li><a href="how-it-works.html">More Cities</a></li>-->
+<!--                <li><a href="blog.html">News</a></li>-->
+<!--                <li><a href="contact.html">Contact</a></li>-->
+<!--            </ul>-->
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="listings.html">Explore</a></li>
-                <li><a href="how-it-works.html">More Cities</a></li>
-                <li><a href="blog.html">News</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="/main">Home</a></li>
+                <li><a href="/lists">Tag</a></li>
+                <li><a href="/showplannerlist">Planners</a></li>
+                <li><a href="contact.html">Request</a></li>
             </ul>
         </nav>
         <div class="header-right">
             <div class="user-access">
                 <% if (!isAuthenticated) { %>
-                    <a href="#">Register/</a>
-                    <a href="#">Login</a>
+                    <a href="/login">Register/</a>
+                    <a href="/login">Login</a>
                 <% } else { %>
                 <% if(user_info.id==currentUser.id) { %>
                         <a href="/mypage">My Page</a>
                         <a href="/logout">Logout</a>
                     <% } else { %>
-                        <a href="#">Register/</a>
-                        <a href="#">Login</a>
+                        <a href="/login">Register/</a>
+                        <a href="/login">Login</a>
                     <% } %>
                <% } %>
             </div>

@@ -26,7 +26,7 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
     var path=fileObj.path;
     var selectTheme="";
 
-    Planner.findOne()
+    Planner.findOne({'id':req.user.id})
         .populate('planner')
         .exec(function(err,planner){
             if(err) return res.json(err);
