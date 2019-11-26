@@ -4,6 +4,8 @@ var mongoose=require("mongoose");
 
 var Planner=mongoose.model('planners');
 
+
+
 // router.get("/post",function(req,res){
 //     PlannerPost.find({})
 //         .populate("author")

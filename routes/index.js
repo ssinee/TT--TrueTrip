@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     res.render('../views/index');
 });
 router.get('/main', (req, res) => {
-    res.render('../views/index');
+    res.render('../views/index.ejs');
 });
 
 router.get('/lists', (req,res)=>{
@@ -27,9 +27,11 @@ router.get('/lists', (req,res)=>{
     // res.render('../views/listings.ejs')
 
 })
-router.get('/showimg', (req, res)=>{
-    res.render('../views/showImg.ejs')
-})
+
+
+// router.get('/showimg', (req, res)=>{
+//     res.render('../views/showImg.ejs')
+// })
 
 router.get('/guide', (req, res)=>{
     res.render('../views/guidepage_traveler')
