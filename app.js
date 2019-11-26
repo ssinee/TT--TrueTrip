@@ -54,6 +54,8 @@ app.use(express.static('vendor'))
 app.use(express.static('img'))
 app.use('/upload', express.static('./upload'))
 
+// app.use(express.static(path.join(__dirname,'/views')))
+
 // EJS
 // app.set('view engine', 'html')
 app.set('view engine', 'ejs');
@@ -100,6 +102,9 @@ app.use('/', require('./routes/passport'));
 app.use('/', require('./routes/upload.js'));
 app.use('/', require('./routes/showTheme.js'));
 app.use('/', require('./routes/showPlannersImage'));
+
+app.use('/', require('./routes/post'));
+app.use('/', require('./routes/showpopup'));
 
 
 

@@ -15,8 +15,6 @@ showPlannersImageRouter.post('/showPlannersImage', function(req, res, next){
     dbdata.find({author: user_ID}, function(err, data){
         if(err) res.send(err)
         else {
-            console.log("_____________data in javascript \n\n")
-            console.log(data)
             res.send({'data': data})
         }
     }).select('-_id')

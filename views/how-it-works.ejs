@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel=" shortcut icon" href="img/favicon-32x32.ico">
+    <link rel="icon" href="img/favicon-32x32.ico">
 </head>
 
 <body>
@@ -31,83 +33,68 @@
 
     <!-- Header Section Begin -->
     <header class="header-section listings">
-        <div class="container-fluid">
-            <div class="logo">
-                <a href="./index.html"><img style="width:180px; height:65px" src="img/yeah.png" alt=""></a>
-            </div>
-            <nav class="main-menu mobile-menu">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="how-it-works.html">Explore</a></li>
-                    <li><a href="listings.html">More Cities</a></li>
-                    <li><a href="blog.html">News</a></li>
-                    <li class="active"><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="header-right">
-                <div class="user-access">
-                    <a href="#">Register/</a>
-                    <a href="#">Login</a>
-                </div>
-                <a href="#" class="primary-btn">Add Listing</a>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
+        <% include ./header.html %>
     </header>
     <!-- Header End -->
 
-    <!-- Map Section Begin -->
-    <div class="map">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26440.72384129847!2d-118.24906619231132!3d34.06719475913053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c659f50c318d%3A0xe2ffb80a9d3820ae!2sChinatown%2C%20Los%20Angeles%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1570213740685!5m2!1sen!2sbd"
-            height="657" style="border:0;" allowfullscreen="">
-        </iframe>
+    <!-- Hero Section Begin -->
+    <div class="hero-listing set-bg" data-setbg="img/how-it-works-bg.jpg">
     </div>
-    <!-- Map Section End -->
+    <!-- Hero Section End -->
 
-    <!-- Contact Section Begin -->
-    <section class="contact-section spad">
+    <!-- How It Works Begin -->
+    <section class="howitworks-section spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <form action="#" class="contact-form">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <input type="text" placeholder="Your Name">
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" placeholder="Your E-mail">
-                            </div>
-                            <div class="col-lg-12 text-center">
-                                <input type="text" placeholder="Subject">
-                                <textarea placeholder="Message"></textarea>
-                                <button type="submit">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="row mb-110">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="howit-item">
+                        <h2>Choose a package</h2>
+                        <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Ut gravida mattis magna, non varius lorem sodales nec. In libero orci, ornare non nisl a, auctor euismod purus. Morbi pretium interdum vestibulum. Fusce nec eleifend ipsum. Sed non blandit tellus. Phasellus facilisis lobortis metus, sit amet viverra lectus finibus ac. Aenean non felis dapibus, placerat libero auctor, ornare ante. Morbi quis ex eleifend,sodales nulla vitae, scelerisque ante. </p>
+                    </div>
+                    <a href="#" class="primary-btn">See Pricing</a>
+                </div>
+                <div class="col-lg-5 offset-lg-1 order-1 order-lg-2">
+                    <div class="howit-img">
+                        <img src="img/how-it-works-1.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-110">
+                <div class="col-lg-5">
+                    <div class="howit-img insige-bg">
+                        <img src="img/how-it-works-2.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="howit-item">
+                        <h2>Submit a Listing</h2>
+                        <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Ut gravida mattis magna, non varius lorem sodales nec. In libero orci, ornare non nisl a, auctor euismod purus. Morbi pretium interdum vestibulum. Fusce nec eleifend ipsum. Sed non blandit tellus. Phasellus facilisis lobortis metus, sit amet viverra lectus finibus ac. Aenean non felis dapibus, placerat libero.</p>
+                    </div>
+                    <a href="#" class="primary-btn">Add Listing</a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="cs-info">
-                        <h2>Contact Info</h2>
-                        <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Ut gravida mattis magna, non varius lorem sodales nec. In libero orci, ornare non nisl a, auctor euismod purus. Morbi pretium interdum vestibulum. </p>
-                        <span>Main Road , No 25/11</span>
-                        <ul>
-                            <li>+34 556788 3221</li>
-                            <li>contact@pizzaplace.com</li>
-                        </ul>
+                <div class="col-lg-7 order-2 order-lg-1">
+                    <div class="howit-item">
+                        <h2>Weight for Approval</h2>
+                        <p>Fusce lobortis a enim eget tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Ut gravida mattis magna, non varius lorem sodales nec. In libero orci, ornare non nisl a, auctor euismod purus. Morbi pretium interdum vestibulum. Fusce nec eleifend ipsum. Sed non blandit tellus. Phasellus facilisis lobortis metus, sit amet viverra lectus finibus ac. Aenean non felis dapibus, placerat libero auctor, ornare ante. Morbi quis ex eleifend, sodales nulla vitae, scelerisque ante.</p>
                     </div>
+                    <a href="#" class="primary-btn">Create Account</a>
                 </div>
-                <div class="col-lg-6">
-                    <div class="contact-add">
-                        <img src="img/contact-add.png" alt="">
+                <div class="col-lg-4 offset-lg-1 order-1 order-lg-2">
+                    <div class="howit-img last-img">
+                        <img src="img/how-it-works-3.png" alt="">
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container-fluid">
+            <div class="howit-bg">
+                <img src="img/howit-bg.png" alt="">
+            </div>
+        </div>
     </section>
-    <!-- Contact Section End -->
+    <!-- How It Works End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer-section spad">

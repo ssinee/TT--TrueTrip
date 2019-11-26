@@ -21,36 +21,39 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
     <style>
-        .postpic{
+        .postpic {
             height: 250px;
-            max-width:100%;
+            max-width: 100%;
             width: auto;
         }
-        .postpic:hover{border:2px; solid:blue; border-radius: 100px;}
+
+        .postpic:hover {
+            border: 2px;
+            solid: blue;
+            border-radius: 100px;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 
     <script>
         var content;
         var contentString = "";
         var stringArr = new Array();
-        var pagenum = 1;
+        var pagenum = 0;
         $(document).ready(function () {
-            contentString = "";
-            stringArr=[];
-            pagenum=1;
+
             var theme = $(":input:radio[name=the]:checked").val();
             var posting = $.post('/showtheme', {'theme': theme})
+
             posting.done(function (data) {
                 content = data.data
-
                 for (var i = 0; i < content.length; i++) {
-
                     contentString +=
                         "<div class=\"col-lg-4 col-sm-6\" >" +
-                        "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+                        "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
                         "                            <div class=\"arrange-pic\">" +
-                        "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                        "                            <img src=\'" + content[i].path + "' style='width:264px; height:270px' alt=\"\">" +
                         "                            <div class=\"rating\">4.9</div>" +
                         "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
                         "                            </div>" +
@@ -62,33 +65,34 @@
                         "                        </div>" +
                         "                       </a>" +
                         "                     </div>"
-                    if ((i > 0 && i % 9 == 0) || i==content.length){
+                    if ((i > 0 && i % 8 == 0) || i == content.length - 1) {
                         stringArr[pagenum] = contentString;
-                        console.log("pagennum")
-                        console.log(pagenum)
+                        console.log(i);
                         pagenum++;
                         contentString = ""
                     }
                 }
-                $('#showhere').html(stringArr[1]);
+                $('#showhere').html(stringArr[0]);
             });
+
 
             $('input[name="the"]').click(function () {
                 contentString = "";
-                stringArr=[];
-                pagenum=1;
+                stringArr = [0,];
+                pagenum = 0;
                 var theme = $(":input:radio[name=the]:checked").val();
 
                 var posting = $.post('/showtheme', {'theme': theme})
                 posting.done(function (data) {
                     content = data.data
-                    console.log(data.length)
+                    console.log(data)
+
                     for (var i = 0; i < content.length; i++) {
                         contentString +=
                             "<div class=\"col-lg-4 col-sm-6\" >" +
-                            "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+                            "                            <a class=\"arrange-items\" href=\"single-listing.ejs\">" +
                             "                            <div class=\"arrange-pic\">" +
-                            "                            <img src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+                            "                            <img src=\'" + content[i].path + "' style='width:264px; height:270px;' alt=\"\">" +
                             "                            <div class=\"rating\">4.9</div>" +
                             "                            <div class=\"tic-text\">" + content[i].author + "</div>" +
                             "                            </div>" +
@@ -100,22 +104,20 @@
                             "                        </div>" +
                             "                       </a>" +
                             "                     </div>"
-                        if ((i > 0 && i % 9 == 0) || i==content.length){
+                        if ((i > 0 && i % 8 == 0) || i == content.length - 1) {
                             stringArr[pagenum] = contentString;
-                            console.log("pagennum")
-                            console.log(pagenum)
                             pagenum++;
                             contentString = ""
                         }
                     }
-                    $('#showhere').html(stringArr[1]);
+                    console.log(stringArr[0])
+                    $('#showhere').html(stringArr[0]);
                 });
-
             });
 
             $('.pagination-num a').click(function () {
                 var pagenum_ = parseInt($(this).text());
-                $('#showhere').html(stringArr[pagenum_]);
+                $('#showhere').html(stringArr[pagenum_ - 1]);
             });
         });
 
@@ -130,28 +132,7 @@
 
 <!-- Header Section Begin -->
 <header class="header-section listings">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href="./index.html"><img style="width:180px; height:65px" src="img/yeah.png" alt=""></a>
-        </div>
-        <nav class="main-menu mobile-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="how-it-works.html">Explore</a></li>
-                <li class="active"><a href="listings.html">More Cities</a></li>
-                <li><a href="blog.html">News</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-            <div class="user-access">
-                <a href="#">Register/</a>
-                <a href="#">Login</a>
-            </div>
-            <a href="#" class="primary-btn">Add Listing</a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-    </div>
+    <% include ./header.html %>
 </header>
 <!-- Header End -->
 
@@ -231,8 +212,6 @@
                             </form>
                         </div>
                     </div>
-
-
 
 
                     <div class="rating-filter">

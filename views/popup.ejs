@@ -1,0 +1,128 @@
+<!--게시글 페이지. 장소, 제목 등 보여줌-->
+<!--플래너 이름이나 아래 버튼 클릭시 플래너페이지로 이동-->
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script language="javascript">
+        $(document).ready(function(){
+            var posting= $.get('/setpopup', {});
+            posting.done(function(data){
+                var postData="<%= PostID%>";
+            })
+        })
+    </script>
+
+
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        table {
+            /*table-layout: fixed;*/
+            /*border: black;*/
+            /*width: 1200px;*/
+            /*height: 500px;*/
+            /*border-style: solid;*/
+            /*word-break: break-all;*/
+            border: 1px solid #CACDD6;
+            padding: 48px 45px 34px 31px;
+        }
+    </style>
+</head>
+
+
+<!--chg. 이미지 사이즈따라서 테이블 사이즈가 바뀌는데 고정시켜야함.-->
+<!--작을 때는 테이블 사이즈가 정의한 대로 되는데, 클 때는 테이블 위아래가 커짐.-->
+<body style="height:400px">
+
+<!--<div class="container">-->
+<!--    <div class="row mb-110">-->
+<!--        <div class="col-lg-5">-->
+<!--            <div class="howit-img insige-bg">-->
+<!--                <img src="img/how-it-works-2.png" alt="">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-6 offset-lg-1">-->
+<!--            <div class="howit-item">-->
+<!--                <h2>Submit a Listing</h2>-->
+<!--                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae massa. Proin-->
+<!--                    vulputate congue rutrum. Fusce lobortis a enim eget tempus. Class aptent taciti sociosqu ad litora-->
+<!--                    torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Ut gravida mattis magna,-->
+<!--                    non varius lorem sodales nec. In libero orci, ornare non nisl a, auctor euismod purus. Morbi pretium-->
+<!--                    interdum vestibulum. Fusce nec eleifend ipsum. Sed non blandit tellus. Phasellus facilisis lobortis-->
+<!--                    metus, sit amet viverra lectus finibus ac. Aenean non felis dapibus, placerat libero.</p>-->
+<!--            </div>-->
+<!--            <a href="#" class="primary-btn">Add Listing</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<table border="1" style="border-radius:10px 10px 10px 10px; width:770px; height:450px; margin: 10px;">
+    <tr>
+
+        <td class="postImg" rowspan="5" width="50%" height="100%" align="center ">
+            <img src = "<%= PostPath%>" alt="" style="size: 100px; border-radius: 10px 10px 10px 10px">
+        </td>
+
+        <td class="postPlanner" width="45%" height="7%">
+            <a href="/guidepage_test"><%= PostID%></a>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="postTitle" width="45%" height="7%"><%= PostTitle%></td>
+    </tr>
+
+    <tr>
+        <td class="postCategory" width="45%" height="7%"><%= PostCategory%></td>
+    </tr>
+
+    <tr>
+        <td class="postLocation" width="45%" height="7%"><%= PostLocation%></td>
+    </tr>
+
+    <tr>
+        <td class="postContents" width="45%" height="72%"><%= PostContents%></td>
+    </tr>
+</table>
+<br>
+
+<div class="col-lg-4 offset-lg-1"
+     style="margin-left:0px; max-width: 100%; padding-right:0px; padding-left:150px; width:770px">
+    <div class="intro-share" style="text-align: center">
+        <div class="share-btn" style="width: 500px; margin-bottom: 0px;">
+            <a href="#" onclick="self.close()">Close</a>
+        </div>
+    </div>
+</div>
+<!--    <center>-->
+<!--        <a href="#" class="share">Request</a>-->
+
+<!--        <input type="button" value="계획신청 하러가기" onclick="movetoPlanner()"/>-->
+<!--        <input type="button" value="닫기" onclick="self.close();" />-->
+<!--    </center>-->
+
+
+</body>
+</html>
