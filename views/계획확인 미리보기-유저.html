@@ -70,28 +70,7 @@
 
 <!-- Header Section Begin -->
 <header class="header-section listings">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href="./index.html"><img style="width:180px; height:65px" src="img/yeah.png" alt=""></a>
-        </div>
-        <nav class="main-menu mobile-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="how-it-works.html">Explore</a></li>
-                <li><a href="listings.html">More Cities</a></li>
-                <li class="active"><a href="blog.html">News</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-            <div class="user-access">
-                <a href="#">Register/</a>
-                <a href="#">Login</a>
-            </div>
-            <a href="#" class="primary-btn">Add Listing</a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-    </div>
+    <% include ./header.html %>
 </header>
 <!-- Header End -->
 
@@ -105,11 +84,13 @@
 
                 <br><div><h2>계획 확인</h2></div><br>
 
-<!--                chg. 1번섹션. 요청 정보가 나오게-->
                 <div class="blog-item" style="border: solid black 2px;">
                     <div class="blog-text">
 
+<!--                        req_cont에는 계획의 첫 row가 뜬다.-->
                         <div id="req_cont"></div><br>
+<!--                        blurry_cont에는 나머지 row가 들어간다.-->
+                        <div id="blurry_cont"></div><br>
 
                     </div>
                 </div>
@@ -209,13 +190,12 @@
 
 
             // 로드시에 모든 계획을 다 불러오게 한다.
-            fullLoad();
+            partLoad();
         }
 
 
-
         // 모든 계획 불러오는 함수
-        function fullLoad() {
+        function partLoad() {
 
             for (var k=0; k < howManyRows; k++)
             {
@@ -309,10 +289,6 @@
             }
         }
 
-
-    function print_plan() {
-        window.print();
-    }
 
 </script>
 
