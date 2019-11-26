@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamically Add Remove Table Rows in JavaScript</title>
+
+    <style>
+        table {
+            alignment: center;
+            margin: auto;
+            width: 90%;
+            font: 20px "맑은 고딕";
+        }
+        table, th, td {
+            border: solid 1px brown;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+            alignment: center;
+            margin: auto;
+        }
+        textarea{
+            width: 80%;
+            float: left;
+            margin: 20px;
+            align-self: center;
+        }
+    </style>
+</head>
+<body onload="createTable()">
+
+
+<center><h1>계획짜기 페이지</h1></center>
+    <!--THE CONTAINER WHERE WE'll ADD THE DYNAMIC TABLE-->
+    <div id="cont"></div>
+
+    <center><p>
+        <input type="button" id="addRow" value="일정 추가" onclick="addRow()" />
+        <input type="button" id="bt" value="계획 제출" onclick="submit_plan()" />
+    </p>
+        <ps>저장 후에 F12 콘솔창에서 확인</p>
+    </center>
+
+
+
+</body>
+
+<script>
+    // ARRAY FOR HEADER.
+    var arrHead = new Array();
+    arrHead = ['', '시간', '장소', '세부사항'];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+
+    // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
+    // ADD THE TABLE TO YOUR WEB PAGE.
+    function createTable() {
+        var empTable = document.createElement('table');
+        empTable.setAttribute('id', 'empTable');            // SET THE TABLE ID.
+
+        var tr = empTable.insertRow(-1);
+
+        for (var h = 0; h < arrHead.length; h++) {
+            var th = document.createElement('th');          // TABLE HEADER.
+            th.innerHTML = arrHead[h];
+            tr.appendChild(th);
+        }
+
+        var div = document.getElementById('cont');
+        div.appendChild(empTable);    // ADD THE TABLE TO YOUR WEB PAGE.
+    }
+
+    // ADD A NEW ROW TO THE TABLE.s
+    function addRow() {
+        var empTab = document.getElementById('empTable');
+
+        var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
+        var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
+        tr = empTab.insertRow(rowCnt);
+
+        for (var c = 0; c < arrHead.length; c++) {
+            var td = document.createElement('td');          // TABLE DEFINITION.
+            td = tr.insertCell(c);
+
+            if (c == 0) {           // FIRST COLUMN.
+                // ADD A BUTTON.
+                var button = document.createElement('input');
+
+                // SET INPUT ATTRIBUTE.
+                button.setAttribute('type', 'button');
+                button.setAttribute('value', '일정 삭제');
+
+                // ADD THE BUTTON's 'onclick' EVENT.
+                button.setAttribute('onclick', 'removeRow(this)');
+
+                td.appendChild(button);
+            }
+
+            else if(c==1){
+                // CREATE AND ADD TEXTBOX IN EACH CELL.
+                var ele = document.createElement('input');
+                ele.setAttribute('type', 'text');
+                ele.setAttribute('placeholder', '09:00 ~ 10:30');
+
+                td.appendChild(ele);
+
+            }
+
+            else if(c==2){
+                // CREATE AND ADD TEXTBOX IN EACH CELL.
+                var ele = document.createElement('input');
+                ele.setAttribute('type', 'text');
+                ele.setAttribute('placeholder', '아주대학교');
+
+                td.appendChild(ele);
+
+            }
+
+            else if(c== arrHead.length-1){
+                // 세부사항 텍스트 에리어 추가함.
+
+                var textarea1 = document.createElement("textarea");
+                textarea1.setAttribute('type', 'textarea');
+                textarea1.setAttribute('placeholder', '세부사항 입력창1 입니다.');
+                td.appendChild(textarea1);
+
+                var textarea2 = document.createElement("textarea");
+                textarea2.setAttribute('type', 'textarea');
+                textarea2.setAttribute('placeholder', '세부사항 입력창2 입니다.');
+                td.appendChild(textarea2);
+
+                var textarea3 = document.createElement("textarea");
+                textarea3.setAttribute('type', 'textarea');
+                textarea3.setAttribute('placeholder', '세부사항 입력창3 입니다.');
+                td.appendChild(textarea3);
+            }
+        }
+    }
+
+    // DELETE TABLE ROW.
+    function removeRow(oButton) {
+        var empTab = document.getElementById('empTable');
+        empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
+    }
+
+    // EXTRACT AND SUBMIT TABLE DATA.
+    function submit_plan() {
+        var myTab = document.getElementById('empTable');
+        var values = new Array();
+
+        // LOOP THROUGH EACH ROW OF THE TABLE.
+        for (row = 1; row < myTab.rows.length - 1; row++) {
+            for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+                var element = myTab.rows.item(row).cells[c];
+                if (element.childNodes[0].getAttribute('type') == 'text') {
+                    values.push("'" + element.childNodes[0].value + "'");
+                }
+                if(element.childNodes[0].getAttribute('type') == 'textarea'){
+                    values.push("'" + element.childNodes[0].value + "'");
+                    values.push("'" + element.childNodes[1].value + "'");
+                    values.push("'" + element.childNodes[2].value + "'");
+                }
+
+            }
+        }
+
+        // SHOW THE RESULT IN THE CONSOLE WINDOW.
+        console.log(values);
+    }
+</script>
+</html>
