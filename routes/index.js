@@ -38,7 +38,9 @@ router.get('/guide', (req, res)=>{
 router.get('/upload', (req, res)=>{
     res.render('../views/image_upload.ejs');
 })
-
+router.get('/showplannerlist',(req,res)=>{
+    res.render('../views/plannerList.ejs');
+})
 
 // router.get('/popup', (req,res)=>{
 //     var Userid=req.body.UserID;

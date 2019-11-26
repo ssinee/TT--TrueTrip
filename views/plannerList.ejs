@@ -209,28 +209,7 @@
 
 <!-- Header Section Begin -->
 <header class="header-section listings">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href="./index.html"><img style="width:180px; height:65px" src="img/yeah.png" alt=""></a>
-        </div>
-        <nav class="main-menu mobile-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="how-it-works.html">Explore</a></li>
-                <li class="active"><a href="listings.html">More Cities</a></li>
-                <li><a href="blog.html">News</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-            <div class="user-access">
-                <a href="#">Register/</a>
-                <a href="#">Login</a>
-            </div>
-            <a href="#" class="primary-btn">Add Listing</a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-    </div>
+    <% include ./header.html %>
 </header>
 <!-- Header End -->
 
@@ -273,34 +252,34 @@
                     </div>
 
                     <!--                    플래너 분야 카테고리-->
-                    <div class="category-filter">
-                        <h3>Category Filter</h3>
-                        <div class="category-option">
-                            <form id="themeForm" action="/showtheme" method="post">
-                                <div class="co-item">
-                                    <label class="active"><input type="radio" name="the" value="모두">모두</label>
-                                </div>
-                                <div class="co-item">
-                                    <label> <input type="radio" name="the" value="쇼핑">쇼핑</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="카페">카페</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="사진">사진</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="음식">음식</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="액티비티">액티비티</label>
-                                </div>
-                                <div class="co-item">
-                                    <label><input type="radio" name="the" value="유명명소">유명명소</label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+<!--                    <div class="category-filter">-->
+<!--                        <h3>Category Filter</h3>-->
+<!--                        <div class="category-option">-->
+<!--                            <form id="themeForm" action="/showtheme" method="post">-->
+<!--                                <div class="co-item">-->
+<!--                                    <label class="active"><input type="radio" name="the" value="모두">모두</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label> <input type="radio" name="the" value="쇼핑">쇼핑</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="카페">카페</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="사진">사진</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="음식">음식</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="액티비티">액티비티</label>-->
+<!--                                </div>-->
+<!--                                <div class="co-item">-->
+<!--                                    <label><input type="radio" name="the" value="유명명소">유명명소</label>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="rating-filter">
                         <h3>Ratings</h3>
