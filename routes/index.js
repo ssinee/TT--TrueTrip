@@ -39,6 +39,12 @@ router.get('/upload', (req, res)=>{
     res.render('../views/image_upload.ejs');
 })
 
+router.get('/reqForm', (req,res)=>{
+    res.render('../views/RequestForm.ejs');
+
+})
+
+
 
 // router.get('/popup', (req,res)=>{
 //     var Userid=req.body.UserID;

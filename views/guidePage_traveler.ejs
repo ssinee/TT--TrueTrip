@@ -33,19 +33,17 @@
             width: auto;
         }
 
-        .postpic:hover {
+        .outline:hover {
             border: 2px solid #FF5581;
         }
 
-        .postpic:active {
+        .outline:active {
             border: 5px solid #FF5581;
-
-
         }
 
-        .postpicActive {
+        .outlineActive {
             border: 5px solid #FF5581;
-            height: 250px;
+            height: 400px;
             max-width: 100%;
             width: auto;
         }
@@ -55,7 +53,7 @@
         function showPopup() {
             var popupX = (window.screen.width / 2) - (1300 / 2);
             var popupY = (window.screen.height / 2) - (600 / 2);
-            window.open('popup', 'a', 'status=no, height=421, width=591');
+            window.open('popup', 'a', 'status=no, height=395, width=528');
         }
     </script>
 
@@ -73,8 +71,8 @@
 
                 for (var i = 0; i < content.length; i++) {
                     postsArr +=
-                        "<div class=\"col-lg-4 col-sm-6\" >" +
-                        "                            <a class=\"arrange-items\">" +
+                        "<div class=\"col-lg-4 col-sm-6 \"  >" +
+                        "                            <a class=\"arrange-items outline\">" +
                         "                            <div class=\"arrange-pic\">" +
                         "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
                         "                            </div>" +
@@ -89,8 +87,8 @@
                 $('#showPlannerImages').html(postsArr)
             })
 
-            $('#showPlannerImages').on('click', 'img', function (event) {
-                $(this).toggleClass('postpicActive')
+            $('#showPlannerImages').on('click', '.outline', function (event) {
+                $(this).toggleClass('outlineActive')
                 // $(this).css("border", "5px solid #FF5581")
             })
 
@@ -114,8 +112,33 @@
                 //     }
                 // });
                 showPopup()
+            })
+
+            $('#reqbtn').click(function(global){
+
+                var passImg_Arr=new Array();//active 상태인 게시글들의 사진을 저장하고 넘겨주기 위한 array
+
+                console.log("reqbtn clicked in javascript")
+                //outlineActive class안에서 img 요소들을 for문 처럼 돌며 각각의 image src를 저장해줌
+                $('.outlineActive img').each(function(){
+                    passImg_Arr.push($(this).attr('src'))
+                })
+
+                console.log(passImg_Arr)
+
+
+
+                //localstorage only suppors strings
+                //so should use JSON.stringify() and JSON.parse()
+                localStorage.setItem("passingImg", JSON.stringify(passImg_Arr) )
+                var storedNames=JSON.parse(localStorage.getItem('passingImg'))
+                console.log("storedNames printing")
+                console.log(storedNames)
 
             })
+
+
+
 
 
         })
@@ -221,8 +244,8 @@
                                 <div class="intro-share" style="text-align: left">
                                     <div class="share-btn" style="width: 500px;">
 
-                                        <a href="#">Request</a>
-                                        <input type="button" value='글제목' onclick="showPopup();"/>
+                                        <a href="/reqForm" id="reqbtn">Request</a>
+                                        
                                     </div>
                                 </div>
                             </div>
