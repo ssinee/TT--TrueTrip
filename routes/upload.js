@@ -5,16 +5,12 @@ const mongoose=require("mongoose");
 const DBData=require('../models/DBData');
 const Planner=mongoose.model('planners');
 
-//multer 미들웨어 등록
+//multer 미들웨어 등록 -> 사진 등록시 upload 파일에 저장
 let upload=multer({
     dest:'upload/'
 })
 
-uploadRouter.get('/test', function(req,res, next){
-    res.render('image_upload.ejs')
-});
 
-//로그인한 planner 이름을 author 값으로 넘겨줘서 posts 데이터에 저장
 uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
     var title=req.body.title//글의 title
     var fileObj=req.file//multer 모듈로 req.files
@@ -26,7 +22,7 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
     var path=fileObj.path;
     var selectTheme="";
 
-    Planner.findOne()
+    Planner.findOne({'id':req.user.id})
         .populate('planner')
         .exec(function(err,planner){
             if(err) return res.json(err);
@@ -49,7 +45,6 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
 
         })
 });
-
 //기존 것 주석처리 해놓은 부분
 // uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
 //
