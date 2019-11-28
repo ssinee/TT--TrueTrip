@@ -12,7 +12,8 @@ var PlannerSchema= new Schema({
     category3: String,
     //나중에 추가한 부분
     introduce: String,
-    location: String
+    location: String,
+    userType: { type: [String], index: "planner" }
 });
 
 module.exports= mongoose.model('planners', PlannerSchema, 'planners');
