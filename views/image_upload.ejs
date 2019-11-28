@@ -15,18 +15,23 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <style>
+        h5{
+            margin-top: 8px;*/
+            font-size: 18px;
+            font-weight: 700;
+        }
         table {
             width: 100%;
         }
@@ -34,6 +39,43 @@
             border-color: black;
             border-style: solid;
         }
+        .contact-form input:focus {
+            border-color: #FF5581;
+        }
+        .contact-form .txt1 {
+            border: grey solid 2px;
+            font-size: 14px;
+            font-style: italic;
+            font-weight: 700;
+            padding-left: 5px;
+            color: #838383;
+            margin-bottom: 0px;
+        }
+
+        .contact-form textarea:focus {
+            border-color: #FF5581;
+        }
+
+        .contact-form textarea {
+            width: 100%;
+            height: 302px;
+            border: grey solid 2px;
+            font-size: 14px;
+            color: #838383;
+            font-weight: 700;
+            font-style: italic;
+            padding-left: 5px;
+            resize: none;
+            padding-top: 10px;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+            margin-bottom: 0px;
+        }
+
+        .contact-form textarea:focus {
+            border-color: #FF5581;
+        }
+
 
     </style>
 
@@ -46,7 +88,7 @@
 <!-- Header End -->
 
 <!-- Hero Section Begin -->
-<div class="hero-listing set-bg" data-setbg="img/cats/bg.jpg" style="height: 100px;">
+<div class="hero-listing set-bg" data-setbg="/img/cats/bg.jpg" style="height: 1px;">
 </div>
 <!-- Hero Section End -->
 
@@ -60,63 +102,66 @@
                     <div class="blog-text">
                         <h2>새로운 장소 추가하기</h2>
 
-                        <center>
-                            <table>
-                                <form action="/create" enctype="multipart/form-data" method="post">
 
-                                    <tr>
-                                        <td rowspan="4">
-                                            <input type="file" name="myFile" id="profile_pt" onchange="previewImage(this,'View_area')">
+                            <form action="/create" enctype="multipart/form-data" method="post">
+                                <table>
+                                <tr>
+                                    <td rowspan="4" width="55%">
+                                        <label for="file-input">
+                                            <img src="../img/icon/upload.jpg" width="170px" height="170px"style="cursor:pointer">
+                                        </label>
 
-                                            <!--                                        아래는 미리보기 div-->
-                                            <div id='View_area' style='position:relative; width: 500px; height: 500px; color: black; border: 0px solid black; dispaly: inline; '></div>
+                                        <input id="file-input" type="file" name="myFile" style="display:none;" onchange="previewImage(this,'View_area')">
 
-                                        </td>
-                                        <td>
-                                            <br>
+                                        <!--                                        아래는 미리보기 div-->
+                                        <div id='View_area' style='position:relative; width: 100%; height: 100%; color: black; border: 0px solid black; display: inline; '></div>
+                                        <br><br>
+
+                                    </td>
+                                    <td>
+
+                                        <div class="contact-form">
                                             <h5>장소 이름</h5><br>
-                                            <input type="text" name="title"/>
-                                        </td>
-                                    </tr>
+                                            <input type="text" class="txt1" style="width: 93%" placeholder="장소의 이름을 적어주세요." name="title"/>
+                                        </div>
 
-                                    <tr>
-                                        <td>
-                                            <br>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="contact-form">
                                             <h5>주소</h5><br>
-                                            <input type="text" name="location"/>
-                                        </td>
-                                    </tr>
+                                            <input type="text" class="txt1" style="width: 93%" placeholder="상세한 주소를 적어주세요." name="location"/>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                                    <tr>
-                                        <td>
-                                            <br>
-                                            <h5>카테고리 선택</h5><br>
-                                            <label><input id="쇼핑" type="radio" name="theme" value="쇼핑">&nbsp;쇼핑</label>&nbsp;&nbsp;&nbsp;
-                                            <label><input id="카페" type="radio" name="theme" value="카페">&nbsp;카페</label>&nbsp;&nbsp;&nbsp;
-                                            <label><input id="사진" type="radio" name="theme" value="사진">&nbsp;사진</label>&nbsp;&nbsp;&nbsp;
-                                            <label><input id="음식" type="radio" name="theme" value="음식">&nbsp;음식</label>&nbsp;&nbsp;&nbsp;
-                                            <label><input id="액티비티" type="radio" name="theme" value="액티비티">&nbsp;액티비티</label>&nbsp;&nbsp;&nbsp;
-                                            <label><input id="유명명소" type="radio" name="theme" value="유명명소">&nbsp;유명명소</label>&nbsp;&nbsp;&nbsp;
-                                            <label><input id="기타" type="radio" name="theme" value="기타">&nbsp;기타</label>&nbsp;&nbsp;&nbsp;
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <h5>카테고리 선택</h5><br>
+                                        <label><input id="쇼핑" type="radio" name="theme" value="쇼핑">&nbsp;쇼핑</label>&nbsp;&nbsp;&nbsp;
+                                        <label><input id="카페" type="radio" name="theme" value="카페">&nbsp;카페</label>&nbsp;&nbsp;&nbsp;
+                                        <label><input id="사진" type="radio" name="theme" value="사진">&nbsp;사진</label>&nbsp;&nbsp;&nbsp;
+                                        <label><input id="음식" type="radio" name="theme" value="음식">&nbsp;음식</label>&nbsp;&nbsp;&nbsp;
+                                        <label><input id="액티비티" type="radio" name="theme" value="액티비티">&nbsp;액티비티</label>&nbsp;&nbsp;&nbsp;
+                                        <label><input id="유명명소" type="radio" name="theme" value="유명명소">&nbsp;유명명소</label>&nbsp;&nbsp;&nbsp;
+                                        <label><input id="기타" type="radio" name="theme" value="기타">&nbsp;기타</label>&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
 
-                                    <tr>
-                                        <td>
-                                            <br>
+                                <tr>
+                                    <td>
+                                        <div class="contact-form">
                                             <h5>소개글</h5><br>
-                                            <textarea name="text" placeholder="장소에 대한 간단한 설명을 써주세요."></textarea>
-                                        </td>
-                                    </tr>
+                                            <textarea name="text" style="width: 93%; height: 250px;" placeholder="장소에 대한 간단한 설명을 써주세요."></textarea>
+                                        </div>
 
-
-                                </form>
-
-                            </table>
-                            <br><br>
-                            <input type="submit" class="primary-btn" value="업로드">
-                        </center>
-
+                                    </td>
+                                </tr>
+                        </table>
+                                <center><br><br><input type="submit" class="primary-btn" value="업로드"></center>
+                        </form>
 
                     </div>
                 </div>
@@ -127,49 +172,6 @@
 
 
 
-
-<!--<fieldset>-->
-<!--    <legend>파일 업로드</legend>-->
-<!--    <table>-->
-<!--        <form action="/create" enctype="multipart/form-data" method="post">-->
-<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td>글쓴이 : </td>&ndash;&gt;-->
-<!--&lt;!&ndash;                <td><input type="text" name="author"/></td>&ndash;&gt;-->
-<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
-<!--            <tr>-->
-<!--                <td>제목 : </td>-->
-<!--                <td><input type="text" name="title"/></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>위치 : </td>-->
-<!--                <td><input type="text" name="location"/></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>text : </td>-->
-<!--                <td><input type="text" name="text"/></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>이미지 : </td>-->
-<!--                <td><input type="file" value="파일 선택" name="myFile"/></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--               <td><label><input id="쇼핑" type="checkbox" name="theme" value="쇼핑">쇼핑</label></td>-->
-<!--               <td><label><input id="카페" type="checkbox" name="theme" value="카페">카페</label></td>-->
-<!--                <td><label><input id="사진" type="checkbox" name="theme" value="사진">사진</label></td>-->
-<!--                <td><label><input id="음식" type="checkbox" name="theme" value="음식">음식</label></td>-->
-<!--                <td><label><input id="액티비티" type="checkbox" name="theme" value="액티비티">액티비티</label></td>-->
-<!--                <td><label><input id="유명명소" type="checkbox" name="theme" value="유명명소">유명명소</label></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td colspan="2"><input type="submit" value="업로드"/></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><img src="../upload/74c9b5f97188abd144ffa1c6fcb076c8" id="img preview" width="100" height="50"></img></td>-->
-<!--            </tr>-->
-
-<!--        </form>-->
-<!--    </table>-->
-<!--</fieldset>-->
 
 </body>
 
