@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 <!--    <style>-->
 
 <!--        .postpic{-->
@@ -30,6 +31,7 @@
 <!--            width: auto;-->
 <!--        }-->
 <!--    </style>-->
+
     <style>
         .activeimgcolor {
             border: 5px solid #FF5581;
@@ -53,14 +55,13 @@
 
         .postpicActive {
             border: 5px solid #FF5581;
-            height: 250px;
-            max-width: 100%;
-            width: auto;
-        }
+
+
 
     </style>
     <script language="javascript">
       function showPopup() {
+
             var popupX = (window.screen.width / 2) - (1300 / 2);
             var popupY = (window.screen.height / 2) - (600 / 2);
             window.open('popup', 'a', 'status=no, height=421, width=591');
@@ -127,7 +128,9 @@
                 $('#editProfile2').hide();
                 $('#save').hide();
             })
+
             $('#UserID').hide();
+
         })
 
         $(document).ready(function (req,res) {
@@ -210,6 +213,7 @@
             <a href="/main"><img style="width:180px; height:65px" src="/img/yeah.png" alt=""></a>
         </div>
         <nav class="main-menu mobile-menu">
+
 <!--            <ul>-->
 <!--                <li><a href="index.html">Home</a></li>-->
 <!--                <li><a href="listings.html">Explore</a></li>-->
@@ -217,6 +221,7 @@
 <!--                <li><a href="blog.html">News</a></li>-->
 <!--                <li><a href="contact.html">Contact</a></li>-->
 <!--            </ul>-->
+
             <ul>
                 <li><a href="/main">Home</a></li>
                 <li><a href="/lists">Request</a></li>
@@ -228,9 +233,11 @@
                     <a href="/login" class="primary-btn">Register/Login</a>
 <!--                    <a href="/login">Login</a>-->
                 <% } else { %>
+ 
                         <a href="/mypage" class="primary-btn">My Page</a>
                         <a href="/logout" class="primary-btn">Logout</a>
                     <% } %>
+
             </div>
 <!--            <a href="#" class="primary-btn">Add Listing</a>-->
         </div>

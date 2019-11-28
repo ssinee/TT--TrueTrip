@@ -11,9 +11,12 @@ var PlannerSchema= new Schema({
     category2: String,
     category3: String,
     //나중에 추가한 부분
-    introduce: String,
     location: String,
+    path:String,//프로필 사진 경로
+    introduce: String,
     userType: { type: [String], index: "planner" }
 });
-
+//
+// {"id":id, "pw":pw, "name":paramName,"email":paramEmail,
+//     "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3, "location": location, "path": profileImg}
 module.exports= mongoose.model('planners', PlannerSchema, 'planners');
