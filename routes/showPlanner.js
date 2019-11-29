@@ -6,14 +6,18 @@ const bodyParser=require('body-parser')
 var mongoose=require('mongoose')
 
 
-//planner별로 list 보여주는 page
-showPlannersListRouter.get('/pLists', function(req, res, next){
+
+
+showPlannersListRouter.get('/plannerlist', function(req, res){
     res.render('../views/plannerList.ejs')
 })
 
 
 
 
-module.exports=showPlannersListRouter;
 
 
+
+
+
+module.exports = showPlannersListRouter

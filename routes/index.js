@@ -49,9 +49,6 @@ router.get('/reqForm', (req,res)=>{
 
 
 
-router.get('/showplannerlist',(req,res)=>{
-    res.render('../views/plannerList.ejs');
-})
 
 
 // router.get('/popup', (req,res)=>{

@@ -228,7 +228,6 @@
     $(document).ready(function () {
 
         var location = $(":input:radio[name=the]:checked").val();
-        var posting = $.post('/showlocation', {'location': location})
 
         posting.done(function (data) {
             content = data.data
