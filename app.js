@@ -109,7 +109,7 @@ app.use('/', require('./routes/showPlannersImage'));
 app.use('/', require('./routes/post'));
 app.use('/', require('./routes/showpopup'));
 app.use('/', require('./routes/showPlannerList'));
-
+app.use('/',require('./routes/request'));
 
 
 const PORT = process.env.PORT || 5020;

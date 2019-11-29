@@ -28,8 +28,8 @@ showPlannersImageRouter.post('/showPlannersImage', function(req, res, next){
         else {
             res.send({'data': data})
         }
-    }).select('-_id')
-})
+    })
+});
 
 
 module.exports=showPlannersImageRouter;
