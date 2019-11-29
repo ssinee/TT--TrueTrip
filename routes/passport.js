@@ -211,6 +211,7 @@ passport.use('local-planner', new LocalStrategy({
     var paramCategory1= req.body.category1 || req.query.category1;
     var paramCategory2= req.body.category2 || req.query.category2;
     var paramCategory3= req.body.category3 || req.query.category3;
+    var location = req.body.location || req.query.location;
 
     console.log('passport의 local-signup 호출됨 : ' + id + ', ' + pw + ', ' + paramName);
 
@@ -230,7 +231,7 @@ passport.use('local-planner', new LocalStrategy({
             } else {
                 // 모델 인스턴스 객체 만들어 저장
                 var planner = new Planner({"id":id, "pw":pw, "name":paramName,"email":paramEmail,
-                    "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3});
+                    "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3, "location":location});
                 planner.save(function(err) {
                     if (err) {
                         throw err;

@@ -33,6 +33,27 @@
 <!--    </style>-->
 
     <style>
+        .about-right .contact-info .contact-text {
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+            border-left: 1px solid #CACDD6;
+            border-right: 1px solid #CACDD6;
+            border-bottom: 1px solid #CACDD6;
+        }
+
+        .primary-btn {
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 5px 5px 5px;
+            color: black;
+            background: #e5e5e5;
+            line-height: 23px;
+        }
+
+
         .activeimgcolor {
             border: 5px solid #FF5581;
         }
@@ -44,7 +65,7 @@
         }
 
         .postpic:hover {
-            border: 2px solid #FF5581;
+            border: 3px solid #FF5581;
         }
 
         .postpic:active {
@@ -55,6 +76,17 @@
 
         .postpicActive {
             border: 5px solid #FF5581;
+        }
+
+        .container {
+            max-width: 1300px;
+            /*width: 1500px;*/
+        }
+
+        .arrange-text{
+            cursor: pointer;
+        }
+
 
 
 
@@ -64,7 +96,7 @@
 
             var popupX = (window.screen.width / 2) - (1300 / 2);
             var popupY = (window.screen.height / 2) - (600 / 2);
-            window.open('popup', 'a', 'status=no, height=421, width=591');
+            window.open('popup', 'a', 'status=no, height=500, width=800');
         }
     </script>
 
@@ -261,12 +293,12 @@
 <section class="about-section">
 
     <div class="about-item" style="padding-top: 100px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4" style="max-width: 28%; padding-right: 40px;">
+        <div class="container" style="width: 3000px;">
+            <div class="row" style="width: 100%;">
+                <div class="col-lg-4" style="max-width: 30%; padding-right: 40px; padding-left: 0px;">
                     <div class="about-right">
-                        <div class="contact-info" style="padding-top: 100px">
-                            <div class="map" style="border:1px solid #CACDD6; ">
+                        <div class="contact-info" style="padding-top: 100px; width: 100%;" >
+                            <div class="map" style="border:3px solid #CACDD6; height: 300px;">
                                 <!--                                <iframe-->
                                 <!--                                        src="img/증명사진.jpg" -->
                                 <!--                                        height="385" width="380" size="100%" style="border:1px;" allowfullscreen="">-->
@@ -274,6 +306,8 @@
                                 <!--                                <img src="img/pin.png" alt="">-->
                                 <img src="" alt="" style="height:inherit;">
                             </div>
+
+
                             <div class="contact-text">
                                 <!--                                <h4 id="UserID">ssinee</h4>-->
                                 <!--                                <span>Can show you the best city in Suwon</span>-->
@@ -282,36 +316,62 @@
                                 <!--                                    <li>TrueTrip@ajou.ac.kr</li>-->
                                 <!--                                </ul>-->
                                 <form method="post" action="/mypage/write">
-                                    <h5>이름: <%=user_info.name%></h5>
+                                    <p align="center" style="font-size: 30px; margin-bottom: 0px;"><b><%=user_info.name%></b></p>
+                                    <h5 align="center" style="color: deepskyblue"><%=user_info.email%></h5>
                                     <div style="padding:5px 20px"></div>
-                                    <h5>이메일:  <%=user_info.email%></h5>
+
+                                    <div><center>
+                                        <img src="../img/icon/category.png" style="width: 30px; height: 30px;">
+                                        <span style="margin-bottom: 0px; font-size: 22px;">전문분야</span>
+                                        <h5 align="center"><%=user_info.category1%> / <%=user_info.category2%> / <%=user_info.category3%></h5>
+                                        </center>
+                                    </div>
+
                                     <div style="padding:5px 20px"></div>
-                                    <h5>관심 카테고리1: <%=user_info.category1%></h5>
-                                    <div style="padding:5px 20px"></div>
-                                    <h5>관심 카테고리2: <%=user_info.category2%></h5>
-                                    <div style="padding:5px 20px"></div>
-                                    <h5>관심 카테고리3: <%=user_info.category3%></h5>
-                                    <div style="padding:5px 20px"></div>
-                                    <h5>관심지역: <%=user_info.location%></h5>
+
+                                    <center>
+                                        <img src="../img/icon/location.png" style="width: 25px; height: 25px;">
+                                        <span style="margin-bottom: 0px; font-size: 22px;">활동지역</span>
+                                        <h5 align="center"><%=user_info.location%></h5>
+                                    </center>
+
+
                                     <div style="padding:5px 20px"></div>
                                     <h5 id="UserID"><%=user_info.id%></h5>
-                                    <div id="editProfile" style="padding:5px 20px">
-                                        <input type="text" name="location" placeholder="관심지역">
+                                    <div id="editProfile"  align="center">
+                                        <select name="location">
+                                            <option value="인계동">인계동</option>
+                                            <option value="행궁동">행궁동</option>
+                                            <option value="영통동">영통동</option>
+                                            <option value="우만동">우만동</option>
+                                            <option value="매탄동">매탄동</option>
+                                        </select>
+<!--                                        <input type="text" name="location" style="width: 80%;" placeholder="활동지역을 써주세요.">-->
+                                        <div style="padding:5px 20px"></div>
                                     </div>
-                                    <h5>소개글: <%=user_info.introduce%></h5>
+
+                                    <center>
+                                        <img src="../img/icon/text.png" style="width: 25px; height: 25px;">
+                                        <span style="margin-bottom: 0px; font-size: 22px;">자기소개</span>
+                                        <h5 align="center"><%=user_info.introduce%></h5>
+                                    </center>
+
+                                    <div id="editProfile2" style="padding:5px 20px" align="center">
+                                        <textarea style="width: 100%; min-height: 100px;" name="introduce" placeholder="자기소개글을 적어주세요."></textarea>
+                                    </div>
+
                                     <div style="padding:5px 20px"></div>
-                                    <div id="editProfile2" style="padding:5px 20px">
-                                        <input type="textarea" style="min-height: 50px" name="introduce" placeholder="소개글">
-                                    </div>
 
 
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
                                         <% if(user_info.id==currentUser.id) { %>
-                                            <input class="primary-btn" type="button" id="editButton" value="edit" name="edit">
+                                            <center>
+                                            <input class="primary-btn" type="button" id="editButton" value="프로필 수정" name="edit">
+                                                <div style="padding:5px 20px"></div>
                                             <div id="save">
-                                                <input class="primary-btn" type="submit" id="saveButton" value="save" name="save">
-                                            </div>
+                                                <input class="primary-btn" type="submit" id="saveButton" value="저장" name="save">
+                                            </div></center>
 
                                         <% } else { %>
                                         <% } %>
@@ -319,79 +379,51 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="working-hours">
-                            <h4>Working Hours</h4>
-                            <ul>
-                                <li>Monday<span>08:00 - 22:00</span></li>
-                                <li>Tuesday<span>08:00 - 22:00</span></li>
-                                <li>Wednesday<span>08:00 - 22:00</span></li>
-                                <li>Thursday<span>08:00 - 22:00</span></li>
-                                <li>Friday <span>08:00 - 22:00</span></li>
-                                <li>Saturday<span>08:00 - 22:00</span></li>
-                                <li>Sunday<span>Closed</span></li>
-                            </ul>
-                        </div>
+
+<!--                        <div class="working-hours">-->
+<!--                            <h4>Working Hours</h4>-->
+<!--                            <ul>-->
+<!--                                <li>Monday<span>08:00 - 22:00</span></li>-->
+<!--                                <li>Tuesday<span>08:00 - 22:00</span></li>-->
+<!--                                <li>Wednesday<span>08:00 - 22:00</span></li>-->
+<!--                                <li>Thursday<span>08:00 - 22:00</span></li>-->
+<!--                                <li>Friday <span>08:00 - 22:00</span></li>-->
+<!--                                <li>Saturday<span>08:00 - 22:00</span></li>-->
+<!--                                <li>Sunday<span>Closed</span></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
                     </div>
                 </div>
 
 
-                <div class="col-lg-8">
-                    <div class="about-left">
-                        <div class="intro-item" style="height:100px">
-                            <div class="container">
-                                <div class="row">
-                                    <!--                                    <div class="col-lg-7">-->
-                                    <!--                                        <div class="about-intro">-->
-                                    <!--                                            <div class="rating">4.9</div>-->
-                                    <!--                                            <div class="intro-text">-->
-                                    <!--                                                <h2>Trocadero Restaurant</h2>-->
-                                    <!--                                                <p>Explore some of the best places in the world</p>-->
-                                    <!--                                                <div class="open">Opens Tomorow at 10am</div>-->
-                                    <!--                                                <div class="closed">Closed now</div>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
-                                    <!--                                    </div>-->
-                                    <!--                                    <div class="col-lg-4 offset-lg-1">-->
-                                    <!--                                        <div class="intro-share">-->
-                                    <!--                                            <div class="share-btn">-->
-                                    <!--                                                <a href="#" class="share">Share</a>-->
-                                    <!--                                                <a href="#">Submit a Review</a>-->
-                                    <!--                                            </div>-->
-                                    <!--                                            <div class="share-icon">-->
-                                    <!--                                                <a href="#"><i class="fa fa-map-marker"></i></a>-->
-                                    <!--                                                <a href="#"><i class="fa fa-book"></i></a>-->
-                                    <!--                                                <a href="#"><i class="fa fa-hand-o-right"></i></a>-->
-                                    <!--                                                <a href="#"><i class="fa fa-user-o"></i></a>-->
-                                    <!--                                                <a href="#"><i class="fa fa-star-o"></i></a>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </div>-->
-                                    <!--                                    </div>-->
-                                </div>
-                            </div>
-                            <div class="col-lg-4 offset-lg-1"
-                                 style="margin-left:200px; max-width: 50%; padding-right:0px">
-                                <div class="intro-share">
-                                    <div class="share-btn" style="width: 500px;">
-                                        <a href="#" class="share">Select</a>
-                                        <a href="#">Request</a>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col-lg-8" style="max-width: 100%;">
+                    <div class="about-left" style="padding-top: 120px">
 
-                        </div>
+
 
 
                         <!--                        show images here -->
                         <!--                        contents-->
 
                         <div class="row" id="showPlannerImages">
-
                         </div>
 
 
                         <div class="about-video">
-
                         </div>
+
+<!--                        버튼 위치 아래로-->
+                        <div class="col-lg-4 offset-lg-1"
+                             style="margin-left:200px; max-width: 50%; padding-right:0px">
+                            <div class="intro-share">
+                                <div class="share-btn" style="width: 500px;">
+                                    <a href="#" class="share">Select</a>
+                                    <a href="#">Request</a>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="client-reviews">
                             <h3>Reviews</h3>
                             <div class="reviews-item">
