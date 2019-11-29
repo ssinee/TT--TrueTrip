@@ -22,7 +22,7 @@ showPlannersImageRouter.get('/deletePlannersImage', function(req, res, next){
 
 showPlannersImageRouter.post('/showPlannersImage', function(req, res, next){
     var user_ID=req.body.UserID
-
+ 
     dbdata.find({author: user_ID}, function(err, data){
         if(err) res.send(err)
         else {

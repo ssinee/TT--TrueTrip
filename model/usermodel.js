@@ -6,7 +6,9 @@ var UserSchema= new Schema({
     pw: {type:String, required:true},
     // salt:{type:String, required:true},
     name: String,
-    email: String
+    email: String,
+    userType: { type: [String], index: "traveler" }
+
 })
 
 

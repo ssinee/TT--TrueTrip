@@ -139,7 +139,6 @@
             var author=""
             var postsArr = ""
             var postTitle = ""
-
             var posting = $.post('/showPlannersImage', {'UserID': User_ID})
 
             posting.done(function (data) {
@@ -225,27 +224,22 @@
 
             <ul>
                 <li><a href="/main">Home</a></li>
-                <li><a href="/lists">Tag</a></li>
-                <li><a href="/showplannerlist">Planners</a></li>
-                <li><a href="contact.html">Request</a></li>
+                <li><a href="/lists">Request</a></li>
             </ul>
         </nav>
         <div class="header-right">
             <div class="user-access">
                 <% if (!isAuthenticated) { %>
-                    <a href="/login">Register/</a>
-                    <a href="/login">Login</a>
+                    <a href="/login" class="primary-btn">Register/Login</a>
+<!--                    <a href="/login">Login</a>-->
                 <% } else { %>
-                    <% if(user_info.id==currentUser.id) { %>
-                        <a href="/mypage">My Page</a>
-                        <a href="/logout">Logout</a>
-                    <% } else { %>
-                        <a href="/login">Register/</a>
-                        <a href="/login">Login</a>
+ 
+                        <a href="/mypage" class="primary-btn">My Page</a>
+                        <a href="/logout" class="primary-btn">Logout</a>
                     <% } %>
-                <% } %>
+
             </div>
-            <a href="#" class="primary-btn">Add Listing</a>
+<!--            <a href="#" class="primary-btn">Add Listing</a>-->
         </div>
         <div id="mobile-menu-wrap"></div>
     </div>
@@ -272,7 +266,7 @@
                                 <!--                                        height="385" width="380" size="100%" style="border:1px;" allowfullscreen="">-->
                                 <!--                                </iframe>-->
                                 <!--                                <img src="img/pin.png" alt="">-->
-                                <img src="" alt="" style="height:inherit;">
+                                <img src="/img/145852.png" alt="" style="height:inherit;">
                             </div>
                             <div class="contact-text">
                                 <!--                                <h4 id="UserID">ssinee</h4>-->
@@ -371,10 +365,19 @@
                             <div class="col-lg-4 offset-lg-1"
                                  style="margin-left:200px; max-width: 50%; padding-right:0px">
                                 <div class="intro-share">
-                                    <div class="share-btn" style="width: 500px;">
-                                        <a href="#" class="share">Select</a>
-                                        <a href="#">Request</a>
-                                    </div>
+                                    <% if (!isAuthenticated) { %>
+                                    <% } else { %>
+                                        <% if(currentUser.userType != user_info.userType) { %>
+                                            <div class="share-btn" style="width: 500px;">
+                                                <a href="#">Request</a>
+                                            </div>
+                                        <% } else { %>
+                                        <% } %>
+                                    <% } %>
+<!--                                    <div class="share-btn" style="width: 500px;">-->
+<!--                                        <a href="#" class="share">Select</a>-->
+<!--                                        <a href="#">Request</a>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
 
