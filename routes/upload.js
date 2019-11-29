@@ -28,18 +28,20 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
             if(err) return res.json(err);
             else{
                 var author=planner.id;
+                var name = planner.name;
                 console.log(author);
-                for(var i =0;i<theme.length;i++){
+                // 게시글 작성시 카테고리 라디오버튼으로 바꿈. 한 게시글당 카테고리 1개 == 한번
+                // for(var i =0;i<theme.length;i++){
                     if(typeof theme=="string") selectTheme=theme;
                     else selectTheme=theme[i];
-                    var obj={ "author":author,"title": title,"location":location,"text":textinput, "theme":selectTheme, "orgFileName":orgFileName, "saveFileName":saveFileName, "path": path};
+                    var obj={ "name": name,"author":author,"title": title,"location":location,"text":textinput, "theme":selectTheme, "orgFileName":orgFileName, "saveFileName":saveFileName, "path": path};
                     //DBdata 객체에 담음 (DBdata 는 moongoose의 schema를 모델화한 객체)
                     var newData=new DBData(obj);
                     newData.save(function(err){
                         if(err) throw err;
                         res.end('OK');
                     });
-                }
+                // }
 
             }
 
