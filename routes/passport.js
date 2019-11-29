@@ -27,18 +27,16 @@ router.post('/select', function(req, res, next) {
     res.render('selectUserType', { title: 'Express' });
 });
 
-router.post('/register', function(req, res, next) {
-
-    var user_type =req.body.temp1;
-    // console.log(user_type);
-    if(user_type=="Planner"){
-        res.render('plannerRegister', { title: 'Express' });
-    }
-    else{
-        res.render('travelerRegister', { title: 'Express' });
-    }
-
+router.post('/register_planner', function(req, res, next) {
+     res.render('plannerRegister', { title: 'Express' });
 });
+
+router.post('/register_traveler', function(req, res, next) {
+    res.render('travelerRegister', { title: 'Express' });
+});
+
+
+
 
 router.get('/profile',isAuthenticated, function (req, res) {
     res.render('profile',{
