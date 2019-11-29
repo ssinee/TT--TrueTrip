@@ -171,7 +171,6 @@
             var author=""
             var postsArr = ""
             var postTitle = ""
-
             var posting = $.post('/showPlannersImage', {'UserID': User_ID})
 
             posting.done(function (data) {
@@ -257,27 +256,22 @@
 
             <ul>
                 <li><a href="/main">Home</a></li>
-                <li><a href="/lists">Tag</a></li>
-                <li><a href="/showplannerlist">Planners</a></li>
-                <li><a href="contact.html">Request</a></li>
+                <li><a href="/lists">Request</a></li>
             </ul>
         </nav>
         <div class="header-right">
             <div class="user-access">
                 <% if (!isAuthenticated) { %>
-                    <a href="/login">Register/</a>
-                    <a href="/login">Login</a>
+                    <a href="/login" class="primary-btn">Register/Login</a>
+<!--                    <a href="/login">Login</a>-->
                 <% } else { %>
-                    <% if(user_info.id==currentUser.id) { %>
-                        <a href="/mypage">My Page</a>
-                        <a href="/logout">Logout</a>
-                    <% } else { %>
-                        <a href="/login">Register/</a>
-                        <a href="/login">Login</a>
+ 
+                        <a href="/mypage" class="primary-btn">My Page</a>
+                        <a href="/logout" class="primary-btn">Logout</a>
                     <% } %>
-                <% } %>
+
             </div>
-            <a href="#" class="primary-btn">Add Listing</a>
+<!--            <a href="#" class="primary-btn">Add Listing</a>-->
         </div>
         <div id="mobile-menu-wrap"></div>
     </div>
@@ -304,7 +298,7 @@
                                 <!--                                        height="385" width="380" size="100%" style="border:1px;" allowfullscreen="">-->
                                 <!--                                </iframe>-->
                                 <!--                                <img src="img/pin.png" alt="">-->
-                                <img src="" alt="" style="height:inherit;">
+                                <img src="/img/145852.png" alt="" style="height:inherit;">
                             </div>
 
 
@@ -396,9 +390,63 @@
                 </div>
 
 
+<<<<<<< HEAD
                 <div class="col-lg-8" style="max-width: 100%;">
                     <div class="about-left" style="padding-top: 120px">
 
+=======
+                <div class="col-lg-8">
+                    <div class="about-left">
+                        <div class="intro-item" style="height:100px">
+                            <div class="container">
+                                <div class="row">
+                                    <!--                                    <div class="col-lg-7">-->
+                                    <!--                                        <div class="about-intro">-->
+                                    <!--                                            <div class="rating">4.9</div>-->
+                                    <!--                                            <div class="intro-text">-->
+                                    <!--                                                <h2>Trocadero Restaurant</h2>-->
+                                    <!--                                                <p>Explore some of the best places in the world</p>-->
+                                    <!--                                                <div class="open">Opens Tomorow at 10am</div>-->
+                                    <!--                                                <div class="closed">Closed now</div>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <div class="col-lg-4 offset-lg-1">-->
+                                    <!--                                        <div class="intro-share">-->
+                                    <!--                                            <div class="share-btn">-->
+                                    <!--                                                <a href="#" class="share">Share</a>-->
+                                    <!--                                                <a href="#">Submit a Review</a>-->
+                                    <!--                                            </div>-->
+                                    <!--                                            <div class="share-icon">-->
+                                    <!--                                                <a href="#"><i class="fa fa-map-marker"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-book"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-hand-o-right"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-user-o"></i></a>-->
+                                    <!--                                                <a href="#"><i class="fa fa-star-o"></i></a>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="col-lg-4 offset-lg-1"
+                                 style="margin-left:200px; max-width: 50%; padding-right:0px">
+                                <div class="intro-share">
+                                    <% if (!isAuthenticated) { %>
+                                    <% } else { %>
+                                        <% if(currentUser.userType != user_info.userType) { %>
+                                            <div class="share-btn" style="width: 500px;">
+                                                <a href="#">Request</a>
+                                            </div>
+                                        <% } else { %>
+                                        <% } %>
+                                    <% } %>
+<!--                                    <div class="share-btn" style="width: 500px;">-->
+<!--                                        <a href="#" class="share">Select</a>-->
+<!--                                        <a href="#">Request</a>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+>>>>>>> bec50504439b5e69c8dd5cc1938e8446c99ab177
 
 
 
