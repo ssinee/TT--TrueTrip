@@ -15,6 +15,7 @@ showpopupRouter.get('/popup', function (req, res, next) {
     res.render('popup',
         {
             'PostID': passing_content.author,
+            'PostName' : passing_content.name,
             'PostTitle': passing_content.title,
             'PostCategory': passing_content.theme,
             'PostLocation': passing_content.location,
@@ -62,7 +63,9 @@ showpopupRouter.post('/showpopup', function (req, res, next) {
                     'PostCategory': passing_content.theme,
                     'PostLocation': passing_content.location,
                     'PostContents': passing_content.text,
-                    'PostPath': passing_content.path
+                    'PostPath': passing_content.path,
+                    'PostName' : passing_content.name
+
                 }
             );
         }
