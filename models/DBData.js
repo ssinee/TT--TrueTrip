@@ -6,6 +6,7 @@ var Schema=mongoose.Schema
 var dataSchema= new Schema({
     // author: String,
     planner:{type:mongoose.Schema.Types.ObjectId, ref:"planners"},
+    name: String,
     author:String,
     title: String,
     location:String,
