@@ -182,6 +182,7 @@
 
         jQuery(document).ready(function ($) {
 
+
             function start_slick(){
                 $(".regular").slick({
                     dots: false,
@@ -202,7 +203,9 @@
             }
 
             // 딜레이 7후에 start_slick 실행.
+
             window.setTimeout(start_slick, 7);
+
 
 
 
@@ -210,24 +213,18 @@
 
             posting.done(function (data) {
 
-                console.log(data.location)
+                console.log(contentString)
                 // console.log(data.category)
                 console.log(data.Iddata)
                 imagepath = data.data//get image path
                 // location = data.location// get selected location
                 // category = data.category// get selectetd category
                 idData = data.Iddata// get selected ID data
-
-
-                console.log(imagepath[0])
-                console.log(imagepath[1])
-                // console.log(imagepath[0][0].path)
-
-                console.log(imagepath.length)
-                console.log(imagepath[0].length)
+                console.log(idData)
                 console.log(idData[0].id)
 
-                for (var i = 0; i < imagepath.length; i++) {
+                for (var i = 0; i < idData.length; i++) {
+                    console.log(idData[i].id)
                     //프로필 채우기
                     contentString +=
                         "                        <div class=\"planner\">\n" +
@@ -261,9 +258,13 @@
                         "                            </div>\n" +
                         "                        </div>"
                 }
+               //$("#please").html(contentString);
+
                 $("#please").html(contentString).trigger("create");
 
+
             })
+            contentString=""
         })
     </script>
 
