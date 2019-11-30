@@ -19,7 +19,7 @@ var category;
 
 
 showPlannersListRouter.post('/showplanner', function (req, res) {
-    res.send({'data': content,'location':location,'category':category,'Iddata':idcontent})
+    res.send({'data': content, 'Iddata':idcontent})
 })
 
 
