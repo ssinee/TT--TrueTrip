@@ -42,12 +42,14 @@ var category="";
 
 
     showPlannersListRouter.post('/showplanner', function(req, res){
-        temp=idcontent
-        console.log(idcontent[0])
-        idcontent=[];
-        console.log(temp)
 
-        res.send({'data':content, 'Iddata': temp})
+
+
+
+        res.send({'data':content, 'Iddata': idcontent})
+        idcontent=[];
+
+        content=[];
     });
 
 

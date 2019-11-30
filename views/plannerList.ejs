@@ -173,12 +173,7 @@
 
 
     <script>
-        var imagepath;
-        var location;
-        var category;
-        var idData;
-        var path;
-        var contentString="";
+
 
         jQuery(document).ready(function ($) {
 
@@ -204,7 +199,7 @@
 
             // 딜레이 7후에 start_slick 실행.
 
-            window.setTimeout(start_slick, 7);
+            window.setTimeout(start_slick, 30);
 
 
 
@@ -212,19 +207,24 @@
             var posting = $.post('/showplanner', {})
 
             posting.done(function (data) {
-
-                console.log(contentString)
-                // console.log(data.category)
-                console.log(data.Iddata)
-                imagepath = data.data//get image path
-                // location = data.location// get selected location
-                // category = data.category// get selectetd category
-                idData = data.Iddata// get selected ID data
+                var imagepath;
+                var location;
+                var category;
+                var idData;
+                var path;
+                var contentString="";
+                console.log(imagepath)
                 console.log(idData)
-                console.log(idData[0].id)
+
+                imagepath = data.data//get image path
+                idData = data.Iddata// get selected ID data
+                console.log(imagepath)
+                console.log(idData)
+
+
 
                 for (var i = 0; i < idData.length; i++) {
-                    console.log(idData[i].id)
+
                     //프로필 채우기
                     contentString +=
                         "                        <div class=\"planner\">\n" +
@@ -244,8 +244,7 @@
                         "                                <div class=\"autoplay slider\">\n"
 
                     for (var j = 0; j < imagepath[i].length; j++) {
-                        console.log(i)
-                        console.log(j)
+
                         console.log(imagepath[i][j].path)
                         contentString +=
                             "                                    <div>" +
@@ -258,9 +257,9 @@
                         "                            </div>\n" +
                         "                        </div>"
                 }
-               //$("#please").html(contentString);
+               $("#please").html(contentString);
 
-                $("#please").html(contentString).trigger("create");
+                // $("#please").html(contentString)
 
 
             })
