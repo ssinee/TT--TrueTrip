@@ -203,7 +203,9 @@
             }
 
             // 딜레이 7후에 start_slick 실행.
-            window.setTimeout(start_slick, 900);
+
+            window.setTimeout(start_slick, 7);
+
 
 
 
@@ -256,7 +258,10 @@
                         "                            </div>\n" +
                         "                        </div>"
                 }
-                $("#please").html(contentString);
+               //$("#please").html(contentString);
+
+                $("#please").html(contentString).trigger("create");
+
 
             })
             contentString=""
