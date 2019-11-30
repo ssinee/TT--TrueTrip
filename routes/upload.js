@@ -7,7 +7,7 @@ const Planner=mongoose.model('planners');
 
 //multer 미들웨어 등록 -> 사진 등록시 upload 파일에 저장
 let upload=multer({
-    dest:'upload/'
+    dest:'upload'
 })
 
 
@@ -20,7 +20,7 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
     var textinput=req.body.text
     var theme=req.body.theme
     var path=fileObj.path;
-    var selectTheme="";
+
 
     Planner.findOne({'id':req.user.id})
         .populate('planner')
@@ -30,18 +30,16 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
                 var author=planner.id;
                 var name = planner.name;
                 console.log(author);
-                // 게시글 작성시 카테고리 라디오버튼으로 바꿈. 한 게시글당 카테고리 1개 == 한번
-                // for(var i =0;i<theme.length;i++){
-                    if(typeof theme=="string") selectTheme=theme;
-                    else selectTheme=theme[i];
-                    var obj={ "name": name,"author":author,"title": title,"location":location,"text":textinput, "theme":selectTheme, "orgFileName":orgFileName, "saveFileName":saveFileName, "path": path};
+
+                    var obj={ "author":author,"title": title,"location":location,"text":textinput, "theme":theme, "orgFileName":orgFileName, "saveFileName":saveFileName, "path": path};
+
+
                     //DBdata 객체에 담음 (DBdata 는 moongoose의 schema를 모델화한 객체)
                     var newData=new DBData(obj);
                     newData.save(function(err){
                         if(err) throw err;
                         res.end('OK');
                     });
-                // }
 
             }
 
