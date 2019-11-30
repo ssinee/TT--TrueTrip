@@ -25,7 +25,7 @@
 
     <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"></script>
-<!--    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+
 
     <style>
         * {
@@ -178,34 +178,51 @@
         var category;
         var idData;
         var path;
-        var contentString;
+        var contentString="";
+
+        jQuery(document).ready(function ($) {
 
 
-        $(document).ready(function () {
+            function start_slick(){
+                $(".regular").slick({
+                    dots: false,
+                    infinite: true,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+
+                });
+
+                $('.autoplay').slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    pauseOnHover: true,
+
+                });
+            }
+
+            // 딜레이 7후에 start_slick 실행.
+            window.setTimeout(start_slick, 900);
+
 
 
             var posting = $.post('/showplanner', {})
 
             posting.done(function (data) {
 
-                console.log(data.location)
+                console.log(contentString)
                 // console.log(data.category)
                 console.log(data.Iddata)
                 imagepath = data.data//get image path
                 // location = data.location// get selected location
                 // category = data.category// get selectetd category
                 idData = data.Iddata// get selected ID data
-
-
-                console.log(imagepath[0])
-                console.log(imagepath[1])
-                // console.log(imagepath[0][0].path)
-
-                console.log(imagepath.length)
-                console.log(imagepath[0].length)
+                console.log(idData)
                 console.log(idData[0].id)
 
-                for (var i = 0; i < imagepath.length; i++) {
+                for (var i = 0; i < idData.length; i++) {
+                    console.log(idData[i].id)
                     //프로필 채우기
                     contentString +=
                         "                        <div class=\"planner\">\n" +
@@ -222,7 +239,8 @@
                         "                            </div>\n" +
                         "\n" +
                         "                            <div class=\"desc\">\n" +
-                        "                                <div class=\"regular slider\">\n"
+                        "                                <div class=\"autoplay slider\">\n"
+
                     for (var j = 0; j < imagepath[i].length; j++) {
                         console.log(i)
                         console.log(j)
@@ -238,10 +256,11 @@
                         "                            </div>\n" +
                         "                        </div>"
                 }
-                $("#please").html(contentString)
-            })
-        })
+                $("#please").html(contentString);
 
+            })
+            contentString=""
+        })
     </script>
 
 
@@ -266,12 +285,8 @@
 
 <!-- Header End -->
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 
-<script>
-
-</script>
 
 
 <!-- Filter Section Begin -->
@@ -295,16 +310,19 @@
                                     <label class="active"><input type="radio" name="the" value="모두">모두</label>
                                 </div>
                                 <div class="lo-item">
-                                    <label> <input type="radio" name="the" value="팔달구">팔달구</label>
+                                    <label> <input type="radio" name="the" value="인계동">인계동</label>
                                 </div>
                                 <div class="lo-item">
-                                    <label><input type="radio" name="the" value="장안구">장안구</label>
+                                    <label><input type="radio" name="the" value="행궁동">행궁동</label>
                                 </div>
                                 <div class="lo-item">
-                                    <label><input type="radio" name="the" value="권선구">권선구</label>
+                                    <label><input type="radio" name="the" value="영통동">영통동</label>
                                 </div>
                                 <div class="lo-item">
-                                    <label><input type="radio" name="the" value="영통구">영통구</label>
+                                    <label><input type="radio" name="the" value="우만동">우만동</label>
+                                </div>
+                                <div class="lo-item">
+                                    <label><input type="radio" name="the" value="매탄동">매탄동</label>
                                 </div>
                             </form>
                         </div>
@@ -402,45 +420,45 @@
                             </div>
                         </div>
                     </div>
-                    <div class="distance-filter">
-                        <h3>Distance</h3>
-                        <div class="distance-option">
-                            <div class="do-item">
-                                <input type="radio">
-                                <label class="active">0.0-0.3km</label>
-                            </div>
-                            <div class="do-item">
-                                <input type="radio">
-                                <label>0.3-0.6km</label>
-                            </div>
-                            <div class="do-item">
-                                <input type="radio">
-                                <label>0.6-0.9km</label>
-                            </div>
-                            <div class="do-item">
-                                <input type="radio">
-                                <label>1.0-3.0km</label>
-                            </div>
-                            <div class="do-item">
-                                <input type="radio">
-                                <label>3.0-10.0km</label>
-                            </div>
-                        </div>
-                    </div>
+                    <!--                    <div class="distance-filter">-->
+                    <!--                        <h3>Distance</h3>-->
+                    <!--                        <div class="distance-option">-->
+                    <!--                            <div class="do-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label class="active">0.0-0.3km</label>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="do-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label>0.3-0.6km</label>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="do-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label>0.6-0.9km</label>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="do-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label>1.0-3.0km</label>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="do-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label>3.0-10.0km</label>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
             </div>
 
             <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form action="#" class="arrange-select">
-                            <span>Arrange by</span>
-                            <select>
-                                <option>Newest</option>
-                                <option>Oldest</option>
-                            </select>
-                        </form>
-                    </div>
+                <div class="row" id="parent">
+                    <!--                    <div class="col-lg-12">-->
+                    <!--                        <form action="#" class="arrange-select">-->
+                    <!--                            <span>Arrange by</span>-->
+                    <!--                            <select>-->
+                    <!--                                <option>Newest</option>-->
+                    <!--                                <option>Oldest</option>-->
+                    <!--                            </select>-->
+                    <!--                        </form>-->
+                    <!--                    </div>-->
 
 
                     <div id="please" class="planners">
@@ -448,79 +466,80 @@
                         <hr>
 
 
-                        <div class="planner">
-                            <div class="profile">
+                        <!--                        <div class="planner">-->
+                        <!--                            <div class="profile">-->
 
-                                <div class="profile_desc">
-                                    <span>별점</span>
-                                    <span>플래너이름</span>
+                        <!--                                <div class="profile_desc">-->
+                        <!--                                    <span>별점</span>-->
+                        <!--                                    <span>플래너이름</span>-->
 
-                                </div>
-                                <div class="profile_img">
-                                    <img src="img/cats/profile.jpg">
-                                </div>
-                            </div>
+                        <!--                                </div>-->
+                        <!--                                <div class="profile_img">-->
+                        <!--                                    <img src="img/cats/profile.jpg">-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
 
-                            <div class="desc">
-                                <div class="regular slider">
-                                    <div>
-                                        <img src="img/cats/cat.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat2.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat3.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat4.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat2.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat.jpg">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--                            <div class="desc">-->
+                        <!--                                <div class="regular slider">-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat2.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat3.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat4.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat2.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
 
-                        <div class="planner">
-                            <div class="profile">
+                        <!--                        <div class="planner">-->
+                        <!--                            <div class="profile">-->
 
-                                <div class="profile_desc">
-                                    <span>별점</span>
-                                    <span>플래너이름</span>
+                        <!--                                <div class="profile_desc">-->
+                        <!--                                    <span>별점</span>-->
+                        <!--                                    <span>플래너이름</span>-->
 
-                                </div>
-                                <div class="profile_img">
-                                    <img src="img/cats/profile.jpg">
-                                </div>
-                            </div>
+                        <!--                                </div>-->
+                        <!--                                <div class="profile_img">-->
+                        <!--                                    <img src="img/cats/profile.jpg">-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
 
-                            <div class="desc">
-                                <div class="autoplay slider">
-                                    <div>
-                                        <img src="img/cats/cat.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat2.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat3.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat4.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat2.jpg">
-                                    </div>
-                                    <div>
-                                        <img src="img/cats/cat.jpg">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!--                            <div class="desc">-->
+                        <!--                                <div class="autoplay slider">-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat2.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat3.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat4.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat2.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <img src="img/cats/cat.jpg">-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+
                     </div>
 
                     <div class="col-lg-12 text-right">
@@ -574,25 +593,10 @@
 
 
 <script src="slick/slick.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    $(".regular").slick({
-        dots: false,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3,
 
-    });
 
-    $('.autoplay').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        pauseOnHover: true,
 
-    });
 
-</script>
 
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>

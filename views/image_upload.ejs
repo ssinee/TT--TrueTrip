@@ -27,21 +27,25 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <style>
-        h5{
+        h5 {
             margin-top: 8px;
             font-size: 18px;
             font-weight: 700;
         }
+
         table {
             width: 100%;
         }
-        tr, td{
+
+        tr, td {
             border-color: black;
             border-style: solid;
         }
+
         .contact-form input:focus {
             border-color: #FF5581;
         }
+
         .contact-form .txt1 {
             border: grey solid 2px;
             font-size: 14px;
@@ -103,18 +107,21 @@
                         <h2>새로운 장소 추가하기</h2>
 
 
-                            <form action="/create" enctype="multipart/form-data" method="post">
-                                <table>
+                        <form action="/create" enctype="multipart/form-data" method="post">
+                            <table>
                                 <tr>
                                     <td rowspan="4" width="55%">
                                         <label for="file-input">
-                                            <img src="../img/icon/upload.jpg" width="170px" height="170px"style="cursor:pointer">
+                                            <img src="../img/icon/upload.jpg" width="170px" height="170px"
+                                                 style="cursor:pointer">
                                         </label>
 
-                                        <input id="file-input" type="file" name="myFile" style="display:none;" onchange="previewImage(this,'View_area')">
+                                        <input id="file-input" type="file" name="myFile" style="display:none;"
+                                               onchange="previewImage(this,'View_area')">
 
                                         <!--                                        아래는 미리보기 div-->
-                                        <div id='View_area' style='position:relative; width: 100%; height: 100%; color: black; border: 0px solid black; display: inline; '></div>
+                                        <div id='View_area'
+                                             style='position:relative; width: 100%; height: 100%; color: black; border: 0px solid black; display: inline; '></div>
                                         <br><br>
 
                                     </td>
@@ -122,7 +129,8 @@
 
                                         <div class="contact-form">
                                             <h5>장소 이름</h5><br>
-                               z             <input type="text" class="txt1" style="width: 93%" placeholder="장소의 이름을 적어주세요." name="title"/>
+                                             <input type="text" class="txt1" style="width: 93%"
+                                                     placeholder="장소의 이름을 적어주세요." name="title"/>
                                         </div>
 
                                     </td>
@@ -132,7 +140,8 @@
                                     <td>
                                         <div class="contact-form">
                                             <h5>주소</h5><br>
-                                            <input type="text" class="txt1" style="width: 93%" placeholder="상세한 주소를 적어주세요." name="location"/>
+                                            <input type="text" class="txt1" style="width: 93%"
+                                                   placeholder="상세한 주소를 적어주세요." name="location"/>
                                         </div>
                                     </td>
                                 </tr>
@@ -144,8 +153,10 @@
                                         <label><input id="카페" type="radio" name="theme" value="카페">&nbsp;카페</label>&nbsp;&nbsp;&nbsp;
                                         <label><input id="사진" type="radio" name="theme" value="사진">&nbsp;사진</label>&nbsp;&nbsp;&nbsp;
                                         <label><input id="음식" type="radio" name="theme" value="음식">&nbsp;음식</label>&nbsp;&nbsp;&nbsp;
-                                        <label><input id="액티비티" type="radio" name="theme" value="액티비티">&nbsp;액티비티</label>&nbsp;&nbsp;&nbsp;
-                                        <label><input id="유명명소" type="radio" name="theme" value="유명명소">&nbsp;유명명소</label>&nbsp;&nbsp;&nbsp;
+                                        <label><input id="액티비티" type="radio" name="theme"
+                                                      value="액티비티">&nbsp;액티비티</label>&nbsp;&nbsp;&nbsp;
+                                        <label><input id="유명명소" type="radio" name="theme"
+                                                      value="유명명소">&nbsp;유명명소</label>&nbsp;&nbsp;&nbsp;
                                         <label><input id="기타" type="radio" name="theme" value="기타">&nbsp;기타</label>&nbsp;&nbsp;&nbsp;
                                     </td>
                                 </tr>
@@ -154,13 +165,14 @@
                                     <td>
                                         <div class="contact-form">
                                             <h5>소개글</h5><br>
-                                            <textarea name="text" style="width: 93%; height: 250px;" placeholder="장소에 대한 간단한 설명을 써주세요."></textarea>
+                                            <textarea name="text" style="width: 93%; height: 250px;"
+                                                      placeholder="장소에 대한 간단한 설명을 써주세요."></textarea>
                                         </div>
 
                                     </td>
                                 </tr>
-                        </table>
-                                <center><br><br><input type="submit" class="primary-btn" value="업로드"></center>
+                            </table>
+                            <center><br><br><input type="submit" class="primary-btn" value="업로드"></center>
                         </form>
 
                     </div>
@@ -169,8 +181,6 @@
         </div>
     </div>
 </section>
-
-
 
 
 </body>
@@ -196,7 +206,7 @@
                 var img = document.getElementById(View_area); //이미지가 뿌려질 곳
 
                 //이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
-                img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+src+"', sizingMethod='scale')";
+                img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "', sizingMethod='scale')";
             } catch (e) {
                 if (!document.getElementById("ie_preview_error_" + View_area)) {
                     var info = document.createElement("<p>");
@@ -208,7 +218,7 @@
             //ie가 아닐때(크롬, 사파리, FF)
         } else {
             var files = targetObj.files;
-            for ( var i = 0; i < files.length; i++) {
+            for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
                 if (!file.type.match(imageType))
@@ -226,8 +236,8 @@
                 preview.appendChild(img);
                 if (window.FileReader) { // FireFox, Chrome, Opera 확인.
                     var reader = new FileReader();
-                    reader.onloadend = (function(aImg) {
-                        return function(e) {
+                    reader.onloadend = (function (aImg) {
+                        return function (e) {
                             aImg.src = e.target.result;
                         };
                     })(img);
