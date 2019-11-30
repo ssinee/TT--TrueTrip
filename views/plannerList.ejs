@@ -201,9 +201,6 @@
 
             window.setTimeout(start_slick, 30);
 
-
-
-
             var posting = $.post('/showplanner', {})
 
             posting.done(function (data) {
@@ -220,6 +217,11 @@
                 idData = data.Iddata// get selected ID data
                 console.log(imagepath)
                 console.log(idData)
+                category=data.category
+                location=data.location
+                console.log(category)
+                console.log(location)
+
 
 
 
