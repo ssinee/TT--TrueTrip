@@ -90,6 +90,19 @@
     });
 
 
+    $(".filter-left .location-filter .location-option .lo-item label").on('click', function () {
+        $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
+        $(this).addClass('active');
+    });
+
+
+
+    $(".filter-left .location-theme-filter .location-option .lo-item label").on('click', function () {
+        $(".filter-left .location-theme-filter .location-option .lo-item label").removeClass('active');
+        $(this).addClass('active');
+    });
+
+
     $(".filter-left .rating-filter .rating-option .ro-item label").on('click', function () {
         $(".filter-left .rating-filter .rating-option .ro-item label").removeClass('active');
         $(this).addClass('active');

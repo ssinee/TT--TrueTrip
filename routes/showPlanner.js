@@ -15,14 +15,6 @@ var content = [];
 var location = "";
 var category = "";
 
-
-
-
-
-
-
-
-
 showPlannersListRouter.post('/showplanner', function (req, res) {
     res.send({'data': content, 'Iddata': idcontent, 'location': location, 'category': category})
     // idcontent = [];
