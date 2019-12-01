@@ -15,6 +15,10 @@ router.get('/main', (req, res) => {
     res.render('../views/index.ejs');
 });
 
+router.get('/plannerlist', function (req, res) {
+    res.render('../views/plannerList.ejs');
+})
+
 router.get('/lists', (req,res)=>{
     var theme= req.body.theme;
     var dbdata=mongoose.model('PostData');
@@ -44,14 +48,9 @@ router.get('/upload', (req, res)=>{
 
 router.get('/reqForm', (req,res)=>{
     res.render('../views/RequestForm.ejs');
-
 })
 
 
-
-router.get('/showplannerlist',(req,res)=>{
-    res.render('../views/plannerList.ejs');
-})
 
 
 // router.get('/popup', (req,res)=>{

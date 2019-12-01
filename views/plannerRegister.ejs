@@ -21,32 +21,121 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+        .login-page {
+            width: 360px;
+            padding: 8% 0 0;
+            margin: auto;
+        }
+        .form {
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            max-width: 360px;
+            margin: 0 auto 100px;
+            padding: 45px;
+            text-align: center;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+        .form input {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: lightgrey;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .form button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #FF5581;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
+        .form button:hover,.form button:active,.form button:focus {
+            background: #FF5581;
+        }
+        .form .message {
+            margin: 15px 0 0;
+            color: #b3b3b3;
+            font-size: 12px;
+        }
 
+        .form .register-form {
+            display: none;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .container:before, .container:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .container .info {
+            margin: 50px auto;
+            text-align: center;
+        }
+        .container .info h1 {
+            margin: 0 0 15px;
+            padding: 0;
+            font-size: 36px;
+            font-weight: 300;
+            color: #1a1a1a;
+        }
+        .container .info span {
+            color: #4d4d4d;
+            font-size: 12px;
+        }
+        .container .info span a {
+            color: #000000;
+            text-decoration: none;
+        }
+        .container .info span .fa {
+            color: #EF3B3A;
+        }
+        body {
+            background: #FF5581; /* fallback for old browsers */
+            background: -webkit-linear-gradient(right, #FF5581, #8DC26F);
+            background: -moz-linear-gradient(right, #FF5581, #8DC26F);
+            background: -o-linear-gradient(right, #FF5581, #8DC26F);
+            background: linear-gradient(to left, #FF5581, #8DC26F);
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .지역 {
+            /*position: relative;*/
+        }
+        .카테고리{
+            width: 100%;
+            float: left;
+            position: relative;
+        }
     </style>
+
+
+
 </head>
 
 <body>
-<style>
-    .login-form {
-        text-align: center;
-        border: 1px solid;
-        padding: 50px;
-    }
-
-    input {
-        padding: 5px
 
 
-    }
-
-    td {
-        padding: 20px
-    }
-    table{
-
-    }
-</style>
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -58,221 +147,177 @@
 </header>
 <!-- Header End -->
 
-<!-- Hero Section Begin -->
-<div class="hero-listing set-bg" data-setbg="img/blog-bg.jpg">
+<!--메뉴바랑 본문사이 여백-->
+<div class="hero-listing set-bg" style="height: 100px;"></div>
+<!--메뉴바랑 본문사이 여백-->
+
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" method="post" action="/addPlanner">
+
+
+            <img src="img/fancy_TT_logo.PNG" width="100%" height="100%">
+            <input type="text" name="name" placeholder="이름"/>
+            <input type="text" name="id" placeholder="아이디"/>
+            <input type="password" name="pw" placeholder="비밀번호"/>
+            <input type="text" name="email" placeholder="Email"/>
+
+
+            <div class="카테고리" style="margin-bottom: 10px;">
+                <b>전문분야</b>
+                <div class="category-search">
+                    <select class="ca-search" name="category1">
+                        <option>쇼핑</option>
+                        <option>카페</option>
+                        <option>사진</option>
+                        <option>음식</option>
+                        <option>액티비티</option>
+                        <option>유명명소</option>
+                        <option>기타</option>
+                    </select>
+
+                    <select class="ca-search" name="category2">
+                        <option>쇼핑</option>
+                        <option selected>카페</option>
+                        <option>사진</option>
+                        <option>음식</option>
+                        <option>액티비티</option>
+                        <option >유명명소</option>
+                        <option>기타</option>
+                    </select>
+
+                    <select class="ca-search" name="category3">
+                        <option>쇼핑</option>
+                        <option>카페</option>
+                        <option>사진</option>
+                        <option selected>음식</option>
+                        <option>액티비티</option>
+                        <option >유명명소</option>
+                        <option>기타</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="지역">
+                <b>지역</b>
+                <div class="category-search">
+                    <select class="ca-search" name="location" align="center">
+                        <option value="인계동">인계동</option>
+                        <option value="행궁동">행궁동</option>
+                        <option value="영통동">영통동</option>
+                        <option value="우만동">우만동</option>
+                        <option value="매탄동">매탄동</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" style="margin-bottom: 8px; margin-top: 8px;">가입하기</button>
+        </form>
+    </div>
 </div>
-<!-- Hero Section End -->
 
-<!-- Blog Section Begin -->
-<section class="blog-section spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="blog-item">
-                    <div class="blog-pic set-bg" data-setbg="img/blog/blog-1.jpg">
-                        <div class="blog-absolute">
-                            <h2>23</h2>
-                            <span>March</span>
-                            <span>2019</span>
-                        </div>
-                    </div>
-                    <div class="blog-text">
-                        <h2 style="margin-bottom:100px">Planner Register</h2>
-                        <form class="login-form" method="post" action="/addPlanner">
-                            <table>
-                                <tr>
-                                    <td><label>이름 : </label></td>
-                                    <td><input type="text" name="name"></td>
-                                </tr>
-                                <tr>
-                                    <td><label>ID : </label></td>
-                                    <td><input type="text" name="id"></td>
-                                </tr>
-                                <tr>
-                                    <td><label>Password : </label></td>
-                                    <td><input type="text" name="pw"></td>
-                                </tr>
-                                <tr>
-                                    <td><label>e-mail : </label></td>
-                                    <td><input type="text" name="email"></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="category-search">
-                                            <h5>Select Category1</h5>
-                                            <select class="ca-search" name="category1">
 
-                                                <option>전체</option>
-                                                <option>쇼핑</option>
-                                                <option>카페</option>
-                                                <option>사진</option>
-                                                <option>음식</option>
-                                                <option>액티비티</option>
-                                                <option>유명명소</option>
-                                                <option>기타</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="category-search">
-                                            <h5>Select Category2</h5>
-                                            <select class="ca-search" name="category2">
 
-                                                <option>전체</option>
-                                                <option>쇼핑</option>
-                                                <option>카페</option>
-                                                <option>사진</option>
-                                                <option>음식</option>
-                                                <option>액티비티</option>
-                                                <option>유명명소</option>
-                                                <option>기타</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="category-search">
-                                            <h5>Select Category3</h5>
-                                            <select class="ca-search" name="category3">
 
-                                                <option>전체</option>
-                                                <option>쇼핑</option>
-                                                <option>카페</option>
-                                                <option>사진</option>
-                                                <option>음식</option>
-                                                <option>액티비티</option>
-                                                <option>유명명소</option>
-                                                <option>기타</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="category-search">
-                                            <h5>Select Location</h5>
-                                            <select class="ca-search" name="location">
-                                                <option>인계동</option>
-                                                <option>행궁동</option>
-                                                <option>영통동</option>
-                                                <option>우만동</option>
-                                                <option>매탄동</option>
-                                            </select>
-                                        </div>
-                                    </td>
 
-                                </tr>
-                                <tr>
-<!--                                    <td><input  type="file" value="파일 선택" name="myProfileImg"/></td>-->
-                                    <td><input class="primary-btn" type="submit" value="다음" name=""></td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Blog Section End -->
-
-<!-- Footer Section Begin -->
-<footer class="footer-section spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <form action="#" class="newslatter-form">
-                    <input type="text" placeholder="Your email address">
-                    <button type="submit">Subscribe to our Newsletter</button>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="footer-widget">
-                    <h4>Usefull Links</h4>
-                    <ul>
-                        <li>About us</li>
-                        <li>Testimonials</li>
-                        <li>How it works</li>
-                        <li>Create an account</li>
-                        <li>Our Services</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="footer-widget">
-                    <h4>Categories</h4>
-                    <ul>
-                        <li>Hotels</li>
-                        <li>Restaurant</li>
-                        <li>Spa & resorts</li>
-                        <li>Concert & Events</li>
-                        <li>Bars & Pubs</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="footer-widget">
-                    <h4>Usefull Links</h4>
-                    <ul>
-                        <li>About us</li>
-                        <li>Testimonials</li>
-                        <li>How it works</li>
-                        <li>Create an account</li>
-                        <li>Our Services</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="footer-widget">
-                    <h4>From the Blog</h4>
-                    <div class="single-blog">
-                        <div class="blog-pic">
-                            <img src="img/f-blog-1.jpg" alt="">
-                        </div>
-                        <div class="blog-text">
-                            <h6>10 Best clubs in town</h6>
-                            <span>March 27, 2019</span>
-                        </div>
-                    </div>
-                    <div class="single-blog">
-                        <div class="blog-pic">
-                            <img src="img/f-blog-2.jpg" alt="">
-                        </div>
-                        <div class="blog-text">
-                            <h6>10 Best clubs in town</h6>
-                            <span>March 27, 2019</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row footer-bottom">
-            <div class="col-lg-5 order-2 order-lg-1">
-                <div class="copyright">
-                    <p class="text-white">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                        All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i>
-                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-7 text-center text-lg-right order-1 order-lg-2">
-                <div class="footer-menu">
-                    <a href="#">Home</a>
-                    <a href="#">Explore</a>
-                    <a href="#">More Cities</a>
-                    <a href="#">News</a>
-                    <a href="#">Contact</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- Footer Section End -->
+<!--&lt;!&ndash; Footer Section Begin &ndash;&gt;-->
+<!--<footer class="footer-section spad">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-12">-->
+<!--                <form action="#" class="newslatter-form">-->
+<!--                    <input type="text" placeholder="Your email address">-->
+<!--                    <button type="submit">Subscribe to our Newsletter</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-3 col-sm-6">-->
+<!--                <div class="footer-widget">-->
+<!--                    <h4>Usefull Links</h4>-->
+<!--                    <ul>-->
+<!--                        <li>About us</li>-->
+<!--                        <li>Testimonials</li>-->
+<!--                        <li>How it works</li>-->
+<!--                        <li>Create an account</li>-->
+<!--                        <li>Our Services</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-sm-6">-->
+<!--                <div class="footer-widget">-->
+<!--                    <h4>Categories</h4>-->
+<!--                    <ul>-->
+<!--                        <li>Hotels</li>-->
+<!--                        <li>Restaurant</li>-->
+<!--                        <li>Spa & resorts</li>-->
+<!--                        <li>Concert & Events</li>-->
+<!--                        <li>Bars & Pubs</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-sm-6">-->
+<!--                <div class="footer-widget">-->
+<!--                    <h4>Usefull Links</h4>-->
+<!--                    <ul>-->
+<!--                        <li>About us</li>-->
+<!--                        <li>Testimonials</li>-->
+<!--                        <li>How it works</li>-->
+<!--                        <li>Create an account</li>-->
+<!--                        <li>Our Services</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-sm-6">-->
+<!--                <div class="footer-widget">-->
+<!--                    <h4>From the Blog</h4>-->
+<!--                    <div class="single-blog">-->
+<!--                        <div class="blog-pic">-->
+<!--                            <img src="img/f-blog-1.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="blog-text">-->
+<!--                            <h6>10 Best clubs in town</h6>-->
+<!--                            <span>March 27, 2019</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single-blog">-->
+<!--                        <div class="blog-pic">-->
+<!--                            <img src="img/f-blog-2.jpg" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="blog-text">-->
+<!--                            <h6>10 Best clubs in town</h6>-->
+<!--                            <span>March 27, 2019</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row footer-bottom">-->
+<!--            <div class="col-lg-5 order-2 order-lg-1">-->
+<!--                <div class="copyright">-->
+<!--                    <p class="text-white">-->
+<!--                        &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>-->
+<!--                        All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i>-->
+<!--                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
+<!--                        &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-7 text-center text-lg-right order-1 order-lg-2">-->
+<!--                <div class="footer-menu">-->
+<!--                    <a href="#">Home</a>-->
+<!--                    <a href="#">Explore</a>-->
+<!--                    <a href="#">More Cities</a>-->
+<!--                    <a href="#">News</a>-->
+<!--                    <a href="#">Contact</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</footer>-->
+<!--&lt;!&ndash; Footer Section End &ndash;&gt;-->
 
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
