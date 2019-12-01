@@ -97,9 +97,6 @@
             cursor: pointer;
         }
 
-
-
-
     </style>
     <script language="javascript">
       function showPopup() {
@@ -191,7 +188,7 @@
                         "<div class=\"col-lg-4 col-sm-6\" >" +
                         "                            <a class=\"arrange-items\">" +
                         "                            <div class=\"arrange-pic\">" +
-                        "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
+                        "                            <img class=\"postpic\" id=\'"+i+"' src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
                         "                            </div>" +
                         "                            <div class=\"arrange-text\">" +
                         "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
@@ -202,12 +199,50 @@
                         "                     </div>"
                 }
                 $('#showPlannerImages').html(postsArr)
+
+                var ids= new Array();
+                var objid;
+                $('#request').click(function(){
+
+                    var selected_photos = $('.postpicActive');
+                    var ids= new Array();
+                    selected_photos.each(function(){
+                        var selval = $(this).attr("id");
+                        selval*=1;
+                        objid=content[selval]._id;
+                        console.log(objid);
+                        // var id_arr = id_str.split("_");
+                        // var selval = id_arr[1];
+                        if(objid!='undefined'&&objid!=''&&objid!=null){
+                            ids.push(objid);
+                        }
+                    });
+                    var request = $.post('/request', {'ids':ids});
+                })
+
             })
 
             $('#showPlannerImages').on('click', 'img', function (event) {
                 $(this).toggleClass('postpicActive')
                 // $(this).css("border", "5px solid #FF5581")
-            })
+            });
+
+            // var ids= new Array();
+            // $('#request').click(function(){
+            //
+            //     var selected_photos = $('.postpicActive');
+            //     var ids= new Array();
+            //     selected_photos.each(function(){
+            //         var selval = $(this).attr("id");
+            //
+            //         // var id_arr = id_str.split("_");
+            //         // var selval = id_arr[1];
+            //         if(selval!='undefined'&&selval!=''&&selval!=null){
+            //             ids.push(selval);
+            //         }
+            //     });
+            //      var request = $.post('/request', {'ids':ids});
+            // })
 
             $('#showPlannerImages').on('click', 'h5', function (event) {
                 postTitle = $(this).text()
@@ -235,6 +270,15 @@
 
 
         })
+
+        // $(document).ready( function(){
+        //
+        //     var element= $(`[name="postimage"]`).attr('class');
+        //     // var elementClass=element.attr('class');
+        //     console.log('element',element);
+        //
+        //
+        // })
 
 
 
@@ -395,7 +439,8 @@
                                     <% } else { %>
                                         <% if(currentUser.userType != user_info.userType) { %>
                                             <div class="share-btn" style="width: 500px;">
-                                                <a href="#">Request</a>
+                                                <a id="request" href="../requestform">Request</a>
+<!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
                                             </div>
                                         <% } else { %>
                                         <% } %>

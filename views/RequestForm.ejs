@@ -67,7 +67,7 @@
             /*border: solid black 1px;*/
             float: left;
             margin-left:5px;
-            margin-right:10x;
+            margin-right:10px;
             margin-top: 10px;
             margin-bottom: 10px;
             text-align: center;
@@ -98,22 +98,102 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
 
+        // $(document).ready(function(){
+        //     console.log("gi")
+        //     var storedNames=JSON.parse(localStorage.getItem('passingImg'))
+        //     console.log(storedNames)
+        //
+        // })
         $(document).ready(function(){
-            console.log("gi")
-            var storedNames=JSON.parse(localStorage.getItem('passingImg'))
-            console.log(storedNames)
+            var select_num="<%=content_id.length%>";
+            var data="<%=content_id%>";
+            var str=data.split(",");
+            // var array=str[0];
+            // console.log(array);
+            var content;
+            var postsArr="";
 
+            for(var i=0; i<select_num;i++){
+               var posting= $.post('/showRequest', {'content_id':str[i]});
+               posting.done(function(data){
+                   content=data.data;
+                   console.log(content);
+                   console.log(content[0].path);
+
+                       postsArr +=
+                           "<div class=\"request-item\" >" +
+                           "                            <div class=\"left\">" +
+                           "                                <div class=\"item\">" +
+                           "                                    <img class=\"postpic\" id=\'"+i+"' src=\'" + content[0].path + "'width=100%; height=100%'>" +
+                           "                                </div>" +
+                           "                            </div>" +
+                           "                            <div class=\"middle\">" +
+                           "                                <div class=\"item\">" +
+                           "                                    <h4>"+content[0].title+"</h4>" +
+                           "                                    <br>" +
+                           "                                    <h5>"+content[0].text+"</h5>" +
+                           "                                </div>" +
+                           "                            </div>" +
+                           "                     </div>"
+
+                   $('#showSelectPosts').html(postsArr)
+
+               })
+            }
+
+            $('#submit').click(function(){
+                var senddata=str;
+                console.log(senddata);//게시글 _id
+                var date=$('#date').val();
+                var start=$("select[name=startTime]").val();
+                var end=$("select[name=endTime]").val();
+                var numofpeople= $("select[name=numofpeople]").val();
+                var age= $("select[name=age]").val();
+                var usecar= $("input[name=usecar]:checked").val();
+                var yesarray= new Array(); //type은 object 요소 하나하나는 string
+                var noarray= new Array();
+                var addition=$("textarea[name=addition]").val();
+
+                $("input[name=yes_info]:checked").each(function(){
+                    yesarray.push($(this).val());
+                });
+                $("input[name=no_info]:checked").each(function(){
+                    noarray.push($(this).val());
+                });
+
+                var send=$.post('/sendForm', {
+                    'senddata':senddata,
+                    'date':date,
+                    'start':start,
+                    'end':end,
+                    'numofpeople':numofpeople,
+                    'age':age,
+                    'usecar':usecar,
+                    'yesarray':yesarray,
+                    'noarray':noarray,
+                    'addition':addition
+
+                    });
+                //
+                // console.log(typeof(date));
+                // console.log(typeof(start));
+                // console.log(usecar);
+                // console.log(addition);
+                // console.log(typeof(yesarray[0]));
+
+            })
         })
 
     </script>
@@ -160,6 +240,9 @@
                                 <h2 style="font-size: 20px; text-align: left; margin-top: 5px; margin-bottom: 5px; font-family: HY견고딕; margin-left: 8px;">선택장소</h2>
                                 <hr style="border: solid black 1px;">
 
+                                <div class="row" id="showSelectPosts"></div>
+
+
                                 <!--                                    chg. 선택장소 하나씩 들어가게 해야됨.-->
                                 <!--                                    chg. 선택장소1-->
                                 <!--                                   <div class="request-item">-->
@@ -173,100 +256,100 @@
 
                                 <!--                                    chg. 선택장소 하나씩 들어가게 해야됨.-->
                                 <!--                                    chg. 선택장소1-->
-                                <div class="request-item" >
-                                    <div class="left">
-                                        <div class="item">
-                                            <img src="img/cats/행.jpg" width="100%" height="100%">
-                                        </div>
-                                    </div>
-                                    <div class="middle">
-                                        <div class="item">
-                                            <p><b>행궁동 행리단길</b></p>
-                                            <p>행리단길은 일상과 특별함이 공존하는 있는 골목길입니다. <br>
-                                                작은 화단과 벽화로 장식된 행리단길은 산책로로 제격입니다.</p>
-                                        </div>
-                                    </div>
+<!--                                <div class="request-item" >-->
+<!--                                    <div class="left">-->
+<!--                                        <div class="item">-->
+<!--                                            <img src="/img/cats/행.jpg" width="100%" height="100%">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="middle">-->
+<!--                                        <div class="item">-->
+<!--                                            <p><b>행궁동 행리단길</b></p>-->
+<!--                                            <p>행리단길은 일상과 특별함이 공존하는 있는 골목길입니다. <br>-->
+<!--                                                작은 화단과 벽화로 장식된 행리단길은 산책로로 제격입니다.</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
-                                    <div class="right">
-                                        <div class="item">
-                                            <img src="img/icon/x.jpg" style="cursor:pointer;" onclick="removeRow()">
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                    <div class="right">-->
+<!--                                        <div class="item">-->
+<!--                                            <img src="/img/icon/x.jpg" style="cursor:pointer;" onclick="removeRow()">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
 
 
-                                <!--                                여기까지가 선택장소 이미지랑 설명-->
+<!--                                &lt;!&ndash;                                여기까지가 선택장소 이미지랑 설명&ndash;&gt;-->
 
-                            </div>
-
+<!--                            </div>-->
                             <!--                                아래 들어갈 체크박스등.내용-->
                             <hr style="border: solid black 1px;">
                             <div class="underSection">
                                 <!--                                날짜.-->
                                 <div style = "text-align: left">
                                     <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;">날짜 </span>
+                                    <input type="date" id="date">
 
-                                    <select name="year">
-                                        <option value="2019" selected="selected">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                    </select>&nbsp;년도&nbsp;
+<!--                                    <select name="year">-->
+<!--                                        <option value="2019" selected="selected">2019</option>-->
+<!--                                        <option value="2020">2020</option>-->
+<!--                                        <option value="2021">2021</option>-->
+<!--                                    </select>&nbsp;년도&nbsp;-->
 
-                                    <select name="month">
-                                        <option value="01"selected="selected">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                    </select>&nbsp;월&nbsp;
+<!--                                    <select name="month">-->
+<!--                                        <option value="01"selected="selected">01</option>-->
+<!--                                        <option value="02">02</option>-->
+<!--                                        <option value="03">03</option>-->
+<!--                                        <option value="04">04</option>-->
+<!--                                        <option value="05">05</option>-->
+<!--                                        <option value="06">06</option>-->
+<!--                                        <option value="07">07</option>-->
+<!--                                        <option value="08">08</option>-->
+<!--                                        <option value="09">09</option>-->
+<!--                                        <option value="10">10</option>-->
+<!--                                        <option value="11">11</option>-->
+<!--                                        <option value="12">12</option>-->
+<!--                                    </select>&nbsp;월&nbsp;-->
 
-                                    <select name="day">
-                                        <option value="01"selected="selected">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                    </select>&nbsp;일&nbsp;
-                                </div>
+<!--                                    <select name="day">-->
+<!--                                        <option value="01"selected="selected">01</option>-->
+<!--                                        <option value="02">02</option>-->
+<!--                                        <option value="03">03</option>-->
+<!--                                        <option value="04">04</option>-->
+<!--                                        <option value="05">05</option>-->
+<!--                                        <option value="06">06</option>-->
+<!--                                        <option value="07">07</option>-->
+<!--                                        <option value="08">08</option>-->
+<!--                                        <option value="09">09</option>-->
+<!--                                        <option value="10">10</option>-->
+<!--                                        <option value="11">11</option>-->
+<!--                                        <option value="12">12</option>-->
+<!--                                        <option value="13">13</option>-->
+<!--                                        <option value="14">14</option>-->
+<!--                                        <option value="15">15</option>-->
+<!--                                        <option value="16">16</option>-->
+<!--                                        <option value="17">17</option>-->
+<!--                                        <option value="18">18</option>-->
+<!--                                        <option value="19">19</option>-->
+<!--                                        <option value="20">20</option>-->
+<!--                                        <option value="21">21</option>-->
+<!--                                        <option value="22">22</option>-->
+<!--                                        <option value="23">23</option>-->
+<!--                                        <option value="24">24</option>-->
+<!--                                        <option value="25">25</option>-->
+<!--                                        <option value="26">26</option>-->
+<!--                                        <option value="27">28</option>-->
+<!--                                        <option value="29">29</option>-->
+<!--                                        <option value="30">30</option>-->
+<!--                                        <option value="31">31</option>-->
+<!--                                    </select>&nbsp;일&nbsp;-->
+<!--                                </div>-->
 
 
                                 <!--                                출발/도착시간-->
                                 <div style = "text-align: left">
                                     <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;"> 출발 </span>
-
+<!--                                    <input id="start" type="time" min="00" max="24">-->
                                     <select name="startTime">
                                         <option value="00">00</option>
                                         <option value="01">01</option>
@@ -295,6 +378,7 @@
                                     </select>&nbsp;시&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
 
                                     <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕;"> 귀가 </span>
+<!--                                    <input id="end" type="time" min="00" max="24">-->
 
                                     <select name="endTime">
                                         <option value="00">00</option>
@@ -385,11 +469,11 @@
 
                                     <div style="text-align: left">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info1" value="주변식당">주변식당 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info2" value="대중교통">대중교통 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info3" value="주차공간">주차공간 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info4" value="장애인 편의시설">장애인 편의시설 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info5" value="휴식장소">휴식장소 &nbsp;&nbsp;&nbsp;
+                                        <input type="checkbox" name="yes_info" value="주변식당">주변식당 &nbsp;&nbsp;&nbsp;
+                                        <input type="checkbox" name="yes_info" value="대중교통">대중교통 &nbsp;&nbsp;&nbsp;
+                                        <input type="checkbox" name="yes_info" value="주차공간">주차공간 &nbsp;&nbsp;&nbsp;
+                                        <input type="checkbox" name="yes_info" value="장애인 편의시설">장애인 편의시설 &nbsp;&nbsp;&nbsp;
+                                        <input type="checkbox" name="yes_info" value="휴식장소">휴식장소 &nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
                                 <br>
@@ -401,9 +485,9 @@
 
                                     <div style="text-align: left">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="no_info1" value="오래 걷지 못해요">오래 걷지 못해요 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="no_info2" value="피해야할 음식이 있어요">피해야할 음식이 있어요 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="no_info3" value="유모차나 휠체어를 이용해요">유모차나 휠체어를 이용해요 &nbsp;&nbsp;&nbsp;
+                                        <input type="checkbox" name="no_info" value="오래 걷지 못해요">오래 걷지 못해요 &nbsp;&nbsp;&nbsp;
+                                        <input type="checkbox" name="no_info" value="피해야할 음식이 있어요">피해야할 음식이 있어요 &nbsp;&nbsp;&nbsp;
+                                        <input type="checkbox" name="no_info" value="유모차나 휠체어를 이용해요">유모차나 휠체어를 이용해요 &nbsp;&nbsp;&nbsp;
 
                                     </div>
                                 </div>
@@ -414,9 +498,9 @@
                                 <div class="col-lg-12 text-center">
 
                                     <h2 style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 8px;">추가 요구사항</h2>
-                                    <textarea placeholder="플래너에게 하고 말을 적어주세요." style="height: 200px;"></textarea>
-
-                                    <button type="submit" style="margin-bottom: 30px;">신청서 제출</button>
+                                    <textarea name="addition" placeholder="플래너에게 하고 말을 적어주세요." style="height: 200px;"></textarea>
+                                    <a id="submit" href="/">Request</a>
+<!--                                    <input type="submit" id="submit" style="margin-bottom: 30px;">신청서 제출</input>-->
                                 </div>
 
                             </div>
@@ -428,6 +512,10 @@
 
                     </div>
                 </form>
+
+<!--                <div class="row" id="showSelectPosts">-->
+
+<!--                </div>-->
             </div>
         </div>
     </div>
@@ -437,14 +525,14 @@
 
 
 <!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/main.js"></script>
 </body>
 
 </html>
