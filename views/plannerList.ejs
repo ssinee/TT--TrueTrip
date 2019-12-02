@@ -290,6 +290,8 @@
                 posting_filter.done(function(data){
                     console.log(data)
                     if(data=='1'){
+                        //time 설정 needed
+                        window.setTimeout(start_slick, 300);
                         var posting_filter_start=$.post('/showplanner', {})
 
                         posting_filter_start.done(function(data){
