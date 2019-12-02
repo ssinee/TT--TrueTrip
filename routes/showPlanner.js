@@ -46,7 +46,8 @@ showPlannersListRouter.get('/plannerlist', function (req, res) {
 
 
 showPlannersListRouter.post('/showplanner', function(req, res){
-        res.send({'data':content, 'Iddata': idcontent})
+    console.log(content)
+        res.send({'data':content, 'Iddata': idcontent, 'location': location,'category': category })
 
 });
 
@@ -66,6 +67,8 @@ showPlannersListRouter.post('/frommain', async (req, res)=> {
         for(var i=0; i<IDdata.length; i++){
             dbdata.find({'author': IDdata[i].id}, {'_id': 0, 'path': 1}, function (err, POSTdata) {
                 content.push(POSTdata)
+                console.log("_______________________________")
+                console.log(POSTdata)
             })
         }
 

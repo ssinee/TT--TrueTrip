@@ -185,6 +185,8 @@
             var contentString = "";
 
 
+
+
             function start_slick() {
                 $(".regular").slick({
                     dots: false,
@@ -222,6 +224,13 @@
                     location = data.location
                     console.log(category)
                     console.log(location)
+                    //이전에 선택한 location filter과 category filter로 선택되어 들어올 수 있도록 함
+                    $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
+                    $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
+                    $('#' + location).addClass('active')
+                    $('#' + category).addClass('active')
+
+
 
 
                     for (var i = 0; i < idData.length; i++) {
@@ -261,11 +270,7 @@
                     $("#please").html(contentString);
 
 
-                    //이전에 선택한 location filter과 category filter로 선택되어 들어올 수 있도록 함
-                    $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
-                    $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
-                    $('#' + location).addClass('active')
-                    $('#' + category).addClass('active')
+
 
                 })
             }, 1800)
@@ -324,7 +329,7 @@
                         <div class="location-option">
 
                             <div class="lo-item">
-                                <label id="모든지역" class="active"><input type="radio" name="the" value="모든 지역">전체</label>
+                                <label id="모든지역" class="active"><input type="radio" name="the" value="모든지역">전체</label>
                             </div>
                             <div class="lo-item">
                                 <label id="인계동"> <input type="radio" name="the" value="인계동">인계동</label>
@@ -350,7 +355,7 @@
                         <div class="category-option">
                             <div class="co-item">
                                 <label class="active" id="모든카테고리"><input type="radio" name="thec"
-                                                                         value="모든 카테고리">전체</label>
+                                                                         value="모든카테고리">전체</label>
                             </div>
                             <div class="co-item">
                                 <label id="쇼핑"> <input type="radio" name="thec" value="쇼핑">쇼핑</label>
