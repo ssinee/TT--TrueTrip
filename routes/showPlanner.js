@@ -8,18 +8,18 @@ var mongoose = require('mongoose')
 //for posts collection and planner collection
 const dbdata = mongoose.model('PostData');
 const Planner = mongoose.model('planners');
-mongoose.Promise=global.Promise
+mongoose.Promise = global.Promise
 
 
 var temp = []
-var idcontent=[];
+var idcontent = [];
 var content = [];
-var location="";
-var category="";
+var location = "";
+var category = "";
 
 
 showPlannersListRouter.get('/plannerlist', function (req, res) {
-    res.render('../views/plannerList.ejs', {'data':content});
+    res.render('../views/plannerList.ejs', {'data': content});
 })
 // showPlannersListRouter.post('/showplanner', function (req, res) {
 //     Planner.find({'location': location}, {'id': 1, '_id': 0}, function (err, IDdata) {
@@ -43,38 +43,85 @@ showPlannersListRouter.get('/plannerlist', function (req, res) {
 // })
 
 
-
-
-showPlannersListRouter.post('/showplanner', function(req, res){
+//planner page data 전송
+showPlannersListRouter.post('/showplanner', function (req, res) {
     console.log(content)
-        res.send({'data':content, 'Iddata': idcontent, 'location': location,'category': category })
+    res.send({'data': content, 'Iddata': idcontent, 'location': location, 'category': category})
 
 });
 
-
-showPlannersListRouter.post('/frommain', async (req, res)=> {
-    temp=[]
-    idcontent=[];
-    content=[];
+showPlannersListRouter.post('/frommain', async (req, res) => {
+    idcontent = [];
+    content = [];
     //main 화면에서 사용자가 선택한 카테고리와 위치
     category = req.body.category;
     location = req.body.location;
-    await Planner.find({'location': location}, {'id': 1, '_id': 0}, async (err, IDdata)=> {
-        //사용자가 선택한 장소를 기반으로 planner의 collection안에서 filter
-        //filter된 id바탕으로 planner의게시글 가져옴 id 통해서
-        idcontent=IDdata;
-        console.log(idcontent);
-        for(var i=0; i<IDdata.length; i++){
-            await dbdata.find({'author': IDdata[i].id}, {'_id': 0, 'path': 1}, function (err, POSTdata) {
-                content.push(POSTdata)
-                console.log('in for area')
+    var plannerquery="{}"
+    var postquery="{}"
 
-            })
-        }
-        console.log("content")
-        console.log(content)
-        res.send('1');
-    });
+    if((location=="모든지역") && (category=="모든카테고리")){
+
+        //{'location': location} planner
+        // {'author': IDdata[i].id, 'theme': category} post
+        await Planner.find({}, {'id': 1, '_id': 0}, async (err, IDdata) => {
+            idcontent = IDdata;
+            for (var i = 0; i < IDdata.length; i++) {
+                await dbdata.find({'author':IDdata[i].id}, {
+                    '_id': 0,
+                    'path': 1
+                }, function (err, POSTdata) {
+                    content.push(POSTdata)
+                })
+            }
+            res.send('1');
+        });
+        
+    }else if(location=="모든지역"){
+
+        //plannerquery null
+        // post query author theme
+        await Planner.find({}, {'id': 1, '_id': 0}, async (err, IDdata) => {
+            idcontent = IDdata;
+            for (var i = 0; i < IDdata.length; i++) {
+                await dbdata.find({'author':IDdata[i].id,'theme': category }, {
+                    '_id': 0,
+                    'path': 1
+                }, function (err, POSTdata) {
+                    content.push(POSTdata)
+                })
+            }
+            res.send('1');
+        });
+    }else if(category=="모든카테고리"){
+        console.log("category all")
+        await Planner.find({'location': location}, {'id': 1, '_id': 0}, async (err, IDdata) => {
+            idcontent = IDdata;
+            for (var i = 0; i < IDdata.length; i++) {
+                await dbdata.find({'author':IDdata[i].id }, {
+                    '_id': 0,
+                    'path': 1
+                }, function (err, POSTdata) {
+                    content.push(POSTdata)
+                })
+            }
+            res.send('1');
+        });
+    }else {
+        await Planner.find({'location': location}, {'id': 1, '_id': 0}, async (err, IDdata) => {
+            idcontent = IDdata;
+            for (var i = 0; i < IDdata.length; i++) {
+                await dbdata.find({'author':IDdata[i].id , 'theme': category}, {
+                    '_id': 0,
+                    'path': 1
+                }, function (err, POSTdata) {
+                    content.push(POSTdata)
+                })
+            }
+            res.send('1');
+        });
+
+    }
+
 
 });
 

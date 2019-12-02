@@ -173,20 +173,69 @@
 
 
     <script>
+        var contentString=""
 
+
+        //fill body content
+        function fillcontent(imagedata, idData){
+            contentString=""
+
+            for (var i = 0; i < idData.length; i++) {
+                if (imagedata[i].length == 0) {
+                    continue;
+                }
+                //fill the profile
+                contentString +=
+                    "                        <div class=\"planner\" >\n" +
+                    "                            <div class=\"profile\" style=\"border:1px solid #CACDD6; \">\n" +
+                    "\n" +
+                    "                                <div class=\"profile_desc\" style=\"border:1px solid #CACDD6; \" >\n" +
+                    "                                    <span>별점</span>\n" +
+                    "                                    <span>" + idData[i].id + "</span>\n" +
+                    "\n" +
+                    "                                </div>\n" +
+                    "                                <div class=\"profile_img\">\n" +
+                    "                                    <img  src=\"img/profile1.jpg\">\n" +
+                    "                                </div>\n" +
+                    "                            </div>\n" +
+                    "\n" +
+                    "                            <div class=\"desc\">\n" +
+                    "                                <div class=\"autoplay slider\">\n"
+                for (var j = 0; j < imagedata[i].length; j++) {
+
+                    contentString +=
+                        "                                    <div>" +
+                        "                                        <img style='width:141px; height: 169px' src='" + imagedata[i][j].path + "'>" +
+                        "                                    </div>"
+                }
+                contentString +=
+                    "                                </div>\n" +
+                    "                            </div>\n" +
+                    "                        </div>"
+            }
+            console.log("in contentString please")
+            $("#please").html(contentString);
+
+        }//end of fill content
+
+
+        function changefilter(location, category){
+            $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
+            $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
+            $('#' + location).addClass('active')
+            $('#' + category).addClass('active')
+
+        }
 
         jQuery(document).ready(function ($) {
-
             var imagepath;
             var location;
             var category;
             var idData;
             var path;
-            var contentString = "";
 
 
-
-
+            //for slider
             function start_slick() {
                 $(".regular").slick({
                     dots: false,
@@ -205,71 +254,62 @@
 
                 });
             }
+
             // 딜레이 7후에 start_slick 실행.
             window.setTimeout(start_slick, 500);
 
+            //post request for planner and image data
+            var posting = $.post('/showplanner', {})
+            //post done, get data
+            posting.done(function (data) {
+                imagepath = data.data//get image path
+                idData = data.Iddata// get selected ID data
+                category = data.category//get selected category data
+                location = data.location//get selected location data
 
-                var posting = $.post('/showplanner', {})
+                //fill body section with data
+                fillcontent(imagepath, idData)
 
-                posting.done(function (data) {
+                //set the filter section as selected data
+                changefilter(location, category)
 
-                    imagepath = data.data//get image path
-                    idData = data.Iddata// get selected ID data
-                    console.log(imagepath)
-                    console.log(idData)
-                    category = data.category
-                    location = data.location
-                    console.log(category)
-                    console.log(location)
-                    //이전에 선택한 location filter과 category filter로 선택되어 들어올 수 있도록 함
-                    $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
-                    $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
-                    $('#' + location).addClass('active')
-                    $('#' + category).addClass('active')
+            })
 
+            //when location filter and category filter is selected
+            $('input[name="the"], input[name="thec"]').click(function () {
 
+                //get the id of selected filter __location and category
+                var loc = $(".filter-left .location-filter .location-option .lo-item .active").attr('id')
+                var cat = $(".filter-left .category-filter .category-option .co-item .active").attr('id')
+                console.log(loc)
+                console.log(cat)
 
+                //plannerlist page에서 maybe frommain will work
+                var posting_filter = $.post('/frommain', {'location':loc, 'category': cat})
 
-                    for (var i = 0; i < idData.length; i++) {
+                posting_filter.done(function(data){
+                    console.log(data)
+                    if(data=='1'){
+                        //time 설정 needed
+                        window.setTimeout(start_slick, 300);
+                        var posting_filter_start=$.post('/showplanner', {})
 
-                        //프로필 채우기
-                        contentString +=
-                            "                        <div class=\"planner\">\n" +
-                            "                            <div class=\"profile\">\n" +
-                            "\n" +
-                            "                                <div class=\"profile_desc\">\n" +
-                            "                                    <span>별점</span>\n" +
-                            "                                    <span>" + idData[i].id + "</span>\n" +
-                            "\n" +
-                            "                                </div>\n" +
-                            "                                <div class=\"profile_img\">\n" +
-                            "                                    <img  src=\"img/profile1.jpg\">\n" +
-                            "                                </div>\n" +
-                            "                            </div>\n" +
-                            "\n" +
-                            "                            <div class=\"desc\">\n" +
-                            "                                <div class=\"autoplay slider\">\n"
+                        posting_filter_start.done(function(data){
+                            imagepath = data.data//get image path
+                            idData = data.Iddata// get selected ID data
+                            category = data.category//get selected category data
+                            location = data.location//get selected location data
 
-                        for (var j = 0; j < imagepath[i].length; j++) {
+                            console.log(imagepath)
 
-                            console.log(imagepath[i][j].path)
-                            contentString +=
-                                "                                    <div>" +
-                                "                                        <img style='width:141px; height: 169px' src='" + imagepath[i][j].path + "'>" +
-                                "                                    </div>"
+                            //fill body section with data
+                            fillcontent(imagepath, idData)
 
-                        }
-                        contentString +=
-                            "                                </div>\n" +
-                            "                            </div>\n" +
-                            "                        </div>"
+                        })
                     }
-                    $("#please").html(contentString);
+
                 })
-
-            contentString = ""
-
-
+            })
         })
 
 

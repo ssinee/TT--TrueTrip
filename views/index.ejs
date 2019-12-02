@@ -38,9 +38,7 @@
                 console.log("selected theme")
                 console.log(cat)
 
-
                var posting= $.post('/frommain', {'location':loc, 'category': cat})
-
 
                 posting.done(function(data){
                     if(data=='1') location.href='plannerlist';
