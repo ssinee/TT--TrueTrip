@@ -113,6 +113,8 @@ app.use('/', require('./routes/showpopup'));
 app.use('/',require('./routes/request'));
 app.use('/', require('./routes/showPlanner'));
 
+app.use('/',require('./routes/plan'));
+
 
 
 

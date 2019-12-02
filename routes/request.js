@@ -88,6 +88,55 @@ router.post('/sendForm', function(req,res){
 
     // res.render("../views/RequestForm.ejs");
     // console.log("데이터 리스트"+data_list[0]);
+
+    res.render('/');
+});
+
+
+router.get('/reservation_planner',function(req,res){
+    res.redirect('/reservation_planner/'+req.user.id);
+    // res.render('../views/reservation_planner.ejs');
+});
+
+router.get('/reservation_planner/:id',function(req,res){
+    var data_array=new Array();
+    var data_length;
+
+    Request.find({'planner':req.params.id},function(err,data){
+        if(err) throw err;
+        console.log(data);
+        data_length=data.length;
+        console.log(data_length);
+        console.log(typeof(data));
+        var req_id=new Array();
+        for(var i =0;i<data_length;i++){
+            req_id=data[i]._id;
+            console.log(req_id);
+            // var post_len=postid.length;
+            // console.log(postid[0]);
+            // for (var j=0; j<post_len;j++){
+            //     Postdata.find({_id:postid[j]}, function(err,post){
+            //         if(err) throw err;
+            //         console.log(post);
+            //         console.log(post[0].title);
+            //     })
+            // }
+        }
+        res.render('../views/reservation_planner.ejs',{data_length:data_length,send_data:data})
+    })
+
+});
+
+router.post('/findTitle',function(req,res){
+    var data= req.body.postid;
+     console.log("넘겨받은 데이터:"+data);
+    Postdata.find({'_id':data},function(err,data) {
+        console.log(data);
+        var title=data[0].title;
+        console.log("제목"+title);
+        // console.log("찾은데이터"+data);
+        res.send({'post_title':title});
+    })
 });
 
 module.exports = router;
