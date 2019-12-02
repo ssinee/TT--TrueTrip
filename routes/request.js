@@ -19,25 +19,7 @@ router.post('/request', function(req,res){
 
 router.get('/requestform',function(req,res){
 
-
     res.render("../views/RequestForm.ejs",{content_id:content_id});
-
-
-    // for(var i=0; i<content_id.length;i++){
-    //     Postdata.find({_id:content_id[i]},function(err,data){
-    //         console.log(data);
-    //         request.selectpost[i]=data;
-    //         request.save(function(err){
-    //             if(err){
-    //                 console.log(err);
-    //             }
-    //             console.log("request:"+request);
-    //             res.render("../views/RequestForm.ejs",{data:request});
-    //         });
-    //
-    //         console.log(request.selectpost[i]);
-    //     });
-    // }
 
 });
 

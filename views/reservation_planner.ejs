@@ -156,8 +156,7 @@
 
             var send=$.post('/sendReqID', {
                 'req_id':req_ids[id_num]
-            })
-            ;
+            });
 
         })
 
@@ -303,7 +302,7 @@
                     </div>
                     <div id="test"></div>
                     <div class="right">
-                        <div><a name="accept" href="/requestAccept"><img src="/img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
+                        <div><a name="accept" href="/sendReqID"><img src="/img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
                         <div><a href="#"><img src="/img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
                     </div>
                 </div>
