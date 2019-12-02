@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var mongoose=require("mongoose");
-
+const multer=require('multer');
 var Planner=mongoose.model('planners');
 
-
+//multer 미들웨어 등록 -> 사진 등록시 upload 파일에 저장
+let upload=multer({
+    dest:'upload_profile'
+})
 
 // router.get("/post",function(req,res){
 //     PlannerPost.find({})
@@ -45,15 +48,24 @@ router.get('/post',function(req,res){
     res.render('write',{title:'게시글작성'});
 });
 
-router.post('/mypage/write',function(req,res){
-
+router.post('/mypage/write', upload.single('editImg'),function(req,res, next){
+// 마이페이지에서 프로필 수정할 때. 이미지도 수정가능하게 바꿈.
+// 대신에 image_upload랑 똑같은 버그 하나 있음. 이미지 선택안하고 저장하면 튕김.
+// 프로필 수정할때마다 upload_profile에 하나씩 남음.
     var paramintroduce=req.body.introduce;
     var paramlocation=req.body.location;
+    //이미지================================================
+    var fileObj=req.file//multer 모듈로 req.files
+    var paramorgFileName=fileObj.originalname;// 원본 파일명 저장(originalname은 fileObj의 속성)
+    var paramsaveFileName=fileObj.filename;//저장된 파일명
+    var parampath=fileObj.path;
+    //==================================================================
 
     var plannerpost =new Planner({"location":paramlocation,"introduce":paramintroduce});
     var userid=req.user.id;
     console.log(userid);
-    Planner.findOneAndUpdate({id:req.user.id},{$set:{"location":paramlocation,"introduce":paramintroduce}},function (err,post) {
+    Planner.findOneAndUpdate({id:req.user.id},{$set:{"location":paramlocation,"introduce":paramintroduce, "orgFileName": paramorgFileName,
+        "saveFileName": paramsaveFileName, "path":parampath}},function (err,post) {
         if (err) {
             console.log(err);
             res.redirect('/');

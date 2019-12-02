@@ -14,7 +14,9 @@ var PlannerSchema= new Schema({
     location: String,
     path:String,//프로필 사진 경로
     introduce: String,
-    userType: { type: [String], index: "planner" }
+    userType: { type: [String], index: "planner" },
+    orgFileName: String,    //프로필 사진 orgname
+    saveFileName:String,    //프로필 사진 savename
 });
 //
 // {"id":id, "pw":pw, "name":paramName,"email":paramEmail,

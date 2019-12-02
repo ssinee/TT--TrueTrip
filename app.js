@@ -54,8 +54,10 @@ app.use(express.static('scss'))
 app.use(express.static('vendor'))
 app.use(express.static('img'))
 
+
 app.use('/upload', express.static('./upload'))
 app.use('/post/upload', express.static('./upload'))
+app.use('/post/upload_profile', express.static('./upload_profile'))
 
 
 // app.use(express.static(path.join(__dirname,'/views')))
