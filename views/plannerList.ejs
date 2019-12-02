@@ -177,8 +177,17 @@
 
         jQuery(document).ready(function ($) {
 
+            var imagepath;
+            var location;
+            var category;
+            var idData;
+            var path;
+            var contentString = "";
 
-            function start_slick(){
+
+
+
+            function start_slick() {
                 $(".regular").slick({
                     dots: false,
                     infinite: true,
@@ -196,75 +205,79 @@
 
                 });
             }
-
             // 딜레이 7후에 start_slick 실행.
-
-            window.setTimeout(start_slick, 30);
-
+            window.setTimeout(start_slick, 500);
 
 
+                var posting = $.post('/showplanner', {})
 
-            var posting = $.post('/showplanner', {})
+                posting.done(function (data) {
 
-            posting.done(function (data) {
-                var imagepath;
-                var location;
-                var category;
-                var idData;
-                var path;
-                var contentString="";
-                console.log(imagepath)
-                console.log(idData)
-
-                imagepath = data.data//get image path
-                idData = data.Iddata// get selected ID data
-                console.log(imagepath)
-                console.log(idData)
+                    imagepath = data.data//get image path
+                    idData = data.Iddata// get selected ID data
+                    console.log(imagepath)
+                    console.log(idData)
+                    category = data.category
+                    location = data.location
+                    console.log(category)
+                    console.log(location)
+                    //이전에 선택한 location filter과 category filter로 선택되어 들어올 수 있도록 함
+                    $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
+                    $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
+                    $('#' + location).addClass('active')
+                    $('#' + category).addClass('active')
 
 
 
-                for (var i = 0; i < idData.length; i++) {
 
-                    //프로필 채우기
-                    contentString +=
-                        "                        <div class=\"planner\">\n" +
-                        "                            <div class=\"profile\">\n" +
-                        "\n" +
-                        "                                <div class=\"profile_desc\">\n" +
-                        "                                    <span>별점</span>\n" +
-                        "                                    <span>" + idData[i].id + "</span>\n" +
-                        "\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"profile_img\">\n" +
-                        "                                    <img src=\"img/cats/profile.jpg\">\n" +
-                        "                                </div>\n" +
-                        "                            </div>\n" +
-                        "\n" +
-                        "                            <div class=\"desc\">\n" +
-                        "                                <div class=\"autoplay slider\">\n"
+                    for (var i = 0; i < idData.length; i++) {
 
-                    for (var j = 0; j < imagepath[i].length; j++) {
-
-                        console.log(imagepath[i][j].path)
+                        //프로필 채우기
                         contentString +=
-                            "                                    <div>" +
-                            "                                        <img style='width:141px; height: 169px' src='" + imagepath[i][j].path + "'>" +
-                            "                                    </div>"
+                            "                        <div class=\"planner\">\n" +
+                            "                            <div class=\"profile\">\n" +
+                            "\n" +
+                            "                                <div class=\"profile_desc\">\n" +
+                            "                                    <span>별점</span>\n" +
+                            "                                    <span>" + idData[i].id + "</span>\n" +
+                            "\n" +
+                            "                                </div>\n" +
+                            "                                <div class=\"profile_img\">\n" +
+                            "                                    <img  src=\"img/profile1.jpg\">\n" +
+                            "                                </div>\n" +
+                            "                            </div>\n" +
+                            "\n" +
+                            "                            <div class=\"desc\">\n" +
+                            "                                <div class=\"autoplay slider\">\n"
 
+                        for (var j = 0; j < imagepath[i].length; j++) {
+
+                            console.log(imagepath[i][j].path)
+                            contentString +=
+                                "                                    <div>" +
+                                "                                        <img style='width:141px; height: 169px' src='" + imagepath[i][j].path + "'>" +
+                                "                                    </div>"
+
+                        }
+                        contentString +=
+                            "                                </div>\n" +
+                            "                            </div>\n" +
+                            "                        </div>"
                     }
-                    contentString +=
-                        "                                </div>\n" +
-                        "                            </div>\n" +
-                        "                        </div>"
-                }
-               $("#please").html(contentString);
+                    $("#please").html(contentString);
+                })
 
-                // $("#please").html(contentString)
+            contentString = ""
 
 
-            })
-            contentString=""
         })
+
+
+    </script>
+
+    <script>
+
+
     </script>
 
 
@@ -290,9 +303,6 @@
 <!-- Header End -->
 
 
-
-
-
 <!-- Filter Section Begin -->
 <section class="filter-section spad">
     <div class="container">
@@ -309,59 +319,60 @@
                     <div class="location-filter">
                         <h3>지역 필터</h3>
                         <div class="location-option">
-                            <form id="locationForm" action="" method="post">
-                                <div class="lo-item">
-                                    <label class="active"><input type="radio" name="the" value="모두">모두</label>
-                                </div>
-                                <div class="lo-item">
-                                    <label> <input type="radio" name="the" value="인계동">인계동</label>
-                                </div>
-                                <div class="lo-item">
-                                    <label><input type="radio" name="the" value="행궁동">행궁동</label>
-                                </div>
-                                <div class="lo-item">
-                                    <label><input type="radio" name="the" value="영통동">영통동</label>
-                                </div>
-                                <div class="lo-item">
-                                    <label><input type="radio" name="the" value="우만동">우만동</label>
-                                </div>
-                                <div class="lo-item">
-                                    <label><input type="radio" name="the" value="매탄동">매탄동</label>
-                                </div>
-                            </form>
+
+                            <div class="lo-item">
+                                <label id="모든지역" class="active"><input type="radio" name="the" value="모든지역">전체</label>
+                            </div>
+                            <div class="lo-item">
+                                <label id="인계동"> <input type="radio" name="the" value="인계동">인계동</label>
+                            </div>
+                            <div class="lo-item">
+                                <label id="행궁동"><input type="radio" name="the" value="행궁동">행궁동</label>
+                            </div>
+                            <div class="lo-item">
+                                <label id="영통동"><input type="radio" name="the" value="영통동">영통동</label>
+                            </div>
+                            <div class="lo-item">
+                                <label id="우만동"><input type="radio" name="the" value="우만동">우만동</label>
+                            </div>
+                            <div class="lo-item">
+                                <label id="매탄동"><input type="radio" name="the" value="매탄동">매탄동</label>
+                            </div>
                         </div>
                     </div>
 
 
-                    <!--                    플래너 분야 카테고리-->
-                    <!--                    <div class="category-filter">-->
-                    <!--                        <h3>Category Filter</h3>-->
-                    <!--                        <div class="category-option">-->
-                    <!--                            <form id="themeForm" action="/showtheme" method="post">-->
-                    <!--                                <div class="co-item">-->
-                    <!--                                    <label class="active"><input type="radio" name="the" value="모두">모두</label>-->
-                    <!--                                </div>-->
-                    <!--                                <div class="co-item">-->
-                    <!--                                    <label> <input type="radio" name="the" value="쇼핑">쇼핑</label>-->
-                    <!--                                </div>-->
-                    <!--                                <div class="co-item">-->
-                    <!--                                    <label><input type="radio" name="the" value="카페">카페</label>-->
-                    <!--                                </div>-->
-                    <!--                                <div class="co-item">-->
-                    <!--                                    <label><input type="radio" name="the" value="사진">사진</label>-->
-                    <!--                                </div>-->
-                    <!--                                <div class="co-item">-->
-                    <!--                                    <label><input type="radio" name="the" value="음식">음식</label>-->
-                    <!--                                </div>-->
-                    <!--                                <div class="co-item">-->
-                    <!--                                    <label><input type="radio" name="the" value="액티비티">액티비티</label>-->
-                    <!--                                </div>-->
-                    <!--                                <div class="co-item">-->
-                    <!--                                    <label><input type="radio" name="the" value="유명명소">유명명소</label>-->
-                    <!--                                </div>-->
-                    <!--                            </form>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
+                    <div class="category-filter">
+                        <h3>카테고리 필터</h3>
+                        <div class="category-option">
+                            <div class="co-item">
+                                <label class="active" id="모든카테고리"><input type="radio" name="thec"
+                                                                         value="모든카테고리">전체</label>
+                            </div>
+                            <div class="co-item">
+                                <label id="쇼핑"> <input type="radio" name="thec" value="쇼핑">쇼핑</label>
+                            </div>
+                            <div class="co-item">
+                                <label id="카페"><input type="radio" name="thec" value="카페">카페</label>
+                            </div>
+                            <div class="co-item">
+                                <label id="사진"><input type="radio" name="thec" value="사진">사진</label>
+                            </div>
+                            <div class="co-item">
+                                <label id="음식"><input type="radio" name="thec" value="음식">음식</label>
+                            </div>
+                            <div class="co-item">
+                                <label id="액티비티"><input type="radio" name="thec" value="액티비티">액티비티</label>
+                            </div>
+                            <div class="co-item">
+                                <label id="유명명소"><input type="radio" name="thec" value="유명명소">유명명소</label>
+                            </div>
+                            <div class="co-item">
+                                <label id="기타"><input type="radio" name="thec" value="기타">기타</label>
+                            </div>
+
+                        </div>
+                    </div>
 
 
                     <div class="rating-filter">
@@ -597,9 +608,6 @@
 
 
 <script src="slick/slick.js" type="text/javascript" charset="utf-8"></script>
-
-
-
 
 
 <!-- Js Plugins -->

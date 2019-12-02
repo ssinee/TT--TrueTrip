@@ -12,12 +12,9 @@ router.get('/', (req, res) => {
     res.render('../views/index');
 });
 router.get('/main', (req, res) => {
-    res.render('../views/index.ejs');
+    res.render('../views/index');
 });
 
-router.get('/plannerlist', function (req, res) {
-    res.render('../views/plannerList.ejs');
-})
 
 router.get('/lists', (req,res)=>{
     var theme= req.body.theme;
