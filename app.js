@@ -57,7 +57,9 @@ app.use(express.static('img'))
 
 app.use('/upload', express.static('./upload'))
 app.use('/post/upload', express.static('./upload'))
-app.use('/post/upload_profile', express.static('./upload_profile'))
+app.use('/post/upload_profile', express.static('./upload_profile'))   // 프로필 업데이트에 이용. 프로필 사진 들어가는 폴더
+
+
 
 
 // app.use(express.static(path.join(__dirname,'/views')))

@@ -54,12 +54,27 @@ router.post('/mypage/write', upload.single('editImg'),function(req,res, next){
 // 프로필 수정할때마다 upload_profile에 하나씩 남음.
     var paramintroduce=req.body.introduce;
     var paramlocation=req.body.location;
-    //이미지================================================
-    var fileObj=req.file//multer 모듈로 req.files
-    var paramorgFileName=fileObj.originalname;// 원본 파일명 저장(originalname은 fileObj의 속성)
-    var paramsaveFileName=fileObj.filename;//저장된 파일명
-    var parampath=fileObj.path;
-    //==================================================================
+    var fileObj; //multer 모듈로 req.files
+    var paramorgFileName;// 원본 파일명 저장(originalname은 fileObj의 속성)
+    var paramsaveFileName;//저장된 파일명
+    var parampath;
+
+    console.log('여기여기여기여기여기여기')
+    // 이미지가 있다면,
+    if(req.file){
+        fileObj = req.file
+        paramorgFileName=fileObj.originalname;// 원본 파일명 저장(originalname은 fileObj의 속성)
+        paramsaveFileName=fileObj.filename;//저장된 파일명
+        parampath=fileObj.path;
+    }
+
+    // 이미지가 입력되지 않으면, 기본 프로필 사진으로 하자.
+    // upload_profile에서 default_profile.jpg 지우면 안됨!!!!!
+    else{
+        paramorgFileName = "";
+        paramsaveFileName = "";
+        parampath= "upload_profile/default_profile.jpg";
+    }
 
     var plannerpost =new Planner({"location":paramlocation,"introduce":paramintroduce});
     var userid=req.user.id;
