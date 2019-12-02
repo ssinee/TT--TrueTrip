@@ -173,10 +173,7 @@
 
 
     <script>
-
-
         jQuery(document).ready(function ($) {
-
             var imagepath;
             var location;
             var category;
@@ -184,9 +181,7 @@
             var path;
             var contentString = "";
 
-
-
-
+            //for slider
             function start_slick() {
                 $(".regular").slick({
                     dots: false,
@@ -208,36 +203,37 @@
             // 딜레이 7후에 start_slick 실행.
             window.setTimeout(start_slick, 500);
 
-
+                //post 요청 for planner and image data
                 var posting = $.post('/showplanner', {})
 
                 posting.done(function (data) {
 
                     imagepath = data.data//get image path
                     idData = data.Iddata// get selected ID data
-                    console.log(imagepath)
-                    console.log(idData)
-                    category = data.category
-                    location = data.location
-                    console.log(category)
-                    console.log(location)
-                    //이전에 선택한 location filter과 category filter로 선택되어 들어올 수 있도록 함
+                    category = data.category//get selected category data
+                    location = data.location//get selected location data
+
+                    //set the filter section as selected data
                     $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
                     $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
                     $('#' + location).addClass('active')
                     $('#' + category).addClass('active')
+                    console.log(imagepath)
 
 
-
-
+                    //fill body section with data
                     for (var i = 0; i < idData.length; i++) {
-
+                        if(imagepath[i].length==0) {
+                            console.log(i)
+                            console.log("Its null")
+                            continue;
+                        }
                         //프로필 채우기
                         contentString +=
-                            "                        <div class=\"planner\">\n" +
-                            "                            <div class=\"profile\">\n" +
+                            "                        <div class=\"planner\" >\n" +
+                            "                            <div class=\"profile\" style=\"border:1px solid #CACDD6; \">\n" +
                             "\n" +
-                            "                                <div class=\"profile_desc\">\n" +
+                            "                                <div class=\"profile_desc\" style=\"border:1px solid #CACDD6; \" >\n" +
                             "                                    <span>별점</span>\n" +
                             "                                    <span>" + idData[i].id + "</span>\n" +
                             "\n" +
@@ -249,10 +245,8 @@
                             "\n" +
                             "                            <div class=\"desc\">\n" +
                             "                                <div class=\"autoplay slider\">\n"
-
                         for (var j = 0; j < imagepath[i].length; j++) {
 
-                            console.log(imagepath[i][j].path)
                             contentString +=
                                 "                                    <div>" +
                                 "                                        <img style='width:141px; height: 169px' src='" + imagepath[i][j].path + "'>" +
@@ -316,7 +310,7 @@
                     <!--                    chg. 지역 필터랑 카테고리 필터가 하나로 인식됨. 위아래 통틀어 한개만 선택가능-->
                     <!--                    위치카테고리용 class="lo-item"은 co-item과 같게 정의해야함.-->
 
-                    <div class="location-filter">
+                    <div class="location-filter" >
                         <h3>지역 필터</h3>
                         <div class="location-option">
 
