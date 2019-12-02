@@ -39,7 +39,12 @@
                 console.log(cat)
 
 
-                $.post('/frommain', {'location':loc, 'category': cat})
+               var posting= $.post('/frommain', {'location':loc, 'category': cat})
+
+
+                posting.done(function(data){
+                    if(data=='1') location.href='plannerlist';
+                })
 
 
 
@@ -101,7 +106,7 @@
                             </select>
                         </div>
 
-                        <button id="mainbtn" type="button" onclick="location.href='plannerlist'">Search Now</button>
+                        <button id="mainbtn" type="button" onclick="">Search Now</button>
 <!--                        <button id="mainbtn" type="button">Search Now</button>-->
                     </div>
                 </div>

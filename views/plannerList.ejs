@@ -205,13 +205,10 @@
 
                 });
             }
-
             // 딜레이 7후에 start_slick 실행.
+            window.setTimeout(start_slick, 500);
 
-            window.setTimeout(start_slick, 1900);
 
-
-            window.setTimeout(function () {
                 var posting = $.post('/showplanner', {})
 
                 posting.done(function (data) {
@@ -268,12 +265,7 @@
                             "                        </div>"
                     }
                     $("#please").html(contentString);
-
-
-
-
                 })
-            }, 1800)
 
             contentString = ""
 

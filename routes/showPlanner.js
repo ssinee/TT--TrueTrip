@@ -65,13 +65,14 @@ showPlannersListRouter.post('/frommain', async (req, res)=> {
         idcontent=IDdata;
         console.log(idcontent);
         for(var i=0; i<IDdata.length; i++){
-            dbdata.find({'author': IDdata[i].id}, {'_id': 0, 'path': 1}, function (err, POSTdata) {
+            await dbdata.find({'author': IDdata[i].id}, {'_id': 0, 'path': 1}, function (err, POSTdata) {
                 content.push(POSTdata)
-                console.log("_______________________________")
-                console.log(POSTdata)
+                console.log('in for area')
+
             })
         }
-
+        console.log("content")
+        console.log(content)
         res.send('1');
     });
 
