@@ -57,6 +57,8 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
     //main 화면에서 사용자가 선택한 카테고리와 위치
     category = req.body.category;
     location = req.body.location;
+    console.log(category)
+    console.log(location)
     await Planner.find({'location': location}, {'id': 1, '_id': 0}, async (err, IDdata) => {
         //사용자가 선택한 장소를 기반으로 planner의 collection안에서 filter
         //filter된 id바탕으로 planner의게시글 가져옴 id 통해서
