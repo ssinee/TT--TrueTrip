@@ -30,8 +30,8 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
                 var author=planner.id;
                 var name = planner.name;
                 console.log(author);
-
-                    var obj={ "author":author,"title": title,"location":location,"text":textinput, "theme":theme, "orgFileName":orgFileName, "saveFileName":saveFileName, "path": path};
+                    // 팝업 확인할 때, 이름 나올 수 있게 넣었음.
+                    var obj={ "name":name, "author":author,"title": title,"location":location,"text":textinput, "theme":theme, "orgFileName":orgFileName, "saveFileName":saveFileName, "path": path};
 
 
                     //DBdata 객체에 담음 (DBdata 는 moongoose의 schema를 모델화한 객체)
