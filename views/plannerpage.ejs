@@ -16,12 +16,10 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
     <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <!--    <style>-->
 
@@ -98,59 +96,12 @@
         }
 
     </style>
-    <script language="javascript">
-      function showPopup() {
 
-            var popupX = (window.screen.width / 2) - (1300 / 2);
-            var popupY = (window.screen.height / 2) - (600 / 2);
-            window.open('popup', 'a', 'status=no, height=500, width=800');
-        }
-    </script>
 
     <script>
-        // $(document).ready(function () {
-        //     var content;
-        //     var User_ID = $('#UserID').text();
-        //     var postsArr = ""
-        //
-        //     var posting = $.post('/showPlannersImage', {'UserID': User_ID})
-        //
-        //     posting.done(function (data) {
-        //         content = data.data
-        //
-        //         for (var i = 0; i < content.length; i++) {
-        //             postsArr +=
-        //                 "<div class=\"col-lg-4 col-sm-6\" >" +
-        //                 "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
-        //                 "                            <div class=\"arrange-pic\">" +
-        //                 "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
-        //                 "                            </div>" +
-        //                 "                            <div class=\"arrange-text\">" +
-        //                 "                            <h5>" + content[i].title + "</h5>" +
-        //                 "                        </div>" +
-        //                 "                       </a>" +
-        //                 "                     </div>"
-        //         }
-        //         $('#showPlannerImages').html(postsArr)
-        //     })
-        // })
-        //
-        // // var hidden=false;
-        // // function action(){
-        // //     hidden =!hidden;
-        // //     if(hidden){
-        // //         document.getElementById('saveButton').style.visibility='visible';
-        // //     } else{
-        // //         document.getElementById('saveButton').style.visibility='hidden';
-        // //     }
-        // // }
-        // // var hidden=document.getElementById('saveButton').style.visibility;
-        // // function action(){
-        // //     if(hidden){
-        // //         document.getElementById('saveButton').style.visibility='visible';
-        // //     }
-        // // }
-        //
+        // content에 User_ID 기준으로 게시글 다 긁어서 저장함.
+        var content;
+
         $(document).ready( function(){
             $('#editProfile').hide();
             $('#editProfile2').hide();
@@ -176,7 +127,7 @@
         })
 
         $(document).ready(function (req,res) {
-            var content;
+
             var User_ID = $('#UserID').text();
             var author=""
             var postsArr = ""
@@ -195,7 +146,7 @@
                         "                            </div>" +
                         "                            <div class=\"arrange-text\">" +
                         "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
-                        "                            <h5 class='posttitle'>" + content[i].title + "</h5>" +
+                        "                            <h5 class='posttitle' data-target='#myModal'>" + content[i].title + "</h5>" +
 
                         "                        </div>" +
                         "                       </a>" +
@@ -252,26 +203,29 @@
                 console.log(postTitle)
                 console.log($(this).eq(-2).attr('class'))
                 console.log($(this).parents().eq(1).attr('class'))
-                var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
 
-                // $.ajax({
-                //     type:"GET",
-                //     url:"/showpopup",
-                //     data:{
-                //         User_ID: User_ID,
-                //         Title: postTitle,
-                //     }
-                // }).done(function(result){
-                //     if(result==='1'){
-                //         console.log("functionscucces")
-                //     }
-                // });
 
-                showPopup()
+                //chg. 여기를 modal로 바꿔야함.========================
+                var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle});
 
+                posting.done(function(data){
+                    console.log("plannerpage.ejs로 넘어온 값입니다.")
+                    console.log(data.PostID)
+                    console.log(data.PostCategory)
+
+                    // JQuery를 이용해서 값을 바꾼다. #id
+                    $('#posttitle').text(data.PostTitle);
+                    $('#postcategory').text(data.PostCategory);
+                    $('#postname').text(data.PostLocation);
+                    $('#postlocation').text(data.PostLocation);
+                    $('#postpath').attr("src", data.PostPath);
+                    $('#postcontent').text(data.PostContents);
+
+                })
+
+                // 모달창이 수동으로 나오게 함.
+                $('#myModal').modal('toggle');
             })
-
-
         })
 
         // $(document).ready( function(){
@@ -471,6 +425,43 @@
 
                         <div class="row" id="showPlannerImages" style="padding-bottom: 400px;">
                         </div>
+
+                        <!--    모달 시작-->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!--            모달 내용 시작-->
+                                <div class="modal-content">
+                                    <!--                모달창 위에 제목-->
+                                    <div class="modal-header">
+
+                                        <h4 class="modal-title" align="left" id="posttitle"></h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!--                모달 바디-->
+                                    <div class="modal-body">
+                                        카테고리:&nbsp;
+                                        <p id="postcategory"></p>
+                                        글쓴이:&nbsp;
+                                        <p id="postname"></p>
+                                        주소:&nbsp;
+                                        <p id="postlocation"></p>
+                                        이미지주소:&nbsp;
+                                        <p><img id="postpath"></p>
+                                        소개글:&nbsp;
+                                        <p id="postcontent"></p>
+
+                                    </div>
+                                    <!--                모달 바디-->
+
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--    모달 끝-->
 
 
 

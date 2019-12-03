@@ -107,7 +107,15 @@ router.get('/post/:id', function (req, res) {
         }
         Planner.findOne({id:req.params.id}, function (err, post) {
 
-            res.render('plannerpage', { title: 'Post', user_info: post });
+            res.render('plannerpage', { title: 'Post', user_info: post ,
+                    PostID: " ",
+                    PostName: " ",
+                    PostTitle: " ",
+                    PostCategory: " ",
+                    PostLocation: " ",
+                    PostContents: " ",
+                    PostPath: " ",
+                });
         })
     }
 });

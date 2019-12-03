@@ -10,6 +10,8 @@ const fs = require('fs');
 let passing_content;
 
 //popup 페이지 초기화
+
+
 showpopupRouter.get('/popup', function (req, res, next) {
     console.log('/popup 호출됨')
     res.render('popup',
@@ -56,7 +58,9 @@ showpopupRouter.post('/showpopup', function (req, res, next) {
         else {
             passing_content = data[0]
             console.log(passing_content);
-            res.render('../views/popup',
+
+            // 받은 db를 가져다가, 돌려줘야함. 근데, modal로? 여기가 문제임.
+            res.send(
                 {
                     'PostID': passing_content.author,
                     'PostTitle': passing_content.title,
@@ -65,9 +69,9 @@ showpopupRouter.post('/showpopup', function (req, res, next) {
                     'PostContents': passing_content.text,
                     'PostPath': passing_content.path,
                     'PostName' : passing_content.name
-
                 }
             );
+            console.log('showpopup에서 res.send 완료. ');
         }
     })
 })
