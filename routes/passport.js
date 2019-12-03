@@ -213,6 +213,9 @@ passport.use('local-planner', new LocalStrategy({
     var paramCategory3= req.body.category3 || req.query.category3;
     var location = req.body.location || req.query.location;
 
+    //기본 프로필 설정을 위한 부분
+    var parampath= "upload_profile/default_profile.jpg";
+
     console.log('passport의 local-signup 호출됨 : ' + id + ', ' + pw + ', ' + paramName);
 
     // findOne 메소드가 blocking되지 않도록 하고 싶은 경우, async 방식으로 변경
@@ -231,7 +234,7 @@ passport.use('local-planner', new LocalStrategy({
             } else {
                 // 모델 인스턴스 객체 만들어 저장
                 var planner = new Planner({"id":id, "pw":pw, "name":paramName,"email":paramEmail,
-                    "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3, "location":location});
+                    "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3, "location":location, "path":parampath});
                 planner.save(function(err) {
                     if (err) {
                         throw err;

@@ -50,8 +50,8 @@ router.get('/post',function(req,res){
 
 router.post('/mypage/write', upload.single('editImg'),function(req,res, next){
 // 마이페이지에서 프로필 수정할 때. 이미지도 수정가능하게 바꿈.
-// 대신에 image_upload랑 똑같은 버그 하나 있음. 이미지 선택안하고 저장하면 튕김.
-// 프로필 수정할때마다 upload_profile에 하나씩 남음.
+// 이미지 입력안하면 기본사진으로 들어감.
+// 프로필 수정할때마다 upload_profile에 하나씩 넣음.
     var paramintroduce=req.body.introduce;
     var paramlocation=req.body.location;
     var fileObj; //multer 모듈로 req.files
