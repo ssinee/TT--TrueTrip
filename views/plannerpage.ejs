@@ -154,17 +154,20 @@
         $(document).ready( function(){
             $('#editProfile').hide();
             $('#editProfile2').hide();
+            $('#editProfile3').hide();
             $('#save').hide();
 
             $('#editButton').click(function(){
                 $('#editProfile').show();
                 $('#editProfile2').show();
+                $('#editProfile3').show();
                 $('#save').show();
             })
 
             $('#saveButton').click(function(){
                 $('#editProfile').hide();
                 $('#editProfile2').hide();
+                $('#editProfile3').hide();
                 $('#save').hide();
             })
 
@@ -347,13 +350,14 @@
                     <div class="about-right">
                         <div class="contact-info" style="padding-top: 100px; width: 100%;" >
                             <div class="map" style="border:3px solid #CACDD6; height: 300px;">
+<!--                                주소에서 post/를 지워야함.-->
 
-                                <img src="/img/145852.png" alt="" style="width: 100%; height: 100%;">
+                                <img src='<%=user_info.path%>' alt="" style="width: 100%; height: 100%;">
+
                             </div>
 
-
                             <div class="contact-text">
-                                <form method="post" action="/mypage/write">
+                                <form method="post" action="/mypage/write" ENCTYPE="multipart/form-data">
                                     <p align="center" style="font-size: 30px; margin-bottom: 0px;"><b><%=user_info.name%></b></p>
                                     <h5 align="center" style="color: deepskyblue"><%=user_info.email%></h5>
                                     <div style="padding:5px 20px"></div>
@@ -400,6 +404,11 @@
 
                                     <div style="padding:5px 20px"></div>
 
+<!--                                    프로필 사진 변경 버튼-->
+                                    <div id="editProfile3" style="padding:5px 20px" align="center">
+                                        <input class="primary-btn" type="file" value="이미지변경" name="editImg">
+                                    </div>
+
 
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
@@ -407,9 +416,10 @@
                                             <center>
                                             <input class="primary-btn" type="button" id="editButton" value="프로필 수정" name="edit">
                                                 <div style="padding:5px 20px"></div>
-                                            <div id="save">
-                                                <input class="primary-btn" type="submit" id="saveButton" value="저장" name="save">
-                                            </div></center>
+
+                                                <div id="save">
+                                                    <input class="primary-btn" type="submit" id="saveButton" value="저장" name="save">
+                                                </div></center>
 
                                         <% } else { %>
                                         <% } %>
@@ -626,6 +636,11 @@
     </div>
 </footer>
 <!-- Footer Section End -->
+
+<script>
+
+</script>
+
 
 <!-- Js Plugins -->
 <script src="/js/jquery-3.3.1.min.js"></script>
