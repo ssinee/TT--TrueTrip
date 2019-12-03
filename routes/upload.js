@@ -10,17 +10,32 @@ let upload=multer({
     dest:'upload'
 })
 
-
+// image_upload.ejs에서 게시글 등록 시
 uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
     var title=req.body.title//글의 title
-    var fileObj=req.file//multer 모듈로 req.files
-    var orgFileName=fileObj.originalname;// 원본 파일명 저장(originalname은 fileObj의 속성)
-    var saveFileName=fileObj.filename;//저장된 파일명
-    var location=req.body.location
-    var textinput=req.body.text
-    var theme=req.body.theme
-    var path=fileObj.path;
+    var location=req.body.location;
+    var textinput=req.body.text;
+    var theme=req.body.theme;
 
+    var fileObj;
+    var orgFileName;
+    var saveFileName;
+    var path;
+
+    //이미지 있을 때,
+    if(req.file){
+        fileObj = req.file;
+        orgFileName = fileObj.originalname;// 원본 파일명 저장(originalname은 fileObj의 속성)
+        saveFileName = fileObj.filename;//저장된 파일명
+        path = fileObj.path;
+    }
+
+    //이미지 없을 때,
+    else{
+        orgFileName="";
+        saveFileName="";
+        path = "upload/default_img.jpg"; // upload 폴더의 default_img.jpg를 게시글 기본이미지로 한다.
+    }
 
     Planner.findOne({'id':req.user.id})
         .populate('planner')
