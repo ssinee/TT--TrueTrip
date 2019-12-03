@@ -397,8 +397,7 @@
                                 <div class="row"></div>
                             </div>
 
-                            <div class="col-lg-4 offset-lg-1"
-                                 style="margin-left:200px; max-width: 50%; padding-right:0px">
+                            <div class="col-lg-4 offset-lg-1" style="margin-left:200px; max-width: 50%; padding-right:0px">
                                 <div class="intro-share">
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
@@ -406,10 +405,21 @@
                                             <div class="share-btn" style="width: 500px;">
                                                 <a id="request" href="../requestform">Request</a>
 <!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
-                                            </div>
                                         <% } else { %>
                                         <% } %>
                                     <% } %>
+
+
+<!--                                    현재 로그인한애가 페이지 주인이면, 글쓰기 버튼 활성화-->
+                                    <% if (!isAuthenticated) { %>
+                                    <% } else { %>
+                                        <% if(user_info.id==currentUser.id) { %>
+                                                <a id="writePost" name="writePost" href="../upload">글쓰기</a>
+                                        <% } else { %>
+                                        <% } %>
+                                    <% } %>
+                                            </div>
+
 <!--                                    <div class="share-btn" style="width: 500px;">-->
 <!--                                        <a href="#" class="share">Select</a>-->
 <!--                                        <a href="#">Request</a>-->
