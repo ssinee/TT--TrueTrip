@@ -234,7 +234,7 @@ passport.use('local-planner', new LocalStrategy({
             } else {
                 // 모델 인스턴스 객체 만들어 저장
                 var planner = new Planner({"id":id, "pw":pw, "name":paramName,"email":paramEmail,
-                    "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3, "location":location, "path":parampath});
+                    "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3, "location":location, "path":parampath}); //기본프로필 주소추가
                 planner.save(function(err) {
                     if (err) {
                         throw err;
