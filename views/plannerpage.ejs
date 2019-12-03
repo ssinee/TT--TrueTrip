@@ -91,9 +91,20 @@
             /*width: 1500px;*/
         }
 
-        .arrange-text{
-            cursor: pointer;
+        h6 {
+            height: 70px;
+            font-size: x-large;
         }
+
+        .arrange-items .arrange-text {
+            cursor: pointer;
+            background: #f2f2f2;
+            padding-left: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-right: 0px;
+        }
+
 
     </style>
 
@@ -146,7 +157,7 @@
                         "                            </div>" +
                         "                            <div class=\"arrange-text\">" +
                         "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
-                        "                            <h5 class='posttitle' data-target='#myModal'>" + content[i].title + "</h5>" +
+                        "                            <h6 class='posttitle' data-target='#myModal'>" + content[i].title + "</h6>" +
 
                         "                        </div>" +
                         "                       </a>" +
@@ -198,48 +209,38 @@
             //      var request = $.post('/request', {'ids':ids});
             // })
 
-            $('#showPlannerImages').on('click', 'h5', function (event) {
+            $('#showPlannerImages').on('click', 'h6', function (event) {
+
                 postTitle = $(this).text()
+                console.log('여기야')
                 console.log(postTitle)
-                console.log($(this).eq(-2).attr('class'))
-                console.log($(this).parents().eq(1).attr('class'))
+
+                // 이미 받아온 DB값에서 검색. content는 ID를 얘가 쓴 게시글들.
+                // DB에서 안긁고 그냥 돌리기
+                console.log('여기부터')
+                console.log(content[0].path);//됨
+                console.log(content[0].title); //됨
+                console.log(content[0].name);//됨
+                console.log(content[0].location);//됨
+                console.log(content[0].theme);// 됨
+                console.log(content[0].text); // 됨
 
 
-                //chg. 여기를 modal로 바꿔야함.========================
-                var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle});
-
-                posting.done(function(data){
-                    console.log("plannerpage.ejs로 넘어온 값입니다.")
-                    console.log(data.PostID)
-                    console.log(data.PostCategory)
-
-                    // JQuery를 이용해서 값을 바꾼다. #id
-                    $('#posttitle').text(data.PostTitle);
-                    $('#postcategory').text(data.PostCategory);
-                    $('#postname').text(data.PostLocation);
-                    $('#postlocation').text(data.PostLocation);
-                    $('#postpath').attr("src", data.PostPath);
-                    $('#postcontent').text(data.PostContents);
-
-                })
-
+                for (var i = 0; i< content.length; i++){
+                    if (content[i].title == postTitle){
+                        $('#posttitle').text(content[i].title);
+                        $('#postcategory').text(content[i].theme);
+                        $('#postname').text(content[i].name);
+                        $('#postlocation').text(content[i].location);
+                        $('#postpath').attr("src", content[i].path);
+                        $('#postcontent').text(content[i].text);
+                        break;
+                    }
+                }
                 // 모달창이 수동으로 나오게 함.
                 $('#myModal').modal('toggle');
             })
         })
-
-        // $(document).ready( function(){
-        //
-        //     var element= $(`[name="postimage"]`).attr('class');
-        //     // var elementClass=element.attr('class');
-        //     console.log('element',element);
-        //
-        //
-        // })
-
-
-
-
     </script>
 </head>
 
@@ -434,29 +435,31 @@
                                     <!--                모달창 위에 제목-->
                                     <div class="modal-header">
 
-                                        <h4 class="modal-title" align="left" id="posttitle"></h4>
+                                        <h4 style="font-size: xx-large" class="modal-title" align="left" id="posttitle"></h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
 
                                     <!--                모달 바디-->
-                                    <div class="modal-body">
-                                        카테고리:&nbsp;
-                                        <p id="postcategory"></p>
-                                        글쓴이:&nbsp;
-                                        <p id="postname"></p>
-                                        주소:&nbsp;
-                                        <p id="postlocation"></p>
-                                        이미지주소:&nbsp;
-                                        <p><img id="postpath"></p>
-                                        소개글:&nbsp;
-                                        <p id="postcontent"></p>
+                                    <div class="modal-body" >
+
+                                        <center><p><img id="postpath" style="width: 80%; height: 80%;"></p>
+
+                                        <span><b>주소:&nbsp;</b></span>
+                                        <span id="postlocation"></span><br>
+                                        <span><b>카테고리:&nbsp;</b></span>
+                                        <span id="postcategory"></span><br>
+                                        <span><b>글쓴이:&nbsp;</b></span>
+                                        <span id="postname"></span><br>
+
+                                        <span><b>소개글</b></span><br>
+                                        <textarea style="height: 130px; width: 85%;" id="postcontent"></textarea><br>
+                                        </center>
 
                                     </div>
                                     <!--                모달 바디-->
 
-
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" style="border: solid black 1px;" class="btn btn-default" data-dismiss="modal">닫기</button>
                                     </div>
                                 </div>
                             </div>
