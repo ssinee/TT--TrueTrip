@@ -7,7 +7,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>guidepageTest</title>
+    <title>TT-TrueTrip</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="icon" href="img/favicon-32x32.png">
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -41,7 +43,6 @@
             text-align: center;
 
         }
-
         .about-right .contact-info .contact-text {
             padding-left: 10px;
             padding-top: 10px;
@@ -51,16 +52,31 @@
             border-right: 3px solid #CACDD6;
             border-bottom: 3px solid #CACDD6;
         }
-
-        .primary-btn {
-            display: inline-block;
-            font-size: 15px;
-            font-weight: 400;
-            padding: 5px 5px 5px;
-            color: black;
-            background: #e5e5e5;
-            line-height: 23px;
+        .edit_pro_img{
+            position: absolute;
+            left: 260px;
+            top: 322px;
+            height: 55px;
+            width: 55px;
+            background: #FF5581;
+            text-align: center;
+            line-height: 55px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
         }
+
+        /*.primary-btn {*/
+        /*    display: inline-block;*/
+        /*    font-size: 15px;*/
+        /*    font-weight: 400;*/
+        /*    padding: 5px 5px 5px;*/
+        /*    color: black;*/
+        /*    background: #e5e5e5;*/
+        /*    line-height: 23px;*/
+        /*}*/
 
 
         .activeimgcolor {
@@ -203,6 +219,7 @@
                 }
                 $('#showPlannerImages').html(postsArr)
 
+
                 var ids= new Array();
                 var objid;
                 $('#request').click(function(){
@@ -227,7 +244,6 @@
 
             $('#showPlannerImages').on('click', 'img', function (event) {
                 $(this).toggleClass('postpicActive')
-                // $(this).css("border", "5px solid #FF5581")
             });
 
             // var ids= new Array();
@@ -254,19 +270,6 @@
                 console.log($(this).parents().eq(1).attr('class'))
                 var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
 
-                // $.ajax({
-                //     type:"GET",
-                //     url:"/showpopup",
-                //     data:{
-                //         User_ID: User_ID,
-                //         Title: postTitle,
-                //     }
-                // }).done(function(result){
-                //     if(result==='1'){
-                //         console.log("functionscucces")
-                //     }
-                // });
-
                 showPopup()
 
             })
@@ -274,71 +277,26 @@
 
         })
 
-        // $(document).ready( function(){
-        //
-        //     var element= $(`[name="postimage"]`).attr('class');
-        //     // var elementClass=element.attr('class');
-        //     console.log('element',element);
-        //
-        //
-        // })
-
-
-
 
     </script>
 </head>
 
 <body>
+
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
 </div>
 
-<!-- Header Section Begin -->
+<!--header-->
 <header class="header-section listings">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href="/main"><img style="width:180px; height:65px" src="/img/yeah.png" alt=""></a>
-        </div>
-        <nav class="main-menu mobile-menu">
-
-<!--            <ul>-->
-<!--                <li><a href="index.html">Home</a></li>-->
-<!--                <li><a href="listings.html">Explore</a></li>-->
-<!--                <li><a href="how-it-works.html">More Cities</a></li>-->
-<!--                <li><a href="blog.html">News</a></li>-->
-<!--                <li><a href="contact.html">Contact</a></li>-->
-<!--            </ul>-->
-
-            <ul>
-                <li><a href="/main">Home</a></li>
-                <li><a href="/lists">Request</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-            <div class="user-access">
-                <% if (!isAuthenticated) { %>
-                    <a href="/login" class="primary-btn" style="background: #FF5581">Register/Login</a>
-<!--                    <a href="/login">Login</a>-->
-                <% } else { %>
- 
-                        <a href="/mypage" class="primary-btn" style="background: #FF5581">My Page</a>
-                        <a href="/logout" class="primary-btn" style="background: #FF5581">Logout</a>
-                    <% } %>
-
-            </div>
-<!--            <a href="#" class="primary-btn">Add Listing</a>-->
-        </div>
-        <div id="mobile-menu-wrap"></div>
-    </div>
+    <% if(isAuthenticated) { %>
+        <% include header_af_login.html %>
+    <% } else { %>
+        <% include header_bf_login.html %>
+    <% } %>
 </header>
 <!-- Header End -->
-
-<!-- Hero Section Begin -->
-<!--<div class="hero-listing set-bg" data-setbg="img/wallpaper_1.jpg">-->
-<!--</div>-->
-<!-- Hero Section End -->
 
 <!-- About Secton Begin -->
 <section class="about-section">
@@ -349,14 +307,15 @@
                 <div class="col-lg-4" style="max-width: 30%; padding-right: 40px; padding-left: 0px;">
                     <div class="about-right">
                         <div class="contact-info" style="padding-top: 100px; width: 100%;" >
-                            <div class="map" style="border:3px solid #CACDD6; height: 300px;">
+                            <div class="map" style="border:3px solid #CACDD6; height: 400px;">
 <!--                                주소에서 post/를 지워야함.-->
 
-                                <img src='<%=user_info.path%>' alt="" style="width: 100%; height: 100%;">
+                                <img name="profile_img" src='<%=user_info.path%>' alt="" style="width: 100%; height: 100%;">
+                                <div class="edit_pro_img" style="left:145px; top:365px;"><img src="upload_profile/edit_1.png" style="width:40px; position: initial"></div>
 
                             </div>
 
-                            <div class="contact-text">
+                            <div class="contact-text" style="padding-top: 30px">
                                 <form method="post" action="/mypage/write" ENCTYPE="multipart/form-data">
                                     <p align="center" style="font-size: 30px; margin-bottom: 0px;"><b><%=user_info.name%></b></p>
                                     <h5 align="center" style="color: deepskyblue"><%=user_info.email%></h5>
@@ -376,6 +335,8 @@
                                         <span style="margin-bottom: 0px; font-size: 22px;">활동지역</span>
                                         <h5 align="center"><%=user_info.location%></h5>
                                     </center>
+
+
 
 
                                     <div style="padding:5px 20px"></div>
