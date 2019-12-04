@@ -105,11 +105,23 @@
             padding-right: 0px;
         }
 
+        table{
+            /*border: solid darkgrey 3px;*/
+            width: 90%;
+        }
+        tr, td{
+            border: solid grey 3px;
+
+        }
+
+
 
     </style>
 
 
     <script>
+        // 모달용.
+        var $name;
         // content에 User_ID 기준으로 게시글 다 긁어서 저장함.
         var content;
 
@@ -187,7 +199,11 @@
 
             })
 
+
+
+
             $('#showPlannerImages').on('click', 'img', function (event) {
+                console.log($(this))
                 $(this).toggleClass('postpicActive')
                 // $(this).css("border", "5px solid #FF5581")
             });
@@ -211,20 +227,23 @@
 
             $('#showPlannerImages').on('click', 'h6', function (event) {
 
+                // 만약 얘의 세부정보를 보려고 하면, 게시글 제목 엘리먼트 변수에 담음.
+                // 클래스이름이 '~'인 애의 요소. 모달에서 선택시에 부모창에 반영되게.
+                $name = $(this).parent().parent().find('.arrange-pic').children('.postpic');
+                console.log('아래에가 이번에 고른거의 이미지요소')
+                console.log($name)
                 postTitle = $(this).text()
-                console.log('여기야')
-                console.log(postTitle)
+                // console.log('여기야')
+                // console.log(postTitle)
 
                 // 이미 받아온 DB값에서 검색. content는 ID를 얘가 쓴 게시글들.
                 // DB에서 안긁고 그냥 돌리기
-                console.log('여기부터')
-                console.log(content[0].path);//됨
-                console.log(content[0].title); //됨
-                console.log(content[0].name);//됨
-                console.log(content[0].location);//됨
-                console.log(content[0].theme);// 됨
-                console.log(content[0].text); // 됨
-
+                // console.log(content[0].path);//됨
+                // console.log(content[0].title); //됨
+                // console.log(content[0].name);//됨
+                // console.log(content[0].location);//됨
+                // console.log(content[0].theme);// 됨
+                // console.log(content[0].text); // 됨
 
                 for (var i = 0; i< content.length; i++){
                     if (content[i].title == postTitle){
@@ -240,6 +259,13 @@
                 // 모달창이 수동으로 나오게 함.
                 $('#myModal').modal('toggle');
             })
+
+            // 모달창에서 선택했을 때 부모창에서도 적용되도록 하는 코드.
+            $('#myModal').on('click', '#activateIt', function (event) {
+                console.log('선택버튼누름. 아래애의 요소에 체크될것')
+                console.log($name);
+                $name.toggleClass('postpicActive');
+            });
         })
     </script>
 </head>
@@ -452,24 +478,38 @@
                                     <!--                모달 바디-->
                                     <div class="modal-body" >
 
-                                        <center><p><img id="postpath" style="width: 80%; height: 80%;"></p>
+                                        <center><p><img id="postpath" style="width: 90%; height: 90%;"></p>
 
-                                        <span><b>주소:&nbsp;</b></span>
-                                        <span id="postlocation"></span><br>
-                                        <span><b>카테고리:&nbsp;</b></span>
-                                        <span id="postcategory"></span><br>
-                                        <span><b>글쓴이:&nbsp;</b></span>
-                                        <span id="postname"></span><br>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 19%"><span><b>주소</b></span></td>
+                                                    <td><span id="postlocation"></span><br></td>
+                                                </tr>
 
-                                        <span><b>소개글</b></span><br>
-                                        <textarea style="height: 130px; width: 85%;" id="postcontent"></textarea><br>
+                                                <tr>
+                                                    <td><span><b>카테고리</b></span></td>
+                                                    <td><span id="postcategory"></span><br></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td><span><b>글쓴이</b></span></td>
+                                                    <td><span id="postname"></span><br></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td><span><b>소개글</b></span><br></td>
+                                                    <td><textarea style="height: 130px; width: 100%; border: none" id="postcontent" placeholder="아직 소개글이 없습니다."></textarea><br></td>
+                                                </tr>
+                                            </table>
+
                                         </center>
 
                                     </div>
                                     <!--                모달 바디-->
 
                                     <div class="modal-footer">
-                                        <button type="button" style="border: solid black 1px;" class="btn btn-default" data-dismiss="modal">닫기</button>
+                                        <button type="button" style="border: solid grey 2px;" class="btn btn-default" id="activateIt" data-dismiss="modal">장소선택</button>
+                                        <button type="button" style="border: solid grey 2px;" class="btn btn-default" data-dismiss="modal">닫기</button>
                                     </div>
                                 </div>
                             </div>
