@@ -109,6 +109,40 @@ router.get('/reservation_planner/:id',function(req,res){
 
 });
 
+router.get('/reservation_traveler',function(req,res){
+    res.redirect('/reservation_traveler/'+req.user.id);
+    // res.render('../views/reservation_planner.ejs');
+});
+
+router.get('/reservation_traveler/:id',function(req,res){
+
+    var data_array=new Array();
+    var data_length;
+
+    Request.find({'author':req.params.id},function(err,data){
+        if(err) throw err;
+        console.log(data);
+        data_length=data.length;
+        console.log(data_length);
+        console.log(typeof(data));
+        var req_id=new Array();
+        for(var i =0;i<data_length;i++){
+            req_id=data[i]._id;
+            console.log(req_id);
+            // var post_len=postid.length;
+            // console.log(postid[0]);
+            // for (var j=0; j<post_len;j++){
+            //     Postdata.find({_id:postid[j]}, function(err,post){
+            //         if(err) throw err;
+            //         console.log(post);
+            //         console.log(post[0].title);
+            //     })
+            // }
+        }
+        res.render('../views/reservation_traveler.ejs',{data_length:data_length,send_data:data})
+    });
+
+});
 router.post('/findTitle',function(req,res){
     var data= req.body.postid;
      console.log("넘겨받은 데이터:"+data);

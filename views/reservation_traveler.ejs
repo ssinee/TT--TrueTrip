@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Local Directory | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <style type ="text/css">
+        .BigBox{
+            width:70%;
+            min-height:200px;
+            border: solid black 1px;
+            alignment: center;
+            margin:5px;
+            postion: absolute;
+        }
+
+        .smallBox{
+            width: 100%;
+            height:150px;
+            border: solid black 1px;
+            alignment: center;
+            margin-top:10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .smallBox .left{
+            width: 20%;
+            height: 140px;
+            /*border: solid black 1px;*/
+            float: left;
+            margin-left:10px;
+            margin-right:5px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .smallBox .left .item{
+            background: #3fbf79;
+            margin: 10px;
+            color: #FFF;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .smallBox .middle{
+            width: 54%;
+            height: 140px;
+            /*border: solid black 1px;*/
+            float: left;
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .smallBox .middle .item{
+            text-align: left;
+            margin-left: 50px;
+        }
+
+        .smallBox .right{
+            width: 20%;
+            height: 140px;
+            /*border: solid black 1px;*/
+            float: left;
+            margin-left:5px;
+            margin-right:10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .smallBox .right .item{
+            text-align: center;
+        }
+
+
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+
+            var data_length="<%=data_length%>";
+            var array=new Array();
+
+            <% for(var i=0; i<data_length; i++) { %>
+            var req_id="<%=send_data[i]._id%>";
+
+            array.push(req_id);
+            console.log(array);
+            console.log(req_id);
+
+            <% } %>
+            // var posting=$.post('/findSchedule', {'reqid':req_id});
+            // posting.done(function(data){
+            //     var data=data
+            //     console.log(data);
+            //
+            // });
+
+
+            $("input[name=confirmPlan]").click(function(){
+                var req_id="<%=send_data[0]._id%>";
+                var data_length="<%=data_length%>";
+                console.log(req_id);
+                console.log(data_length);
+
+                var id_num= $(this).parent().parent().parent().attr('id');
+                id_num=id_num*1;
+                console.log(id_num);
+
+                var send=$.post('/viewPlan', {'reqid':array[id_num]});
+
+            })
+
+        })
+
+
+    </script>
+</head>
+
+<body>
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header-section listings">
+    <% include ./header.html %>
+</header>
+<!-- Header End -->
+
+
+<!-- Contact Section Begin -->
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!--                    나의 요청. -->
+                <br><br><br>
+
+                <div class="BigBox">
+                    <b>나의 요청</b><hr>
+
+                    <div class="smallBox">
+                        <div class="left">
+                            <div class="item"><h1>1</h1></div>
+                        </div>
+
+                        <div class="middle">
+                            <div class="item" id="reservePlanner">플래너: OOO</div>
+                            <br>
+                            <div class="item" id="reserveDate">날짜: 2019.00.00</div>
+                            <br>
+                            <div class="item" id="reservePlace">선택장소: A, B</div>
+                        </div>
+
+                        <div class="right">
+                            <div>대기중</div><br>
+                            <div><a href="#">계획확인하기!</a></div><br>
+                            <div>거절되었습니다</div><br>
+                        </div>
+                    </div>
+
+                    <div class="smallBox">
+                        <div class="left">
+                            <div class="item"><h1>2</h1></div>
+                        </div>
+
+                        <div class="middle">
+                            <div class="item">플래너: OOO</div>
+                            <br>
+                            <div class="item">날짜: 2019.00.00</div>
+                            <br>
+                            <div class="item">선택장소: A, B</div>
+
+                        </div>
+
+                        <div class="right">
+                            <div>대기중</div><br>
+                            <div><a href="#">계획확인하기!</a></div><br>
+                            <div>거절되었습니다</div><br>
+                        </div>
+                    </div>
+
+                    <div class="smallBox">
+                        <div class="left">
+                            <div class="item"><h1>3</h1></div>
+                        </div>
+
+                        <div class="middle">
+                            <div class="item">플래너: OOO</div>
+                            <br>
+                            <div class="item">날짜: 2019.00.00</div>
+                            <br>
+                            <div class="item">선택장소: A, B</div>
+                        </div>
+
+                        <div class="right">
+                            <div>대기중</div><br>
+                            <div><a href="#">계획확인하기!</a></div><br>
+                            <div>거절되었습니다</div><br>
+                        </div>
+                    </div>
+
+
+                    <% for(var i=0; i<data_length; i++) { %>
+
+                    <div class="smallBox" id="<%=i%>">
+                        <div class="left">
+                            <div class="item"><h1><%=i+1%></h1></div>
+                        </div>
+
+                        <div class="middle">
+                            <a href="">
+                                <div class="item" name="reservePlanner"><%= send_data[i].planner%> 플래너가 계획을 보냈습니다.</div>
+                                <br>
+                                <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
+                                <br>
+                                <div class="item" name="reservePlace"> </div>
+                                <br>
+                                <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
+                            </a>
+                        </div>
+                        <div id="test"></div>
+                        <div class="right">
+                            <div>대기중</div><br>
+                            <div>
+                                <input name="confirmPlan" type="button" value="계획 확인하기!" onclick="location.href='/viewPlan'" style="margin-bottom: 8px;" >계획 확인하기!</inputbutton>
+                            </div>
+<!--                            <div><a name="confirmPlan" href="">계획 확인하기!</a></div><br>-->
+                            <div>거절되었습니다</div><br>
+                        </div>
+                    </div>
+                    <% } %>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+
+
+
+<!-- Js Plugins -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

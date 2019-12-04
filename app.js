@@ -16,6 +16,7 @@ const DBData=require('./models/DBData');
 const User= require('./model/usermodel');
 const Planner=require('./model/plannermodel');
 const Request=require('./models/requestmodel');
+const Schedule=require('./models/schedulemodel');
 const fs= require('fs');
 
 
