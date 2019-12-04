@@ -39,7 +39,7 @@ router.post('/register_traveler', function(req, res, next) {
 
 
 router.get('/profile',isAuthenticated, function (req, res) {
-    res.render('profile',{
+    res.render('index',{
         title: 'My Info',
         user_info: req.user
     })

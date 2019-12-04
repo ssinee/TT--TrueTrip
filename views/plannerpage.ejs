@@ -7,7 +7,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>guidepageTest</title>
+    <title>TT-TrueTrip</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
@@ -18,23 +18,28 @@
     <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <link rel="icon" href="img/favicon-32x32.png">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-<!--    <style>-->
 
-<!--        .postpic{-->
-<!--            height: 250px;-->
-<!--            max-width:100%;-->
-<!--            width: auto;-->
-<!--        }-->
-<!--    </style>-->
+    <!--    <style>-->
+
+    <!--        .postpic{-->
+    <!--            height: 250px;-->
+    <!--            max-width:100%;-->
+    <!--            width: auto;-->
+    <!--        }-->
+    <!--    </style>-->
 
     <style>
 
         .arrange-items .arrange-text {
             background: #dfdfdf;
-            border: solid black 1px;
+            /*border: solid black 1px;*/
             border-top: 0px;
             text-align: center;
 
@@ -50,15 +55,31 @@
             border-bottom: 3px solid #CACDD6;
         }
 
-        .primary-btn {
-            display: inline-block;
-            font-size: 15px;
-            font-weight: 400;
-            padding: 5px 5px 5px;
-            color: black;
-            background: #e5e5e5;
-            line-height: 23px;
+        .edit_pro_img {
+            position: absolute;
+            left: 260px;
+            top: 322px;
+            height: 55px;
+            width: 55px;
+            background: #FF5581;
+            text-align: center;
+            line-height: 55px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
         }
+
+        /*.primary-btn {*/
+        /*    display: inline-block;*/
+        /*    font-size: 15px;*/
+        /*    font-weight: 400;*/
+        /*    padding: 5px 5px 5px;*/
+        /*    color: black;*/
+        /*    background: #e5e5e5;*/
+        /*    line-height: 23px;*/
+        /*}*/
 
 
         .activeimgcolor {
@@ -69,7 +90,7 @@
             height: 250px;
             max-width: 100%;
             width: auto;
-            border: solid black 1px;
+            /*border: solid black 1px;*/
         }
 
         .postpic:hover {
@@ -91,12 +112,14 @@
             /*width: 1500px;*/
         }
 
+
         h6 {
             height: 70px;
             font-size: x-large;
         }
 
         .arrange-items .arrange-text {
+
             cursor: pointer;
             background: #f2f2f2;
             padding-left: 0px;
@@ -105,12 +128,16 @@
             padding-right: 0px;
         }
 
+    <script language="javascript">
+        function showPopup() {
+
         table{
             /*border: solid darkgrey 3px;*/
             width: 90%;
         }
         tr, td{
             border: solid grey 3px;
+
 
         }
 
@@ -120,25 +147,72 @@
 
 
     <script>
+
+        // $(document).ready(function () {
+        //     var content;
+        //     var User_ID = $('#UserID').text();
+        //     var postsArr = ""
+        //
+        //     var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+        //
+        //     posting.done(function (data) {
+        //         content = data.data
+        //
+        //         for (var i = 0; i < content.length; i++) {
+        //             postsArr +=
+        //                 "<div class=\"col-lg-4 col-sm-6\" >" +
+        //                 "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+        //                 "                            <div class=\"arrange-pic\">" +
+        //                 "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+        //                 "                            </div>" +
+        //                 "                            <div class=\"arrange-text\">" +
+        //                 "                            <h5>" + content[i].title + "</h5>" +
+        //                 "                        </div>" +
+        //                 "                       </a>" +
+        //                 "                     </div>"
+        //         }
+        //         $('#showPlannerImages').html(postsArr)
+        //     })
+        // })
+        //
+        // // var hidden=false;
+        // // function action(){
+        // //     hidden =!hidden;
+        // //     if(hidden){
+        // //         document.getElementById('saveButton').style.visibility='visible';
+        // //     } else{
+        // //         document.getElementById('saveButton').style.visibility='hidden';
+        // //     }
+        // // }
+        // // var hidden=document.getElementById('saveButton').style.visibility;
+        // // function action(){
+        // //     if(hidden){
+        // //         document.getElementById('saveButton').style.visibility='visible';
+        // //     }
+        // // }
+        //
+        $(document).ready(function () {
+
         // 모달용.
         var $name;
         // content에 User_ID 기준으로 게시글 다 긁어서 저장함.
         var content;
 
         $(document).ready( function(){
+
             $('#editProfile').hide();
             $('#editProfile2').hide();
             $('#editProfile3').hide();
             $('#save').hide();
 
-            $('#editButton').click(function(){
+            $('#editButton').click(function () {
                 $('#editProfile').show();
                 $('#editProfile2').show();
                 $('#editProfile3').show();
                 $('#save').show();
             })
 
-            $('#saveButton').click(function(){
+            $('#saveButton').click(function () {
                 $('#editProfile').hide();
                 $('#editProfile2').hide();
                 $('#editProfile3').hide();
@@ -149,10 +223,13 @@
 
         })
 
-        $(document).ready(function (req,res) {
+
+        $(document).ready(function (req, res) {
+            var content;
+
 
             var User_ID = $('#UserID').text();
-            var author=""
+            var author = ""
             var postsArr = ""
             var postTitle = ""
             var posting = $.post('/showPlannersImage', {'UserID': User_ID})
@@ -164,8 +241,8 @@
                     postsArr +=
                         "<div class=\"col-lg-4 col-sm-6\" >" +
                         "                            <a class=\"arrange-items\">" +
-                        "                            <div class=\"arrange-pic\">" +
-                        "                            <img class=\"postpic\" id=\'"+i+"' src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
+                        "                            <div class=\"arrange-pic\" style='border:0px;'>" +
+                        "                            <img class=\"postpic\" id=\'" + i + "' src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
                         "                            </div>" +
                         "                            <div class=\"arrange-text\">" +
                         "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
@@ -177,24 +254,25 @@
                 }
                 $('#showPlannerImages').html(postsArr)
 
-                var ids= new Array();
+
+                var ids = new Array();
                 var objid;
-                $('#request').click(function(){
+                $('#request').click(function () {
 
                     var selected_photos = $('.postpicActive');
-                    var ids= new Array();
-                    selected_photos.each(function(){
+                    var ids = new Array();
+                    selected_photos.each(function () {
                         var selval = $(this).attr("id");
-                        selval*=1;
-                        objid=content[selval]._id;
+                        selval *= 1;
+                        objid = content[selval]._id;
                         console.log(objid);
                         // var id_arr = id_str.split("_");
                         // var selval = id_arr[1];
-                        if(objid!='undefined'&&objid!=''&&objid!=null){
+                        if (objid != 'undefined' && objid != '' && objid != null) {
                             ids.push(objid);
                         }
                     });
-                    var request = $.post('/request', {'ids':ids});
+                    var request = $.post('/request', {'ids': ids});
                 })
 
             })
@@ -205,25 +283,39 @@
             $('#showPlannerImages').on('click', 'img', function (event) {
                 console.log($(this))
                 $(this).toggleClass('postpicActive')
-                // $(this).css("border", "5px solid #FF5581")
             });
 
-            // var ids= new Array();
-            // $('#request').click(function(){
-            //
-            //     var selected_photos = $('.postpicActive');
-            //     var ids= new Array();
-            //     selected_photos.each(function(){
-            //         var selval = $(this).attr("id");
-            //
-            //         // var id_arr = id_str.split("_");
-            //         // var selval = id_arr[1];
-            //         if(selval!='undefined'&&selval!=''&&selval!=null){
-            //             ids.push(selval);
-            //         }
-            //     });
-            //      var request = $.post('/request', {'ids':ids});
-            // })
+
+
+            $('#showPlannerImages').on('click', 'h5', function (event) {
+                postTitle = $(this).text()
+                var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
+                showPopup()
+            })
+
+            //profile preview
+            function readURL(input){
+                if(input.files && input.files[0]){
+                    var reader= new FileReader();
+                    reader.onload=function(e){
+                        $('#profile_img').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0])
+                }
+            }
+
+
+            $('#fileinput').change(function(){
+
+                readURL(this);
+                console.log(form);
+                // $('#fileuploadform')[0];
+
+
+            });
+
+        })
+
 
             $('#showPlannerImages').on('click', 'h6', function (event) {
 
@@ -267,59 +359,26 @@
                 $name.toggleClass('postpicActive');
             });
         })
+
     </script>
 </head>
 
 <body>
+
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
 </div>
 
-<!-- Header Section Begin -->
+<!--header-->
 <header class="header-section listings">
-    <div class="container-fluid">
-        <div class="logo">
-            <a href="/main"><img style="width:180px; height:65px" src="/img/yeah.png" alt=""></a>
-        </div>
-        <nav class="main-menu mobile-menu">
-
-<!--            <ul>-->
-<!--                <li><a href="index.html">Home</a></li>-->
-<!--                <li><a href="listings.html">Explore</a></li>-->
-<!--                <li><a href="how-it-works.html">More Cities</a></li>-->
-<!--                <li><a href="blog.html">News</a></li>-->
-<!--                <li><a href="contact.html">Contact</a></li>-->
-<!--            </ul>-->
-
-            <ul>
-                <li><a href="/main">Home</a></li>
-                <li><a href="/lists">Request</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-            <div class="user-access">
-                <% if (!isAuthenticated) { %>
-                    <a href="/login" class="primary-btn" style="background: #FF5581">Register/Login</a>
-<!--                    <a href="/login">Login</a>-->
-                <% } else { %>
- 
-                        <a href="/mypage" class="primary-btn" style="background: #FF5581">My Page</a>
-                        <a href="/logout" class="primary-btn" style="background: #FF5581">Logout</a>
-                    <% } %>
-
-            </div>
-<!--            <a href="#" class="primary-btn">Add Listing</a>-->
-        </div>
-        <div id="mobile-menu-wrap"></div>
-    </div>
+    <% if(isAuthenticated) { %>
+        <% include header_af_login.html %>
+    <% } else { %>
+        <% include header_bf_login.html %>
+    <% } %>
 </header>
 <!-- Header End -->
-
-<!-- Hero Section Begin -->
-<!--<div class="hero-listing set-bg" data-setbg="img/wallpaper_1.jpg">-->
-<!--</div>-->
-<!-- Hero Section End -->
 
 <!-- About Secton Begin -->
 <section class="about-section">
@@ -329,24 +388,34 @@
             <div class="row" style="width: 100%;">
                 <div class="col-lg-4" style="max-width: 30%; padding-right: 40px; padding-left: 0px;">
                     <div class="about-right">
-                        <div class="contact-info" style="padding-top: 100px; width: 100%;" >
-                            <div class="map" style="border:3px solid #CACDD6; height: 300px;">
-<!--                                주소에서 post/를 지워야함.-->
+                        <div class="contact-info" style="padding-top: 100px; width: 100%;">
 
-                                <img src='<%=user_info.path%>' alt="" style="width: 100%; height: 100%;">
+                            <!--profile image comes here-->
+                            <form method="post" action="/mypage/editimg" enctype="multipart/form-data" id="fileuploadform">
+                                <div class="map" style="border:1px solid #CACDD6; height: 400px;">
 
-                            </div>
+                                    <img id="profile_img" name="profile_img" src='<%= user_info.path %>' alt=""
+                                         style="width: 100%; height: 100%;">
+                                    <div class="edit_pro_img"  style="left:145px; top:365px;">
+                                        <input id="fileinput" type="file" value="이미지변경" onchange="this.form.submit()" name="editImg" style="position:absolute;width:50px;height:50px;padding:0;margin:-1px;opacity: 0;">
+                                        <img src="upload_profile/edit_1.png" style="width:40px; position: initial">
+                                    </div>
+                                </div>
+                            </form>
 
-                            <div class="contact-text">
+
+                            <div class="contact-text" style="border:1px solid #CACDD6; padding-top: 30px ">
                                 <form method="post" action="/mypage/write" ENCTYPE="multipart/form-data">
-                                    <p align="center" style="font-size: 30px; margin-bottom: 0px;"><b><%=user_info.name%></b></p>
-                                    <h5 align="center" style="color: deepskyblue"><%=user_info.email%></h5>
+                                    <p align="center" style="font-size: 30px; margin-bottom: 0px;">
+                                        <b><%= user_info.name %></b></p>
+                                    <h5 align="center" style="color: deepskyblue"><%= user_info.email %></h5>
                                     <div style="padding:5px 20px"></div>
-
-                                    <div><center>
-                                        <img src="../img/icon/category.png" style="width: 30px; height: 30px;">
-                                        <span style="margin-bottom: 0px; font-size: 22px;">전문분야</span>
-                                        <h5 align="center"><%=user_info.category1%> / <%=user_info.category2%> / <%=user_info.category3%></h5>
+                                    <div>
+                                        <center>
+                                            <img src="../img/icon/category.png" style="width: 30px; height: 30px;">
+                                            <span style="margin-bottom: 0px; font-size: 22px;">전문분야</span>
+                                            <h5 align="center"><%= user_info.category1 %> / <%= user_info.category2 %>
+                                                / <%= user_info.category3 %></h5>
                                         </center>
                                     </div>
 
@@ -355,13 +424,13 @@
                                     <center>
                                         <img src="../img/icon/location.png" style="width: 25px; height: 25px;">
                                         <span style="margin-bottom: 0px; font-size: 22px;">활동지역</span>
-                                        <h5 align="center"><%=user_info.location%></h5>
+                                        <h5 align="center"><%= user_info.location %></h5>
                                     </center>
 
 
                                     <div style="padding:5px 20px"></div>
-                                    <h5 id="UserID"><%=user_info.id%></h5>
-                                    <div id="editProfile"  align="center">
+                                    <h5 id="UserID"><%= user_info.id %></h5>
+                                    <div id="editProfile" align="center">
                                         <select name="location">
                                             <option value="인계동">인계동</option>
                                             <option value="행궁동">행궁동</option>
@@ -369,38 +438,41 @@
                                             <option value="우만동">우만동</option>
                                             <option value="매탄동">매탄동</option>
                                         </select>
-<!--                                        <input type="text" name="location" style="width: 80%;" placeholder="활동지역을 써주세요.">-->
+                                        <!--                                        <input type="text" name="location" style="width: 80%;" placeholder="활동지역을 써주세요.">-->
                                         <div style="padding:5px 20px"></div>
                                     </div>
 
                                     <center>
                                         <img src="../img/icon/text.png" style="width: 25px; height: 25px;">
                                         <span style="margin-bottom: 0px; font-size: 22px;">자기소개</span>
-                                        <h5 align="center"><%=user_info.introduce%></h5>
+                                        <h5 align="center"><%= user_info.introduce %></h5>
                                     </center>
 
                                     <div id="editProfile2" style="padding:5px 20px" align="center">
-                                        <textarea style="width: 100%; min-height: 100px;" name="introduce" placeholder="자기소개글을 적어주세요."></textarea>
+                                        <textarea style="width: 100%; min-height: 100px;" name="introduce"
+                                                  placeholder="자기소개글을 적어주세요."></textarea>
                                     </div>
 
                                     <div style="padding:5px 20px"></div>
 
-<!--                                    프로필 사진 변경 버튼-->
-                                    <div id="editProfile3" style="padding:5px 20px" align="center">
-                                        <input class="primary-btn" type="file" value="이미지변경" name="editImg">
-                                    </div>
-
+                                    <!--                                    프로필 사진 변경 버튼-->
+<!--                                    <div id="editProfile3" style="padding:5px 20px" align="center">-->
+<!--                                        <input class="primary-btn" type="file" value="이미지변경" name="editImg">-->
+<!--                                    </div>-->
 
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
-                                        <% if(user_info.id==currentUser.id) { %>
+                                        <% if(user_info.id == currentUser.id) { %>
                                             <center>
-                                            <input class="primary-btn" type="button" id="editButton" value="프로필 수정" name="edit">
+                                                <input class="primary-btn" type="button" id="editButton" value="프로필 수정"
+                                                       name="edit">
                                                 <div style="padding:5px 20px"></div>
 
                                                 <div id="save">
-                                                    <input class="primary-btn" type="submit" id="saveButton" value="저장" name="save">
-                                                </div></center>
+                                                    <input class="primary-btn" type="submit" id="saveButton" value="저장"
+                                                           name="save">
+                                                </div>
+                                            </center>
 
                                         <% } else { %>
                                         <% } %>
@@ -410,8 +482,7 @@
                         </div>
                     </div>
                 </div>
-<!--                여기까지 같다.-->
-
+                <!--                여기까지 같다.-->
 
 
                 <div class="col-lg-8" style="max-width: 100%;">
@@ -430,6 +501,17 @@
                                         <% if(currentUser.userType != user_info.userType) { %>
                                             <div class="share-btn" style="width: 500px;">
                                                 <a id="request" href="../requestform">Request</a>
+                                              <!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
+                                            </div>
+                                        <% } else { %>
+                                        <% } %>
+                                    <% } %>
+                                    <!--                                    <div class="share-btn" style="width: 500px;">-->
+                                    <!--                                        <a href="#" class="share">Select</a>-->
+                                    <!--                                        <a href="#">Request</a>-->
+                                    <!--                                    </div>-->
+                                    
+
 <!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
                                         <% } else { %>
                                         <% } %>
@@ -450,11 +532,10 @@
 <!--                                        <a href="#" class="share">Select</a>-->
 <!--                                        <a href="#">Request</a>-->
 <!--                                    </div>-->
+
                                 </div>
                             </div>
                         </div>
-
-
 
 
                         <!--                        show images here -->
@@ -517,17 +598,16 @@
                         <!--    모달 끝-->
 
 
-
-<!--                        버튼 위치 아래로-->
-<!--                        <div class="col-lg-4 offset-lg-1"-->
-<!--                             style="margin-left:200px; max-width: 50%; padding-right:0px">-->
-<!--                            <div class="intro-share">-->
-<!--                                <div class="share-btn" style="width: 500px;">-->
-<!--                                    <a href="#" class="share">Select</a>-->
-<!--                                    <a href="#">Request</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                        버튼 위치 아래로-->
+                        <!--                        <div class="col-lg-4 offset-lg-1"-->
+                        <!--                             style="margin-left:200px; max-width: 50%; padding-right:0px">-->
+                        <!--                            <div class="intro-share">-->
+                        <!--                                <div class="share-btn" style="width: 500px;">-->
+                        <!--                                    <a href="#" class="share">Select</a>-->
+                        <!--                                    <a href="#">Request</a>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
 
 
                         <div class="client-reviews">
