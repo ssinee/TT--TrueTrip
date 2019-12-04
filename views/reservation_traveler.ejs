@@ -170,66 +170,66 @@
                 <div class="BigBox">
                     <b>나의 요청</b><hr>
 
-                    <div class="smallBox">
-                        <div class="left">
-                            <div class="item"><h1>1</h1></div>
-                        </div>
+<!--                    <div class="smallBox">-->
+<!--                        <div class="left">-->
+<!--                            <div class="item"><h1>1</h1></div>-->
+<!--                        </div>-->
 
-                        <div class="middle">
-                            <div class="item" id="reservePlanner">플래너: OOO</div>
-                            <br>
-                            <div class="item" id="reserveDate">날짜: 2019.00.00</div>
-                            <br>
-                            <div class="item" id="reservePlace">선택장소: A, B</div>
-                        </div>
+<!--                        <div class="middle">-->
+<!--                            <div class="item" id="reservePlanner">플래너: OOO</div>-->
+<!--                            <br>-->
+<!--                            <div class="item" id="reserveDate">날짜: 2019.00.00</div>-->
+<!--                            <br>-->
+<!--                            <div class="item" id="reservePlace">선택장소: A, B</div>-->
+<!--                        </div>-->
 
-                        <div class="right">
-                            <div>대기중</div><br>
-                            <div><a href="#">계획확인하기!</a></div><br>
-                            <div>거절되었습니다</div><br>
-                        </div>
-                    </div>
+<!--                        <div class="right">-->
+<!--                            <div>대기중</div><br>-->
+<!--                            <div><a href="#">계획확인하기!</a></div><br>-->
+<!--                            <div>거절되었습니다</div><br>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="smallBox">
-                        <div class="left">
-                            <div class="item"><h1>2</h1></div>
-                        </div>
+<!--                    <div class="smallBox">-->
+<!--                        <div class="left">-->
+<!--                            <div class="item"><h1>2</h1></div>-->
+<!--                        </div>-->
 
-                        <div class="middle">
-                            <div class="item">플래너: OOO</div>
-                            <br>
-                            <div class="item">날짜: 2019.00.00</div>
-                            <br>
-                            <div class="item">선택장소: A, B</div>
+<!--                        <div class="middle">-->
+<!--                            <div class="item">플래너: OOO</div>-->
+<!--                            <br>-->
+<!--                            <div class="item">날짜: 2019.00.00</div>-->
+<!--                            <br>-->
+<!--                            <div class="item">선택장소: A, B</div>-->
 
-                        </div>
+<!--                        </div>-->
 
-                        <div class="right">
-                            <div>대기중</div><br>
-                            <div><a href="#">계획확인하기!</a></div><br>
-                            <div>거절되었습니다</div><br>
-                        </div>
-                    </div>
+<!--                        <div class="right">-->
+<!--                            <div>대기중</div><br>-->
+<!--                            <div><a href="#">계획확인하기!</a></div><br>-->
+<!--                            <div>거절되었습니다</div><br>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="smallBox">
-                        <div class="left">
-                            <div class="item"><h1>3</h1></div>
-                        </div>
+<!--                    <div class="smallBox">-->
+<!--                        <div class="left">-->
+<!--                            <div class="item"><h1>3</h1></div>-->
+<!--                        </div>-->
 
-                        <div class="middle">
-                            <div class="item">플래너: OOO</div>
-                            <br>
-                            <div class="item">날짜: 2019.00.00</div>
-                            <br>
-                            <div class="item">선택장소: A, B</div>
-                        </div>
+<!--                        <div class="middle">-->
+<!--                            <div class="item">플래너: OOO</div>-->
+<!--                            <br>-->
+<!--                            <div class="item">날짜: 2019.00.00</div>-->
+<!--                            <br>-->
+<!--                            <div class="item">선택장소: A, B</div>-->
+<!--                        </div>-->
 
-                        <div class="right">
-                            <div>대기중</div><br>
-                            <div><a href="#">계획확인하기!</a></div><br>
-                            <div>거절되었습니다</div><br>
-                        </div>
-                    </div>
+<!--                        <div class="right">-->
+<!--                            <div>대기중</div><br>-->
+<!--                            <div><a href="#">계획확인하기!</a></div><br>-->
+<!--                            <div>거절되었습니다</div><br>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
 
                     <% for(var i=0; i<data_length; i++) { %>
@@ -243,7 +243,7 @@
                             <a href="">
                                 <div class="item" name="reservePlanner"><%= send_data[i].planner%> 플래너가 계획을 보냈습니다.</div>
                                 <br>
-                                <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
+                                <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
                                 <br>
                                 <div class="item" name="reservePlace"> </div>
                                 <br>
@@ -254,7 +254,7 @@
                         <div class="right">
                             <div>대기중</div><br>
                             <div>
-                                <input name="confirmPlan" type="button" value="계획 확인하기!" onclick="location.href='/viewPlan'" style="margin-bottom: 8px;" >계획 확인하기!</inputbutton>
+                                <input name="confirmPlan" type="button" value="계획 확인하기!" onclick="location.href='/viewPlan'" style="margin-bottom: 8px;" ></inputbutton>
                             </div>
 <!--                            <div><a name="confirmPlan" href="">계획 확인하기!</a></div><br>-->
                             <div>거절되었습니다</div><br>

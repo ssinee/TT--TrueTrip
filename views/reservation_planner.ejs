@@ -160,6 +160,31 @@
 
         })
 
+        $("a[name=reject]").click(function(){
+            //
+            var select_num= $(this).parent().parent().parent().attr('id');
+            select_num=select_num*1;
+
+            console.log(req_ids[select_num]);
+            console.log(typeof(req_ids[select_num]));
+            $.ajax({
+                url:'/reject',
+                dataType: 'json',
+                type:'Post',
+                data:{"data":req_ids[select_num]},
+                success: function(result) {
+                    if(result){
+                        // alert(result.result);
+                       console.log("성공");
+                    }
+            },
+                error: function(request,status,error){
+                    alert(error);
+                }
+
+            })
+        })
+
     })
 
 </script>
@@ -188,51 +213,60 @@
 
                 <div class="BigBox" id="receivedQuest">
                     <b>나에게 온 플랜 요청</b><hr>
+                    <% for(var i=0; i<data_length; i++) { %>
+                        <% if( send_data[i].confirm==false) { %>
+                        <div class="smallBox" id="<%=i%>">
+                            <div class="left">
+                                <div class="item"><h1><%=i+1%></h1></div>
+                            </div>
 
-                    <div class="smallBox">
+                            <div class="middle">
+                                <a href="">
+                                    <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
+                                    <br>
+                                    <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
+                                    <br>
+                                    <div class="item" name="reservePlace"> </div>
+                                    <br>
+                                    <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
+                                </a>
+                            </div>
+                            <div id="test"></div>
+                            <div class="right">
+                                <div><a><img src="/img/icon/x.png" width="16" height="16">거절완료</a></div><br>
+                            </div>
+                        </div>
+                        <% } else { %>
+
+                    <div class="smallBox" id="<%=i%>">
                         <div class="left">
-                            <div class="item"><h1>1</h1></div>
+                            <div class="item"><h1><%=i+1%></h1></div>
                         </div>
 
                         <div class="middle">
                             <a href="">
-                                <div class="item" id="reservePlanner">여행자 이름: OOO</div>
+                                <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
                                 <br>
-                                <div class="item" id="reserveDate">날짜: 2019.00.00</div>
+                                <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
                                 <br>
-                                <div class="item" id="reservePlace">선택장소: A, B</div>
+                                <div class="item" name="reservePlace"> </div>
+                                <br>
+                                <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
                             </a>
                         </div>
-
+                        <div id="test"></div>
                         <div class="right">
-                            <div><a href="#"><img src="/img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
-                            <div><a href="#"><img src="/img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
+                            <div><a name="accept" href="/sendReqID"><img src="/img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
+                            <div><a name="reject"href=""><img src="/img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
                         </div>
                     </div>
+                    <% } %>
+                    <% } %>
 
-                    <div class="smallBox">
-                        <div class="left">
-                            <div class="item"><h1>2</h1></div>
-                        </div>
-
-                        <div class="middle">
-                            <a href="">
-                                <div class="item" id="reservePlanner">여행자 이름: OOO</div>
-                                <br>
-                                <div class="item" id="reserveDate">날짜: 2019.00.00</div>
-                                <br>
-                                <div class="item" id="reservePlace">선택장소: A, B</div>
-                            </a>
-                        </div>
-
-                        <div class="right">
-                            <div><a href="#"><img src="/img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
-                            <div><a href="#"><img src="/img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
-                        </div>
-                    </div>
                 </div>
                 <br>
 
+                <p id="result"></p>
 
                 <div class="BigBox" id="acceptedQuest">
                     <b>채택된 플랜</b><hr>
@@ -281,33 +315,6 @@
 
                 </div>
 <!--                <div class="row" id="showRequest"></div>-->
-
-                <% for(var i=0; i<data_length; i++) { %>
-
-                <div class="smallBox" id="<%=i%>">
-                    <div class="left">
-                        <div class="item"><h1><%=i+1%></h1></div>
-                    </div>
-
-                    <div class="middle">
-                        <a href="">
-                            <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
-                            <br>
-                            <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
-                            <br>
-                            <div class="item" name="reservePlace"> </div>
-                            <br>
-                            <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
-                        </a>
-                    </div>
-                    <div id="test"></div>
-                    <div class="right">
-                        <div><a name="accept" href="/sendReqID"><img src="/img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
-                        <div><a href="#"><img src="/img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
-                    </div>
-                </div>
-                <% } %>
-
 
 
             </div>

@@ -16,7 +16,8 @@ var RequestSchema= new Schema({
     yes_info: [String],
     no_info: [String],
     addition: String,
-    confirm: { type: Boolean, default: false}
+    // confirm: { type: Boolean, default: false}
+    confirm: Boolean
 
 });
 

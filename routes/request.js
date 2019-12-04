@@ -155,4 +155,21 @@ router.post('/findTitle',function(req,res){
     })
 });
 
+router.post('/reject',function(req,res){
+    console.log("/reject 호출됨")
+    var data= req.body.data;
+    console.log(data[0]);
+    var find_id=data[0];
+    var state=data[0].confirm;
+
+    Request.findOneAndUpdate({_id:find_id},{$set:{"confirm":false}},function (err,data) {
+        if (err) throw err;
+        console.log("찾찾찾찾찾찾찾데이터"+data);
+        var result='요청이 거절되었습니다.';
+        // console.log(data[0].confirm);
+        res.send({result:result});
+    });
+
+});
+
 module.exports = router;

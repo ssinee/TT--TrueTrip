@@ -48,14 +48,10 @@ router.post('/addPlan', function(req,res){
         var state=data[0].confirm;
 
         console.log("상태"+state);
-        if(state==false){
-            Request.findOneAndUpdate({_id:origin_request},{$set:{"confirm":true}},function (err,data) {
+        Request.findOneAndUpdate({_id:origin_request},{$set:{"confirm":true}},function (err,data) {
                 if (err) throw err;
-            });
-        }
-        else{
+        });
 
-        }
         var schedule= new Schedule({
             "planner":planner,"traveler":traveler,"originRequest":origin_request,"plan":values
         });
