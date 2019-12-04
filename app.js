@@ -61,7 +61,6 @@ app.use('/post/upload_profile', express.static('./upload_profile'))   // 프로�
 
 
 
-
 // app.use(express.static(path.join(__dirname,'/views')))
 
 // EJS

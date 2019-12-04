@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Studio Template">
+    <meta name="keywords" content="Yoga, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>guidepageTest</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<!--    <style>-->
+
+<!--        .postpic{-->
+<!--            height: 250px;-->
+<!--            max-width:100%;-->
+<!--            width: auto;-->
+<!--        }-->
+<!--    </style>-->
+
+    <style>
+
+        .arrange-items .arrange-text {
+            background: #dfdfdf;
+            border: solid black 1px;
+            border-top: 0px;
+            text-align: center;
+
+        }
+
+        .about-right .contact-info .contact-text {
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+            border-left: 3px solid #CACDD6;
+            border-right: 3px solid #CACDD6;
+            border-bottom: 3px solid #CACDD6;
+        }
+
+        .primary-btn {
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 5px 5px 5px;
+            color: black;
+            background: #e5e5e5;
+            line-height: 23px;
+        }
+
+
+        .activeimgcolor {
+            border: 5px solid #FF5581;
+        }
+
+        .postpic {
+            height: 250px;
+            max-width: 100%;
+            width: auto;
+            border: solid black 1px;
+        }
+
+        .postpic:hover {
+            border: 5px solid #FF5581;
+        }
+
+        .postpic:active {
+            border: 5px solid #FF5581;
+
+
+        }
+
+        .postpicActive {
+            border: 5px solid #FF5581;
+        }
+
+        .container {
+            max-width: 1300px;
+            /*width: 1500px;*/
+        }
+
+        .arrange-text{
+            cursor: pointer;
+        }
+
+    </style>
+    <script language="javascript">
+      function showPopup() {
+
+            var popupX = (window.screen.width / 2) - (1300 / 2);
+            var popupY = (window.screen.height / 2) - (600 / 2);
+            window.open('popup', 'a', 'status=no, height=500, width=800');
+        }
+    </script>
+
+    <script>
+        // $(document).ready(function () {
+        //     var content;
+        //     var User_ID = $('#UserID').text();
+        //     var postsArr = ""
+        //
+        //     var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+        //
+        //     posting.done(function (data) {
+        //         content = data.data
+        //
+        //         for (var i = 0; i < content.length; i++) {
+        //             postsArr +=
+        //                 "<div class=\"col-lg-4 col-sm-6\" >" +
+        //                 "                            <a class=\"arrange-items\" href=\"single-listing.html\">" +
+        //                 "                            <div class=\"arrange-pic\">" +
+        //                 "                            <img class=\"postpic\" src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed' alt=\"\">" +
+        //                 "                            </div>" +
+        //                 "                            <div class=\"arrange-text\">" +
+        //                 "                            <h5>" + content[i].title + "</h5>" +
+        //                 "                        </div>" +
+        //                 "                       </a>" +
+        //                 "                     </div>"
+        //         }
+        //         $('#showPlannerImages').html(postsArr)
+        //     })
+        // })
+        //
+        // // var hidden=false;
+        // // function action(){
+        // //     hidden =!hidden;
+        // //     if(hidden){
+        // //         document.getElementById('saveButton').style.visibility='visible';
+        // //     } else{
+        // //         document.getElementById('saveButton').style.visibility='hidden';
+        // //     }
+        // // }
+        // // var hidden=document.getElementById('saveButton').style.visibility;
+        // // function action(){
+        // //     if(hidden){
+        // //         document.getElementById('saveButton').style.visibility='visible';
+        // //     }
+        // // }
+        //
+        $(document).ready( function(){
+            $('#editProfile').hide();
+            $('#editProfile2').hide();
+            $('#editProfile3').hide();
+            $('#save').hide();
+
+            $('#editButton').click(function(){
+                $('#editProfile').show();
+                $('#editProfile2').show();
+                $('#editProfile3').show();
+                $('#save').show();
+            })
+
+            $('#saveButton').click(function(){
+                $('#editProfile').hide();
+                $('#editProfile2').hide();
+                $('#editProfile3').hide();
+                $('#save').hide();
+            })
+
+            $('#UserID').hide();
+
+        })
+
+        $(document).ready(function (req,res) {
+            var content;
+            var User_ID = $('#UserID').text();
+            var author=""
+            var postsArr = ""
+            var postTitle = ""
+            var posting = $.post('/showPlannersImage', {'UserID': User_ID})
+
+            posting.done(function (data) {
+                content = data.data
+                console.log(content);
+                for (var i = 0; i < content.length; i++) {
+                    postsArr +=
+                        "<div class=\"col-lg-4 col-sm-6\" >" +
+                        "                            <a class=\"arrange-items\">" +
+                        "                            <div class=\"arrange-pic\">" +
+                        "                            <img class=\"postpic\" id=\'"+i+"' src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
+                        "                            </div>" +
+                        "                            <div class=\"arrange-text\">" +
+                        "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
+                        "                            <h5 class='posttitle'>" + content[i].title + "</h5>" +
+
+                        "                        </div>" +
+                        "                       </a>" +
+                        "                     </div>"
+                }
+                $('#showPlannerImages').html(postsArr)
+
+                var ids= new Array();
+                var objid;
+                $('#request').click(function(){
+
+                    var selected_photos = $('.postpicActive');
+                    var ids= new Array();
+                    selected_photos.each(function(){
+                        var selval = $(this).attr("id");
+                        selval*=1;
+                        objid=content[selval]._id;
+                        console.log(objid);
+                        // var id_arr = id_str.split("_");
+                        // var selval = id_arr[1];
+                        if(objid!='undefined'&&objid!=''&&objid!=null){
+                            ids.push(objid);
+                        }
+                    });
+                    var request = $.post('/request', {'ids':ids});
+                })
+
+            })
+
+            $('#showPlannerImages').on('click', 'img', function (event) {
+                $(this).toggleClass('postpicActive')
+                // $(this).css("border", "5px solid #FF5581")
+            });
+
+            // var ids= new Array();
+            // $('#request').click(function(){
+            //
+            //     var selected_photos = $('.postpicActive');
+            //     var ids= new Array();
+            //     selected_photos.each(function(){
+            //         var selval = $(this).attr("id");
+            //
+            //         // var id_arr = id_str.split("_");
+            //         // var selval = id_arr[1];
+            //         if(selval!='undefined'&&selval!=''&&selval!=null){
+            //             ids.push(selval);
+            //         }
+            //     });
+            //      var request = $.post('/request', {'ids':ids});
+            // })
+
+            $('#showPlannerImages').on('click', 'h5', function (event) {
+                postTitle = $(this).text()
+                console.log(postTitle)
+                console.log($(this).eq(-2).attr('class'))
+                console.log($(this).parents().eq(1).attr('class'))
+                var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
+
+                // $.ajax({
+                //     type:"GET",
+                //     url:"/showpopup",
+                //     data:{
+                //         User_ID: User_ID,
+                //         Title: postTitle,
+                //     }
+                // }).done(function(result){
+                //     if(result==='1'){
+                //         console.log("functionscucces")
+                //     }
+                // });
+
+                showPopup()
+
+            })
+
+
+        })
+
+        // $(document).ready( function(){
+        //
+        //     var element= $(`[name="postimage"]`).attr('class');
+        //     // var elementClass=element.attr('class');
+        //     console.log('element',element);
+        //
+        //
+        // })
+
+
+
+
+    </script>
+</head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header-section listings">
+    <div class="container-fluid">
+        <div class="logo">
+            <a href="/main"><img style="width:180px; height:65px" src="/img/yeah.png" alt=""></a>
+        </div>
+        <nav class="main-menu mobile-menu">
+
+<!--            <ul>-->
+<!--                <li><a href="index.html">Home</a></li>-->
+<!--                <li><a href="listings.html">Explore</a></li>-->
+<!--                <li><a href="how-it-works.html">More Cities</a></li>-->
+<!--                <li><a href="blog.html">News</a></li>-->
+<!--                <li><a href="contact.html">Contact</a></li>-->
+<!--            </ul>-->
+
+            <ul>
+                <li><a href="/main">Home</a></li>
+                <li><a href="/lists">Request</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="user-access">
+                <% if (!isAuthenticated) { %>
+                    <a href="/login" class="primary-btn" style="background: #FF5581">Register/Login</a>
+<!--                    <a href="/login">Login</a>-->
+                <% } else { %>
+ 
+                        <a href="/mypage" class="primary-btn" style="background: #FF5581">My Page</a>
+                        <a href="/logout" class="primary-btn" style="background: #FF5581">Logout</a>
+                    <% } %>
+
+            </div>
+<!--            <a href="#" class="primary-btn">Add Listing</a>-->
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Hero Section Begin -->
+<!--<div class="hero-listing set-bg" data-setbg="img/wallpaper_1.jpg">-->
+<!--</div>-->
+<!-- Hero Section End -->
+
+<!-- About Secton Begin -->
+<section class="about-section">
+
+    <div class="about-item" style="padding-top: 100px;">
+        <div class="container" style="width: 3000px;">
+            <div class="row" style="width: 100%;">
+                <div class="col-lg-4" style="max-width: 30%; padding-right: 40px; padding-left: 0px;">
+                    <div class="about-right">
+                        <div class="contact-info" style="padding-top: 100px; width: 100%;" >
+                            <div class="map" style="border:3px solid #CACDD6; height: 300px;">
+<!--                                주소에서 post/를 지워야함.-->
+
+                                <img src='<%=user_info.path%>' alt="" style="width: 100%; height: 100%;">
+
+                            </div>
+
+                            <div class="contact-text">
+                                <form method="post" action="/mypage/write" ENCTYPE="multipart/form-data">
+                                    <p align="center" style="font-size: 30px; margin-bottom: 0px;"><b><%=user_info.name%></b></p>
+                                    <h5 align="center" style="color: deepskyblue"><%=user_info.email%></h5>
+                                    <div style="padding:5px 20px"></div>
+
+                                    <div><center>
+                                        <img src="../img/icon/category.png" style="width: 30px; height: 30px;">
+                                        <span style="margin-bottom: 0px; font-size: 22px;">전문분야</span>
+                                        <h5 align="center"><%=user_info.category1%> / <%=user_info.category2%> / <%=user_info.category3%></h5>
+                                        </center>
+                                    </div>
+
+                                    <div style="padding:5px 20px"></div>
+
+                                    <center>
+                                        <img src="../img/icon/location.png" style="width: 25px; height: 25px;">
+                                        <span style="margin-bottom: 0px; font-size: 22px;">활동지역</span>
+                                        <h5 align="center"><%=user_info.location%></h5>
+                                    </center>
+
+
+                                    <div style="padding:5px 20px"></div>
+                                    <h5 id="UserID"><%=user_info.id%></h5>
+                                    <div id="editProfile"  align="center">
+                                        <select name="location">
+                                            <option value="인계동">인계동</option>
+                                            <option value="행궁동">행궁동</option>
+                                            <option value="영통동">영통동</option>
+                                            <option value="우만동">우만동</option>
+                                            <option value="매탄동">매탄동</option>
+                                        </select>
+<!--                                        <input type="text" name="location" style="width: 80%;" placeholder="활동지역을 써주세요.">-->
+                                        <div style="padding:5px 20px"></div>
+                                    </div>
+
+                                    <center>
+                                        <img src="../img/icon/text.png" style="width: 25px; height: 25px;">
+                                        <span style="margin-bottom: 0px; font-size: 22px;">자기소개</span>
+                                        <h5 align="center"><%=user_info.introduce%></h5>
+                                    </center>
+
+                                    <div id="editProfile2" style="padding:5px 20px" align="center">
+                                        <textarea style="width: 100%; min-height: 100px;" name="introduce" placeholder="자기소개글을 적어주세요."></textarea>
+                                    </div>
+
+                                    <div style="padding:5px 20px"></div>
+
+<!--                                    프로필 사진 변경 버튼-->
+                                    <div id="editProfile3" style="padding:5px 20px" align="center">
+                                        <input class="primary-btn" type="file" value="이미지변경" name="editImg">
+                                    </div>
+
+
+                                    <% if (!isAuthenticated) { %>
+                                    <% } else { %>
+                                        <% if(user_info.id==currentUser.id) { %>
+                                            <center>
+                                            <input class="primary-btn" type="button" id="editButton" value="프로필 수정" name="edit">
+                                                <div style="padding:5px 20px"></div>
+
+                                                <div id="save">
+                                                    <input class="primary-btn" type="submit" id="saveButton" value="저장" name="save">
+                                                </div></center>
+
+                                        <% } else { %>
+                                        <% } %>
+                                    <% } %>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                여기까지 같다.-->
+
+
+
+                <div class="col-lg-8" style="max-width: 100%;">
+                    <div class="about-left" style="padding-top: 0px;">
+
+
+                        <div class="intro-item" style="height:100px">
+                            <div class="container">
+                                <div class="row"></div>
+                            </div>
+
+                            <div class="col-lg-4 offset-lg-1"
+                                 style="margin-left:200px; max-width: 50%; padding-right:0px">
+                                <div class="intro-share">
+                                    <% if (!isAuthenticated) { %>
+                                    <% } else { %>
+                                        <% if(currentUser.userType != user_info.userType) { %>
+                                            <div class="share-btn" style="width: 500px;">
+                                                <a id="request" href="../requestform">Request</a>
+<!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
+                                            </div>
+                                        <% } else { %>
+                                        <% } %>
+                                    <% } %>
+<!--                                    <div class="share-btn" style="width: 500px;">-->
+<!--                                        <a href="#" class="share">Select</a>-->
+<!--                                        <a href="#">Request</a>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <!--                        show images here -->
+                        <!--                        contents-->
+
+                        <div class="row" id="showPlannerImages" style="padding-bottom: 400px;">
+                        </div>
+
+
+
+<!--                        버튼 위치 아래로-->
+<!--                        <div class="col-lg-4 offset-lg-1"-->
+<!--                             style="margin-left:200px; max-width: 50%; padding-right:0px">-->
+<!--                            <div class="intro-share">-->
+<!--                                <div class="share-btn" style="width: 500px;">-->
+<!--                                    <a href="#" class="share">Select</a>-->
+<!--                                    <a href="#">Request</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
+                        <div class="client-reviews">
+                            <h3>Reviews</h3>
+                            <div class="reviews-item">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <h5>“A Great Place”</h5>
+                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
+                                    vitae
+                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
+                                    Class
+                                    aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                    himenaeos. </p>
+                                <div class="client-text">
+                                    <h5>Michael Smith</h5>
+                                    <span>March 03, 2019</span>
+                                </div>
+                            </div>
+                            <div class="reviews-item">
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <h5>“The best food in town”</h5>
+                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
+                                    vitae
+                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
+                                    Class
+                                    aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                    himenaeos. </p>
+                                <div class="client-text">
+                                    <h5>Michael Smith</h5>
+                                    <span>March 03, 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Secton End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="#" class="newslatter-form">
+                    <input type="text" placeholder="Your email address">
+                    <button type="submit">Subscribe to our Newsletter</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Usefull Links</h4>
+                    <ul>
+                        <li>About us</li>
+                        <li>Testimonials</li>
+                        <li>How it works</li>
+                        <li>Create an account</li>
+                        <li>Our Services</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li>Hotels</li>
+                        <li>Restaurant</li>
+                        <li>Spa & resorts</li>
+                        <li>Concert & Events</li>
+                        <li>Bars & Pubs</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Usefull Links</h4>
+                    <ul>
+                        <li>About us</li>
+                        <li>Testimonials</li>
+                        <li>How it works</li>
+                        <li>Create an account</li>
+                        <li>Our Services</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>From the Blog</h4>
+                    <div class="single-blog">
+                        <div class="blog-pic">
+                            <img src="/img/f-blog-1.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <h6>10 Best clubs in town</h6>
+                            <span>March 27, 2019</span>
+                        </div>
+                    </div>
+                    <div class="single-blog">
+                        <div class="blog-pic">
+                            <img src="/img/f-blog-2.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <h6>10 Best clubs in town</h6>
+                            <span>March 27, 2019</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row footer-bottom">
+            <div class="col-lg-5 order-2 order-lg-1">
+                <div class="copyright">
+                    <p class="text-white">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i>
+                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-7 text-center text-lg-right order-1 order-lg-2">
+                <div class="footer-menu">
+                    <a href="#">Home</a>
+                    <a href="#">Explore</a>
+                    <a href="#">More Cities</a>
+                    <a href="#">News</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<script>
+
+</script>
+
+
+<!-- Js Plugins -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

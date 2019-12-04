@@ -59,7 +59,6 @@ router.post('/mypage/write', upload.single('editImg'),function(req,res, next){
     var paramsaveFileName;//저장된 파일명
     var parampath;
 
-    console.log('여기여기여기여기여기여기')
     // 이미지가 있다면,
     if(req.file){
         fileObj = req.file
@@ -107,7 +106,15 @@ router.get('/post/:id', function (req, res) {
         }
         Planner.findOne({id:req.params.id}, function (err, post) {
 
-            res.render('plannerpage', { title: 'Post', user_info: post });
+            res.render('plannerpage', { title: 'Post', user_info: post ,
+                    PostID: " ",
+                    PostName: " ",
+                    PostTitle: " ",
+                    PostCategory: " ",
+                    PostLocation: " ",
+                    PostContents: " ",
+                    PostPath: " ",
+                });
         })
     }
 });
