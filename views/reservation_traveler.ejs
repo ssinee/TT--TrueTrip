@@ -120,14 +120,18 @@
 
             var plan=new Array();
             for(var i=0; i<data_length; i++){
+                //div id 동적생성
                 plan.push("#plan"+i);
             }
 
+            // 계획 상태 확인하기
+            //해당 request의 confirm이 false이면 거절된것
+            //false가 아닐때 schedule done값 요청해서  true 이면 계획 작성완료된것, 아니면 대기중
             for (var j=0; j<data_length; j++){
                 console.log(j);
                 // console.log(plan);
                 $.ajax({
-                    url:'/checkReject',
+                    url:'/checkReject', //request.js에 있음
                     dataType: 'json',
                     type:'Post',
                     data:{"reqid":array[j]},
@@ -145,7 +149,7 @@
                             // alert(result.result);
                             console.log("거절 아님");
                             $.ajax({
-                                url:'/checkPlan',
+                                url:'/checkPlan', //request.js에 있음
                                 dataType: 'json',
                                 type:'Post',
                                 data:{"reqid":array[j]},
@@ -162,6 +166,7 @@
                                     else if(data.data[0].done==true){
                                         // alert(result.result);
                                         console.log("성공");
+                                        //버튼 생성 누르면 plan.js /viewPlan get으로 감
                                         postsArr +=
                                             "<a name=\"confirmPlan\" href=\"/viewPlan\">" +
                                             "  계획 확인하기 " +
@@ -185,7 +190,7 @@
 
             }
 
-
+            //계획 확인하기 눌렀을 때 plan.js /viewPlan으로 데이터 post
             $("a[name=confirmPlan]").click(function(){
                 var req_id="<%=send_data[0]._id%>";
                 var data_length="<%=data_length%>";
@@ -235,68 +240,6 @@
                 <div class="BigBox">
                     <b>나의 요청</b><hr>
 
-<!--                    <div class="smallBox">-->
-<!--                        <div class="left">-->
-<!--                            <div class="item"><h1>1</h1></div>-->
-<!--                        </div>-->
-
-<!--                        <div class="middle">-->
-<!--                            <div class="item" id="reservePlanner">플래너: OOO</div>-->
-<!--                            <br>-->
-<!--                            <div class="item" id="reserveDate">날짜: 2019.00.00</div>-->
-<!--                            <br>-->
-<!--                            <div class="item" id="reservePlace">선택장소: A, B</div>-->
-<!--                        </div>-->
-
-<!--                        <div class="right">-->
-<!--                            <div>대기중</div><br>-->
-<!--                            <div><a href="#">계획확인하기!</a></div><br>-->
-<!--                            <div>거절되었습니다</div><br>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="smallBox">-->
-<!--                        <div class="left">-->
-<!--                            <div class="item"><h1>2</h1></div>-->
-<!--                        </div>-->
-
-<!--                        <div class="middle">-->
-<!--                            <div class="item">플래너: OOO</div>-->
-<!--                            <br>-->
-<!--                            <div class="item">날짜: 2019.00.00</div>-->
-<!--                            <br>-->
-<!--                            <div class="item">선택장소: A, B</div>-->
-
-<!--                        </div>-->
-
-<!--                        <div class="right">-->
-<!--                            <div>대기중</div><br>-->
-<!--                            <div><a href="#">계획확인하기!</a></div><br>-->
-<!--                            <div>거절되었습니다</div><br>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="smallBox">-->
-<!--                        <div class="left">-->
-<!--                            <div class="item"><h1>3</h1></div>-->
-<!--                        </div>-->
-
-<!--                        <div class="middle">-->
-<!--                            <div class="item">플래너: OOO</div>-->
-<!--                            <br>-->
-<!--                            <div class="item">날짜: 2019.00.00</div>-->
-<!--                            <br>-->
-<!--                            <div class="item">선택장소: A, B</div>-->
-<!--                        </div>-->
-
-<!--                        <div class="right">-->
-<!--                            <div>대기중</div><br>-->
-<!--                            <div><a href="#">계획확인하기!</a></div><br>-->
-<!--                            <div>거절되었습니다</div><br>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-
                     <% for(var i=0; i<data_length; i++) { %>
 
                     <div class="smallBox" id="<%=i%>">
@@ -317,12 +260,7 @@
                         </div>
                         <div id="test"></div>
                         <div class="right">
-<!--                            <div>대기중</div><br>-->
-                            <div>
-<!--                                <input name="confirmPlan" type="button" value="계획 확인하기!" onclick="location.href='/viewPlan'" style="margin-bottom: 8px;" ></inputbutton>-->
-                            </div>
                             <div id="plan<%=i%>"></div><br>
-<!--                            <div>거절되었습니다</div><br>-->
                         </div>
                     </div>
                     <% } %>

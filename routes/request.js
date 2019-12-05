@@ -8,6 +8,7 @@ var Schedule=mongoose.model('schedules');
 let content_id;
 let planner_id;
 
+//plannerpage.ejs 에서 request 눌렀을 떄 script에서 보내는 데이터 전역변수에 저장
 router.post('/request', function(req,res){
     content_id= req.body.ids;
     console.log('/request 호출됨');
@@ -18,6 +19,7 @@ router.post('/request', function(req,res){
     // console.log("데이터 리스트"+data_list[0]);
 });
 
+//plannerpage.ejs 에서 request 누르면 실행됨
 router.get('/requestform',function(req,res){
 
     res.render("../views/RequestForm.ejs",{content_id:content_id});
@@ -36,6 +38,7 @@ router.post('/showRequest',function(req,res){
     })
 });
 
+//RequestForm.ejs에서 request 누르면 실행됨
 router.post('/sendForm', function(req,res){
 
     console.log('/sendForm 호출됨');
@@ -58,6 +61,7 @@ router.post('/sendForm', function(req,res){
 
     console.log(senddata);
 
+    //새로운 request db 생성됨
     var request= new Request({
         "planner":planner_id,"author":author,"selectpost":senddata,"date":date,
         "start":start,"end":end,"people":numofpeople,"age":age,"car":usecar,
@@ -75,12 +79,13 @@ router.post('/sendForm', function(req,res){
     res.render('/');
 });
 
-
+//request planner 메뉴 누르면 실행됨
 router.get('/reservation_planner',function(req,res){
     res.redirect('/reservation_planner/'+req.user.id);
     // res.render('../views/reservation_planner.ejs');
 });
 
+// /reservation_planner 실행되면 해당 id의 페이지로감 오류처리 아직 안되어있음
 router.get('/reservation_planner/:id',function(req,res){
     var data_array=new Array();
     var data_length;
@@ -110,11 +115,13 @@ router.get('/reservation_planner/:id',function(req,res){
 
 });
 
+//request traveler 메뉴 누르면 실행됨
 router.get('/reservation_traveler',function(req,res){
     res.redirect('/reservation_traveler/'+req.user.id);
     // res.render('../views/reservation_planner.ejs');
 });
 
+// /reservation_traveler 실행되면 해당 id의 페이지로감 오류처리 아직 안되어있음
 router.get('/reservation_traveler/:id',function(req,res){
 
     var data_array=new Array();
@@ -144,6 +151,8 @@ router.get('/reservation_traveler/:id',function(req,res){
     });
 
 });
+
+//RequestForm.ejs에서 쓸 예정임
 router.post('/findTitle',function(req,res){
     var data= req.body.postid;
      console.log("넘겨받은 데이터:"+data);
@@ -156,13 +165,15 @@ router.post('/findTitle',function(req,res){
     })
 });
 
+//reservation_planner.ejs 에서 거절 누르면 실행됨
 router.post('/reject',function(req,res){
-    console.log("/reject 호출됨")
+    console.log("/reject 호출됨");
     var data= req.body.data;
     console.log(data[0]);
     var find_id=data[0];
     var state=data[0].confirm;
 
+    //찾은 데이터의 confirm 값 false로 바꿈
     Request.findOneAndUpdate({_id:find_id},{$set:{"confirm":false}},function (err,data) {
         if (err) throw err;
         console.log("찾찾찾찾찾찾찾데이터"+data);
@@ -173,6 +184,7 @@ router.post('/reject',function(req,res){
 
 });
 
+//reservation_traveler.ejs ajax에서 호출됨
 router.post('/checkPlan', function(req,res){
     console.log("/checkPlan 호출됨");
     var reqid=req.body.reqid;
@@ -187,6 +199,7 @@ router.post('/checkPlan', function(req,res){
 
 });
 
+//reservation_traveler.ejs ajax에서 호출됨
 router.post('/checkReject', function(req,res){
     var reqid=req.body.reqid;
     Request.find({'_id':reqid},function(err,data){

@@ -123,6 +123,8 @@
         req_ids.push(req_array);
         var postsArr="";
         console.log("길이"+post_len);
+
+        //선택장소 보여줄려고 했는데 미완성
         for(var j=0; j<post_len;j++){
 
             var posting= $.post('/findTitle', {'postid':array[j]});
@@ -147,7 +149,7 @@
 
         <% } %>
 
-        //plan.js로 감
+        //plan.js post /sendReqID로 감
         $("a[name=accept]").click(function(){
 
             var id_num= $(this).parent().parent().parent().attr('id');
@@ -161,6 +163,7 @@
 
         })
 
+        //request.js /reject로 감
         $("a[name=reject]").click(function(){
             //
             var select_num= $(this).parent().parent().parent().attr('id');
