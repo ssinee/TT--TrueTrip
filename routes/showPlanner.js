@@ -65,7 +65,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
 
         //{'location': location} planner
         // {'author': IDdata[i].id, 'theme': category} post
-        await Planner.find({}, {'id': 1, '_id': 0}, async (err, IDdata) => {
+        await Planner.find({}, {'id': 1, 'path':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author':IDdata[i].id}, {
@@ -82,7 +82,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
 
         //plannerquery null
         // post query author theme
-        await Planner.find({}, {'id': 1, '_id': 0}, async (err, IDdata) => {
+        await Planner.find({}, {'id': 1, 'path':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author':IDdata[i].id,'theme': category }, {
@@ -100,8 +100,6 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
         console.log("category all")
         await Planner.find({'location': location}, {'id': 1, 'path':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
-            console.log(IDdata)
-
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author':IDdata[i].id }, {
                     '_id': 0,
@@ -113,7 +111,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
             res.send('1');
         });
     }else {
-        await Planner.find({'location': location}, {'id': 1, '_id': 0}, async (err, IDdata) => {
+        await Planner.find({'location': location}, {'id': 1, 'path':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author':IDdata[i].id , 'theme': category}, {

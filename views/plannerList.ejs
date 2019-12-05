@@ -188,25 +188,24 @@
                 //fill the profile
                 contentString +=
                     "                        <div class=\"planner\" >\n" +
-                    "                            <div class=\"profile\" style=\"border:1px solid #CACDD6; \">\n" +
+                    "                            <div class=\"profile\" style=\"border:none \">\n" +
                     "\n" +
-                    "                                <div class=\"profile_desc\" style=\"border:1px solid #CACDD6; \" >\n" +
-                    "                                    <span>별점</span>\n" +
-                    "                                    <span>" + idData[i].id + "</span>\n" +
+                    "                                <div  class=\"profile_desc\" style=\"border:1px solid #CACDD6; \" >\n" +
+                    "                                    <span class='planners_IDs'>" + idData[i].id + "</span>\n" +
                     "\n" +
                     "                                </div>\n" +
                     "                                <div class=\"profile_img\">\n" +
-                    "                                    <img  src='"+idData[i].path+"'>\n" +
+                    "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;' src='"+idData[i].path+"'>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     "\n" +
-                    "                            <div class=\"desc\">\n" +
+                    "                            <div class=\"desc\" style='padding-top: 20px'>\n" +
                     "                                <div class=\"autoplay slider\">\n"
                 for (var j = 0; j < imagedata[i].length; j++) {
 
                     contentString +=
                         "                                    <div>" +
-                        "                                        <img style='width:180px; height: 180px' src='" + imagedata[i][j].path + "'>" +
+                        "                                        <img style='width:180px; height: 210px' src='" + imagedata[i][j].path + "'>" +
                         "                                    </div>"
                 }
                 contentString +=
@@ -310,6 +309,13 @@
                     }
 
                 })
+            })
+
+            //profile clicked
+            $(document).on('click', '.profile',function(){
+              var temp=$(this).find('.planners_IDs').text()
+
+                window.location.href='/post/'+temp;
             })
         })
     </script>
