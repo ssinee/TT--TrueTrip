@@ -14,6 +14,7 @@ mongoose.Promise = global.Promise
 var temp = []
 var idcontent = [];
 var content = [];
+var proImg_content=[];
 var location = "";
 var category = "";
 
@@ -46,6 +47,7 @@ showPlannersListRouter.get('/plannerlist', function (req, res) {
 //planner page data 전송
 showPlannersListRouter.post('/showplanner', function (req, res) {
     console.log(content)
+    console.log(idcontent)
     res.send({'data': content, 'Iddata': idcontent, 'location': location, 'category': category})
 
 });
@@ -87,15 +89,19 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                     '_id': 0,
                     'path': 1
                 }, function (err, POSTdata) {
+
                     content.push(POSTdata)
                 })
             }
+
             res.send('1');
         });
     }else if(category=="모든카테고리"){
         console.log("category all")
-        await Planner.find({'location': location}, {'id': 1, '_id': 0}, async (err, IDdata) => {
+        await Planner.find({'location': location}, {'id': 1, 'path':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
+            console.log(IDdata)
+
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author':IDdata[i].id }, {
                     '_id': 0,
