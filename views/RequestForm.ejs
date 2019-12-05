@@ -4,6 +4,41 @@
 <head>
 
     <style type="text/css">
+        span {
+            font-size: 28px;
+            text-align: left;
+            margin-bottom: 5px;
+            margin-left: 21px;
+            color: #FF5581;
+        }
+
+        /*.col-lg-12 text-center textarea:focus{*/
+        /*    border: solid #FF5581 3px;*/
+        /*}*/
+
+        /*.col-lg-12 text-center textarea{*/
+        /*    width: 100%;*/
+        /*    border: grey solid 2px;*/
+        /*    font-size: 20px;*/
+        /*    color: #838383;*/
+        /*    font-weight: 100;*/
+        /*    font-style: normal;*/
+        /*    padding-left: 5px;*/
+        /*    resize: none;*/
+        /*    padding-top: 5px;*/
+        /*    -webkit-transition: all 0.3s;*/
+        /*    transition: all 0.3s;*/
+        /*    margin-bottom: 0px;*/
+        /*}*/
+
+
+        .chosenPlace .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-left: 15px;
+        }
 
 
         .request-item{
@@ -42,9 +77,9 @@
         }
 
         .request-item .middle{
-            width: 56%;
+            width: 59%;
             height: 90%;
-            border: solid black 1px;
+            border: solid #CACDD6 2px;
             float: left;
             margin-left: 5px;
             margin-right: 5px;
@@ -54,11 +89,12 @@
         }
 
         .request-item .middle .item{
-            width: 98%;
-            height: 98%;
+            width: 95%;
+            height: 90%;
             text-align: left;
-            border: solid white 1px;
-            margin: 10px auto;
+            /*border: solid blue 1px;*/
+            margin: 10px;
+
         }
 
         .request-item .right{
@@ -95,7 +131,7 @@
     <title>Local Directory | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
@@ -136,13 +172,14 @@
                            "                            <div class=\"middle\">" +
                            "                                <div class=\"item\">" +
                            "                                    <h4>"+content[0].title+"</h4>" +
-                           "                                    <br>" +
-                           "                                    <h5>"+content[0].text+"</h5>" +
+                           "                                    <hr style='border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 3px;'>" +
+                           "                                    <p style='font-size: 16px; font-weight: 100; line-height: 20px;margin-bottom: 0px; max-height: 112px; overflow: scroll'>"+content[0].text+"</p>" +
                            "                                </div>" +
                            "                            </div>" +
                            "                     </div>"
 
                    $('#showSelectPosts').html(postsArr)
+
 
                })
             }
@@ -219,19 +256,20 @@
 
                 <!--                    chg. form작성시에 이동할 페이지 써야함-->
                 <form action="#" class="contact-form">
-                    <h1 style="font-size: 30px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 170px;">REQUEST FORM</h1>
+                    <h1 style="font-size: 50px; text-align: left; margin-bottom: 5px; margin-left: 155px;">계획 신청서</h1>
                     <div class="row">
 
 
 
-                        <div class="bigBox" style="border: medium solid black; width: 70%;">
+                        <div class="bigBox" style="border: medium solid #CACDD6; width: 70%;">
 
 
 
                             <!--                            chg. DB에서 선택한 곳 3곳 선택장소-->
                             <div class="chosenPlace" >
-                                <h2 style="font-size: 20px; text-align: left; margin-top: 5px; margin-bottom: 5px; font-family: HY견고딕; margin-left: 8px;">선택장소</h2>
-                                <hr style="border: solid black 1px;">
+                                <h2 style="font-size: 28px; text-align: left; margin-left: 11px; padding: 10px; color: #FF5581">선택장소</h2>
+                                <hr style="border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 5px;">
+
 
                                 <div class="row" id="showSelectPosts"></div>
 
@@ -276,16 +314,16 @@
 
 <!--                            </div>-->
                             <!--                                아래 들어갈 체크박스등.내용-->
-                            <hr style="border: solid black 1px;">
+                            <hr style="border: solid #CACDD6 1px;">
                             <div class="underSection">
                                 <!--                                날짜.-->
                                 <div style = "text-align: left">
-                                    <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;">날짜 </span>
+                                    <span>날짜 </span>
                                     <input type="date" id="date">
 
                                 <!--                                출발/도착시간-->
                                 <div style = "text-align: left">
-                                    <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;"> 출발 </span>
+                                    <span> 출발 </span>
 <!--                                    <input id="start" type="time" min="00" max="24">-->
                                     <select name="startTime">
                                         <option value="00">00</option>
@@ -314,7 +352,7 @@
                                         <option value="23">23</option>
                                     </select>&nbsp;시&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
 
-                                    <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕;"> 귀가 </span>
+                                    <span style="margin-left: 0px"> 귀가 </span>
 <!--                                    <input id="end" type="time" min="00" max="24">-->
 
                                     <select name="endTime">
@@ -349,7 +387,7 @@
 
                                 <!--                                인원수-->
                                 <div style = "text-align: left">
-                                    <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;">인원 </span>
+                                    <span>인원 </span>
 
 
                                     <select name="numofpeople">
@@ -372,7 +410,7 @@
 
                                 <!--                                    나이-->
                                 <div style = "text-align: left">
-                                    <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;">나이 </span>
+                                    <span>나이 </span>
 
 
                                     <select name="age">
@@ -391,9 +429,9 @@
 
                                 <!--                                차량-->
                                 <div style = "text-align: left">
-                                    <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;">자가용 이용 </span>
-                                    <input type="radio" name="usecar" value="yes"> 예
-                                    <input type="radio" name="usecar" value="no"> 아니오
+                                    <span style="margin-right: 10px">자가용 이용 </span>
+                                    <input type="radio" name="usecar" value="yes" checked> <span style="color: black; font-size: 20px; margin: 0px;">예&nbsp;&nbsp;</span>
+                                    <input type="radio" name="usecar" value="no"> <span style="color: black; font-size: 20px; margin: 0px;">아니오&nbsp;&nbsp;</span>
                                 </div>
                                 <br>
 
@@ -402,10 +440,10 @@
 
                                 <!--                                이런정보가 필요해요-->
                                 <div style="text-align: left">
-                                    <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;"> "이런 정보가 필요해요" </span>
+                                    <span > "이런 정보가 필요해요" </span>
 
-                                    <div style="text-align: left">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div style="text-align: left; font-size: 20px;">
+                                        &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="yes_info" value="주변식당">주변식당 &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="yes_info" value="대중교통">대중교통 &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="yes_info" value="주차공간">주차공간 &nbsp;&nbsp;&nbsp;
@@ -418,10 +456,10 @@
 
                                 <!--이런 것들은 유의해주세요-->
                                 <div style="text-align: left">
-                                    <span style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 25px;"> "이런 것들은 유의해주세요" </span>
+                                    <span > "이런 점들은 유의해주세요" </span>
 
-                                    <div style="text-align: left">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div style="text-align: left;font-size: 20px;">
+                                        &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="no_info" value="오래 걷지 못해요">오래 걷지 못해요 &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="no_info" value="피해야할 음식이 있어요">피해야할 음식이 있어요 &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="no_info" value="유모차나 휠체어를 이용해요">유모차나 휠체어를 이용해요 &nbsp;&nbsp;&nbsp;
@@ -432,11 +470,14 @@
 
 
                                 <!--                                하고싶은말-->
+                                    <span style="text-align: left">추가 요구사항</span>
                                 <div class="col-lg-12 text-center">
 
-                                    <h2 style="font-size: 20px; text-align: left; margin-bottom: 5px; font-family: HY견고딕; margin-left: 8px;">추가 요구사항</h2>
-                                    <textarea name="addition" placeholder="플래너에게 하고 말을 적어주세요." style="height: 200px;"></textarea>
-                                    <a id="submit" href="/">Request</a>
+
+                                    <textarea name="addition" placeholder="플래너에게 하고 말을 적어주세요." style="height: 200px; padding: 8px;
+                                    margin-bottom: 0px; font-style: normal; font-weight: 100; border: 2px solid grey; font-size: 19px;" ></textarea>
+                                    <a class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px;" id="submit" href="/">완료</a>
+                                    <a class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;" id = "back" href="javascript:history.back();">취소</a>
 <!--                                    <input type="submit" id="submit" style="margin-bottom: 30px;">신청서 제출</input>-->
                                 </div>
 

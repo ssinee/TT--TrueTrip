@@ -14,13 +14,13 @@ router.get('/', (req, res) => {
 router.get('/main', (req, res) => {
     res.render('../views/index');
 });
-
-router.get('/reservation_planner', (req,res)=>{
-    res.render('../views/reservation_planner.ejs')
-})
-router.get('/reservation_user', (req,res)=>{
-    res.render('../views/reservation_user.ejs')
-})
+//위에 탭 때문에 지움.
+// router.get('/reservation_planner', (req,res)=>{
+//     res.render('../views/reservation_planner.ejs')
+// })
+// router.get('/reservation_user', (req,res)=>{
+//     res.render('../views/reservation_user.ejs')
+// })
 
 router.get('/lists', (req,res)=>{
     var theme= req.body.theme;
