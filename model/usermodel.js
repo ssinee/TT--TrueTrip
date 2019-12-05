@@ -7,7 +7,7 @@ var UserSchema= new Schema({
     // salt:{type:String, required:true},
     name: String,
     email: String,
-    userType: { type: [String], index: "traveler" }
+    userType: String, //가입 시 traveler로 들어감.
 
 })
 

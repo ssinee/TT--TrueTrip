@@ -184,7 +184,7 @@ passport.use('local-traveler', new LocalStrategy({
                 return done(null, false, req.flash('signupMessage', '계정이 이미 있습니다.'));  // 검증 콜백에서 두 번째 파라미터의 값을 false로 하여 인증 실패한 것으로 처리
             } else {
                 // 모델 인스턴스 객체 만들어 저장
-                var newuser = new User({"id":id, "pw":pw, "name":paramName,"email":paramEmail});
+                var newuser = new User({"id":id, "pw":pw, "name":paramName,"email":paramEmail, "userType": "traveler"});
                 newuser.save(function(err) {
                     if (err) {
                         throw err;
@@ -234,7 +234,7 @@ passport.use('local-planner', new LocalStrategy({
             } else {
                 // 모델 인스턴스 객체 만들어 저장
                 var planner = new Planner({"id":id, "pw":pw, "name":paramName,"email":paramEmail,
-                    "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3, "location":location, "path":parampath}); //기본프로필 주소추가
+                    "category1":paramCategory1,"category2": paramCategory2,"category3":paramCategory3, "location":location, "path":parampath, "userType": "planner"}); //기본프로필 주소추가
                 planner.save(function(err) {
                     if (err) {
                         throw err;
