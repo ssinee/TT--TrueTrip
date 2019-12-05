@@ -206,6 +206,9 @@
                 $('#editProfile2').show();
                 $('#editProfile3').show();
                 $('#save').show();
+                $('#introduceText').hide()
+                $(this).hide();
+
             })
 
             $('#saveButton').click(function () {
@@ -213,6 +216,8 @@
                 $('#editProfile2').hide();
                 $('#editProfile3').hide();
                 $('#save').hide();
+                $('#editButton').show();
+                $('#introduceText').show()
             })
 
             $('#UserID').hide();
@@ -437,7 +442,7 @@
                                     <center>
                                         <img src="../img/icon/text.png" style="width: 25px; height: 25px;">
                                         <span style="margin-bottom: 0px; font-size: 22px;">자기소개</span>
-                                        <h5 align="center"><%= user_info.introduce %></h5>
+                                        <h5 align="center" id="introduceText"><%= user_info.introduce %></h5>
                                     </center>
 
                                     <div id="editProfile2" style="padding:5px 20px" align="center">
@@ -457,7 +462,7 @@
                                         <% if(user_info.id == currentUser.id) { %>
                                             <center>
                                                 <input class="primary-btn" type="button" id="editButton" value="프로필 수정"
-                                                       name="edit">
+                                                       name="edit" >
                                                 <div style="padding:5px 20px"></div>
 
                                                 <div id="save">
