@@ -247,7 +247,6 @@
             })
 
             $('#UserID').hide();
-            $()
 
         })
         var $name;
@@ -334,8 +333,6 @@
                 readURL(this);
                 console.log(form);
                 // $('#fileuploadform')[0];
-
-
             });
 
             $('#showPlannerImages').on('click', 'h6', function (event) {
@@ -372,6 +369,8 @@
                 // 모달창이 수동으로 나오게 함.
                 $('#myModal').modal('toggle');
             })
+
+
 
             // 모달창에서 선택했을 때 부모창에서도 적용되도록 하는 코드.
             $('#activateIt').on('click', function (event) {
@@ -574,10 +573,10 @@
                                         <% if (!isAuthenticated) { %>
                                         <% } else { %>
                                             <% if(user_info.id == currentUser.id) { %>
-                                        <div class="share-btn" style="width: 500px;">
+                                        <div id="writepostdiv" class="share-btn" style="width: 500px;">
 
                                                 <a id="writePost" name="writePost"
-                                                   href="../upload">글쓰기</a>
+                                                   href="../upload" >글쓰기</a>
                                             <% } else { %>
                                             <% } %>
                                         <% } %>

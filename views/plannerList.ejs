@@ -165,6 +165,7 @@
             height: 100%;
             margin: auto;
             /*background: green;*/
+            /*background: green;*/
             float: right;
 
         }
@@ -273,7 +274,7 @@
             }
 
             // 딜레이 7후에 start_slick 실행.
-            window.setTimeout(start_slick, 550);
+            window.setTimeout(start_slick, 300);
 
             //post request for planner and image data
             var posting = $.post('/showplanner', {})
@@ -284,7 +285,6 @@
                 idData = data.Iddata// get selected ID data
                 category = data.category//get selected category data
                 location = data.location//get selected location data
-
                 //fill body section with data
                 fillcontent(imagepath, idData)
 
@@ -296,6 +296,8 @@
             //when location filter and category filter is selected
             $('input[name="the"], input[name="thec"]').click(function () {
 
+                window.setTimeout(start_slick, 100);
+
 
                 //get the id of selected filter __location and category
                 var loc = $(".filter-left .location-filter .location-option .lo-item .active").attr('id')
@@ -304,11 +306,12 @@
 
                 //plannerlist page에서 maybe frommain will work
                 var posting_filter = $.post('/frommain', {'location': loc, 'category': cat})
-
                 posting_filter.done(function (data) {
+
+                    console.log(data)
                     if (data == '1') {
                         //time 설정 needed
-                        window.setTimeout(start_slick, 300);
+
                         var posting_filter_start = $.post('/showplanner', {})
 
                         posting_filter_start.done(function (data) {
@@ -320,8 +323,9 @@
                             //fill body section with data
                             fillcontent(imagepath, idData)
                         })
-                    } else {
+                    } else if(data=='0'){
                         //content가 없을 경우
+                        console.log('in elseif')
                         $('#showhere').html(' ')
                     }
 
