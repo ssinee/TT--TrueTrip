@@ -36,6 +36,28 @@
 
     <style>
 
+        .modal {
+            text-align: center;
+        }
+
+        @media screen and (min-width: 1000px) {
+            .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+            width: 100%;
+            height: 100%;
+
+        }
+
         .arrange-items .arrange-text {
             background: #dfdfdf;
             /*border: solid black 1px;*/
@@ -251,7 +273,7 @@
                         "                            </div>" +
                         "                            <div class=\"arrange-text\">" +
                         "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
-                        "                            <h6 class='posttitle' data-target='#myModal'>" + content[i].title + "</h6>" +
+                        "                            <h6 class='posttitle'  data-target='#myModal'>" + content[i].title + "</h6>" +
 
                         "                        </div>" +
                         "                       </a>" +
@@ -356,6 +378,14 @@
                 console.log('선택버튼누름. 아래애의 요소에 체크될것')
                 console.log($name);
                 $name.toggleClass('postpicActive');
+            });
+
+            $('#wantLogin').on('click', function (event) {
+                //모달창에서 로그인 누름.
+                console.log('로그인창으로 이동합니다.')
+                console.log(location.href)
+                location.href='/login';
+
             });
         })
     </script>
@@ -511,11 +541,10 @@
                                  style="margin-left:200px; max-width: 50%; padding-right:0px">
                                 <div class="intro-share">
 
-<!--                                    비로그인에게 request버튼. 로그인필요 modal띄움.-->
+<!--                                    비로그인에게 request버튼. 로그인하라는 modal띄움.-->
                                     <% if (!isAuthenticated) { %>
                                     <div class="share-btn" style="width: 500px;">
-                                        <a id="needLogin" style="cursor:pointer;" onclick="alert('로그인필요')">로그인리퀘스트</a></div>
-<!--                                        chg. 모달 띄워서 뒤로 로그인화면으로 돌리도록.-->
+                                        <a id="needLogin" style="cursor:pointer;" data-toggle="modal" data-target='#loginModal'>가짜리퀘스트</a></div>
 
 <!--                                    로그인한 여행자는 request 가능한 버튼-->
                                     <% } else { %>
@@ -685,6 +714,28 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="loginModal" role="dialog">
+    <div class="modal-dialog" style="vertical-align: baseline">
+        <div class="modal-content">
+            <!--                모달 바디-->
+            <div class="modal-body">
+                <h4 style="font-size: x-large" class="modal-title" align="left">로그인이 필요한 서비스입니다.<br>
+                로그인 하시겠습니까?</h4>
+            </div>
+            <!--                모달 바디-->
+
+            <div class="modal-footer">
+                <button type="button" style="border: solid grey 2px; margin-right: 15px;" class="btn btn-default"
+                        id="wantLogin" data-dismiss="modal">확인
+                </button>
+                <button type="button" style="border: solid grey 2px;" class="btn btn-default"
+                        data-dismiss="modal">취소
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- About Secton End -->
 
