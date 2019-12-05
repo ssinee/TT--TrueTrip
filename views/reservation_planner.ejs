@@ -13,14 +13,15 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
     <style type ="text/css">
         .BigBox{
@@ -102,144 +103,246 @@
     </style>
 </head>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+
+        var data="<%=send_data[0]._id%>";
+        var data_length="<%=data_length%>";
+        var req_ids=new Array();
+
+
+        <% for(var i=0; i<data_length; i++) { %>
+        var postid="<%=send_data[i].selectpost%>";
+        var array=postid.split(",");
+        var post_len=array.length;
+
+        var request_id="<%=send_data[i]._id%>";
+        var req_array=request_id.split(",");
+        console.log(req_array);
+
+        req_ids.push(req_array);
+        var postsArr="";
+        console.log("길이"+post_len);
+
+        //선택장소 보여줄려고 했는데 미완성
+        for(var j=0; j<post_len;j++){
+
+            var posting= $.post('/findTitle', {'postid':array[j]});
+
+            posting.done(function(post_title){
+                console.log(post_title)
+                var title=post_title["post_title"];
+                console.log(title+j);
+                postsArr+=
+                    "                                    <h4>"+title+"</h4>"
+
+                // var tag_id="reservePlace"+0;
+                // console.log(tag_id);
+                // $(tag_id).html(postsArr)
+            });
+            // var tag_id="#reservePlace"+j;
+            // console.log(tag_id);
+
+            // $("div[name=reservePlace]").html(postsArr)
+        }
+
+
+        <% } %>
+
+        //plan.js post /sendReqID로 감
+        $("a[name=accept]").click(function(){
+
+            var id_num= $(this).parent().parent().parent().attr('id');
+            id_num=id_num*1;
+            console.log(req_ids[id_num]);
+
+
+            var send=$.post('/sendReqID', {
+                'req_id':req_ids[id_num]
+            });
+
+        })
+
+        //request.js /reject로 감
+        $("a[name=reject]").click(function(){
+            //
+            var select_num= $(this).parent().parent().parent().attr('id');
+            select_num=select_num*1;
+
+            console.log(req_ids[select_num]);
+            console.log(typeof(req_ids[select_num]));
+            $.ajax({
+                url:'/reject',
+                dataType: 'json',
+                type:'Post',
+                data:{"data":req_ids[select_num]},
+                success: function(result) {
+                    if(result){
+                        // alert(result.result);
+                       console.log("성공");
+                    }
+            },
+                error: function(request,status,error){
+                    alert(error);
+                }
+
+            })
+        })
+
+    })
+
+</script>
 <body>
 
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
-    <!-- Header Section Begin -->
-    <header class="header-section listings">
-        <% if(isAuthenticated) { %>
+<!-- Header Section Begin -->
+<header class="header-section listings">
+    <% if(isAuthenticated) { %>
         <% include header_af_login.html %>
-        <% } else { %>
+    <% } else { %>
         <% include header_bf_login.html %>
-        <% } %>
-    </header>
-    <!-- Header End -->
+    <% } %>
+</header>
+<!-- Header End -->
 
 
-    <!-- Contact Section Begin -->
-    <section class="contact-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
+<!-- Contact Section Begin -->
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
 
-<!--                    나의 요청. -->
-                    <br><br><br>
+                <!--                    나의 요청. -->
+                <br><br><br>
 
-                    <div class="BigBox" id="receivedQuest">
-                        <b>나에게 온 플랜 요청</b><hr>
-
-                        <div class="smallBox">
+                <div class="BigBox" id="receivedQuest">
+                    <b>나에게 온 플랜 요청</b><hr>
+                    <% for(var i=0; i<data_length; i++) { %>
+                        <% if( send_data[i].confirm==false) { %> 
+			<div class="smallBox" id="<%=i%>">
                             <div class="left">
-                                <div class="item"><h1>1</h1></div>
+                                <div class="item"><h1><%=i+1%></h1></div>
                             </div>
 
                             <div class="middle">
                                 <a href="">
-                                    <div class="item" id="reservePlanner">여행자 이름: OOO</div>
+                                    <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
                                     <br>
-                                    <div class="item" id="reserveDate">날짜: 2019.00.00</div>
+                                    <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
                                     <br>
-                                    <div class="item" id="reservePlace">선택장소: A, B</div>
+                                    <div class="item" name="reservePlace"> </div>
+                                    <br>
+                                    <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
                                 </a>
                             </div>
-
+                            <div id="test"></div>
                             <div class="right">
-                                <div><a href="#"><img src="img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
-                                <div><a href="#"><img src="img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
+                                <div><a><img src="/img/icon/x.png" width="16" height="16">거절완료</a></div><br>
                             </div>
                         </div>
+                        <% } else { %>
 
-                        <div class="smallBox">
-                            <div class="left">
-                                <div class="item"><h1>2</h1></div>
-                            </div>
-
-                            <div class="middle">
-                                <a href="">
-                                    <div class="item" id="reservePlanner">여행자 이름: OOO</div>
-                                    <br>
-                                    <div class="item" id="reserveDate">날짜: 2019.00.00</div>
-                                    <br>
-                                    <div class="item" id="reservePlace">선택장소: A, B</div>
-                                </a>
-                            </div>
-
-                            <div class="right">
-                                <div><a href="#"><img src="img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
-                                <div><a href="#"><img src="img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-
-
-                    <div class="BigBox" id="acceptedQuest">
-                        <b>채택된 플랜</b><hr>
-
-                        <div class="smallBox">
-                            <div class="left">
-                                <div class="item"><h1>1</h1></div>
-                            </div>
-
-                            <div class="middle">
-                                <a href="">
-                                    <div class="item" id="reservePlanner">여행자 이름: OOO</div>
-                                    <br>
-                                    <div class="item" id="reserveDate">날짜: 2019.00.00</div>
-                                    <br>
-                                    <div class="item" id="reservePlace">선택장소: A, B</div>
-                                </a>
-                            </div>
-
-                            <div class="right">
-                                <div> 원안에 후기별점 숫자로<br><br>  5.0</div><br>
-                            </div>
+                    <div class="smallBox" id="<%=i%>">
+                        <div class="left">
+                            <div class="item"><h1><%=i+1%></h1></div>
                         </div>
 
-                        <div class="smallBox">
-                            <div class="left">
-                                <div class="item"><h1>2</h1></div>
-                            </div>
-
-                            <div class="middle">
-                                <a href="">
-                                    <div class="item" id="reservePlanner">여행자 이름: OOO</div>
-                                    <br>
-                                    <div class="item" id="reserveDate">날짜: 2019.00.00</div>
-                                    <br>
-                                    <div class="item" id="reservePlace">선택장소: A, B</div>
-                                </a>
-                            </div>
-
-                            <div class="right">
-                                <div> 원안에 후기별점 숫자로<br><br>  5.0</div><br>
-                            </div>
+                        <div class="middle">
+                            <a href="">
+                                <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
+                                <br>
+                                <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
+                                <br>
+                                <div class="item" name="reservePlace"> </div>
+                                <br>
+                                <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
+                            </a>
+                        </div>
+                        <div id="test"></div>
+                        <div class="right">
+                            <div><a name="accept" href="/sendReqID"><img src="/img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
+                            <div><a name="reject"href=""><img src="/img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
                         </div>
                     </div>
-
-
-
+                    <% } %>
+                    <% } %>
 
                 </div>
+                <br>
+
+                <p id="result"></p>
+
+                <div class="BigBox" id="acceptedQuest">
+                    <b>채택된 플랜</b><hr>
+
+                    <div class="smallBox">
+                        <div class="left">
+                            <div class="item"><h1>1</h1></div>
+                        </div>
+
+                        <div class="middle">
+                            <a href="">
+                                <div class="item" id="reservePlanner">여행자 이름: OOO</div>
+                                <br>
+                                <div class="item" id="reserveDate">날짜: 2019.00.00</div>
+                                <br>
+                                <div class="item" id="reservePlace">선택장소: A, B</div>
+                            </a>
+                        </div>
+
+                        <div class="right">
+                            <div> 원안에 후기별점 숫자로<br><br>  5.0</div><br>
+                        </div>
+                    </div>
+
+                    <div class="smallBox">
+                        <div class="left">
+                            <div class="item"><h1>2</h1></div>
+                        </div>
+
+                        <div class="middle">
+                            <a href="">
+                                <div class="item" id="reservePlanner">여행자 이름: OOO</div>
+                                <br>
+                                <div class="item" id="reserveDate">날짜: 2019.00.00</div>
+                                <br>
+                                <div class="item" id="reservePlace">선택장소: A, B</div>
+                            </a>
+                        </div>
+
+
+                        <div class="right">
+                            <div> 원안에 후기별점 숫자로<br><br>  5.0</div><br>
+                        </div>
+
+                    </div>
+
+                </div>
+<!--                <div class="row" id="showRequest"></div>-->
+
+
             </div>
         </div>
-    </section>
-    <!-- Contact Section End -->
+    </div>
+</section>
+<!-- Contact Section End -->
 
 
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/main.js"></script>
+<!-- Js Plugins -->
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/main.js"></script>
 </body>
 
 </html>
