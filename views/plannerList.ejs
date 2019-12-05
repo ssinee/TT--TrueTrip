@@ -174,12 +174,13 @@
 
 
     <script>
-        var contentString=""
-
+        var contentString = ""
+        var stringArr=new Array();
+        var pagenum=0;
 
         //fill body content
-        function fillcontent(imagedata, idData){
-            contentString=""
+        function fillcontent(imagedata, idData) {
+            contentString = ""
 
             for (var i = 0; i < idData.length; i++) {
                 if (imagedata[i].length == 0) {
@@ -195,7 +196,7 @@
                     "\n" +
                     "                                </div>\n" +
                     "                                <div class=\"profile_img\">\n" +
-                    "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;' src='"+idData[i].path+"'>\n" +
+                    "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;' src='" + idData[i].path + "'>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     "\n" +
@@ -212,14 +213,22 @@
                     "                                </div>\n" +
                     "                            </div>\n" +
                     "                        </div>"
+                if ((i > 0 && i % 4 == 0) || i == idData.length - 1) {
+                    stringArr[pagenum] = contentString;
+                    console.log(i);
+                    pagenum++;
+                    contentString = ""
+                }
             }
             console.log("in contentString please")
-            $("#please").html(contentString);
+            $("#please").html(stringArr[0]);
 
         }//end of fill content
 
 
-        function changefilter(location, category){
+
+
+        function changefilter(location, category) {
             $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
             $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
             $('#' + location).addClass('active')
@@ -228,6 +237,16 @@
         }
 
         jQuery(document).ready(function ($) {
+
+            //page 넘기기
+            $('.pagination-num a').click(function () {
+                window.setTimeout(start_slick, 3);
+
+                console.log("AmI in pagination click?")
+                var pagenum_ = parseInt($(this).text());
+                console.log(pagenum_)
+                $('#please').html(stringArr[pagenum_ - 1]);
+            });
             var imagepath;
             var location;
             var category;
@@ -285,16 +304,16 @@
                 console.log(cat)
 
                 //plannerlist page에서 maybe frommain will work
-                var posting_filter = $.post('/frommain', {'location':loc, 'category': cat})
+                var posting_filter = $.post('/frommain', {'location': loc, 'category': cat})
 
-                posting_filter.done(function(data){
+                posting_filter.done(function (data) {
                     console.log(data)
-                    if(data=='1'){
+                    if (data == '1') {
                         //time 설정 needed
                         window.setTimeout(start_slick, 300);
-                        var posting_filter_start=$.post('/showplanner', {})
+                        var posting_filter_start = $.post('/showplanner', {})
 
-                        posting_filter_start.done(function(data){
+                        posting_filter_start.done(function (data) {
                             imagepath = data.data//get image path
                             idData = data.Iddata// get selected ID data
                             category = data.category//get selected category data
@@ -312,10 +331,10 @@
             })
 
             //profile clicked
-            $(document).on('click', '.profile',function(){
-              var temp=$(this).find('.planners_IDs').text()
+            $(document).on('click', '.profile', function () {
+                var temp = $(this).find('.planners_IDs').text()
 
-                window.location.href='/post/'+temp;
+                window.location.href = '/post/' + temp;
             })
         })
     </script>
@@ -351,13 +370,6 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="filter-left">
-
-
-                    <!--                    플래너 지역 카테고리. -->
-                    <!--                    chg. action? 바꿔야하는데-->
-                    <!--                    chg. 지역 필터랑 카테고리 필터가 하나로 인식됨. 위아래 통틀어 한개만 선택가능-->
-                    <!--                    위치카테고리용 class="lo-item"은 co-item과 같게 정의해야함.-->
-
                     <div class="location-filter">
                         <h3>지역 필터</h3>
                         <div class="location-option">
@@ -507,15 +519,15 @@
 
             <div class="col-lg-9">
                 <div class="row" id="parent">
-                    <!--                    <div class="col-lg-12">-->
-                    <!--                        <form action="#" class="arrange-select">-->
-                    <!--                            <span>Arrange by</span>-->
-                    <!--                            <select>-->
-                    <!--                                <option>Newest</option>-->
-                    <!--                                <option>Oldest</option>-->
-                    <!--                            </select>-->
-                    <!--                        </form>-->
-                    <!--                    </div>-->
+                    <div class="col-lg-12">
+                        <form action="#" class="arrange-select">
+                            <span>Arrange by</span>
+                            <select>
+                                <option>Newest</option>
+                                <option>Oldest</option>
+                            </select>
+                        </form>
+                    </div>
 
 
                     <div id="please" class="planners">
@@ -601,9 +613,11 @@
 
                     <div class="col-lg-12 text-right">
                         <div class="pagination-num">
-                            <a href="#">01</a>
-                            <a href="#">02</a>
-                            <a href="#">03</a>
+                            <a href="javascript:void (0)" value="1" id="check">01</a>
+                            <a href="javascript:void (0)" value="2">02</a>
+                            <a href="javascript:void (0)" value="3">03</a>
+                            <a href="javascript:void (0)" value="4">04</a>
+                            <a href="javascript:void (0)" value="5">05</a>
                         </div>
                     </div>
 
