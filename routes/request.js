@@ -172,4 +172,15 @@ router.post('/reject',function(req,res){
 
 });
 
+
+router.post('/checkReject', function(req,res){
+    var reqid=req.body.reqid;
+    Request.find({'_id':reqid},function(err,data){
+        if(err) throw err;
+        console.log(data);
+        res.send({data:data});
+    })
+
+});
+
 module.exports = router;

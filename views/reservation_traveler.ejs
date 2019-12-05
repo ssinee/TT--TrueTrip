@@ -116,15 +116,118 @@
             console.log(req_id);
 
             <% } %>
+
+            var plan=new Array();
+            for(var i=0; i<data_length; i++){
+                plan.push("#plan"+i);
+            }
+
+            for (var j=0; j<data_length; j++){
+                console.log(j);
+                // console.log(plan);
+                $.ajax({
+                    url:'/checkReject',
+                    dataType: 'json',
+                    type:'Post',
+                    data:{"reqid":array[j]},
+                    async: false,
+                    success: function(data) {
+                        console.log(j);
+                        console.log(data.data);
+
+                        if(data.data[0].confirm==false){
+                            // alert("대기중");
+                            console.log("reject");
+                            $(plan[j]).html("거절됨");
+                        }
+                        else {
+                            // alert(result.result);
+                            console.log("거절 아님");
+                            $.ajax({
+                                url:'/viewPlan',
+                                dataType: 'json',
+                                type:'Post',
+                                data:{"reqid":array[j]},
+                                async: false,
+                                success: function(data) {
+                                    console.log(j);
+                                    console.log(data.data);
+
+                                    if(data.data[0]==null){
+                                        // alert("대기중");
+                                        console.log("대기중");
+                                        $(plan[j]).html("대기중");
+                                    }
+                                    else if(data.data[0].done==false){
+                                        // alert(result.result);
+                                        console.log("성공");
+                                        $(plan[j]).html("계획 확인하기");
+                                    }
+                                },
+                                error: function(request,status,error){
+                                    alert(error);
+                                }
+
+                            })
+
+
+
+                        }
+                    },
+                    error: function(request,status,error){
+                        alert(error);
+                    }
+
+                })
+
+            }
+
             // var posting=$.post('/findSchedule', {'reqid':req_id});
             // posting.done(function(data){
             //     var data=data
             //     console.log(data);
             //
             // });
+            // var plan=new Array();
+            // for(var i=0; i<data_length; i++){
+            //     plan.push("#plan"+i);
+            // }
+            // console.log(plan);
+            // for (var j=0; j<data_length; j++){
+            //     console.log(j);
+            //     // console.log(plan);
+            //     $.ajax({
+            //         url:'/viewPlan',
+            //         dataType: 'json',
+            //         type:'Post',
+            //         data:{"reqid":array[j]},
+            //         async: false,
+            //         success: function(data) {
+            //             console.log(j);
+            //             console.log(data.data);
+            //
+            //             if(data.data[0]==null){
+            //                 // alert("대기중");
+            //                 console.log("대기중");
+            //                 $(plan[j]).html("대기중");
+            //             }
+            //             else if(data.data[0].done==false){
+            //                 // alert(result.result);
+            //                 console.log("성공");
+            //                 $(plan[j]).html("계획 확인하기");
+            //             }
+            //         },
+            //         error: function(request,status,error){
+            //             alert(error);
+            //         }
+            //
+            //     })
+            //
+            // }
 
 
-            $("input[name=confirmPlan]").click(function(){
+
+            $("a[name=confirmPlan]").click(function(){
                 var req_id="<%=send_data[0]._id%>";
                 var data_length="<%=data_length%>";
                 console.log(req_id);
@@ -133,8 +236,6 @@
                 var id_num= $(this).parent().parent().parent().attr('id');
                 id_num=id_num*1;
                 console.log(id_num);
-
-                var send=$.post('/viewPlan', {'reqid':array[id_num]});
 
             })
 
@@ -241,7 +342,7 @@
 
                         <div class="middle">
                             <a href="">
-                                <div class="item" name="reservePlanner"><%= send_data[i].planner%> 플래너가 계획을 보냈습니다.</div>
+                                <div class="item" name="reservePlanner">요청 플래너: <%= send_data[i].planner%></div>
                                 <br>
                                 <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
                                 <br>
@@ -252,12 +353,12 @@
                         </div>
                         <div id="test"></div>
                         <div class="right">
-                            <div>대기중</div><br>
+<!--                            <div>대기중</div><br>-->
                             <div>
-                                <input name="confirmPlan" type="button" value="계획 확인하기!" onclick="location.href='/viewPlan'" style="margin-bottom: 8px;" ></inputbutton>
+<!--                                <input name="confirmPlan" type="button" value="계획 확인하기!" onclick="location.href='/viewPlan'" style="margin-bottom: 8px;" ></inputbutton>-->
                             </div>
-<!--                            <div><a name="confirmPlan" href="">계획 확인하기!</a></div><br>-->
-                            <div>거절되었습니다</div><br>
+                            <div><a id="plan<%=i%>" name="confirmPlan" href="">계획 확인하기!</a></div><br>
+<!--                            <div>거절되었습니다</div><br>-->
                         </div>
                     </div>
                     <% } %>

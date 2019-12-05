@@ -6,7 +6,9 @@ var ScheduleSchema= new Schema({
     planner:String,
     traveler: String,
     originRequest: String,
-    plan:[String]
+    plan:[String],
+    done: { type: Boolean, default: false},
+    confirm: Boolean
 
 });
 

@@ -78,7 +78,8 @@ router.post('/viewPlan', function(req,res){
         if(err) throw err;
         console.log(data);
         schedule_data=data;
-        res.render('../views/receivedPlan.ejs',{data:data});
+        // res.render('../views/receivedPlan.ejs',{data:data});
+        res.send({data:data});
 
     })
 
@@ -90,30 +91,7 @@ router.get('/viewPlan', function(req,res){
     console.log(schedule_data);
     res.render('../views/receivedPlan.ejs',{data:schedule_data});
 
-})
-// router.get('/planPreview/:id', function(req,res){
-//     var userid=req.params.id;
-//     Request.find({'_id':userid},function(err,data){
-//         if(err) throw err;
-//         console.log(data);
-//         res.render('../views/makePlan.ejs',{data:data});
-//     })
-//
-//
-//     Schedule.find({'_id':userid},function(err,data){
-//         if(err) throw err;
-//         console.log(data);
-//         res.render('../views/makePlan.ejs',{data:data});
-//     })
-//
-// });
+});
 
-// router.post('/findRequest', function(req,res){
-//     var id=req.body.find_id;
-//     Request.find({'_id':id},function(err,data){
-//         if(err) throw err;
-//         res.send({data:data});
-//     })
-// });
 
 module.exports = router;

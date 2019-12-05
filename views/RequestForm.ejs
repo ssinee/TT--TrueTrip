@@ -173,6 +173,7 @@
                     noarray.push($(this).val());
                 });
 
+                //request.js 에있는 /sendForm으로
                 var send=$.post('/sendForm', {
                     'senddata':senddata,
                     'date':date,
