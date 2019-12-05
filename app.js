@@ -54,6 +54,8 @@ app.use(express.static('js'))
 app.use(express.static('scss'))
 app.use(express.static('vendor'))
 app.use(express.static('img'))
+app.use('/upload_profile', express.static('./upload_profile'))
+
 
 
 app.use('/upload', express.static('./upload'))
@@ -62,7 +64,6 @@ app.use('/post/upload_profile', express.static('./upload_profile'))   // 프로�
 
 
 
-// app.use(express.static(path.join(__dirname,'/views')))
 
 // EJS
 // app.set('view engine', 'html')
