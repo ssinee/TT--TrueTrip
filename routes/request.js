@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose=require("mongoose");
 var Postdata=mongoose.model('PostData');
 var Request=mongoose.model('requests');
+var Schedule=mongoose.model('schedules');
 
 let content_id;
 let planner_id;
@@ -172,6 +173,19 @@ router.post('/reject',function(req,res){
 
 });
 
+router.post('/checkPlan', function(req,res){
+    console.log("/checkPlan 호출됨");
+    var reqid=req.body.reqid;
+    console.log(reqid);
+    Schedule.find({'originRequest':reqid},function(err,data){
+        if(err) throw err;
+        console.log(data);
+        // res.render('../views/receivedPlan.ejs',{data:data});
+        res.send({data:data});
+
+    })
+
+});
 
 router.post('/checkReject', function(req,res){
     var reqid=req.body.reqid;

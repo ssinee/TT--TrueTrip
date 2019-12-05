@@ -107,6 +107,7 @@
 
             var data_length="<%=data_length%>";
             var array=new Array();
+            var postsArr="";
 
             <% for(var i=0; i<data_length; i++) { %>
             var req_id="<%=send_data[i]._id%>";
@@ -144,7 +145,7 @@
                             // alert(result.result);
                             console.log("거절 아님");
                             $.ajax({
-                                url:'/viewPlan',
+                                url:'/checkPlan',
                                 dataType: 'json',
                                 type:'Post',
                                 data:{"reqid":array[j]},
@@ -158,10 +159,15 @@
                                         console.log("대기중");
                                         $(plan[j]).html("대기중");
                                     }
-                                    else if(data.data[0].done==false){
+                                    else if(data.data[0].done==true){
                                         // alert(result.result);
                                         console.log("성공");
-                                        $(plan[j]).html("계획 확인하기");
+                                        postsArr +=
+                                            "<a name=\"confirmPlan\" href=\"/viewPlan\">" +
+                                            "  계획 확인하기 " +
+                                            "                     </a>"
+                                        $(plan[j]).html(postsArr);
+                                        postsArr="";
                                     }
                                 },
                                 error: function(request,status,error){
@@ -169,9 +175,6 @@
                                 }
 
                             })
-
-
-
                         }
                     },
                     error: function(request,status,error){
@@ -181,50 +184,6 @@
                 })
 
             }
-
-            // var posting=$.post('/findSchedule', {'reqid':req_id});
-            // posting.done(function(data){
-            //     var data=data
-            //     console.log(data);
-            //
-            // });
-            // var plan=new Array();
-            // for(var i=0; i<data_length; i++){
-            //     plan.push("#plan"+i);
-            // }
-            // console.log(plan);
-            // for (var j=0; j<data_length; j++){
-            //     console.log(j);
-            //     // console.log(plan);
-            //     $.ajax({
-            //         url:'/viewPlan',
-            //         dataType: 'json',
-            //         type:'Post',
-            //         data:{"reqid":array[j]},
-            //         async: false,
-            //         success: function(data) {
-            //             console.log(j);
-            //             console.log(data.data);
-            //
-            //             if(data.data[0]==null){
-            //                 // alert("대기중");
-            //                 console.log("대기중");
-            //                 $(plan[j]).html("대기중");
-            //             }
-            //             else if(data.data[0].done==false){
-            //                 // alert(result.result);
-            //                 console.log("성공");
-            //                 $(plan[j]).html("계획 확인하기");
-            //             }
-            //         },
-            //         error: function(request,status,error){
-            //             alert(error);
-            //         }
-            //
-            //     })
-            //
-            // }
-
 
 
             $("a[name=confirmPlan]").click(function(){
@@ -236,6 +195,11 @@
                 var id_num= $(this).parent().parent().parent().attr('id');
                 id_num=id_num*1;
                 console.log(id_num);
+
+                var send=$.post('/viewPlan', {
+                   'reqid':array[id_num]
+                });
+
 
             })
 
@@ -357,7 +321,7 @@
                             <div>
 <!--                                <input name="confirmPlan" type="button" value="계획 확인하기!" onclick="location.href='/viewPlan'" style="margin-bottom: 8px;" ></inputbutton>-->
                             </div>
-                            <div><a id="plan<%=i%>" name="confirmPlan" href="">계획 확인하기!</a></div><br>
+                            <div id="plan<%=i%>"></div><br>
 <!--                            <div>거절되었습니다</div><br>-->
                         </div>
                     </div>

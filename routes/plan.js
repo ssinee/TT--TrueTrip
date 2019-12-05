@@ -78,8 +78,8 @@ router.post('/viewPlan', function(req,res){
         if(err) throw err;
         console.log(data);
         schedule_data=data;
-        // res.render('../views/receivedPlan.ejs',{data:data});
-        res.send({data:data});
+        res.render('../views/receivedPlan.ejs',{data:data});
+        // res.send({data:data});
 
     })
 
