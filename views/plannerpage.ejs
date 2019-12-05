@@ -22,7 +22,6 @@
     <link rel="icon" href="img/favicon-32x32.png">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 
@@ -128,19 +127,17 @@
             padding-right: 0px;
         }
 
-    <script language="javascript">
-        function showPopup() {
 
-        table{
+        table {
             /*border: solid darkgrey 3px;*/
             width: 90%;
         }
-        tr, td{
+
+        tr, td {
             border: solid grey 3px;
 
 
         }
-
 
 
     </style>
@@ -191,14 +188,13 @@
         // //     }
         // // }
         //
-        $(document).ready(function () {
 
         // 모달용.
         var $name;
         // content에 User_ID 기준으로 게시글 다 긁어서 저장함.
         var content;
 
-        $(document).ready( function(){
+        $(document).ready(function () {
 
             $('#editProfile').hide();
             $('#editProfile2').hide();
@@ -278,13 +274,10 @@
             })
 
 
-
-
             $('#showPlannerImages').on('click', 'img', function (event) {
                 console.log($(this))
                 $(this).toggleClass('postpicActive')
             });
-
 
 
             $('#showPlannerImages').on('click', 'h5', function (event) {
@@ -294,10 +287,10 @@
             })
 
             //profile preview
-            function readURL(input){
-                if(input.files && input.files[0]){
-                    var reader= new FileReader();
-                    reader.onload=function(e){
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
                         $('#profile_img').attr('src', e.target.result);
                     }
                     reader.readAsDataURL(input.files[0])
@@ -305,7 +298,7 @@
             }
 
 
-            $('#fileinput').change(function(){
+            $('#fileinput').change(function () {
 
                 readURL(this);
                 console.log(form);
@@ -313,9 +306,6 @@
 
 
             });
-
-        })
-
 
             $('#showPlannerImages').on('click', 'h6', function (event) {
 
@@ -337,8 +327,8 @@
                 // console.log(content[0].theme);// 됨
                 // console.log(content[0].text); // 됨
 
-                for (var i = 0; i< content.length; i++){
-                    if (content[i].title == postTitle){
+                for (var i = 0; i < content.length; i++) {
+                    if (content[i].title == postTitle) {
                         $('#posttitle').text(content[i].title);
                         $('#postcategory').text(content[i].theme);
                         $('#postname').text(content[i].name);
@@ -353,13 +343,12 @@
             })
 
             // 모달창에서 선택했을 때 부모창에서도 적용되도록 하는 코드.
-            $('#myModal').on('click', '#activateIt', function (event) {
+            $('#activateIt').on('click', function (event) {
                 console.log('선택버튼누름. 아래애의 요소에 체크될것')
                 console.log($name);
                 $name.toggleClass('postpicActive');
             });
         })
-
     </script>
 </head>
 
@@ -391,13 +380,16 @@
                         <div class="contact-info" style="padding-top: 100px; width: 100%;">
 
                             <!--profile image comes here-->
-                            <form method="post" action="/mypage/editimg" enctype="multipart/form-data" id="fileuploadform">
+                            <form method="post" action="/mypage/editimg" enctype="multipart/form-data"
+                                  id="fileuploadform">
                                 <div class="map" style="border:1px solid #CACDD6; height: 400px;">
 
                                     <img id="profile_img" name="profile_img" src='<%= user_info.path %>' alt=""
                                          style="width: 100%; height: 100%;">
-                                    <div class="edit_pro_img"  style="left:145px; top:365px;">
-                                        <input id="fileinput" type="file" value="이미지변경" onchange="this.form.submit()" name="editImg" style="position:absolute;width:50px;height:50px;padding:0;margin:-1px;opacity: 0;">
+                                    <div class="edit_pro_img" style="left:145px; top:365px;">
+                                        <input id="fileinput" type="file" value="이미지변경" onchange="this.form.submit()"
+                                               name="editImg"
+                                               style="position:absolute;width:50px;height:50px;padding:0;margin:-1px;opacity: 0;">
                                         <img src="upload_profile/edit_1.png" style="width:40px; position: initial">
                                     </div>
                                 </div>
@@ -450,15 +442,15 @@
 
                                     <div id="editProfile2" style="padding:5px 20px" align="center">
                                         <textarea style="width: 100%; min-height: 100px;" name="introduce"
-                                                  placeholder="자기소개글을 적어주세요."></textarea>
+                                                  placeholder="자기소개글을 적어주세요."><%= user_info.introduce %></textarea>
                                     </div>
 
                                     <div style="padding:5px 20px"></div>
 
                                     <!--                                    프로필 사진 변경 버튼-->
-<!--                                    <div id="editProfile3" style="padding:5px 20px" align="center">-->
-<!--                                        <input class="primary-btn" type="file" value="이미지변경" name="editImg">-->
-<!--                                    </div>-->
+                                    <!--                                    <div id="editProfile3" style="padding:5px 20px" align="center">-->
+                                    <!--                                        <input class="primary-btn" type="file" value="이미지변경" name="editImg">-->
+                                    <!--                                    </div>-->
 
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
@@ -494,15 +486,16 @@
                                 <div class="row"></div>
                             </div>
 
-                            <div class="col-lg-4 offset-lg-1" style="margin-left:200px; max-width: 50%; padding-right:0px">
+                            <div class="col-lg-4 offset-lg-1"
+                                 style="margin-left:200px; max-width: 50%; padding-right:0px">
                                 <div class="intro-share">
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
                                         <% if(currentUser.userType != user_info.userType) { %>
                                             <div class="share-btn" style="width: 500px;">
                                                 <a id="request" href="../requestform">Request</a>
-                                              <!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
-                                            </div>
+                                                <!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
+
                                         <% } else { %>
                                         <% } %>
                                     <% } %>
@@ -510,154 +503,156 @@
                                     <!--                                        <a href="#" class="share">Select</a>-->
                                     <!--                                        <a href="#">Request</a>-->
                                     <!--                                    </div>-->
-                                    
-
-<!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
-                                        <% } else { %>
-                                        <% } %>
-                                    <% } %>
 
 
-<!--                                    현재 로그인한애가 페이지 주인이면, 글쓰기 버튼 활성화-->
+                                    <!--                                    현재 로그인한애가 페이지 주인이면, 글쓰기 버튼 활성화-->
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
-                                        <% if(user_info.id==currentUser.id) { %>
-                                                <a id="writePost" name="writePost" href="../upload">글쓰기</a>
+                                        <% if(user_info.id == currentUser.id) { %>
+                                            <a id="writePost" name="writePost"
+                                               href="../upload">글쓰기</a>
                                         <% } else { %>
                                         <% } %>
                                     <% } %>
-                                            </div>
-
-<!--                                    <div class="share-btn" style="width: 500px;">-->
-<!--                                        <a href="#" class="share">Select</a>-->
-<!--                                        <a href="#">Request</a>-->
-<!--                                    </div>-->
-
                                 </div>
+
+                                <!--                                    <div class="share-btn" style="width: 500px;">-->
+                                <!--                                        <a href="#" class="share">Select</a>-->
+                                <!--                                        <a href="#">Request</a>-->
+                                <!--                                    </div>-->
+
                             </div>
                         </div>
+                    </div>
 
 
-                        <!--                        show images here -->
-                        <!--                        contents-->
+                    <!--                        show images here -->
+                    <!--                        contents-->
 
-                        <div class="row" id="showPlannerImages" style="padding-bottom: 400px;">
-                        </div>
+                    <div class="row" id="showPlannerImages" style="padding-bottom: 400px;">
+                    </div>
 
-                        <!--    모달 시작-->
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
-                                <!--            모달 내용 시작-->
-                                <div class="modal-content">
-                                    <!--                모달창 위에 제목-->
-                                    <div class="modal-header">
+                    <!--    모달 시작-->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <!--            모달 내용 시작-->
+                            <div class="modal-content">
+                                <!--                모달창 위에 제목-->
+                                <div class="modal-header">
 
-                                        <h4 style="font-size: xx-large" class="modal-title" align="left" id="posttitle"></h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-
-                                    <!--                모달 바디-->
-                                    <div class="modal-body" >
-
-                                        <center><p><img id="postpath" style="width: 90%; height: 90%;"></p>
-
-                                            <table>
-                                                <tr>
-                                                    <td style="width: 19%"><span><b>주소</b></span></td>
-                                                    <td><span id="postlocation"></span><br></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td><span><b>카테고리</b></span></td>
-                                                    <td><span id="postcategory"></span><br></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td><span><b>글쓴이</b></span></td>
-                                                    <td><span id="postname"></span><br></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td><span><b>소개글</b></span><br></td>
-                                                    <td><textarea style="height: 130px; width: 100%; border: none" id="postcontent" placeholder="아직 소개글이 없습니다."></textarea><br></td>
-                                                </tr>
-                                            </table>
-
-                                        </center>
-
-                                    </div>
-                                    <!--                모달 바디-->
-
-                                    <div class="modal-footer">
-                                        <button type="button" style="border: solid grey 2px;" class="btn btn-default" id="activateIt" data-dismiss="modal">장소선택</button>
-                                        <button type="button" style="border: solid grey 2px;" class="btn btn-default" data-dismiss="modal">닫기</button>
-                                    </div>
+                                    <h4 style="font-size: xx-large" class="modal-title" align="left"
+                                        id="posttitle"></h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                            </div>
-                        </div>
-                        <!--    모달 끝-->
 
+                                <!--                모달 바디-->
+                                <div class="modal-body">
 
-                        <!--                        버튼 위치 아래로-->
-                        <!--                        <div class="col-lg-4 offset-lg-1"-->
-                        <!--                             style="margin-left:200px; max-width: 50%; padding-right:0px">-->
-                        <!--                            <div class="intro-share">-->
-                        <!--                                <div class="share-btn" style="width: 500px;">-->
-                        <!--                                    <a href="#" class="share">Select</a>-->
-                        <!--                                    <a href="#">Request</a>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
+                                    <center><p><img id="postpath" style="width: 90%; height: 90%;"></p>
 
+                                        <table>
+                                            <tr>
+                                                <td style="width: 19%"><span><b>주소</b></span></td>
+                                                <td><span id="postlocation"></span><br></td>
+                                            </tr>
 
-                        <div class="client-reviews">
-                            <h3>Reviews</h3>
-                            <div class="reviews-item">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                            <tr>
+                                                <td><span><b>카테고리</b></span></td>
+                                                <td><span id="postcategory"></span><br></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><span><b>글쓴이</b></span></td>
+                                                <td><span id="postname"></span><br></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><span><b>소개글</b></span><br></td>
+                                                <td><textarea style="height: 130px; width: 100%; border: none"
+                                                              id="postcontent"
+                                                              placeholder="아직 소개글이 없습니다."></textarea><br></td>
+                                            </tr>
+                                        </table>
+
+                                    </center>
+
                                 </div>
-                                <h5>“A Great Place”</h5>
-                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
-                                    vitae
-                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
-                                    Class
-                                    aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                                    himenaeos. </p>
-                                <div class="client-text">
-                                    <h5>Michael Smith</h5>
-                                    <span>March 03, 2019</span>
-                                </div>
-                            </div>
-                            <div class="reviews-item">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <h5>“The best food in town”</h5>
-                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
-                                    vitae
-                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
-                                    Class
-                                    aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                                    himenaeos. </p>
-                                <div class="client-text">
-                                    <h5>Michael Smith</h5>
-                                    <span>March 03, 2019</span>
+                                <!--                모달 바디-->
+
+                                <div class="modal-footer">
+                                    <button type="button" style="border: solid grey 2px;" class="btn btn-default"
+                                            id="activateIt" data-dismiss="modal">장소선택
+                                    </button>
+                                    <button type="button" style="border: solid grey 2px;" class="btn btn-default"
+                                            data-dismiss="modal">닫기
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <!--    모달 끝-->
 
+
+                    <!--                        버튼 위치 아래로-->
+                    <!--                        <div class="col-lg-4 offset-lg-1"-->
+                    <!--                             style="margin-left:200px; max-width: 50%; padding-right:0px">-->
+                    <!--                            <div class="intro-share">-->
+                    <!--                                <div class="share-btn" style="width: 500px;">-->
+                    <!--                                    <a href="#" class="share">Select</a>-->
+                    <!--                                    <a href="#">Request</a>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+
+
+                    <div class="client-reviews">
+                        <h3>Reviews</h3>
+                        <div class="reviews-item">
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <h5>“A Great Place”</h5>
+                            <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
+                                vitae
+                                massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
+                                Class
+                                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. </p>
+                            <div class="client-text">
+                                <h5>Michael Smith</h5>
+                                <span>March 03, 2019</span>
+                            </div>
+                        </div>
+                        <div class="reviews-item">
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <h5>“The best food in town”</h5>
+                            <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
+                                vitae
+                                massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
+                                Class
+                                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                                himenaeos. </p>
+                            <div class="client-text">
+                                <h5>Michael Smith</h5>
+                                <span>March 03, 2019</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
+    </div>
     </div>
 </section>
 

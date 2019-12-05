@@ -54,9 +54,6 @@ router.post('/mypage/write', upload.single('editImg'), function (req, res) {
 // 프로필 수정할때마다 upload_profile에 하나씩 넣음.
     var paramintroduce = req.body.introduce;
     var paramlocation = req.body.location;
-
-
-
     var plannerpost = new Planner({"location": paramlocation, "introduce": paramintroduce});
     var userid = req.user.id;
 
@@ -113,8 +110,6 @@ router.get('/post/:id', function (req, res) {
             res.redirect('/popup');
         }
         Planner.findOne({id: req.params.id}, function (err, post) {
-
-
             res.render('plannerpage', { title: 'Post', user_info: post ,
                     PostID: " ",
                     PostName: " ",
