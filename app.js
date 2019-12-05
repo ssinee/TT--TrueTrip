@@ -16,6 +16,7 @@ const DBData=require('./models/DBData');
 const User= require('./model/usermodel');
 const Planner=require('./model/plannermodel');
 const Request=require('./models/requestmodel');
+const Schedule=require('./models/schedulemodel');
 const fs= require('fs');
 
 
@@ -115,6 +116,8 @@ app.use('/', require('./routes/showpopup'));
 
 app.use('/',require('./routes/request'));
 app.use('/', require('./routes/showPlanner'));
+
+app.use('/',require('./routes/plan'));
 
 
 
