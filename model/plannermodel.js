@@ -14,7 +14,7 @@ var PlannerSchema= new Schema({
     location: String,
     path:String,//프로필 사진 경로
     introduce: String,
-    userType: { type: [String], index: "planner" },
+    userType: String,       // 가입 시 planner로 들어감.
     orgFileName: String,    //프로필 사진 orgname
     saveFileName:String,    //프로필 사진 savename
 });

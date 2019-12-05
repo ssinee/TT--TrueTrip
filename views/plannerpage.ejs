@@ -10,7 +10,7 @@
     <title>TT-TrueTrip</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
@@ -35,6 +35,28 @@
     <!--    </style>-->
 
     <style>
+
+        .modal {
+            text-align: center;
+        }
+
+        @media screen and (min-width: 1000px) {
+            .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+            width: 100%;
+            height: 100%;
+
+        }
 
         .arrange-items .arrange-text {
             background: #dfdfdf;
@@ -113,8 +135,9 @@
 
 
         h6 {
-            height: 70px;
+            min-height: 70px;
             font-size: x-large;
+            line-height: 70px;
         }
 
         .arrange-items .arrange-text {
@@ -129,12 +152,12 @@
 
 
         table {
-            /*border: solid darkgrey 3px;*/
+            border: 2px solid #CACDD6;
             width: 90%;
         }
 
         tr, td {
-            border: solid grey 3px;
+            border: 2px solid #CACDD6;
 
 
         }
@@ -198,6 +221,7 @@
             $('#editProfile2').hide();
             $('#editProfile3').hide();
             $('#save').hide();
+
             var plannerlocation = '<%= user_info.location %>'
             $('#select_loaction').val(plannerlocation).prop('selected', true)
 
@@ -231,7 +255,6 @@
         var content;
         $(document).ready(function (req, res) {
 
-
             var User_ID = $('#UserID').text();
             var author = ""
             var postsArr = ""
@@ -250,7 +273,7 @@
                         "                            </div>" +
                         "                            <div class=\"arrange-text\">" +
                         "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
-                        "                            <h6 class='posttitle' data-target='#myModal'>" + content[i].title + "</h6>" +
+                        "                            <h6 class='posttitle'  data-target='#myModal'>" + content[i].title + "</h6>" +
 
                         "                        </div>" +
                         "                       </a>" +
@@ -356,6 +379,14 @@
                 console.log($name);
                 $name.toggleClass('postpicActive');
             });
+
+            $('#wantLogin').on('click', function (event) {
+                //모달창에서 로그인 누름.
+                console.log('로그인창으로 이동합니다.')
+                console.log(location.href)
+                location.href='/login';
+
+            });
         })
     </script>
 </head>
@@ -395,11 +426,14 @@
                                     <img id="profile_img" name="profile_img" src='<%= user_info.path %>' alt=""
                                          style="width: 100%; height: 100%;">
 
+
+<!--                                    로그인 시, 페이지 주인이면 profile img edit 활성화-->
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
                                         <% if(user_info.id == currentUser.id) { %>
                                             <center>
                                                 <div class="edit_pro_img" style="left:145px; top:365px;">
+
                                                     <input id="fileinput" type="file" value="이미지변경"
                                                            onchange="this.form.submit()"
                                                            name="editImg"
@@ -408,7 +442,6 @@
                                                          style="width:40px; position: initial;">
                                                 </div>
                                             </center>
-
                                         <% } else { %>
                                         <% } %>
                                     <% } %>
@@ -452,6 +485,7 @@
                                                     <option value="매탄동">매탄동</option>
                                                 </select>
                                                 <!--                                        <input type="text" name="location" style="width: 80%;" placeholder="활동지역을 써주세요.">-->
+
                                                 <div style="padding:5px 20px"></div>
                                             </div>
 
@@ -512,11 +546,19 @@
                             <div class="col-lg-4 offset-lg-1"
                                  style="margin-left:200px; max-width: 50%; padding-right:0px">
                                 <div class="intro-share">
+
+<!--                                    비로그인에게 request버튼. 로그인하라는 modal띄움.-->
                                     <% if (!isAuthenticated) { %>
-                                    <% } else { %>
-                                        <% if(currentUser.userType != user_info.userType) { %>
                                     <div class="share-btn" style="width: 500px;">
-                                        <a id="request" href="../requestform">Request</a>
+                                        <a id="needLogin" style="cursor:pointer;" data-toggle="modal" data-target='#loginModal'>가짜리퀘스트</a></div>
+
+<!--                                    로그인한 여행자는 request 가능한 버튼-->
+                                    <% } else { %>
+
+                                        <% if(currentUser.userType == "traveler") { %>
+                                    <div class="share-btn" style="width: 500px;">
+                                        <a id="request" href="../requestform">Request</a></div>
+
                                         <!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
 
                                         <% } else { %>
@@ -532,6 +574,8 @@
                                         <% if (!isAuthenticated) { %>
                                         <% } else { %>
                                             <% if(user_info.id == currentUser.id) { %>
+                                        <div class="share-btn" style="width: 500px;">
+
                                                 <a id="writePost" name="writePost"
                                                    href="../upload">글쓰기</a>
                                             <% } else { %>
@@ -678,6 +722,28 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="loginModal" role="dialog">
+    <div class="modal-dialog" style="vertical-align: baseline">
+        <div class="modal-content">
+            <!--                모달 바디-->
+            <div class="modal-body">
+                <h4 style="font-size: x-large" class="modal-title" align="left">로그인이 필요한 서비스입니다.<br>
+                로그인 하시겠습니까?</h4>
+            </div>
+            <!--                모달 바디-->
+
+            <div class="modal-footer">
+                <button type="button" style="border: solid grey 2px; margin-right: 15px;" class="btn btn-default"
+                        id="wantLogin" data-dismiss="modal">확인
+                </button>
+                <button type="button" style="border: solid grey 2px;" class="btn btn-default"
+                        data-dismiss="modal">취소
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- About Secton End -->
 
