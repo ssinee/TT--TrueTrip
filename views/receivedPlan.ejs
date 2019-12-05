@@ -127,18 +127,18 @@
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10" selected>10</option>
-                            </select>점 / 10 점
+<!--                                <option value="6">6</option>-->
+<!--                                <option value="7">7</option>-->
+<!--                                <option value="8">8</option>-->
+<!--                                <option value="9">9</option>-->
+<!--                                <option value="10" selected>10</option>-->
+                            </select>점 / 5 점
                             <br>
 
                             <textarea name = "review" form="AAA" cols="40" rows="10" placeholder="이런 점이 좋았고 이런 점이 보완이 필요해요."></textarea>
                             <br><br>
                             <center>
-                                <input type="submit" class="primary-btn" value="확인">
+                                <input id="submit" type="submit" class="primary-btn" value="확인">
                             </center>
                         </form>
                         <br>
@@ -155,7 +155,7 @@
     </div>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 
     var schedule="<%=data[0].plan%>";
@@ -313,6 +313,25 @@
     function print_plan() {
         window.print();
     }
+
+    $(document).ready(function(){
+        $("#submit").click(function(){
+            var origin_id="<%=data[0].originRequest%>";
+            var author="<%=data[0].traveler%>";
+            var planner_id="<%=data[0].planner%>";
+            var score=$("select[name=stars]").val();
+            var comment=$("textarea[name=review]").val();
+
+            var send=$.post('/sendReview', {
+                'author': author,
+                'score': score,
+                'comment': comment,
+                'originRequest': origin_id,
+                'planner_id':planner_id
+            });
+
+        })
+    })
 
 </script>
 

@@ -1,6 +1,15 @@
 var mongoose=require("mongoose")
 var Schema=mongoose.Schema
 
+var ReviewSchema= new Schema({
+
+    author: String,
+    score: String,
+    comment: String,
+    originRequest: String,
+    state: Boolean,
+    date:{type: Date, default:Date.now()}
+});
 
 var PlannerSchema= new Schema({
     id: {type:String, required:true, unique: true},
@@ -17,6 +26,7 @@ var PlannerSchema= new Schema({
     userType: { type: [String], index: "planner" },
     orgFileName: String,    //프로필 사진 orgname
     saveFileName:String,    //프로필 사진 savename
+    reviews:[ReviewSchema]
 });
 //
 // {"id":id, "pw":pw, "name":paramName,"email":paramEmail,
