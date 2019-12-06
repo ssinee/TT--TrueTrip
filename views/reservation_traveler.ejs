@@ -10,7 +10,7 @@
     <title>Local Directory | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
@@ -23,22 +23,39 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 
     <style type ="text/css">
+        a {
+            /*color: #007bff;*/
+            color: #6699f2;
+        }
+        a:hover{
+            color: #007bff;
+            text-decoration: underline;
+        }
+        h1{
+            margin-top: 28px;
+            /*margin-bottom: 30px;*/
+            color: white;
+        }
+        h2 {
+            font-weight: 200;
+        }
         .BigBox{
             width:70%;
             min-height:200px;
-            border: solid black 1px;
+            border: solid #CACDD6 2px;
             alignment: center;
-            margin:5px;
+            margin:auto;
             postion: absolute;
         }
 
         .smallBox{
-            width: 100%;
+            width: 95%;
             height:150px;
-            border: solid black 1px;
+            border: solid #CACDD6 2px;
             alignment: center;
-            margin-top:10px;
-            margin-bottom: 10px;
+            margin: auto;
+            margin-top: 15px;
+            margin-bottom: 15px;
             position: relative;
         }
 
@@ -49,13 +66,13 @@
             float: left;
             margin-left:10px;
             margin-right:5px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-top: 3px;
+            margin-bottom: 3px;
             text-align: center;
         }
         .smallBox .left .item{
-            background: #3fbf79;
-            margin: 10px;
+            background: #FF5581;
+            margin: 30px;
             color: #FFF;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
@@ -71,14 +88,17 @@
             float: left;
             margin-left: 5px;
             margin-right: 5px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-top: 3px;
+            margin-bottom: 3px;
             text-align: left;
+            padding: 10px;
         }
 
         .smallBox .middle .item{
             text-align: left;
-            margin-left: 50px;
+            margin-left: 30px;
+            font-size: 20px;
+            margin-bottom: 11px;
         }
 
         .smallBox .right{
@@ -88,13 +108,14 @@
             float: left;
             margin-left:5px;
             margin-right:10px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-top: 3px;
+            margin-bottom: 3px;
             text-align: left;
         }
 
         .smallBox .right .item{
             text-align: center;
+            font-size: 30px;
         }
 
 
@@ -169,7 +190,7 @@
                                         //버튼 생성 누르면 plan.js /viewPlan get으로 감
                                         postsArr +=
                                             "<a name=\"confirmPlan\" href=\"/viewPlan\">" +
-                                            "  계획 확인하기 " +
+                                            "  계획 확인 " +
                                             "                     </a>"
                                         $(plan[j]).html(postsArr);
                                         postsArr="";
@@ -242,7 +263,7 @@
                 <br><br><br>
 
                 <div class="BigBox">
-                    <b>나의 요청</b><hr>
+                    <h2 style="margin-left: 6px;"><b>내가 보낸 플랜 요청</b></h2><hr style="margin-top: 0px; margin-bottom: 0px;">
 
                     <% for(var i=0; i<data_length; i++) { %>
 
@@ -253,18 +274,19 @@
 
                         <div class="middle">
                             <a href="">
-                                <div class="item" name="reservePlanner">요청 플래너: <%= send_data[i].planner%></div>
-                                <br>
+                                <div class="item" name="reservePlanner">"<%= send_data[i].planner%>" 플래너에게 보낸 요청입니다.</div>
+<!--                                <br>-->
                                 <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
-                                <br>
-                                <div class="item" name="reservePlace"> </div>
-                                <br>
+<!--                                <br>-->
+                                <div class="item" name="reservePlace">선택장소: </div>
+<!--                                <br>-->
                                 <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
                             </a>
                         </div>
                         <div id="test"></div>
                         <div class="right">
-                            <div id="plan<%=i%>"></div><br>
+                            <div class="item" id="plan<%=i%>"></div>
+
                         </div>
                     </div>
                     <% } %>

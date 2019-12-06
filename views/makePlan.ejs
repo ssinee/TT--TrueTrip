@@ -10,7 +10,7 @@
     <title>Local Directory | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -24,28 +24,53 @@
 
 
     <style>
+        .requestInfo {
+            padding: 10px;
+            line-height: normal;
+        }
+        span {
+            font-size: 28px;
+            text-align: left;
+            margin-bottom: 5px;
+            margin-left: 0px;
+            color: #FF5581;
+        }
+        .content{
+            color: black;
+            font-weight: 100;
+        }
+        h2 {
+            font-size: 50px;
+            font-weight: 100;
+        }
         table {
             alignment: center;
             border: solid 3px black;
             margin: auto;
             width: 90%;
-            font: 20px "맑은 고딕";
+            font-size: 30px;
         }
         th, td {
-            border: solid 3px black;
+            border: solid 3px #CACDD6;
             border-collapse: collapse;
             padding: 2px 3px;
             text-align: center;
             alignment: center;
             margin: auto;
         }
+        td{
+            min-width: 130px;
+        }
         textarea{
             width: 90%;
             margin: 10px;
             align-self: center;
-            font-size: 15px;
+            font-size: 20px;
             height: 100px;
-            border: solid dimgrey 2px;
+            border: solid #CACDD6 2px;
+        }
+        textarea:focus{
+            border: solid #FF5581 3px;
         }
         input[type="text"] {
             width: 100%; /* 원하는 너비 설정 */
@@ -119,21 +144,25 @@
 
 
 <!-- Blog Section Begin -->
-<section class="blog-section spad">
+<section class="blog-section spad" style="padding-top: 150px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div>
-                    <h2><b>요청정보</b></h2>
-                    <h4><b>선택장소</b></h4>
+
+                <h2><b>요청정보</b></h2>
+                <div class="requestInfo" id="요청정보섹션" style="border: solid #CACDD6 2px;">
+                    <span><b>선택장소</b></span>
+<!--                    여기에 장소이미지, 설명 들어가게? -->
                     <div class="row" id="selectPlace"></div>
-                    <h4><b>날짜:</b> <%=data[0].date%> </h4>
-                    <h4><b>인원:</b> <%=data[0].people%> 명</h4>
-                    <h4><b>나이:</b><%=data[0].age%></h4>
-                    <h4><b>자가용 이용:</b> <%=data[0].car%> </h4>
-                    <h4><b>이런 정보가 필요해요:</b> <%=data[0].yes_info%> </h4>
-                    <h4><b>이런 것들은 유의해 주세요:</b> <%=data[0].no_info%> </h4>
-                    <h4><b>추가 요구사항:</b><%=data[0].addition%></h4>
+                    <hr>
+                    <span><b>날짜:</b></span> <span class="content"><%=data[0].date%></span><br>
+                    <span><b>인원:</b></span> <span class="content"><%=data[0].people%> 명</span><br>
+                    <span><b>나이:</b></span> <span class="content"><%=data[0].age%></span><br>
+                    <span><b>자가용 이용:</b></span> <span class="content"><%=data[0].car%></span><br>
+                    <span><b>이런 정보가 필요해요:</b></span> <span class="content"><%=data[0].yes_info%></span><br>
+                    <span><b>이런 것들은 유의해 주세요:</b></span> <span class="content"><%=data[0].no_info%></span><br>
+                    <span><b>추가 요구사항:</b></span> <span class="content"><%=data[0].addition%></span>
+
 
                 </div>
                 <br><div><h2><b>계획하기</b></h2></div>
@@ -154,17 +183,16 @@
 
                 <!--                chg. 2번섹션. 계획 페이지-->
                 <!--                <div class="blog-item" style="border: solid black 1px; background: skyblue">-->
-                <div class="blog-item" style="border: solid black 2px;">
+                <div class="blog-item" style="border: solid #CACDD6 2px;">
                     <div class="blog-text">
                         <!--                        <h2>계획 작성</h2><Br>-->
-
 
                         <!--                        계획하기!!!!-->
                         <div id="cont"></div><br>
                         <center><p>
-                                <input type="button" class="primary-btn" id="addRow" value="일정 추가" style="cursor: pointer" onclick="addRow()" />
+                                <input type="button" class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px; cursor: pointer;" id="addRow" value="일정 추가" onclick="addRow()" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="button" class="primary-btn" id="bt" value="계획 제출" style="cursor: pointer"onclick="submit_plan()" />
+                                <input type="button" class="primary-btn" id="bt" value="계획 제출" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px; cursor: pointer;" onclick="submit_plan()" />
                             </p>
                             <!--                            <ps>저장 후에 F12 콘솔창에서 확인</p>-->
                         </center>
@@ -240,7 +268,7 @@
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
                 var ele = document.createElement('input');
                 ele.setAttribute('type', 'text');
-                ele.setAttribute('placeholder', '09:00 ~ 10:30');
+                ele.setAttribute('placeholder', '09:00~10:30');
 
                 td.appendChild(ele);
             } else if (c == 1) {
@@ -293,7 +321,7 @@
             // SET INPUT ATTRIBUTE.
             button.setAttribute('src', 'img/icon/x.jpg');
             button.setAttribute('width', '120');
-            button.setAttribute('height', '55');
+            button.setAttribute('height', '90');
             button.setAttribute('style', 'cursor:pointer');
             button.setAttribute('onclick', 'removeRow(this)');
 
