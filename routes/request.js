@@ -81,12 +81,15 @@ router.post('/sendForm', function(req,res){
 
 //request planner 메뉴 누르면 실행됨
 router.get('/reservation_planner',function(req,res){
+    console.log("유저아이디 호출됨");
+    console.log("유저아이디"+req.user.id);
     res.redirect('/reservation_planner/'+req.user.id);
     // res.render('../views/reservation_planner.ejs');
 });
 
 // /reservation_planner 실행되면 해당 id의 페이지로감 오류처리 아직 안되어있음
 router.get('/reservation_planner/:id',function(req,res){
+    console.log("유저아이디 호출됨22222222ㄴ");
     var data_array=new Array();
     var data_length;
 
