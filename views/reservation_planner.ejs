@@ -45,7 +45,7 @@
             min-height:200px;
             border: solid #CACDD6 2px;
             alignment: center;
-            margin:5px;
+            margin:auto;
             postion: absolute;
         }
 
@@ -264,7 +264,7 @@
                             </div>
                             <div id="test"></div>
                             <div class="right">
-                                <div class="item"><a><img src="/img/icon/x.png" width="16" height="16">거절완료</a></div><br>
+                                <div class="item"><a style="color: #f22a05">거절완료</a></div><br>
                             </div>
                         </div>
                         <% } else { %>
@@ -276,7 +276,7 @@
 
                         <div class="middle">
                             <a href="">
-                                <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
+                                <div class="item" name="reservePlanner">"<%= send_data[i].author%>" 님의 플랜 요청입니다.</div>
 <!--                                <br>-->
                                 <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
 <!--                                <br>-->
@@ -310,38 +310,16 @@
                         <div class="middle">
                             <a href="">
                                 <div class="item" id="reservePlanner">여행자 이름: OOO</div>
-                                <br>
+<!--                                <br>-->
                                 <div class="item" id="reserveDate">날짜: 2019.00.00</div>
-                                <br>
+<!--                                <br>-->
                                 <div class="item" id="reservePlace">선택장소: A, B</div>
                             </a>
                         </div>
 
                         <div class="right">
-                            <div> 원안에 후기별점 숫자로<br><br>  5.0</div><br>
+                            <div class="item">만족도<br>10 / 10</div><br>
                         </div>
-                    </div>
-
-                    <div class="smallBox">
-                        <div class="left">
-                            <div class="item"><h1>2</h1></div>
-                        </div>
-
-                        <div class="middle">
-                            <a href="">
-                                <div class="item" id="reservePlanner">여행자 이름: OOO</div>
-                                <br>
-                                <div class="item" id="reserveDate">날짜: 2019.00.00</div>
-                                <br>
-                                <div class="item" id="reservePlace">선택장소: A, B</div>
-                            </a>
-                        </div>
-
-
-                        <div class="right">
-                            <div> 원안에 후기별점 숫자로<br><br>  5.0</div><br>
-                        </div>
-
                     </div>
 
                 </div>

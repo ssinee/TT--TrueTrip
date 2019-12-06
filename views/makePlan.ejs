@@ -24,6 +24,21 @@
 
 
     <style>
+        .requestInfo {
+            padding: 10px;
+            line-height: normal;
+        }
+        span {
+            font-size: 28px;
+            text-align: left;
+            margin-bottom: 5px;
+            margin-left: 0px;
+            color: #FF5581;
+        }
+        .content{
+            color: black;
+            font-weight: 100;
+        }
         h2 {
             font-size: 50px;
             font-weight: 100;
@@ -120,21 +135,23 @@
 
 
 <!-- Blog Section Begin -->
-<section class="blog-section spad">
+<section class="blog-section spad" style="padding-top: 150px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div>
-                    <h2><b>요청정보</b></h2>
-                    <h4><b>선택장소</b></h4>
+                <h2><b>요청정보</b></h2>
+                <div class="requestInfo" id="요청정보섹션" style="border: solid #CACDD6 2px;">
+                    <span><b>선택장소</b></span>
+<!--                    여기에 장소이미지, 설명 들어가게? -->
                     <div id="selectPlace"></div>
-                    <h4><b>날짜:</b> <%=data[0].date%> </h4>
-                    <h4><b>인원:</b> <%=data[0].people%> 명</h4>
-                    <h4><b>나이:</b><%=data[0].age%></h4>
-                    <h4><b>자가용 이용:</b> <%=data[0].car%> </h4>
-                    <h4><b>이런 정보가 필요해요:</b> <%=data[0].yes_info%> </h4>
-                    <h4><b>이런 것들은 유의해 주세요:</b> <%=data[0].no_info%> </h4>
-                    <h4><b>추가 요구사항:</b><%=data[0].addition%></h4>
+                    <hr>
+                    <span><b>날짜:</b></span> <span class="content"><%=data[0].date%></span><br>
+                    <span><b>인원:</b></span> <span class="content"><%=data[0].people%> 명</span><br>
+                    <span><b>나이:</b></span> <span class="content"><%=data[0].age%></span><br>
+                    <span><b>자가용 이용:</b></span> <span class="content"><%=data[0].car%></span><br>
+                    <span><b>이런 정보가 필요해요:</b></span> <span class="content"><%=data[0].yes_info%></span><br>
+                    <span><b>이런 것들은 유의해 주세요:</b></span> <span class="content"><%=data[0].no_info%></span><br>
+                    <span><b>추가 요구사항:</b></span> <span class="content"><%=data[0].addition%></span>
 
                 </div>
                 <br><div><h2><b>계획하기</b></h2></div>
@@ -155,7 +172,7 @@
 
                 <!--                chg. 2번섹션. 계획 페이지-->
                 <!--                <div class="blog-item" style="border: solid black 1px; background: skyblue">-->
-                <div class="blog-item" style="border: solid black 2px;">
+                <div class="blog-item" style="border: solid #CACDD6 2px;">
                     <div class="blog-text">
                         <!--                        <h2>계획 작성</h2><Br>-->
 

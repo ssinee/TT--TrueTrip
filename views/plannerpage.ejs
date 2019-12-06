@@ -35,6 +35,25 @@
     <!--    </style>-->
 
     <style>
+        span{
+            font-weight: 100;
+            font-size: 23px;
+            color:#FF5581;
+        }
+        .content{
+            color: black;
+        }
+        .intro-share .share-btn a {
+            color: #fff;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 100;
+            letter-spacing: 0.2px;
+            background: #FF5581;
+            padding: 7px 22px;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
 
         .modal {
             text-align: center;
@@ -619,23 +638,24 @@
                                             <table>
                                                 <tr>
                                                     <td style="width: 19%"><span><b>주소</b></span></td>
-                                                    <td><span id="postlocation"></span><br></td>
+                                                    <td><span class="content" id="postlocation"></span><br></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><span><b>카테고리</b></span></td>
-                                                    <td><span id="postcategory"></span><br></td>
+                                                    <td><span class="content" id="postcategory"></span><br></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><span><b>글쓴이</b></span></td>
-                                                    <td><span id="postname"></span><br></td>
+                                                    <td><span class="content" id="postname"></span><br></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><span><b>소개글</b></span><br></td>
-                                                    <td><textarea style="height: 130px; width: 100%; border: none"
+                                                    <td><textarea style="height: 130px; width: 100%; font-size: 18px; border: none"
                                                                   id="postcontent"
+                                                                  class="content"
                                                                   placeholder="아직 소개글이 없습니다."></textarea><br></td>
                                                 </tr>
                                             </table>
