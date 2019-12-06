@@ -10,7 +10,7 @@
     <title>Local Directory | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
 
     <!-- Css Styles -->
 
@@ -24,22 +24,39 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 
     <style type ="text/css">
+        a {
+            /*color: #007bff;*/
+            color: #6699f2;
+        }
+        a:hover{
+            color: #007bff;
+            text-decoration: underline;
+        }
+        h1{
+            margin-top: 28px;
+            /*margin-bottom: 30px;*/
+            color: white;
+        }
+        h2 {
+            font-weight: 200;
+        }
         .BigBox{
             width:70%;
             min-height:200px;
-            border: solid black 1px;
+            border: solid #CACDD6 2px;
             alignment: center;
             margin:5px;
             postion: absolute;
         }
 
         .smallBox{
-            width: 100%;
+            width: 95%;
             height:150px;
-            border: solid black 1px;
+            border: solid #CACDD6 2px;
             alignment: center;
-            margin-top:10px;
-            margin-bottom: 10px;
+            margin: auto;
+            margin-top: 15px;
+            margin-bottom: 15px;
             position: relative;
         }
 
@@ -50,13 +67,13 @@
             float: left;
             margin-left:10px;
             margin-right:5px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-top: 3px;
+            margin-bottom: 3px;
             text-align: center;
         }
         .smallBox .left .item{
-            background: #3fbf79;
-            margin: 10px;
+            background: #FF5581;
+            margin: 30px;
             color: #FFF;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
@@ -72,14 +89,17 @@
             float: left;
             margin-left: 5px;
             margin-right: 5px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-top: 3px;
+            margin-bottom: 3px;
             text-align: left;
+            padding: 10px;
         }
 
         .smallBox .middle .item{
             text-align: left;
-            margin-left: 50px;
+            margin-left: 30px;
+            font-size: 20px;
+            margin-bottom: 11px;
         }
 
         .smallBox .right{
@@ -89,13 +109,14 @@
             float: left;
             margin-left:5px;
             margin-right:10px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-top: 3px;
+            margin-bottom: 3px;
             text-align: left;
         }
 
         .smallBox .right .item{
             text-align: center;
+            font-size: 30px;
         }
 
 
@@ -222,7 +243,7 @@
                 <br><br><br>
 
                 <div class="BigBox" id="receivedQuest">
-                    <b>나에게 온 플랜 요청</b><hr>
+                    <h2 style="margin-left: 6px;"><b>나에게 온 플랜 요청</b></h2><hr style="margin-top: 0px; margin-bottom: 0px;">
                     <% for(var i=0; i<data_length; i++) { %>
                         <% if( send_data[i].confirm==false) { %> 
 			<div class="smallBox" id="<%=i%>">
@@ -233,17 +254,17 @@
                             <div class="middle">
                                 <a href="">
                                     <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
-                                    <br>
-                                    <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
-                                    <br>
-                                    <div class="item" name="reservePlace"> </div>
-                                    <br>
+<!--                                    <br>-->
+                                    <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
+<!--                                    <br>-->
+                                    <div class="item" name="reservePlace">선택장소: </div>
+<!--                                    <br>-->
                                     <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
                                 </a>
                             </div>
                             <div id="test"></div>
                             <div class="right">
-                                <div><a><img src="/img/icon/x.png" width="16" height="16">거절완료</a></div><br>
+                                <div class="item"><a><img src="/img/icon/x.png" width="16" height="16">거절완료</a></div><br>
                             </div>
                         </div>
                         <% } else { %>
@@ -256,18 +277,18 @@
                         <div class="middle">
                             <a href="">
                                 <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
-                                <br>
-                                <div class="item"name="reserveDate">날짜: <%= send_data[i].date %></div>
-                                <br>
-                                <div class="item" name="reservePlace"> </div>
-                                <br>
+<!--                                <br>-->
+                                <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
+<!--                                <br>-->
+                                <div class="item" name="reservePlace">선택장소: </div>
+<!--                                <br>-->
                                 <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
                             </a>
                         </div>
                         <div id="test"></div>
                         <div class="right">
-                            <div><a name="accept" href="/sendReqID"><img src="/img/icon/o.jpg" width="16" height="16">요청수락!</a></div><br>
-                            <div><a name="reject"href=""><img src="/img/icon/x.png" width="16" height="16">요청거부!</a></div><br>
+                            <div class="item"><a name="accept" href="/sendReqID"><img src="/img/icon/o.jpg" width="16" height="16">요청수락</a></div><br>
+                            <div class="item"><a name="reject"href=""><img src="/img/icon/x.png" width="16" height="16">요청거부</a></div><br>
                         </div>
                     </div>
                     <% } %>
@@ -279,7 +300,7 @@
                 <p id="result"></p>
 
                 <div class="BigBox" id="acceptedQuest">
-                    <b>채택된 플랜</b><hr>
+                    <h2 style="margin-left: 6px;"><b>채택된 플랜</b></h2><hr style="margin-top: 0px; margin-bottom: 0px;">
 
                     <div class="smallBox">
                         <div class="left">

@@ -549,14 +549,14 @@
 <!--                                    비로그인에게 request버튼. 로그인하라는 modal띄움.-->
                                     <% if (!isAuthenticated) { %>
                                     <div class="share-btn" style="width: 500px;">
-                                        <a id="needLogin" style="cursor:pointer;" data-toggle="modal" data-target='#loginModal'>가짜리퀘스트</a></div>
+                                        <a id="needLogin" style="cursor:pointer;" data-toggle="modal" data-target='#loginModal'>계획요청</a></div>
 
 <!--                                    로그인한 여행자는 request 가능한 버튼-->
                                     <% } else { %>
 
                                         <% if(currentUser.userType == "traveler") { %>
-                                    <div class="share-btn" style="width: 500px;">
-                                        <a id="request" href="../requestform">Request</a></div>
+                                    <div class="share-btn" style="width: 500px; font-weight: 100;">
+                                        <a id="request" href="../requestform">계획요청</a></div>
 
                                         <!--                                                <form name="request"><input class="primary-btn" type="submit" id="request" value="request" action=""></form>-->
 
