@@ -31,7 +31,11 @@
 
 <!-- Header Section Begin -->
 <header class="header-section listings">
-    <% include header_bf_login.html %>
+    <% if(isAuthenticated) { %>
+        <% include header_af_login.html %>
+    <% } else { %>
+        <% include header_bf_login.html %>
+    <% } %>
 </header>
 <!-- Header End -->
 

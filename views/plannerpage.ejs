@@ -398,6 +398,46 @@
                 $name.toggleClass('postpicActive');
             });
 
+            var planner_id="<%=user_info.id%>"
+
+            $.ajax({
+                url:'/findReview',
+                dataType: 'json',
+                type:'Post',
+                data:{"id":planner_id},
+                async:false,
+                success: function(data) {
+                    var postsArr="";
+                    console.log(data.data.length);
+                    var length=data.data.length;
+                    for(var i=0; i<length; i++){
+                        console.log(data.data[i]);
+                        postsArr +=
+                            "<div class=\"reviews-item\" >" +
+                            "                           <div class=\"rating\">" +
+                            "                                <i class=\"fa fa-star\"></i>"+
+                            "                                <i class=\"fa fa-star\"></i>"+
+                            "                                <i class=\"fa fa-star\"></i>"+
+                            "                                <i class=\"fa fa-star\"></i>"+
+                            "                                <i class=\"fa fa-star\"></i>"+
+                            "                           </div>" +
+                            "                           <p>"+data.data[i].comment+"</p>"+
+                            "                           <div class=\"client-text\">"+
+                            "                               <h5>"+data.data[i].author+"</h5>"+
+                            "                               <span>"+data.data[i].date+"</span>"
+                            "                           </div>"+
+                            "                     </div>"+
+
+                        $(".reviews").html(postsArr);
+                    }
+                },
+                error: function(request,status,error){
+                    alert(error);
+                }
+
+            });
+
+
             $('#wantLogin').on('click', function (event) {
                 //모달창에서 로그인 누름.
                 console.log('로그인창으로 이동합니다.')
@@ -405,6 +445,7 @@
                 location.href='/login';
 
             });
+
         })
     </script>
 </head>
@@ -674,66 +715,78 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!--    모달 끝-->
 
+                                <!--                모달 바디-->
 
-                        <!--                        버튼 위치 아래로-->
-                        <!--                        <div class="col-lg-4 offset-lg-1"-->
-                        <!--                             style="margin-left:200px; max-width: 50%; padding-right:0px">-->
-                        <!--                            <div class="intro-share">-->
-                        <!--                                <div class="share-btn" style="width: 500px;">-->
-                        <!--                                    <a href="#" class="share">Select</a>-->
-                        <!--                                    <a href="#">Request</a>-->
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-
-
-                        <div class="client-reviews">
-                            <h3>Reviews</h3>
-                            <div class="reviews-item">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <h5>“A Great Place”</h5>
-                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
-                                    vitae
-                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
-                                    Class
-                                    aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                                    himenaeos. </p>
-                                <div class="client-text">
-                                    <h5>Michael Smith</h5>
-                                    <span>March 03, 2019</span>
-                                </div>
-                            </div>
-                            <div class="reviews-item">
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <h5>“The best food in town”</h5>
-                                <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id
-                                    vitae
-                                    massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.
-                                    Class
-                                    aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                                    himenaeos. </p>
-                                <div class="client-text">
-                                    <h5>Michael Smith</h5>
-                                    <span>March 03, 2019</span>
+                                <div class="modal-footer">
+                                    <button type="button" style="border: solid grey 2px;" class="btn btn-default"
+                                            id="activateIt" data-dismiss="modal">장소선택
+                                    </button>
+                                    <button type="button" style="border: solid grey 2px;" class="btn btn-default"
+                                            data-dismiss="modal">닫기
+                                    </button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <!--    모달 끝-->
+
+
+                    <!--                        버튼 위치 아래로-->
+                    <!--                        <div class="col-lg-4 offset-lg-1"-->
+                    <!--                             style="margin-left:200px; max-width: 50%; padding-right:0px">-->
+                    <!--                            <div class="intro-share">-->
+                    <!--                                <div class="share-btn" style="width: 500px;">-->
+                    <!--                                    <a href="#" class="share">Select</a>-->
+                    <!--                                    <a href="#">Request</a>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+
+                    <div class="client-reviews">
+                        <h3>Reviews</h3>
+                        <div class="reviews"></div>
+<!--                        <div class="reviews-item">-->
+<!--                            <div class="rating">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <h5>“A Great Place”</h5>-->
+<!--                            <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id-->
+<!--                                vitae-->
+<!--                                massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.-->
+<!--                                Class-->
+<!--                                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos-->
+<!--                                himenaeos. </p>-->
+<!--                            <div class="client-text">-->
+<!--                                <h5>Michael Smith</h5>-->
+<!--                                <span>March 03, 2019</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="reviews-item">-->
+<!--                            <div class="rating">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <h5>“The best food in town”</h5>-->
+<!--                            <p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id-->
+<!--                                vitae-->
+<!--                                massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus.-->
+<!--                                Class-->
+<!--                                aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos-->
+<!--                                himenaeos. </p>-->
+<!--                            <div class="client-text">-->
+<!--                                <h5>Michael Smith</h5>-->
+<!--                                <span>March 03, 2019</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
                     </div>
                 </div>
 
