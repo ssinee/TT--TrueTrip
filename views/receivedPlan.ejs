@@ -11,7 +11,7 @@
     <title>Local Directory | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -27,13 +27,14 @@
     <style>
         table {
             alignment: center;
-            border: solid 3px blue;
+            border: solid #CACDD6 2px;
             margin: auto;
             width: 90%;
-            font: 20px "맑은 고딕";
+            font-size: 30px;
+            /*font: 20px "맑은 고딕";*/
         }
         th, td {
-            border: solid 3px blue;
+            border: solid #CACDD6 3px;
             border-collapse: collapse;
             padding: 2px 3px;
             text-align: center;
@@ -44,9 +45,9 @@
             width: 90%;
             margin: 10px;
             align-self: center;
-            font-size: 15px;
+            font-size: 20px;
             height: 100px;
-            border: solid gold 2px;
+            border: solid grey 2px;
         }
         input[type="text"] {
             width: 100%; /* 원하는 너비 설정 */
@@ -56,6 +57,19 @@
             font-family: inherit; /* 폰트 상속 */
             border: 1px solid #999;
             border-radius: 0; /* iSO 둥근모서리 제거 */
+        }
+        h2{
+            font-size: 50px;
+        }
+        h5{
+            font-size: 20px;
+        }
+        .blog-item .blog-text p {
+            color: black;
+            font-size: 30px;
+            line-height: 28px;
+            letter-spacing: 0.2px;
+            margin-bottom: 46px;
         }
 
 
@@ -84,17 +98,12 @@
 
 
 <!-- Blog Section Begin -->
-<section class="blog-section spad">
+<section class="blog-section spad" style="padding-top: 150px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-
-                <br><br>
-
-                <div class="blog-item" style="border: solid black 2px;">
-
-                    <h2>계획 확인</h2>
-                    <hr style="border: solid black 1px;">
+                <h2>계획 확인</h2>
+                <div class="blog-item" style="border: solid #CACDD6 2px;">
 
                     <!--                    계획 들어가는 자리-->
                     <div class="blog-text">
@@ -110,38 +119,41 @@
 
 
                 <!--                    후기작성 섹션-->
-                <div class="blog-item" style="border: solid black 2px;">
-                    <div id="후기작성">
-                        <br>
-                        <b><h3>&nbsp;리뷰 작성</h3></b>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;리뷰 작성시 마일리지 2포인트가 적립됩니다.</p>
+                <b><h2>리뷰 작성</h2></b>
+                <div class="blog-item" style="border: solid #CACDD6 2px">
+                    <div id="후기작성" style="padding: 30px;">
+<!--                        <p style="font-size: 20px; color: grey">리뷰 작성시 마일리지 2포인트가 적립됩니다.</p>-->
 
                         <!--                        chg. 여기 action 바꿔줘야함.-->
                         <!--                        chg. 후기DB에 stars랑 review값 저장. 유저ID, 플래너ID, 선택장소, 날짜도 저장-->
                         <!--                        chg. 계획요청DB에서 후기여부를 true로.-->
+
                         <form method="post" action="/main" id="AAA">
-                            &nbsp;&nbsp;&nbsp;&nbsp;만족도&nbsp;&nbsp;
+                            만족도&nbsp;&nbsp;
+
                             <select name="stars">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
+
 <!--                                <option value="6">6</option>-->
 <!--                                <option value="7">7</option>-->
 <!--                                <option value="8">8</option>-->
 <!--                                <option value="9">9</option>-->
 <!--                                <option value="10" selected>10</option>-->
                             </select>점 / 5 점
+
                             <br>
 
-                            <textarea name = "review" form="AAA" cols="40" rows="10" placeholder="이런 점이 좋았고 이런 점이 보완이 필요해요."></textarea>
-                            <br><br>
+                            <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="이런 점이 좋았고 이런 점이 보완이 필요해요."></textarea>
+                            <br>
                             <center>
                                 <input id="submit" type="submit" class="primary-btn" value="확인">
                             </center>
                         </form>
-                        <br>
+<!--                        <br>-->
                     </div>
                 </div>
             </div>
