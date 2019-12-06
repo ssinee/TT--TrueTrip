@@ -14,7 +14,9 @@ router.get('/', (req, res) => {
 router.get('/main', (req, res) => {
     res.render('../views/index');
 });
-
+router.post('/main', (req, res) => {
+    res.render('../views/index');
+});
 // router.get('/reservation_planner', (req,res)=>{
 //     res.render('../views/reservation_planner.ejs')
 // })

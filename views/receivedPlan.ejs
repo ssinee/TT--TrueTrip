@@ -119,7 +119,7 @@
                         <!--                        chg. 여기 action 바꿔줘야함.-->
                         <!--                        chg. 후기DB에 stars랑 review값 저장. 유저ID, 플래너ID, 선택장소, 날짜도 저장-->
                         <!--                        chg. 계획요청DB에서 후기여부를 true로.-->
-                        <form action="#" id="AAA">
+                        <form method="post" action="/main" id="AAA">
                             &nbsp;&nbsp;&nbsp;&nbsp;만족도&nbsp;&nbsp;
                             <select name="stars">
                                 <option value="1">1</option>
@@ -329,7 +329,6 @@
                 'originRequest': origin_id,
                 'planner_id':planner_id
             });
-
         })
     })
 
