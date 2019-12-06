@@ -61,7 +61,7 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
-
+        
 
         $(document).ready(function(){
            var post_id="<%=data[0].selectpost%>";
@@ -76,10 +76,19 @@
 
                posting.done(function(post_title){
                    console.log(post_title)
+                   // console.log(post_path)
                    var title=post_title["post_title"];
+                   var path=post_title["post_path"];
+                   console.log(path);
                    console.log(title);
+                   // width:264px; height:223px position:fixed
                    postsArr+=
-                       "                                    <h4>"+title+"</h4>"
+                       "<div class=\"col-lg-4 col-sm-6\" >" +
+                       "        <div class=\"arrange-pic\">" +
+                       "            <img class=\"postpic\" src=\'" + path + "'width=264px; height=223px'>" +
+                       "                                    <h4>"+title+"</h4>"+
+                       "        </div>"+
+                       "</div>"
 
                    $("#selectPlace").html(postsArr)
                });
@@ -117,7 +126,7 @@
                 <div>
                     <h2><b>요청정보</b></h2>
                     <h4><b>선택장소</b></h4>
-                    <div id="selectPlace"></div>
+                    <div class="row" id="selectPlace"></div>
                     <h4><b>날짜:</b> <%=data[0].date%> </h4>
                     <h4><b>인원:</b> <%=data[0].people%> 명</h4>
                     <h4><b>나이:</b><%=data[0].age%></h4>

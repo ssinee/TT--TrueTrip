@@ -8,6 +8,7 @@ var UserSchema= new Schema({
     name: String,
     email: String,
     userType: String, //가입 시 traveler로 들어감.
+    point: {type:Number,default:1000}
 
 })
 

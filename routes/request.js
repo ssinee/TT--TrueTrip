@@ -162,9 +162,11 @@ router.post('/findTitle',function(req,res){
     Postdata.find({'_id':data},function(err,data) {
         console.log(data);
         var title=data[0].title;
+        var path=data[0].path;
         console.log("제목"+title);
+        console.log("찾은 path"+path);
         // console.log("찾은데이터"+data);
-        res.send({'post_title':title});
+        res.send({'post_title':title,'post_path':path});
     })
 });
 
