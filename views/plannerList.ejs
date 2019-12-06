@@ -170,6 +170,22 @@
 
         }
 
+        .plannerRating {
+            position: absolute;
+            left: 11px;
+            top: 14px;
+            height: 55px;
+            width: 55px;
+            background: #FF5581;
+            text-align: center;
+            line-height: 55px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+        }
+
     </style>
 
 
@@ -179,7 +195,7 @@
         var pagenum = 0;
 
         //fill body content
-        function fillcontent(imagedata, idData) {
+        function fillcontent(imagedata, idData, score) {
             contentString = " "
             stringArr = [];
             pagenum = 0;
@@ -199,6 +215,7 @@
                     "\n" +
                     "                                </div>\n" +
                     "                                <div class=\"profile_img\">\n" +
+                    "                            <div class='plannerRating'>" + score[i] + "</div>" +
                     "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;' src='" + idData[i].path + "'>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
@@ -280,13 +297,28 @@
             var posting = $.post('/showplanner', {})
 
             //post done, get data
+            var temp_score = 0;
+            var result_score = new Array();
+
             posting.done(function (data) {
                 imagepath = data.data//get image path
                 idData = data.Iddata// get selected ID data
                 category = data.category//get selected category data
                 location = data.location//get selected location data
-                //fill body section with data
-                fillcontent(imagepath, idData)
+
+                for (var i = 0; i < idData.length; i++) {
+                    if (idData[i].reviews.length == 0) {
+                        result_score.push('NEW')
+                        continue;
+                    }
+                    for (var j = 0; j < idData[i].reviews.length; j++) {
+                        temp_score += parseInt(idData[i].reviews[j].score)
+                    }
+                    result_score.push((temp_score / idData[i].reviews.length).toFixed(1))
+                    console.log('score result:' + temp_score / idData[i].reviews.length)
+                }
+
+                fillcontent(imagepath, idData, result_score)
 
                 //set the filter section as selected data
                 changefilter(location, category)
@@ -313,6 +345,8 @@
                         //time 설정 needed
 
                         var posting_filter_start = $.post('/showplanner', {})
+                        var temp_score = 0;
+                        var result_score = new Array();
 
                         posting_filter_start.done(function (data) {
                             imagepath = data.data//get image path
@@ -320,10 +354,23 @@
                             category = data.category//get selected category data
                             location = data.location//get selected location data
 
+                            for (var i = 0; i < idData.length; i++) {
+                                if (idData[i].reviews.length == 0) {
+                                    result_score.push('NEW')
+                                    continue;
+                                }
+                                for (var j = 0; j < idData[i].reviews.length; j++) {
+                                    temp_score += parseInt(idData[i].reviews[j].score)
+                                }
+                                result_score.push((temp_score / idData[i].reviews.length).toFixed(1))
+                                console.log('score result:' + temp_score / idData[i].reviews.length)
+                            }
+
+
                             //fill body section with data
-                            fillcontent(imagepath, idData)
+                            fillcontent(imagepath, idData, result_score)
                         })
-                    } else if(data=='0'){
+                    } else if (data == '0') {
                         //content가 없을 경우
                         console.log('in elseif')
                         $('#showhere').html(' ')
