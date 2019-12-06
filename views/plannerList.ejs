@@ -142,12 +142,6 @@
             text-align: center;
         }
 
-        .planners .planner .profile .profile_desc {
-            height: 15%;
-            width: 100%;
-            /*background: yellow;*/
-        }
-
         .planners .planner .profile .profile_img {
             height: 85%;
             width: 100%;
@@ -155,10 +149,6 @@
 
         }
 
-        .planners .planner .profile .profile_img img {
-            height: 100%;
-            width: 100%;
-        }
 
         .planners .planner .desc {
             width: 79%;
@@ -170,6 +160,55 @@
 
         }
 
+        .yellowRating {
+            color: #fff;
+            background: #FF5581;
+            font-size: 12px;
+            font-weight: 700;
+            /*display: inline-block;*/
+            padding: 5px 15px;
+            text-transform: uppercase;
+            position: absolute;
+            right: auto;
+            top: 10;
+
+        }
+
+
+        .plannerRating {
+            position: absolute;
+            left: 11px;
+            top: 14px;
+            height: 55px;
+            width: 55px;
+            background: #FF5581;
+            text-align: center;
+            line-height: 55px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+        }
+
+        .planners_IDs {
+            display: inline-block;
+            padding: 7px 20px;
+
+            font-size: 18px;
+            color: black;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+
+        }
+
+        .mystar {
+            height: 30%;
+        !important;
+            width: 30%;
+        !important;
+        }
+
     </style>
 
 
@@ -179,7 +218,7 @@
         var pagenum = 0;
 
         //fill body content
-        function fillcontent(imagedata, idData) {
+        function fillcontent(imagedata, idData, score) {
             contentString = " "
             stringArr = [];
             pagenum = 0;
@@ -191,19 +230,26 @@
                 }
                 //fill the profile
                 contentString +=
+
                     "                        <div class=\"planner\" >\n" +
                     "                            <div class=\"profile\" style=\"border:none; cursor: pointer; \">\n" +
-                    "\n" +
-                    "                                <div  class=\"profile_desc\" style=\"border:1px solid #CACDD6; \" >\n" +
-                    "                                    <span class='planners_IDs'>" + idData[i].id + "</span>\n" +
-                    "\n" +
-                    "                                </div>\n" +
                     "                                <div class=\"profile_img\">\n" +
+                    "                                   <div class='yellowRating' style='width:70px; padding-left:0px;padding-right:0px;'><img class='mystar' src='img/mystar.PNG' >" + score[i] + "</div>" +
                     "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;' src='" + idData[i].path + "'>\n" +
+
+                    "                                 <div  class=\"profile_desc\" style=\"border:1px solid #CACDD6; background: #F7F8FB;\n" +
+                    "\tpadding-left: 16px;\n" +
+                    "\tpadding-top: 5px;\n" +
+                    "\tpadding-bottom: 5px;\n" +
+                    "\tpadding-right: 15px;\" >\n" +
+                    "                                    <span class='planners_names'>" + idData[i].name + "</span>\n" +
+                    "                                    <span style='display:none' class='planners_IDs'>" + idData[i].id + "</span>\n" +
                     "                                </div>\n" +
+                    "                                </div>\n" +
+
                     "                            </div>\n" +
                     "\n" +
-                    "                            <div class=\"desc\" style='padding-top: 20px'>\n" +
+                    "                            <div class=\"desc\" style='padding-top: 10px'>\n" +
                     "                                <div class=\"autoplay slider\">\n"
                 for (var j = 0; j < imagedata[i].length; j++) {
                     contentString +=
@@ -280,13 +326,28 @@
             var posting = $.post('/showplanner', {})
 
             //post done, get data
+            var temp_score = 0;
+            var result_score = new Array();
+
             posting.done(function (data) {
                 imagepath = data.data//get image path
                 idData = data.Iddata// get selected ID data
                 category = data.category//get selected category data
                 location = data.location//get selected location data
-                //fill body section with data
-                fillcontent(imagepath, idData)
+
+                for (var i = 0; i < idData.length; i++) {
+                    if (idData[i].reviews.length == 0) {
+                        result_score.push('NEW')
+                        continue;
+                    }
+                    for (var j = 0; j < idData[i].reviews.length; j++) {
+                        temp_score += parseInt(idData[i].reviews[j].score)
+                    }
+                    result_score.push((temp_score / idData[i].reviews.length).toFixed(1))
+                    console.log('score result:' + temp_score / idData[i].reviews.length)
+                }
+
+                fillcontent(imagepath, idData, result_score)
 
                 //set the filter section as selected data
                 changefilter(location, category)
@@ -313,6 +374,8 @@
                         //time 설정 needed
 
                         var posting_filter_start = $.post('/showplanner', {})
+                        var temp_score = 0;
+                        var result_score = new Array();
 
                         posting_filter_start.done(function (data) {
                             imagepath = data.data//get image path
@@ -320,10 +383,23 @@
                             category = data.category//get selected category data
                             location = data.location//get selected location data
 
+                            for (var i = 0; i < idData.length; i++) {
+                                if (idData[i].reviews.length == 0) {
+                                    result_score.push('NEW')
+                                    continue;
+                                }
+                                for (var j = 0; j < idData[i].reviews.length; j++) {
+                                    temp_score += parseInt(idData[i].reviews[j].score)
+                                }
+                                result_score.push((temp_score / idData[i].reviews.length).toFixed(1))
+                                console.log('score result:' + temp_score / idData[i].reviews.length)
+                            }
+
+
                             //fill body section with data
-                            fillcontent(imagepath, idData)
+                            fillcontent(imagepath, idData, result_score)
                         })
-                    } else if(data=='0'){
+                    } else if (data == '0') {
                         //content가 없을 경우
                         console.log('in elseif')
                         $('#showhere').html(' ')
