@@ -26,7 +26,8 @@ var PlannerSchema= new Schema({
     userType: String,       // 가입 시 planner로 들어감.
     orgFileName: String,    //프로필 사진 orgname
     saveFileName:String,    //프로필 사진 savename
-    reviews:[ReviewSchema]
+    reviews:[ReviewSchema],
+    point: {type:Number,default:1000}
 });
 //
 // {"id":id, "pw":pw, "name":paramName,"email":paramEmail,

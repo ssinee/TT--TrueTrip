@@ -86,7 +86,7 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
-
+        
 
         $(document).ready(function(){
            var post_id="<%=data[0].selectpost%>";
@@ -101,10 +101,19 @@
 
                posting.done(function(post_title){
                    console.log(post_title)
+                   // console.log(post_path)
                    var title=post_title["post_title"];
+                   var path=post_title["post_path"];
+                   console.log(path);
                    console.log(title);
+                   // width:264px; height:223px position:fixed
                    postsArr+=
-                       "                                    <h4>"+title+"</h4>"
+                       "<div class=\"col-lg-4 col-sm-6\" >" +
+                       "        <div class=\"arrange-pic\">" +
+                       "            <img class=\"postpic\" src=\'" + path + "'width=264px; height=223px'>" +
+                       "                                    <h4>"+title+"</h4>"+
+                       "        </div>"+
+                       "</div>"
 
                    $("#selectPlace").html(postsArr)
                });
@@ -139,11 +148,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
+
                 <h2><b>요청정보</b></h2>
                 <div class="requestInfo" id="요청정보섹션" style="border: solid #CACDD6 2px;">
                     <span><b>선택장소</b></span>
 <!--                    여기에 장소이미지, 설명 들어가게? -->
-                    <div id="selectPlace"></div>
+                    <div class="row" id="selectPlace"></div>
                     <hr>
                     <span><b>날짜:</b></span> <span class="content"><%=data[0].date%></span><br>
                     <span><b>인원:</b></span> <span class="content"><%=data[0].people%> 명</span><br>
@@ -152,6 +162,7 @@
                     <span><b>이런 정보가 필요해요:</b></span> <span class="content"><%=data[0].yes_info%></span><br>
                     <span><b>이런 것들은 유의해 주세요:</b></span> <span class="content"><%=data[0].no_info%></span><br>
                     <span><b>추가 요구사항:</b></span> <span class="content"><%=data[0].addition%></span>
+
 
                 </div>
                 <br><div><h2><b>계획하기</b></h2></div>
