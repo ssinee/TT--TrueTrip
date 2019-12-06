@@ -53,7 +53,7 @@ uploadRouter.post('/create', upload.single('myFile'), function(req, res, next){
                     var newData=new DBData(obj);
                     newData.save(function(err){
                         if(err) throw err;
-                        res.end('OK');
+                        res.redirect('/post/'+author)
                     });
 
             }

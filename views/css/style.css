@@ -35,7 +35,7 @@
 html,
 body {
 	height: 100%;
-	font-family: "Lato", sans-serif;
+	font-family: "Do Hyeon", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 	background: none;
@@ -50,7 +50,7 @@ h6 {
 	margin: 0;
 	color: #111111;
 	font-weight: 400;
-	font-family: "Lato", sans-serif;
+	font-family: "Do Hyeon", sans-serif;
 }
 
 h1 {
@@ -80,7 +80,7 @@ h6 {
 p {
 	font-size: 14px;
 	color: #222222;
-	font-family: "Lato", sans-serif;
+	font-family: "Do Hyeon", sans-serif;
 	font-weight: 400;
 	line-height: 30px;
 	margin: 0 0 15px 0;
