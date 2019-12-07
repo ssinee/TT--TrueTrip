@@ -14,6 +14,7 @@
     <% include head_link.html%>
 
     <style>
+
         table {
             alignment: center;
             border: solid #CACDD6 2px;
@@ -30,13 +31,19 @@
             alignment: center;
             margin: auto;
         }
+        td {
+            min-width: 110px;
+            padding: 5px;
+            text-align: unset;
+        }
+
         textarea{
-            width: 90%;
-            margin: 10px;
+            width: 48%;
+            margin: 4px;
             align-self: center;
-            font-size: 20px;
+            font-size: 18px;
             height: 100px;
-            border: solid grey 2px;
+            border: solid #CACDD6 2px;
         }
         input[type="text"] {
             width: 100%; /* 원하는 너비 설정 */
@@ -59,6 +66,10 @@
             line-height: 28px;
             letter-spacing: 0.2px;
             margin-bottom: 46px;
+        }
+        .blog-item .blog-text {
+            text-align: unset;
+            padding-top: 65px;
         }
 
 
@@ -249,9 +260,13 @@
 
                 //세 번째 셀
                 else if (c == 2) {
+                    var space = "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" +
+                        "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" +
+                        "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
+
                     //텍스트 위에 들어가는 타이틀. ex) 위치, 경비...
                     var title1 = document.createElement("h5");
-                    title1.innerText = '위치 / 교통';
+                    title1.innerText = "\u00A0"+"위치 / 교통" + space + "\u00A0\u00A0\u00A0\u00A0"  +"이용료 / 경비";
                     td.appendChild(title1);
                     var textarea1 = document.createElement("textarea");
                     textarea1.setAttribute('type', 'textarea');
@@ -260,47 +275,45 @@
                     td.appendChild(textarea1);
 
                     var textarea2 = document.createElement("textarea");
-                    var title2 = document.createElement("h5");
-                    title2.innerText = '이용료 / 경비';
-                    td.appendChild(title2);
                     textarea2.setAttribute('type', 'textarea');
                     textarea2.setAttribute('placeholder', '이용료/경비');
                     textarea2.innerText = values[cursor++];
                     td.appendChild(textarea2);
 
-
                     var textarea3 = document.createElement("textarea");
-
-                    var title3 = document.createElement("h5");
-                    title3.innerText = '개방시간';
-                    td.appendChild(title3);
+                    var title2 = document.createElement("h5");
+                    title2.innerText = "\u00A0"+"개방시간" + space + "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" + "복잡도";
+                    td.appendChild(title2);
                     textarea3.setAttribute('type', 'textarea');
                     textarea3.setAttribute('placeholder', '개방시간');
                     textarea3.innerText = values[cursor++];
                     td.appendChild(textarea3);
 
                     var textarea4 = document.createElement("textarea");
-                    var title4 = document.createElement("h5");
-                    title4.innerText = '복잡도';
-                    td.appendChild(title4);
+                    // var title4 = document.createElement("h5");
+                    // title4.innerText = '복잡도';
+                    // td.appendChild(title4);
                     textarea4.setAttribute('type', 'textarea');
                     textarea4.setAttribute('placeholder', '복잡도');
                     textarea4.innerText = values[cursor++];
                     td.appendChild(textarea4);
 
                     var textarea5 = document.createElement("textarea");
-                    var title5 = document.createElement("h5");
-                    title5.innerText = '분위기';
-                    td.appendChild(title5);
+                    // var title5 = document.createElement("h5");
+                    // title5.innerText = '분위기';
+                    // td.appendChild(title5);
+                    var title3 = document.createElement("h5");
+                    title3.innerText = "\u00A0" + "분위기" + space + "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" + "플래너의 추천";
+                    td.appendChild(title3);
                     textarea5.setAttribute('type', 'textarea');
                     textarea5.setAttribute('placeholder', '분위기');
                     textarea5.innerText = values[cursor++];
                     td.appendChild(textarea5);
 
                     var textarea6 = document.createElement("textarea");
-                    var title6 = document.createElement("h5");
-                    title6.innerText = '플래너의 추천';
-                    td.appendChild(title6);
+                    // var title6 = document.createElement("h5");
+                    // title6.innerText = '플래너의 추천';
+                    // td.appendChild(title6);
                     textarea6.setAttribute('type', 'textarea');
                     textarea6.setAttribute('placeholder', '플래너의 추천');
                     textarea6.innerText = values[cursor++];
