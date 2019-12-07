@@ -41,7 +41,7 @@
             width: 48%;
             margin: 4px;
             align-self: center;
-            font-size: 18px;
+            font-size: 13px;
             height: 100px;
             border: solid #CACDD6 2px;
         }
@@ -387,7 +387,7 @@
             var author="<%=data[0].traveler%>";
             var planner_id="<%=data[0].planner%>";
             // var score=$("select[name=stars]").val();
-            var score = $("#star_grade a").attr("value");
+            var score = $('.on').length; // 별점클릭시 클래스 on됨. on의 갯수.
             var comment=$("textarea[name=review]").val();
 
             var send=$.post('/sendReview', {
