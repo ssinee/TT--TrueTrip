@@ -24,6 +24,10 @@
 
 
     <style>
+        .blog-item .blog-text {
+             text-align: unset;
+            padding-top: 65px;
+        }
         .requestInfo {
             padding: 10px;
             line-height: normal;
@@ -59,8 +63,9 @@
             margin: auto;
         }
         td{
-            min-width: 110px;
+            min-width: 0px;
             padding: 5px;
+            text-align: unset;
         }
         textarea{
             width: 48%;
@@ -90,6 +95,9 @@
         }
         h4{
             color: dimgrey;
+        }
+        h5{
+            font-size: 20px;
         }
 
 
@@ -257,7 +265,7 @@
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
                 var ele = document.createElement('input');
                 ele.setAttribute('type', 'text');
-                ele.setAttribute('placeholder', '09:00~10:30');
+                ele.setAttribute('placeholder', '09:00~10:00');
 
                 td.appendChild(ele);
             } else if (c == 1) {
@@ -265,41 +273,54 @@
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
                 var ele = document.createElement('input');
                 ele.setAttribute('type', 'text');
-                ele.setAttribute('placeholder', '아주대학교');
+                ele.setAttribute('placeholder', '예시) 화성행궁');
 
                 td.appendChild(ele);
 
 
             } else if (c == 2) {
+                var space = "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" +
+                    "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" +
+                    "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
 
+                var title1 = document.createElement("h5");
+                title1.innerText =  "\u00A0"+"위치 / 교통" + space +"\u00A0"+"이용료 / 경비"
+                td.appendChild(title1);
                 var textarea1 = document.createElement("textarea");
                 textarea1.setAttribute('type', 'textarea');
-                textarea1.setAttribute('placeholder', '위치 및 교통 정보를 적어주세요.');
+                textarea1.setAttribute('placeholder', '예시) OO 정류장에서 내려서 매표소까지 도보 6분입니다.');
                 td.appendChild(textarea1);
 
                 var textarea2 = document.createElement("textarea");
                 textarea2.setAttribute('type', 'textarea');
-                textarea2.setAttribute('placeholder', '이용료/경비를 적어주세요.');
+                textarea2.setAttribute('placeholder', '예시) 성인 입장 요금은 1500원, 청소년 요금은 1000원입니다.');
                 td.appendChild(textarea2);
 
+                var title2 = document.createElement("h5");
+                title2.innerText = "\u00A0"+"개방시간" + space + "\u00A0\u00A0\u00A0\u00A0\u00A0" + "복잡도";
+                td.appendChild(title2);
                 var textarea3 = document.createElement("textarea");
                 textarea3.setAttribute('type', 'textarea');
-                textarea3.setAttribute('placeholder', '개방 시간을 적어주세요.');
+                textarea3.setAttribute('placeholder', '예시) 매일 09:00~18:00 입니다. 동절기(11월~2월)에는 09:00 ~ 17:00로 단축되니 주의해주세요.');
                 td.appendChild(textarea3);
 
                 var textarea4 = document.createElement("textarea");
                 textarea4.setAttribute('type', 'textarea');
-                textarea4.setAttribute('placeholder', '복잡도를 적어주세요.');
+                textarea4.setAttribute('placeholder', '예시) 아침시간에는 사람이 별로 없으니 여유롭게 구경할 수 있어요.');
                 td.appendChild(textarea4);
 
+
+                var title3 = document.createElement("h5");
+                title3.innerText = "\u00A0"+"분위기 / 플래너의 추천";
+                td.appendChild(title3);
                 var textarea5 = document.createElement("textarea");
                 textarea5.setAttribute('type', 'textarea');
-                textarea5.setAttribute('placeholder', '분위기를 적어주세요.');
+                textarea5.setAttribute('placeholder', '예시) 한산한 아침시간에는 차분하고 여유로운 분위기에요.');
                 td.appendChild(textarea5);
 
                 var textarea6 = document.createElement("textarea");
                 textarea6.setAttribute('type', 'textarea');
-                textarea6.setAttribute('placeholder', '플래너의 추천을 적어주세요.');
+                textarea6.setAttribute('placeholder', '예시) 산책으로 가볍게 걷기에 좋고, 아이들이 있다면 화성 어차를 타고 한 바퀴 둘러보는 것을 추천합니다.관광 해설은 10~16시에 안내소에서 신청이 가능해요.');
                 td.appendChild(textarea6);
             }
 
@@ -309,13 +330,12 @@
 
             // SET INPUT ATTRIBUTE.
             button.setAttribute('src', 'img/icon/x.jpg');
-            button.setAttribute('width', '130');
+            button.setAttribute('width', '100');
             button.setAttribute('height', '75');
             button.setAttribute('style', 'cursor:pointer');
             button.setAttribute('onclick', 'removeRow(this)');
 
             td.appendChild(button);
-
         }
         }
     }
