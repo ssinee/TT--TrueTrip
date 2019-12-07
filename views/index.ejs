@@ -21,7 +21,10 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
     <link rel="icon" href="img/favicon-32x32.png">
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 
@@ -32,17 +35,19 @@
 
             $('#mainbtn').click(function () {
                 console.log("main button clicked!")
-                var loc=$('#lo-search option:selected').val()
+                var loc = $('#lo-search option:selected').val()
                 console.log("selected location")
                 console.log(loc)
-                var cat=$('#ca-search option:selected').val()
+                var cat = $('#ca-search option:selected').val()
                 console.log("selected theme")
                 console.log(cat)
 
-               var posting= $.post('/frommain', {'location':loc, 'category': cat})
+                var posting = $.post('/frommain', {'location': loc, 'category': cat})
 
-                posting.done(function(data){
-                    if(data=='1') location.href='plannerlist';
+
+                posting.done(function (data) {
+
+                    if (data == '1') {location.href = 'plannerlist';}
                 })
             })
 
@@ -50,6 +55,53 @@
 
 
     </script>
+
+    <style>
+
+        .lo-search .current, .ca-search .current{
+            color:#787878;
+            font-size: smaller;
+        }
+        .pink_btn{
+            color: #fff;
+            background: #FF5581;
+            font-size: smaller;
+            /*position: absolute;*/
+            right: 38px;
+            top: 41px;
+            margin-left: 20px;
+            padding: 13px 65px;
+            /*cursor: pointer;*/
+            border: 1px solid #FF5581;
+            padding-right: 30px; !important;
+            padding-left: 30px; !important;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        #mainbtn{
+            color: #fff;
+            background: #FF5581;
+            font-size: smaller;
+            /*position: absolute;*/
+            right: 38px;
+            top: 41px;
+            margin-left: 170px;
+            padding: 13px 65px;
+            /*cursor: pointer;*/
+            border: 1px solid #FF5581;
+            padding-right: 30px; !important;
+            padding-left: 30px; !important;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .select_h5{
+            font-size:smaller;!important;
+        }
+        .select_h5_{
+            font-size:smaller;!important;
+        }
+
+    </style>
 
 
 </head>
@@ -73,17 +125,24 @@
 <!-- Header End -->
 
 <!-- Hero Section Begin -->
-<section class="hero-section set-bg" data-setbg="img/blog/일괄편집_방화수류정.jpg" style="height:1000px">
+<section class="hero-section set-bg" data-setbg="img/blog/일괄편집_방화수류정1.jpg" style="height:1000px; padding-top:188px">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="width:1000px; right:50px; max-width: 100%">
                 <div class="hero-text">
-                    <img src="img/placeholder.png" alt="">
-                    <h1>TT-True Trip</h1>
-                    <div class="filter-search">
-                        <div class="location-search">
-                            <h5>Your Location</h5>
-                            <select id="lo-search" class="lo-search">
+
+
+                    <div class="filter-search" style="border-radius: 5px; width: 444px; height:500px; background-color: #FFF; opacity: 1;">
+<!--                        <h1 style="font-size:3rem;position:absolute; font-weight:900 ;margin-left:850px; width:800px">TT</h1>-->
+                        <h1 class='animated flipInX delay-1s' style="font-size:120px;animation-duration:2s;margin-left:640px; margin-top:10px;font-weight: 900; position:absolute">TrueTrip</h1>
+                        <h1 class='animated flipInX delay-2s'style="width:300px;margin-left:777px; font-size: 1.4rem;margin-top:170px;font-weight:400; position:absolute">For your true travel</h1>
+                        <div class="location-search" style="width: 100%; padding-bottom: 30px">
+                            <img src="img/placeholder.png" alt="" style="padding-top: 10px;">
+                            <h4 style="color:#787878; padding-top: 15px; padding-bottom: 40px">편안한 여행을 위한 계획을 요청해보세요.</h4>
+
+                            <h5 class='select_h5' style="color:#787878">목적지</h5>
+
+                            <select id="lo-search" class="lo-search" >
                                 <option selected>모든지역</option>
                                 <option>인계동</option>
                                 <option>행궁동</option>
@@ -92,8 +151,8 @@
                                 <option>매탄동</option>
                             </select>
                         </div>
-                        <div class="category-search">
-                            <h5>Search Category</h5>
+                        <div class="category-search" style="width: 100%">
+                            <h5 class='select_h5_' style="color:#787878">테마</h5>
                             <select id="ca-search" class="ca-search">
                                 <option selected>모든카테고리</option>
                                 <option>쇼핑</option>
@@ -106,8 +165,10 @@
                             </select>
                         </div>
 
-                        <button id="mainbtn" type="button" onclick="">Search Now</button>
-<!--                        <button id="mainbtn" type="button">Search Now</button>-->
+
+                        <button class="pink_btn" id="mainbtn" type="button" style="margint-left: 140px !important;position: relative">검색
+                        </button>
+                        <!--                        <button id="mainbtn" type="button">Search Now</button>-->
                     </div>
                 </div>
             </div>

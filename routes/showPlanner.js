@@ -112,7 +112,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                 })
             }
 
-            if (content.length > 0) res.send('1'); else res.send('0');
+            if (content[0].length > 0) res.send('1'); else res.send('0');
         });
     } else {
         await Planner.find({'location': location},{'id':1,'name': 1, 'path': 1,'reviews':1, '_id': 0}, async (err, IDdata) => {
@@ -126,7 +126,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                 })
             }
             if (content.length==0 || content[0].length==0) res.send('0');
-            else res.send('1');
+            res.send('1');
 
         });
 
