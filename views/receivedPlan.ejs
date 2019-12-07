@@ -71,6 +71,29 @@
             letter-spacing: 0.2px;
             margin-bottom: 46px;
         }
+        .blur_class{
+            -webkit-filter: blur(5px);
+            -moz-filter: blur(5px);
+            -o-filter: blur(5px);
+            -ms-filter: blur(5px);
+            filter: blur(5px);
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            /*position:relative;*/
+
+        }
+        #test{
+           position:absolute;
+            top:1200px;
+            left:200px;
+        }
+        #req_cont{
+            position:relative;
+        }
+        #planalert{
+            font-size: 50px;
+        }
 
 
     </style>
@@ -105,9 +128,22 @@
                 <h2>계획 확인</h2>
                 <div class="blog-item" style="border: solid #CACDD6 2px;">
 
+
                     <!--                    계획 들어가는 자리-->
                     <div class="blog-text">
                         <div id="req_cont"></div><br>
+                        <div id="test" style="padding: 30px;">
+                            <form method="post" action="" id="AAA">
+
+<!--                                <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="계획을 더 보고싶다면?"></textarea>-->
+
+                                <div id="planalert">계획을 더 보려면 100point가 필요합니다.</div>
+                                <br>
+                                <center>
+                                    <input id="submit" type="submit" class="primary-btn" value="계획 더보기">
+                                </center>
+                            </form>
+                        </div>
                     </div>
 
 
@@ -237,10 +273,19 @@
             var tr = userTab.insertRow(rowCnt);      // TABLE ROW.
             tr = userTab.insertRow(rowCnt);
 
+            for(var i=0; i< howManyRows;i++){
+                tr.id= "id"+rowCnt;
+            }
+            for(var j=0; j<howManyRows; j++){
+                if(tr.id!="id1"){
+                    tr.className="blur_class";
+                }
+            }
+
+
             for (var c = 0; c < arrHead.length; c++) {
                 var td = document.createElement('td');          // TABLE DEFINITION.
                 td = tr.insertCell(c);
-
                 //첫 셀
                 if (c == 0) {
 
@@ -327,6 +372,31 @@
     }
 
     $(document).ready(function(){
+
+        // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+        var floatPosition = parseInt($("#test").css('top'))
+        // 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+
+        $(window).scroll(function() {
+            // 현재 스크롤 위치를 가져온다.
+            var scrollTop = $(window).scrollTop();
+            var newvalue=floatPosition-1000;
+            var newPosition = scrollTop + newvalue + "px";
+
+
+             // $("#test").css('top', newPosition);
+
+            if(scrollTop<1200){
+                newPosition=1200;
+            }
+
+            $("#test").stop().animate({
+                "top" : newPosition
+            }, 1000);
+
+        }).scroll();
+
+
         $("#submit").click(function(){
             var origin_id="<%=data[0].originRequest%>";
             var author="<%=data[0].traveler%>";
