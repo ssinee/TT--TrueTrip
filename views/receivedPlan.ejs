@@ -71,6 +71,14 @@
             text-align: unset;
             padding-top: 65px;
         }
+        #star_grade a{
+            font-size: 50px;
+            text-decoration: none;
+            color: gray;
+        }
+        #star_grade a.on{
+            color: gold;
+        }
 
 
     </style>
@@ -115,51 +123,96 @@
                     <div align="right" style="margin-right: 50px; margin-bottom: 30px; margin-top: 20px;">
                         <img src="img/icon/print.png" style="cursor:pointer" width="80px" height="80px" onclick="print_plan()"/>
                     </div>
+                    <div><center><button class="primary-btn" id="reviewBtn">후기작성</button></center></div><br>
+
                 </div>
 
 
                 <!--                    후기작성 섹션-->
-                <b><h2>리뷰 작성</h2></b>
-                <div class="blog-item" style="border: solid #CACDD6 2px">
-                    <div id="후기작성" style="padding: 30px;">
-<!--                        <p style="font-size: 20px; color: grey">리뷰 작성시 마일리지 2포인트가 적립됩니다.</p>-->
+<!--                <b><h2>리뷰 작성</h2></b>-->
+<!--                <div class="blog-item" style="border: solid #CACDD6 2px">-->
+<!--                    <div id="후기작성" style="padding: 30px;">-->
+<!--&lt;!&ndash;                        <p style="font-size: 20px; color: grey">리뷰 작성시 마일리지 2포인트가 적립됩니다.</p>&ndash;&gt;-->
 
-                        <!--                        chg. 여기 action 바꿔줘야함.-->
-                        <!--                        chg. 후기DB에 stars랑 review값 저장. 유저ID, 플래너ID, 선택장소, 날짜도 저장-->
-                        <!--                        chg. 계획요청DB에서 후기여부를 true로.-->
+<!--                        &lt;!&ndash;                        chg. 여기 action 바꿔줘야함.&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        chg. 후기DB에 stars랑 review값 저장. 유저ID, 플래너ID, 선택장소, 날짜도 저장&ndash;&gt;-->
+<!--                        &lt;!&ndash;                        chg. 계획요청DB에서 후기여부를 true로.&ndash;&gt;-->
 
-                        <form method="post" action="/main" id="AAA">
-                            만족도&nbsp;&nbsp;
+<!--                        <form method="post" action="/main" id="AAA">-->
+<!--                            만족도&nbsp;&nbsp;-->
 
-                            <select name="stars">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+<!--                            <select name="stars">-->
+<!--                                <option value="1">1</option>-->
+<!--                                <option value="2">2</option>-->
+<!--                                <option value="3">3</option>-->
+<!--                                <option value="4">4</option>-->
+<!--                                <option value="5">5</option>-->
 
-<!--                                <option value="6">6</option>-->
-<!--                                <option value="7">7</option>-->
-<!--                                <option value="8">8</option>-->
-<!--                                <option value="9">9</option>-->
-<!--                                <option value="10" selected>10</option>-->
-                            </select>점 / 5 점
+<!--&lt;!&ndash;                                <option value="6">6</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="7">7</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="8">8</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="9">9</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="10" selected>10</option>&ndash;&gt;-->
+<!--                            </select>점 / 5 점-->
 
-                            <br>
+<!--                            <br>-->
 
-                            <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="이런 점이 좋았고 이런 점이 보완이 필요해요."></textarea>
-                            <br>
-                            <center>
-                                <input id="submit" type="submit" class="primary-btn" value="확인">
-                            </center>
-                        </form>
-<!--                        <br>-->
-                    </div>
-                </div>
+<!--                            <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="이런 점이 좋았고 이런 점이 보완이 필요해요."></textarea>-->
+<!--                            <br>-->
+<!--                            <center>-->
+<!--                                <input id="submit" type="submit" class="primary-btn" value="확인">-->
+<!--                            </center>-->
+<!--                        </form>-->
+<!--&lt;!&ndash;                        <br>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="reviewModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-size: xx-large" class="modal-title" align="left">계획이 마음에 드시나요?</h4>
+                <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+
+            <!--                모달 바디-->
+            <div class="modal-body">
+                <center><p>플래너 이용 후기를 남겨주세요!</p>
+                    <p id="star_grade">
+                        <a href="#" value="1">★</a>
+                        <a href="#" value="2">★</a>
+                        <a href="#" value="3">★</a>
+                        <a href="#" value="4">★</a>
+                        <a href="#" value="5">★</a>
+                    </p>
+<!--                    <select name="stars">-->
+<!--                        <option value="1">1</option>-->
+<!--                        <option value="2">2</option>-->
+<!--                        <option value="3">3</option>-->
+<!--                        <option value="4">4</option>-->
+<!--                        <option value="5">5</option>-->
+<!--                    </select>-->
+                        <textarea style="height: 130px; width: 100%; font-size: 18px;"
+                                          name="review"
+                                          placeholder="이런 점이 좋았고, 이런 점은 보완이 필요해요."></textarea><br>
+                </center>
+            </div>
+            <!--                모달 바디-->
+            <div class="modal-footer">
+                <button type="button" style="border: solid grey 2px;" class="btn btn-default"
+                        id="submit" data-dismiss="modal">확인
+                </button>
+                <button type="button" id="toMain" style="border: solid grey 2px;" class="btn btn-default"
+                        data-dismiss="modal">메인으로
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Blog Section End -->
 <div class="container-fluid">
     <div class="howit-bg">
@@ -333,7 +386,8 @@
             var origin_id="<%=data[0].originRequest%>";
             var author="<%=data[0].traveler%>";
             var planner_id="<%=data[0].planner%>";
-            var score=$("select[name=stars]").val();
+            // var score=$("select[name=stars]").val();
+            var score = $("#star_grade a").attr("value");
             var comment=$("textarea[name=review]").val();
 
             var send=$.post('/sendReview', {
@@ -343,7 +397,24 @@
                 'originRequest': origin_id,
                 'planner_id':planner_id
             });
+            alert('후기가 등록되었습니다.')
+            location.href = '/main'
+
         })
+
+        $("#reviewBtn").click(function () {
+            $('#reviewModal').modal().toggle();
+        })
+
+        $("#toMain").click(function () {
+            location.href = '/main'
+        })
+
+        $('#star_grade a').click(function(){
+            $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */
+            $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+            return false;
+        });
     })
 
 </script>
