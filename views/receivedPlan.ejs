@@ -133,14 +133,14 @@
                     <div class="blog-text">
                         <div id="req_cont"></div><br>
                         <div id="test" style="padding: 30px;">
-                            <form method="post" action="" id="AAA">
+                            <form method="" action="#">
 
 <!--                                <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="계획을 더 보고싶다면?"></textarea>-->
 
-                                <div id="planalert">계획을 더 보려면 100point가 필요합니다.</div>
+                                <div id="planalert">계획을 더 보려면 100 포인트가 필요합니다.</div>
                                 <br>
                                 <center>
-                                    <input id="submit" type="submit" class="primary-btn" value="계획 더보기">
+                                    <input id="morePlan" type="submit" class="primary-btn" value="계획 더보기">
                                 </center>
                             </form>
                         </div>
@@ -277,7 +277,10 @@
                 tr.id= "id"+rowCnt;
             }
             for(var j=0; j<howManyRows; j++){
-                if(tr.id!="id1"){
+                if(tr.id=="id1"){
+                    tr.className="origin_class";
+                }
+                else{
                     tr.className="blur_class";
                 }
             }
@@ -373,6 +376,10 @@
 
     $(document).ready(function(){
 
+        if(howManyRows==1){
+            $("#test").hide()
+        }
+
         // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
         var floatPosition = parseInt($("#test").css('top'))
         // 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
@@ -382,8 +389,6 @@
             var scrollTop = $(window).scrollTop();
             var newvalue=floatPosition-1000;
             var newPosition = scrollTop + newvalue + "px";
-
-
              // $("#test").css('top', newPosition);
 
             if(scrollTop<1200){
@@ -392,7 +397,7 @@
 
             $("#test").stop().animate({
                 "top" : newPosition
-            }, 1000);
+            }, 150);
 
         }).scroll();
 
@@ -411,6 +416,28 @@
                 'originRequest': origin_id,
                 'planner_id':planner_id
             });
+        })
+
+        $("#morePlan").click(function(){
+            if(confirm("주의! 포인트가 차감됩니다. 계속 진행하시겠습니까?")){
+                var blur_images = $('.blur_class');
+                blur_images.each(function () {
+                    console.log($(this));
+                    $(this).removeClass('blur_class');
+                    $(this).addClass('origin_class');
+                });
+                $("#test").hide();
+            }
+
+            // var blur_images = $('.blur_class');
+            // blur_images.each(function () {
+            //     console.log($(this));
+            //     $(this).removeClass('blur_class');
+            //     $(this).addClass('origin_class');
+            // });
+            // $("#test").hide();
+
+
         })
     })
 
