@@ -1867,7 +1867,7 @@ ol {
 }
 
 .about-right .contact-info .map img {
-	position: absolute;
+	position: inherit;
 	left: auto;
 	right: auto;
 	top: auto;
