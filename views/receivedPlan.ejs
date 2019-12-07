@@ -8,21 +8,10 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Local Directory | Template</title>
+    <title>TT-TrueTrip</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-
+    <% include head_link.html%>
 
     <style>
         table {
@@ -88,7 +77,7 @@
 <!-- Header Section Begin -->
 <header class="header-section listings">
     <% if(isAuthenticated) { %>
-        <% include header_af_login.html %>
+        <% include header_af_login.ejs %>
     <% } else { %>
         <% include header_bf_login.html %>
     <% } %>

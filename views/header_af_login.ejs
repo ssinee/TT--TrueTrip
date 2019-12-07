@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="logo">
+        <a href="/main"><img style="position:absolute; top:20px;width:90px; height:65px; border-radius: 16px" src="../img/TTmainLogo.png" alt=""></a>
+    </div>
+    <nav class="main-menu mobile-menu">
+
+    </nav>
+    <div class="header-right">
+        <div class="user-access">
+            <ul>
+                <% if(currentUser.userType=='planner'){ %>
+                    <a class='requestbtn' style="right: 250px" href="/reservation_planner">요청확인</a>
+                <%} else {%>
+                    <a class='requestbtn' href="/reservation_traveler">요청확인</a>
+                <%}%>
+            </ul>
+            <%if(currentUser.userType=='planner'){%>
+            <a href="/mypage"  class="afpink_btn" style="border-radius: 5px; right:130px">마이페이지</a>
+            <a href="/logout" class="afpink_btn" style="border-radius: 5px">로그아웃</a>
+            <%} else{ %>
+                <a href="/logout" class="afpink_btn" style="border-radius: 5px">로그아웃</a>
+            <%}%>
+
+        </div>
+        <!--                    <a href="#" class="primary-btn">Add Listing</a>-->
+    </div>
+    <div id="mobile-menu-wrap"></div>
+</div>

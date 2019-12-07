@@ -7,18 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TT-lists</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+<!--    &lt;!&ndash; Google Font &ndash;&gt;-->
+<!--    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">-->
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+<!--    &lt;!&ndash; Css Styles &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/flaticon.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/nice-select.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/style.css" type="text/css">-->
+    <% include head_link.html%>
     <link rel="icon" href="img/favicon-32x32.png">
 
     <style>
@@ -135,7 +136,7 @@
 <!-- Header Section Begin -->
 <header class="header-section listings">
     <% if(isAuthenticated) { %>
-        <% include header_af_login.html %>
+        <% include header_af_login.ejs %>
     <% } else { %>
         <% include header_bf_login.html %>
     <% } %>

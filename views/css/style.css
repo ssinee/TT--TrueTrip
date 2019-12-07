@@ -31,12 +31,34 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
-
-
+.requestbtn{
+	position:absolute;
+	right:180px;
+	top:45px;
+	font-weight: bold;
+	font-size: smaller;
+}
+.afpink_btn{
+	position: absolute;
+	color: #fff;
+	/*background: #FF5581;*/
+	font-size: smaller;
+	/*position: absolute;*/
+	right: 38px;
+	top: 34px;
+	margin-left: 20px;
+	padding: 13px 65px;
+	/*cursor: pointer;*/
+	/*border: 1px solid #FF5581;*/
+	padding-right: 15px; !important;
+	padding-left: 15px; !important;
+	border-radius: 5px;
+	font-weight: bold;
+}
 
 .pink_btn{
 	color: #fff;
-	background: #FF5581;
+	/*background: #FF5581;*/
 	font-size: smaller;
 	/*position: absolute;*/
 	right: 38px;
@@ -44,9 +66,9 @@
 	margin-left: 20px;
 	padding: 13px 65px;
 	/*cursor: pointer;*/
-	border: 1px solid #FF5581;
-	padding-right: 30px; !important;
-	padding-left: 30px; !important;
+	/*border: 1px solid #FF5581;*/
+	padding-right: 15px; !important;
+	padding-left: 15px; !important;
 	border-radius: 5px;
 	font-weight: bold;
 }
@@ -352,7 +374,7 @@ ol {
 	position: absolute;
 	left: 0;
 	top: 0;
-	height: 100%;
+	height: 90%;
 	width: 100%;
 	background: #1d1d1d;
 	content: "";
@@ -410,8 +432,8 @@ ol {
 .header-section .header-right .user-access a {
 	display: inline-block;
 	color: #fff;
-	font-size: 20px;
-	font-weight: 400;
+	/*font-size: 20px;*/
+	/*font-weight: 400;*/
 }
 
 .slicknav_menu {

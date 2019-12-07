@@ -10,20 +10,21 @@
     <title>TT-TrueTrip</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">
+<!--    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap" rel="stylesheet">-->
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<!--    &lt;!&ndash; Css Styles &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/flaticon.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/nice-select.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="css/style.css" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">-->
 
-    <link rel="icon" href="img/favicon-32x32.png">
+<!--    <link rel="icon" href="img/favicon-32x32.png">-->
+    <% include head_link.html%>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -57,43 +58,54 @@
     </script>
 
     <style>
+        #myheader:after {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background:transparent;
+            content: "";
+            opacity: 0.49;
+            z-index: -1;
+        }
 
         .lo-search .current, .ca-search .current{
             color:#787878;
             font-size: smaller;
         }
-        .pink_btn{
-            color: #fff;
-            background: #FF5581;
-            font-size: smaller;
-            /*position: absolute;*/
-            right: 38px;
-            top: 41px;
-            margin-left: 20px;
-            padding: 13px 65px;
-            /*cursor: pointer;*/
-            border: 1px solid #FF5581;
-            padding-right: 30px; !important;
-            padding-left: 30px; !important;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        #mainbtn{
-            color: #fff;
-            background: #FF5581;
-            font-size: smaller;
-            /*position: absolute;*/
-            right: 38px;
-            top: 41px;
-            margin-left: 170px;
-            padding: 13px 65px;
-            /*cursor: pointer;*/
-            border: 1px solid #FF5581;
-            padding-right: 30px; !important;
-            padding-left: 30px; !important;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+        /*.pink_btn{*/
+        /*    color: #fff;*/
+        /*    background: #FF5581;*/
+        /*    font-size: smaller;*/
+        /*    !*position: absolute;*!*/
+        /*    right: 38px;*/
+        /*    top: 41px;*/
+        /*    margin-left: 20px;*/
+        /*    padding: 13px 65px;*/
+        /*    !*cursor: pointer;*!*/
+        /*    border: 1px solid #FF5581;*/
+        /*    padding-right: 30px; !important;*/
+        /*    padding-left: 30px; !important;*/
+        /*    border-radius: 5px;*/
+        /*    font-weight: bold;*/
+        /*}*/
+        /*#mainbtn{*/
+        /*    color: #fff;*/
+        /*    background: #FF5581;*/
+        /*    font-size: smaller;*/
+        /*    !*position: absolute;*!*/
+        /*    right: 38px;*/
+        /*    top: 41px;*/
+        /*    margin-left: 170px;*/
+        /*    padding: 13px 65px;*/
+        /*    !*cursor: pointer;*!*/
+        /*    border: 1px solid #FF5581;*/
+        /*    padding-right: 30px; !important;*/
+        /*    padding-left: 30px; !important;*/
+        /*    border-radius: 5px;*/
+        /*    font-weight: bold;*/
+        /*}*/
         .select_h5{
             font-size:smaller;!important;
         }
@@ -115,9 +127,9 @@
 <!-- Header Section Begin -->
 
 <!--header-->
-<header class="header-section listings">
+<header id="myheader" class="header-section listings">
     <% if(isAuthenticated) { %>
-        <% include header_af_login.html %>
+        <% include header_af_login.ejs %>
     <% } else { %>
         <% include header_bf_login.html %>
     <% } %>
@@ -125,17 +137,15 @@
 <!-- Header End -->
 
 <!-- Hero Section Begin -->
-<section class="hero-section set-bg" data-setbg="img/blog/일괄편집_방화수류정1.jpg" style="height:1000px; padding-top:188px">
+<section class="hero-section set-bg" data-setbg="img/blog/bg3.png" style="height:900px; padding-top:160px">
     <div class="container">
         <div class="row">
             <div class="col-lg-12" style="width:1000px; right:50px; max-width: 100%">
                 <div class="hero-text">
-
-
                     <div class="filter-search" style="border-radius: 5px; width: 444px; height:500px; background-color: #FFF; opacity: 1;">
 <!--                        <h1 style="font-size:3rem;position:absolute; font-weight:900 ;margin-left:850px; width:800px">TT</h1>-->
-                        <h1 class='animated flipInX delay-1s' style="font-size:120px;animation-duration:2s;margin-left:640px; margin-top:10px;font-weight: 900; position:absolute">TrueTrip</h1>
-                        <h1 class='animated flipInX delay-2s'style="width:300px;margin-left:777px; font-size: 1.4rem;margin-top:170px;font-weight:400; position:absolute">For your true travel</h1>
+                        <h1 class='animated infinite flipInX delay-1s' style="font-size:120px;animation-duration:2s;margin-left:640px; margin-top:0px;font-weight: 900; position:absolute">TrueTrip</h1>
+                        <h1 class='animated infinite flipInX delay-2s'style="width:300px;margin-left:777px; font-size: 1.4rem;margin-top:150px;font-weight:400; position:absolute">For your true travel</h1>
                         <div class="location-search" style="width: 100%; padding-bottom: 30px">
                             <img src="img/placeholder.png" alt="" style="padding-top: 10px;">
                             <h4 style="color:#787878; padding-top: 15px; padding-bottom: 40px">편안한 여행을 위한 계획을 요청해보세요.</h4>

@@ -15,7 +15,7 @@ showPlannersImageRouter.get('/deletePlannersImage', function(req, res, next){
         if(err){
             console.log(err)
         }else {
-            res.end('success');
+            res.end('success');ㄴㅇ
         }
     });
 });
