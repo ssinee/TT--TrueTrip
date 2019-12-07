@@ -146,31 +146,48 @@
         req_ids.push(req_array);
         var postsArr="";
         console.log("길이"+post_len);
-
+        var str="";
+        var test= new Array();
         //선택장소 보여줄려고 했는데 미완성
         for(var j=0; j<post_len;j++){
 
-            var posting= $.post('/findTitle', {'postid':array[j]});
+            console.log("array:"+array[j]);
 
-            posting.done(function(post_title){
-                console.log(post_title)
-                var title=post_title["post_title"];
-                console.log(title+j);
-                postsArr+=
-                    "                                    <h4>"+title+"</h4>"
+            $.ajax({
+                url:'/findTitle',
+                dataType: 'json',
+                type:'Post',
+                data:{"postid":array[j]},
+                async:false,
+                success: function(post_title) {
+                    if(post_title){
+                        // alert(result.result);
+                        console.log(post_title.post_title);
+                        console.log("성공");
+                        console.log(data_length);
+                        test.push(post_title.post_title);
+                        console.log(test);
+                        var iii="<%=i%>"
 
-                // var tag_id="reservePlace"+0;
-                // console.log(tag_id);
-                // $(tag_id).html(postsArr)
-            });
-            // var tag_id="#reservePlace"+j;
-            // console.log(tag_id);
+                        str= "선택장소: "+test
 
-            // $("div[name=reservePlace]").html(postsArr)
+
+                        for(var k=0; k<post_len;k++){
+                            $("#"+iii).children(".middle").children().children("div[name=reservePlace]").html(str);
+                        }
+
+                    }
+                },
+                error: function(request,status,error){
+                    alert(error);
+                }
+
+            })
         }
 
 
         <% } %>
+
 
         //plan.js post /sendReqID로 감
         $("a[name=accept]").click(function(){
@@ -253,11 +270,11 @@
 
                             <div class="middle">
                                 <a href="">
-                                    <div class="item" name="reservePlanner"><%= send_data[i].author%>님의 요청입니다.</div>
+                                    <div class="item" name="reservePlanner">"<%= send_data[i].author%>" 님의 플랜 요청입니다.</div>
 <!--                                    <br>-->
                                     <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
 <!--                                    <br>-->
-                                    <div class="item" name="reservePlace">선택장소: </div>
+                                    <div class="item" name="reservePlace"></div>
 <!--                                    <br>-->
                                     <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
                                 </a>
