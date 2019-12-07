@@ -209,6 +209,11 @@
         !important;
         }
 
+        /*newest, oldest 오류수정*/
+        .arrange-select .nice-select .current {
+            display: initial;
+        }
+
     </style>
 
 
@@ -342,9 +347,10 @@
                     }
                     for (var j = 0; j < idData[i].reviews.length; j++) {
                         temp_score += parseInt(idData[i].reviews[j].score)
+
                     }
                     result_score.push((temp_score / idData[i].reviews.length).toFixed(1))
-                    console.log('score result:' + temp_score / idData[i].reviews.length)
+                    temp_score=0;
                 }
 
                 fillcontent(imagepath, idData, result_score)

@@ -35,6 +35,12 @@
     <!--    </style>-->
 
     <style>
+        .about-left .client-reviews .reviews-item .rating {
+            margin-bottom: 0px;
+        }
+        .about-left .client-reviews .reviews-item {
+            margin-bottom: 0px;
+        }
 
         .about-left .client-reviews h3 {
             color: #242424;
@@ -310,23 +316,31 @@
                 var ids = new Array();
                 var objid;
                 $('#request').click(function () {
-
                     var selected_photos = $('.postpicActive');
-                    var ids = new Array();
-                    selected_photos.each(function () {
-                        var selval = $(this).attr("id");
-                        selval *= 1;
-                        objid = content[selval]._id;
-                        console.log(objid);
-                        // var id_arr = id_str.split("_");
-                        // var selval = id_arr[1];
-                        if (objid != 'undefined' && objid != '' && objid != null) {
-                            ids.push(objid);
-                        }
-                    });
-                    var request = $.post('/request', {'ids': ids});
+                    //아무것도 선택안하고 요청시에는 에러 메시지 modal로 띄움.
+                    console.log(selected_photos);
+                    if(selected_photos.length == 0){
+                        $('#chooseModal').modal('toggle');
+                        return;
+                    }
+                    //선택된 장소가 있다면,
+                    else {
+                        var ids = new Array();
+                        selected_photos.each(function () {
+                            var selval = $(this).attr("id");
+                            selval *= 1;
+                            objid = content[selval]._id;
+                            console.log(objid);
+                            // var id_arr = id_str.split("_");
+                            // var selval = id_arr[1];
+                            if (objid != 'undefined' && objid != '' && objid != null) {
+                                ids.push(objid);
+                            }
+                        });
+                        var request = $.post('/request', {'ids': ids});
+                        location.href="../requestform"
+                    }
                 })
-
             })
 
 
@@ -339,7 +353,7 @@
             $('#showPlannerImages').on('click', 'h5', function (event) {
                 postTitle = $(this).text()
                 var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
-                showPopup()
+                // showPopup()
             })
 
             //profile preview
@@ -419,21 +433,29 @@
                     var length=data.data.length;
                     for(var i=0; i<length; i++){
                         console.log(data.data[i]);
+
+                        var starStr=""; //후기 별점 str.
+                        for(var j=1; j<=5; j++){
+                            if(j <= parseInt(data.data[i].score)){
+                                starStr +=
+                                    "<i class=\"fa fa-star\"></i>"
+                            }
+                            else{
+                                starStr +=
+                                    "<i class=\"fa fa-star-o\"></i>"
+                            }
+                        }
                         postsArr +=
                             "<div class=\"reviews-item\" >" +
                             "                           <div class=\"rating\">" +
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
+                            starStr +
                             "                           </div>" +
                             "                           <p style='margin-bottom: 0px;'>"+data.data[i].comment+"</p>"+
                             "                           <div class=\"client-text\">"+
                             "                               <h5>"+data.data[i].author+"</h5>"+
                             "                               <span>"+data.data[i].date+"</span>"+
                             "                           </div>"+
-                            "                     </div><br>"
+                            "                     </div><hr>"
 
                         $(".reviews").html(postsArr);
                     }
@@ -613,11 +635,10 @@
                                     <div id="writepostdiv" class="share-btn" style="font-weight: 100; margin-bottom: 0px;">
 
                                         <a id="writePost" style="background: #007bff" name="writePost"
-                                           href="../upload" >글쓰기</a>
+                                           href="../upload" >글쓰기</a></div>
                                         <% } else { %>
                                         <% } %>
                                         <% } %>
-                                    </div>
                                 </div>
                         </div>
 
@@ -637,7 +658,7 @@
 
                                     <% if(currentUser.userType == "traveler") { %>
                                         <div class="share-btn" style="font-weight: 100;">
-                                            <a id="request" style="background: #007bff;" href="../requestform">계획요청</a></div>
+                                            <a id="request" style="background: #007bff; cursor: pointer;" >계획요청</a></div>
 
                                     <% } else { %>
                                     <% } %>
@@ -646,8 +667,8 @@
                         </div>
 
 
-                        <div class="client-reviews" style="margin-top: 15px;">
-                            <h3>플래너 후기</h3><hr style="margin-top: 0px; margin-bottom: 0px;">
+                        <div class="client-reviews" style="margin-top: 15px; margin-bottom: 200px;">
+                            <h3>플래너 후기</h3><hr style="margin-top: 0px;">
 
 <!--                            리뷰들 들어갈 자리임.-->
                             <div class="reviews">
@@ -711,7 +732,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -735,6 +755,28 @@
                 </button>
                 <button type="button" style="border: solid grey 2px;" class="btn btn-default"
                         data-dismiss="modal">취소
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="chooseModal" role="dialog">
+    <div class="modal-dialog" style="vertical-align: baseline">
+        <div class="modal-content">
+            <!--                모달 바디-->
+            <div class="modal-body">
+                <center>
+                <span style="font-size: x-large" class="modal-title">방문하고 싶은 </span>
+                <span style="color: blue">장소를 먼저 선택</span>
+                <span>해주세요.<br>하루에 최대 5곳까지 선택할 수 있습니다.</span>
+                </center>
+            </div>
+            <!--                모달 바디-->
+
+            <div class="modal-footer">
+                <button type="button" style="border: solid grey 2px; margin: auto;" class="btn btn-default"
+                        id="wantLogin" data-dismiss="modal">확인
                 </button>
             </div>
         </div>
