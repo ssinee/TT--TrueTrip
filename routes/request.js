@@ -158,13 +158,9 @@ router.get('/reservation_traveler/:id',function(req,res){
 //RequestForm.ejs에서 쓸 예정임
 router.post('/findTitle',function(req,res){
     var data= req.body.postid;
-     console.log("넘겨받은 데이터:"+data);
     Postdata.find({'_id':data},function(err,data) {
-        console.log(data);
         var title=data[0].title;
         var path=data[0].path;
-        console.log("제목"+title);
-        console.log("찾은 path"+path);
         // console.log("찾은데이터"+data);
         res.send({'post_title':title,'post_path':path});
     })
@@ -174,14 +170,14 @@ router.post('/findTitle',function(req,res){
 router.post('/reject',function(req,res){
     console.log("/reject 호출됨");
     var data= req.body.data;
-    console.log(data[0]);
+    // console.log(data[0]);
     var find_id=data[0];
     var state=data[0].confirm;
 
     //찾은 데이터의 confirm 값 false로 바꿈
     Request.findOneAndUpdate({_id:find_id},{$set:{"confirm":false}},function (err,data) {
         if (err) throw err;
-        console.log("찾찾찾찾찾찾찾데이터"+data);
+        // console.log("찾찾찾찾찾찾찾데이터"+data);
         var result='요청이 거절되었습니다.';
         // console.log(data[0].confirm);
         res.send({result:result});
@@ -191,9 +187,9 @@ router.post('/reject',function(req,res){
 
 //reservation_traveler.ejs ajax에서 호출됨
 router.post('/checkPlan', function(req,res){
-    console.log("/checkPlan 호출됨");
+    // console.log("/checkPlan 호출됨");
     var reqid=req.body.reqid;
-    console.log(reqid);
+    // console.log(reqid);
     Schedule.find({'originRequest':reqid},function(err,data){
         if(err) throw err;
         console.log(data);
@@ -209,7 +205,7 @@ router.post('/checkReject', function(req,res){
     var reqid=req.body.reqid;
     Request.find({'_id':reqid},function(err,data){
         if(err) throw err;
-        console.log(data);
+        // console.log(data);
         res.send({data:data});
     })
 

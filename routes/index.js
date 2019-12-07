@@ -36,14 +36,7 @@ router.get('/lists', (req,res)=>{
             res.render('../views/listings.ejs',{'data': data})
         }
     }).select('-_id')
-    // res.render('../views/listings.ejs')
-
 })
-
-
-// router.get('/showimg', (req, res)=>{
-//     res.render('../views/showImg.ejs')
-// })
 
 router.get('/guide', (req, res)=>{
     res.render('../views/guidepage_traveler')
@@ -59,28 +52,11 @@ router.get('/reqForm', (req,res)=>{
 })
 
 
-
-
-// router.get('/popup', (req,res)=>{
-//     var Userid=req.body.UserID;
-//     var title=req.body.title;
-//     console.log(Userid);
-//     console.log(title);
-//     var dbdata=mongoose.model('PostData');
-//     dbdata.find({'author':Userid,'title':title}, function(err, data){
-//         if(err) res.send(err);
-//         else {
-//             res.render('../views/popup',{'data': data})
-//             console.log(data.id);
-//         }
-//     }).select('-_id')
-//     // res.render('../views/listings.ejs')
-//     // console.log("/popup 호출됨");
-//     // res.render('../views/popup')
-// })
-
 router.get('/testguide', (req, res)=>{
     res.render('../views/guidepage_test.ejs')
+})
+router.get('/plannerRegister', (req,res)=>{
+    res.render('../views/plannerRegister.ejs')
 })
 
 module.exports = router;
