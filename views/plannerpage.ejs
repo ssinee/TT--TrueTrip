@@ -316,23 +316,31 @@
                 var ids = new Array();
                 var objid;
                 $('#request').click(function () {
-
                     var selected_photos = $('.postpicActive');
-                    var ids = new Array();
-                    selected_photos.each(function () {
-                        var selval = $(this).attr("id");
-                        selval *= 1;
-                        objid = content[selval]._id;
-                        console.log(objid);
-                        // var id_arr = id_str.split("_");
-                        // var selval = id_arr[1];
-                        if (objid != 'undefined' && objid != '' && objid != null) {
-                            ids.push(objid);
-                        }
-                    });
-                    var request = $.post('/request', {'ids': ids});
+                    //아무것도 선택안하고 요청시에는 에러 메시지 modal로 띄움.
+                    console.log(selected_photos);
+                    if(selected_photos.length == 0){
+                        $('#chooseModal').modal('toggle');
+                        return;
+                    }
+                    //선택된 장소가 있다면,
+                    else {
+                        var ids = new Array();
+                        selected_photos.each(function () {
+                            var selval = $(this).attr("id");
+                            selval *= 1;
+                            objid = content[selval]._id;
+                            console.log(objid);
+                            // var id_arr = id_str.split("_");
+                            // var selval = id_arr[1];
+                            if (objid != 'undefined' && objid != '' && objid != null) {
+                                ids.push(objid);
+                            }
+                        });
+                        var request = $.post('/request', {'ids': ids});
+                        location.href="../requestform"
+                    }
                 })
-
             })
 
 
@@ -650,7 +658,7 @@
 
                                     <% if(currentUser.userType == "traveler") { %>
                                         <div class="share-btn" style="font-weight: 100;">
-                                            <a id="request" style="background: #007bff;" href="../requestform">계획요청</a></div>
+                                            <a id="request" style="background: #007bff; cursor: pointer;" >계획요청</a></div>
 
                                     <% } else { %>
                                     <% } %>
@@ -747,6 +755,28 @@
                 </button>
                 <button type="button" style="border: solid grey 2px;" class="btn btn-default"
                         data-dismiss="modal">취소
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="chooseModal" role="dialog">
+    <div class="modal-dialog" style="vertical-align: baseline">
+        <div class="modal-content">
+            <!--                모달 바디-->
+            <div class="modal-body">
+                <center>
+                <span style="font-size: x-large" class="modal-title">방문하고 싶은 </span>
+                <span style="color: blue">장소를 먼저 선택</span>
+                <span>해주세요.<br>하루에 최대 5곳까지 선택할 수 있습니다.</span>
+                </center>
+            </div>
+            <!--                모달 바디-->
+
+            <div class="modal-footer">
+                <button type="button" style="border: solid grey 2px; margin: auto;" class="btn btn-default"
+                        id="wantLogin" data-dismiss="modal">확인
                 </button>
             </div>
         </div>
