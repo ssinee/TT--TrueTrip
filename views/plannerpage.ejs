@@ -35,6 +35,9 @@
     <!--    </style>-->
 
     <style>
+        .about-left .client-reviews .reviews-item .rating {
+            margin-bottom: 0px;
+        }
         .about-left .client-reviews .reviews-item {
             margin-bottom: 0px;
         }
@@ -342,7 +345,7 @@
             $('#showPlannerImages').on('click', 'h5', function (event) {
                 postTitle = $(this).text()
                 var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
-                showPopup()
+                // showPopup()
             })
 
             //profile preview
@@ -422,14 +425,22 @@
                     var length=data.data.length;
                     for(var i=0; i<length; i++){
                         console.log(data.data[i]);
+
+                        var starStr=""; //후기 별점 str.
+                        for(var j=1; j<=5; j++){
+                            if(j <= parseInt(data.data[i].score)){
+                                starStr +=
+                                    "<i class=\"fa fa-star\"></i>"
+                            }
+                            else{
+                                starStr +=
+                                    "<i class=\"fa fa-star-o\"></i>"
+                            }
+                        }
                         postsArr +=
                             "<div class=\"reviews-item\" >" +
                             "                           <div class=\"rating\">" +
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
+                            starStr +
                             "                           </div>" +
                             "                           <p style='margin-bottom: 0px;'>"+data.data[i].comment+"</p>"+
                             "                           <div class=\"client-text\">"+
