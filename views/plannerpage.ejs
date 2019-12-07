@@ -35,6 +35,9 @@
     <!--    </style>-->
 
     <style>
+        .about-left .client-reviews .reviews-item {
+            margin-bottom: 0px;
+        }
 
         .about-left .client-reviews h3 {
             color: #242424;
@@ -433,7 +436,7 @@
                             "                               <h5>"+data.data[i].author+"</h5>"+
                             "                               <span>"+data.data[i].date+"</span>"+
                             "                           </div>"+
-                            "                     </div><br>"
+                            "                     </div><hr>"
 
                         $(".reviews").html(postsArr);
                     }
@@ -646,7 +649,7 @@
 
 
                         <div class="client-reviews" style="margin-top: 15px; margin-bottom: 200px;">
-                            <h3>플래너 후기</h3><hr style="margin-top: 0px; margin-bottom: 0px;">
+                            <h3>플래너 후기</h3><hr style="margin-top: 0px;">
 
 <!--                            리뷰들 들어갈 자리임.-->
                             <div class="reviews">
