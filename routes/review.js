@@ -22,7 +22,8 @@ router.post('/sendReview',function(req,res){
         'author': author,
         'score': score,
         'comment': comment,
-        'originRequest': originRequest
+        'originRequest': originRequest,
+        'state':true
     });
 
     //해당 플래너 댓글에 review 객체 추가
@@ -46,5 +47,20 @@ router.post('/findReview',function(req,res){
     })
 
 });
+
+router.post('/reviewState',function(req,res){
+    var planner=req.body.id;
+    // console.log("플래너아이디"+planner);
+
+    Review.find({originRequest:planner},function(err,data){
+        if(err) throw err;
+        var state=data[0].state;
+        // console.log("리뷰 어레이ㅣ이이이"+review_array);
+        res.send({data:state});
+
+    })
+
+});
+
 
 module.exports = router;
