@@ -54,7 +54,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                     '_id': 0,
                     'path': 1
                 }, function (err, POSTdata) {
-                    content.push(POSTdata)
+                    if(POSTdata.length==0)content.push('none') else content.push(POSTdata)
                 })
             }
 
@@ -70,7 +70,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                     '_id': 0,
                     'path': 1
                 }, function (err, POSTdata) {
-                    content.push(POSTdata)
+                    if(POSTdata.length==0)content.push('none') else content.push(POSTdata)
                 })
             }
 
@@ -87,7 +87,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                     'path': 1
                 }, function (err, POSTdata) {
 
-                    content.push(POSTdata)
+                    if(POSTdata.length==0)content.push('none') else content.push(POSTdata)
                 })
             }
 
@@ -101,7 +101,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                     '_id': 0,
                     'path': 1
                 }, function (err, POSTdata) {
-                    content.push(POSTdata)
+                    if(POSTdata.length==0)content.push('none') else content.push(POSTdata)
                 })
             }
             if (content.length==0 || content[0].length==0) res.send('0');
