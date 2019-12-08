@@ -127,7 +127,9 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 
+<% if(data_length!=0) { %>
     $(document).ready(function(){
+
 
         var data="<%=send_data[0]._id%>";
         var data_length="<%=data_length%>";
@@ -245,6 +247,7 @@
         }
 
 
+
         //plan.js post /sendReqID로 감
         $("a[name=accept]").click(function(){
 
@@ -286,6 +289,7 @@
         })
 
     })
+<% } %>
 
 </script>
 <body>
@@ -317,6 +321,9 @@
 
                 <div class="BigBox" id="receivedQuest">
                     <h2 style="margin-left: 6px;"><b>나에게 온 플랜 요청</b></h2><hr style="margin-top: 0px; margin-bottom: 0px;">
+                    <% if ( data_length==0) {  %>
+                        <h5>요청이 없습니다.</h5>
+                    <% } else { %>
                     <% for(var i=0; i<data_length; i++) { %>
                         <% if( send_data[i].confirm==false) { %> 
 			<div class="smallBox" id="<%=i%>">
@@ -366,36 +373,37 @@
                     </div>
                     <% } %>
                     <% } %>
+                    <% } %>
 
                 </div>
                 <br>
 
                 <p id="result"></p>
 
-                <div class="BigBox" id="acceptedQuest">
-                    <h2 style="margin-left: 6px;"><b>채택된 플랜</b></h2><hr style="margin-top: 0px; margin-bottom: 0px;">
+<!--                <div class="BigBox" id="acceptedQuest">-->
+<!--                    <h2 style="margin-left: 6px;"><b>채택된 플랜</b></h2><hr style="margin-top: 0px; margin-bottom: 0px;">-->
 
-                    <div class="smallBox">
-                        <div class="left">
-                            <div class="item"><h1>1</h1></div>
-                        </div>
+<!--                    <div class="smallBox">-->
+<!--                        <div class="left">-->
+<!--                            <div class="item"><h1>1</h1></div>-->
+<!--                        </div>-->
 
-                        <div class="middle">
-                            <a href="">
-                                <div class="item" id="reservePlanner">여행자 이름: OOO</div>
-<!--                                <br>-->
-                                <div class="item" id="reserveDate">날짜: 2019.00.00</div>
-<!--                                <br>-->
-                                <div class="item" id="reservePlace">선택장소: A, B</div>
-                            </a>
-                        </div>
+<!--                        <div class="middle">-->
+<!--                            <a href="">-->
+<!--                                <div class="item" id="reservePlanner">여행자 이름: OOO</div>-->
+<!--&lt;!&ndash;                                <br>&ndash;&gt;-->
+<!--                                <div class="item" id="reserveDate">날짜: 2019.00.00</div>-->
+<!--&lt;!&ndash;                                <br>&ndash;&gt;-->
+<!--                                <div class="item" id="reservePlace">선택장소: A, B</div>-->
+<!--                            </a>-->
+<!--                        </div>-->
 
-                        <div class="right">
-                            <div class="item">만족도<br>10 / 10</div><br>
-                        </div>
-                    </div>
+<!--                        <div class="right">-->
+<!--                            <div class="item">만족도<br>10 / 10</div><br>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                </div>
+<!--                </div>-->
 <!--                <div class="row" id="showRequest"></div>-->
 
 
