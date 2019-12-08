@@ -123,6 +123,7 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
+        <%if (data_length!=0) { %>
         $(document).ready(function(){
 
 
@@ -319,7 +320,7 @@
             })
 
         })
-
+<% } %>
 
     </script>
 </head>
@@ -353,7 +354,9 @@
 
                 <div class="BigBox">
                     <h2 style="margin-left: 6px;"><b>내가 보낸 플랜 요청</b></h2><hr style="margin-top: 0px; margin-bottom: 0px;">
-
+                    <% if ( data_length==0) {  %>
+                        <h5>보낸 요청이 없습니다.</h5>
+                    <% } else { %>
                     <% for(var i=0; i<data_length; i++) { %>
 
                     <div class="smallBox" id="<%=i%>">
@@ -379,6 +382,7 @@
 
                         </div>
                     </div>
+                    <% } %>
                     <% } %>
 
                 </div>
