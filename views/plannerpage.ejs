@@ -126,10 +126,10 @@
 
         .edit_pro_img {
             position: absolute;
-            left: 260px;
+            left: 140px;
             top: 322px;
-            height: 55px;
-            width: 55px;
+            height: 45px;
+            width: 45px;
             background: #FF5581;
             text-align: center;
             line-height: 55px;
@@ -361,7 +361,7 @@
                         "                            <div class=\"arrange-pic\" style='border:0px;'>" +
                         "                            <img class=\"postpic\" id=\'" + i + "' src=\'" + content[i].path + "' style='width:210px; height:223px position:fixed'>" +
                         "                            </div>" +
-                        "                            <div class=\"arrange-text\" style='margin-right:41px;'>" +
+                        "                            <div class=\"arrange-text\" style='margin-left: 10px;'>" +
                         "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
                         "                            <h6 class='posttitle'  data-target='#myModal'>" + content[i].title + "</h6>" +
 
@@ -579,14 +579,14 @@
                                     <% } else { %>
                                         <% if(user_info.id == currentUser.id) { %>
                                             <center>
-                                                <div class="edit_pro_img" style="left:108px; top:290px;">
+                                                <div class="edit_pro_img" style="left:138px; top:280px;">
 
                                                     <input id="fileinput" type="file" value="이미지변경"
                                                            onchange="this.form.submit()"
                                                            name="editImg"
-                                                           style="position:absolute;width:50px;height:50px;padding:0;margin:-1px;opacity: 0;">
+                                                           style="position:absolute;width:50px;height:50px;padding:0;margin:-1px;opacity: 0;right:2px;">
                                                     <img src="upload_profile/edit_1.png"
-                                                         style="width:40px; position: initial;">
+                                                         style="width:33px; position: initial;right:5px; top:8px;margin-bottom:10px">
                                                 </div>
                                             </center>
                                         <% } else { %>
@@ -596,7 +596,7 @@
                             </form>
 
 
-                            <div class="contact-text" style="border:1px solid #CACDD6;text-align: right; padding-top: 30px ">
+                            <div class="contact-text" style="border:1px solid #CACDD6;text-align: right; width:254px;margin-left:32px;padding:0px; padding-top: 15px;padding-bottom:15px  ">
                                 <form method="post" action="/mypage/write" ENCTYPE="multipart/form-data">
                                     <p align="center" style="font-size: 30px; margin-bottom: 0px;">
                                         <b style="font-weight: bold; font-size: medium; padding-bottom:10px"><%= user_info.name %></b></p>
