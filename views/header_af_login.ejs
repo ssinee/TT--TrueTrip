@@ -5,6 +5,18 @@
     <nav class="main-menu mobile-menu">
 
     </nav>
+
+    <div class="greetings">
+        <% if (currentUser.userType == 'planner') { %>
+        <span style="color: white; margin-left: 400px;"><%=currentUser.name%> 플래너님 반갑습니다.</span>
+        <img src="img/icon/coin.png">
+<!--        포인트 수 들어감.-->
+        <% } else { %>
+        <span style="color: white; margin-left: 400px;"><%=currentUser.name%> 회원님 반갑습니다.</span>
+        <img src="img/icon/coin.png">
+        <% } %>
+    </div>
+
     <div class="header-right">
         <div class="user-access">
             <ul>
