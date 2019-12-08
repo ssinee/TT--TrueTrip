@@ -4,13 +4,23 @@
 <head>
 
     <style type="text/css">
-        span {
-            font-size: 28px;
+       span {
+            font-size: large;
+           font-weight: bold;
             text-align: left;
             margin-bottom: 5px;
             margin-left: 21px;
             color: #FF5581;
         }
+
+       /*.underSection div{*/
+       /*    font-size: large;*/
+       /*    text-align: left;*/
+       /*    margin-bottom: 5px;*/
+       /*    margin-left: 21px;*/
+       /*    color: #FF5581;*/
+       /*    font-weight: bold;*/
+       /*}*/
 
         /*.col-lg-12 text-center textarea:focus{*/
         /*    border: solid #FF5581 3px;*/
@@ -78,13 +88,14 @@
 
         .request-item .middle{
             width: 59%;
-            height: 90%;
+            height: 265px;
             border: solid #CACDD6 2px;
             float: left;
             margin-left: 5px;
             margin-right: 5px;
             margin-top: 10px;
             margin-bottom: 10px;
+            border-radius: 5px;
             /*background: orange;*/
         }
 
@@ -152,14 +163,14 @@
                            "<div class=\"request-item\" >" +
                            "                            <div class=\"left\">" +
                            "                                <div class=\"item\">" +
-                           "                                    <img class=\"postpic\" id=\'"+i+"' src=\'" + content[0].path + "'width=100%; height=100%'>" +
+                           "                                    <img class=\"postpic\" id=\'"+i+"' src=\'" + content[0].path + "'width=100%; height=263px' style='border-radius:5px;' >" +
                            "                                </div>" +
                            "                            </div>" +
                            "                            <div class=\"middle\">" +
                            "                                <div class=\"item\">" +
-                           "                                    <h4>"+content[0].title+"</h4>" +
+                           "                                    <h4 style='color:#797979;font-size:large; font-weight: bold; padding-bottom:10px'>"+content[0].title+"</h4>" +
                            "                                    <hr style='border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 3px;'>" +
-                           "                                    <p style='font-size: 16px; font-weight: 100; line-height: 20px;margin-bottom: 0px; max-height: 112px; overflow: scroll'>"+content[0].text+"</p>" +
+                           "                                    <p style='font-size: 16px; font-weight: 100; line-height: 20px;margin-bottom: 0px; max-height: 112px; overflow: auto'>"+content[0].text+"</p>" +
                            "                                </div>" +
                            "                            </div>" +
                            "                     </div>"
@@ -242,21 +253,21 @@
 
                 <!--                    chg. form작성시에 이동할 페이지 써야함-->
                 <form action="#" class="contact-form">
-                    <h1 style="font-size: 50px; text-align: left; margin-bottom: 5px; margin-left: 155px;">계획 신청서</h1>
+                    <h1 style="font-size: xx-large;color:#797979; font-weight:bold; text-align: center;margin-bottom: 35px;">계획 신청서</h1>
                     <div class="row">
 
 
-                        <div class="bigBox" style="border: medium solid #CACDD6; width: 70%;">
+                        <div class="bigBox" style="border-radius:5px;border: 1px solid #CACDD6; width: 70%;">
 
 
 
                             <!--                            chg. DB에서 선택한 곳 3곳 선택장소-->
                             <div class="chosenPlace" >
-                                <h2 style="font-size: 28px; text-align: left; margin-left: 11px; padding: 10px; color: #FF5581">선택장소</h2>
+                                <h2 style="font-size: large; font-weight: bold;text-align: left; margin-left: 11px; padding: 10px; color: #FF5581">선택장소</h2>
                                 <hr style="border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 5px;">
 
 
-                                <div class="row" id="showSelectPosts"></div>
+                                <div class="row" id="showSelectPosts" style="height: 270px"></div>
                             </div>
 
 
@@ -426,7 +437,7 @@
 
                                 <!--                                이런정보가 필요해요-->
                                 <div style="text-align: left">
-                                    <span > "이런 정보가 필요해요" </span>
+                                    <span> "이런 정보가 필요해요" </span>
 
                                     <div style="text-align: left; font-size: 20px;">
                                         &nbsp;&nbsp;&nbsp;
@@ -442,7 +453,7 @@
 
                                 <!--이런 것들은 유의해주세요-->
                                 <div style="text-align: left">
-                                    <span > "이런 점들은 유의해주세요" </span>
+                                    <span> "이런 점들은 유의해주세요" </span>
 
                                     <div style="text-align: left;font-size: 20px;">
                                         &nbsp;&nbsp;&nbsp;
