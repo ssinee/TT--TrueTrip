@@ -31,6 +31,75 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
+/*for menu hover effect*/
+.svg-wrapper {
+	height: 60px;
+	margin: 0 auto;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 320px;
+}
+
+.shape {
+	fill: transparent;
+	stroke-dasharray: 140 540;
+	stroke-dashoffset: -474;
+	stroke-width: 8px;
+	stroke: #19f6e8;
+}
+
+.text {
+	color: #fff;
+	/*font-family: 'Roboto Condensed';*/
+	font-size: smaller;
+	letter-spacing: 8px;
+	line-height: 32px;
+	position: relative;
+	top: -48px;
+}
+
+@keyframes draw {
+	0% {
+		stroke-dasharray: 140 540;
+		stroke-dashoffset: -474;
+		stroke-width: 8px;
+	}
+	100% {
+		stroke-dasharray: 760;
+		stroke-dashoffset: 0;
+		stroke-width: 2px;
+	}
+}
+
+.svg-wrapper:hover .shape {
+	-webkit-animation: 0.5s draw linear forwards;
+	animation: 0.5s draw linear forwards;
+}
+/*//for tooltip*/
+
+
+.balloon {
+	position:relative;
+	margin: 30px;
+	width:400px;
+	height:50px;
+	background:transparent;
+	border-radius: 10px;
+	border:1.5px solid #FF5581;
+
+}
+.balloon:after {
+	border-top:0px solid transparent;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #FF5581;
+
+	content:"";
+	position:absolute;
+	top:-10px;
+	left:150px;
+}
 .requestbtn{
 	position:absolute;
 	right:180px;
@@ -1867,7 +1936,7 @@ ol {
 }
 
 .about-right .contact-info .map img {
-	position: absolute;
+	position: inherit;
 	left: auto;
 	right: auto;
 	top: auto;
@@ -1894,8 +1963,8 @@ ol {
 
 .about-right .contact-info .contact-text span {
 	color: #FF5581;
-	font-size: 14px;
-	font-weight: 700;
+	/*font-size: 14px;*/
+	/*font-weight: 700;*/
 	display: inline-block;
 	margin-bottom: 6px;
 }

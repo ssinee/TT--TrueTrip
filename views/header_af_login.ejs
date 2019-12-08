@@ -9,9 +9,9 @@
         <div class="user-access">
             <ul>
                 <% if(currentUser.userType=='planner'){ %>
-                    <a class='requestbtn' style="right: 250px" href="/reservation_planner">요청확인</a>
+                    <a data-toggle="tooltip" data-placement="bottom" title='플래너에게서 온 요청을 확인하세요.'class='requestbtn' style="right: 250px" href="/reservation_planner">요청확인</a>
                 <%} else {%>
-                    <a class='requestbtn' href="/reservation_traveler">요청확인</a>
+                    <a data-toggle="tooltip" data-placement="bottom" title='플래너에게 보낸 요청을 확인하세요.' class='requestbtn' href="/reservation_traveler">요청확인</a>
                 <%}%>
             </ul>
             <%if(currentUser.userType=='planner'){%>

@@ -58,7 +58,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                 })
             }
 
-            if (content[0].length > 0) res.send('1'); else res.send('0');
+            if (content.length==0 || content[0].length==0) res.send('0'); else res.send('1');
         });
 
     } else if (location == "모든지역") {
@@ -74,8 +74,8 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                 })
             }
 
-            if (content[0].length > 0) res.send('1');
-            else res.send('0');
+            if (content.length==0 || content[0].length==0) res.send('0');
+            else res.send('1');
         });
     } else if (category == "모든카테고리") {
         // console.log("category all")
@@ -91,7 +91,7 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
                 })
             }
 
-            if (content[0].length > 0) res.send('1'); else res.send('0');
+            if (content.length==0 || content[0].length==0) res.send('0'); else res.send('1');
         });
     } else {
         await Planner.find({'location': location},{'id':1,'name': 1, 'path': 1,'reviews':1, '_id': 0}, async (err, IDdata) => {

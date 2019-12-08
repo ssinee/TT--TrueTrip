@@ -7,6 +7,7 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./img/favicon-32x32.png">
     <title>TT-TrueTrip</title>
 
     <!-- Google Font -->
@@ -18,8 +19,9 @@
     <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <%include head_link.html%>
 
-    <link rel="icon" href="img/favicon-32x32.png">
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -35,6 +37,20 @@
     <!--    </style>-->
 
     <style>
+        .contact-text{
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+
+        }
+        .posttile{
+            font-weight: bold;
+            font-size:small;
+            color:#787878;
+        }
+        img, .map{
+            border-top-left-radius:5px;
+            border-top-right-radius:5px;
+        }
         .about-left .client-reviews .reviews-item .rating {
             margin-bottom: 0px;
         }
@@ -48,11 +64,11 @@
             margin-bottom: 0px;
         }
 
-        span{
-            font-weight: 100;
-            font-size: 23px;
-            color:#FF5581;
-        }
+        /*span{*/
+        /*    font-weight: 100;*/
+        /*    font-size: 23px;*/
+        /*    color:#FF5581;*/
+        /*}*/
         .content{
             color: black;
         }
@@ -95,14 +111,16 @@
             /*border: solid black 1px;*/
             border-top: 0px;
             text-align: center;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
 
         }
 
         .about-right .contact-info .contact-text {
-            padding-left: 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-right: 10px;
+            /*padding-left: 10px;*/
+            /*padding-top: 10px;*/
+            /*padding-bottom: 10px;*/
+            /*padding-right: 10px;*/
             border-left: 3px solid #CACDD6;
             border-right: 3px solid #CACDD6;
             border-bottom: 3px solid #CACDD6;
@@ -110,10 +128,10 @@
 
         .edit_pro_img {
             position: absolute;
-            left: 260px;
+            left: 140px;
             top: 322px;
-            height: 55px;
-            width: 55px;
+            height: 45px;
+            width: 45px;
             background: #FF5581;
             text-align: center;
             line-height: 55px;
@@ -144,6 +162,8 @@
             max-width: 100%;
             width: auto;
             /*border: solid black 1px;*/
+            /*padding-left:30px;*/
+
         }
 
         .postpic:hover {
@@ -162,14 +182,17 @@
 
         .container {
             max-width: 1300px;
+            text-align: center;
             /*width: 1500px;*/
         }
 
 
         h6 {
             min-height: 70px;
-            font-size: x-large;
+            font-size: inherit;
+            font-weight: bold;
             line-height: 70px;
+            color:#787878;
         }
 
         .arrange-items .arrange-text {
@@ -193,6 +216,45 @@
 
 
         }
+        .profilelabel{
+            font-size:medium;
+            font-weight: 600;
+            text-align: left;
+            padding-bottom: 10px;
+        }
+        #editButton{
+
+            color: #fff;
+            background-color: #FF5581;
+            font-size: smaller;
+            right: 38px;
+            top: 41px;
+            padding: 13px 65px;
+            cursor: pointer;
+            border: 1px solid #FF5581;
+            padding-right: 15px; !important;
+            padding-left: 15px; !important;
+            border-radius: 5px;
+            font-weight: bold;
+            padding:8px;
+        }
+        #writePost{
+            color: #fff;
+            background-color: #FF5581;
+            font-size: smaller;
+            right: 38px;
+            top: 41px;
+            padding: 13px 65px;
+            cursor: pointer;
+            /*border: 1px solid #FF5581;*/
+            padding-right: 15px; !important;
+            padding-left: 15px; !important;
+            border-radius: 5px;
+            font-weight: bold;
+            padding:8px;
+
+        }
+
 
 
     </style>
@@ -300,9 +362,9 @@
                         "<div class=\"col-lg-4 col-sm-6\" >" +
                         "                            <a class=\"arrange-items\">" +
                         "                            <div class=\"arrange-pic\" style='border:0px;'>" +
-                        "                            <img class=\"postpic\" id=\'" + i + "' src=\'" + content[i].path + "' style='width:264px; height:223px position:fixed'>" +
+                        "                            <img class=\"postpic\" id=\'" + i + "' src=\'" + content[i].path + "' style='width:210px; height:223px position:fixed'>" +
                         "                            </div>" +
-                        "                            <div class=\"arrange-text\">" +
+                        "                            <div class=\"arrange-text\" style='margin-left: 10px;'>" +
                         "                              <div class='imageID' style='display:none'>" + content[i]._id + "</div>" +
                         "                            <h6 class='posttitle'  data-target='#myModal'>" + content[i].title + "</h6>" +
 
@@ -504,17 +566,17 @@
     <div class="about-item" style="padding-top: 100px;">
         <div class="container" style="width: 3000px;">
             <div class="row" style="width: 100%;">
-                <div class="col-lg-4" style="max-width: 30%; padding-right: 40px; padding-left: 0px;">
+                <div class="col-lg-4" style="max-width: 25%; padding-right: 40px; padding-left: 0px;">
                     <div class="about-right">
-                        <div class="contact-info" style="padding-top: 100px; width: 100%;">
+                        <div class="contact-info" style="padding-top: 100px; width: 100%; left:100px;position: absolute;">
 
                             <!--profile image comes here-->
                             <form method="post" action="/mypage/editimg" enctype="multipart/form-data"
                                   id="fileuploadform">
-                                <div class="map" style="border:1px solid #CACDD6; height: 400px;">
+                                <div class="map" style=" height: 310px;">
 
                                     <img id="profile_img" name="profile_img" src='<%= user_info.path %>' alt=""
-                                         style="width: 100%; height: 100%;">
+                                         style="width: 80%; height: 100%;border:1px solid #CACDD6;">
 
 
                                     <!--                                    로그인 시, 페이지 주인이면 profile img edit 활성화-->
@@ -522,14 +584,14 @@
                                     <% } else { %>
                                         <% if(user_info.id == currentUser.id) { %>
                                             <center>
-                                                <div class="edit_pro_img" style="left:145px; top:365px;">
+                                                <div class="edit_pro_img" style="left:138px; top:280px;">
 
                                                     <input id="fileinput" type="file" value="이미지변경"
                                                            onchange="this.form.submit()"
                                                            name="editImg"
-                                                           style="position:absolute;width:50px;height:50px;padding:0;margin:-1px;opacity: 0;">
+                                                           style="position:absolute;width:50px;height:50px;padding:0;margin:-1px;opacity: 0;right:2px;">
                                                     <img src="upload_profile/edit_1.png"
-                                                         style="width:40px; position: initial;">
+                                                         style="width:33px; position: initial;right:5px; top:8px;margin-bottom:10px">
                                                 </div>
                                             </center>
                                         <% } else { %>
@@ -539,17 +601,17 @@
                             </form>
 
 
-                            <div class="contact-text" style="border:1px solid #CACDD6; padding-top: 30px ">
+                            <div class="contact-text" style="border:1px solid #CACDD6;text-align: right; width:254px;margin-left:32px;padding:0px; padding-top: 15px;padding-bottom:15px  ">
                                 <form method="post" action="/mypage/write" ENCTYPE="multipart/form-data">
                                     <p align="center" style="font-size: 30px; margin-bottom: 0px;">
-                                        <b><%= user_info.name %></b></p>
-                                    <h5 align="center" style="color: deepskyblue"><%= user_info.email %></h5>
+                                        <b style="font-weight: bold; font-size: medium; padding-bottom:10px"><%= user_info.name %></b></p>
+                                    <h5 align="center" style="color: deepskyblue; font-size: smaller; "><%= user_info.email %></h5>
                                     <div style="padding:5px 20px"></div>
                                     <div>
                                         <center>
-                                            <img src="../img/icon/category.png" style="width: 30px; height: 30px;">
-                                            <span style="margin-bottom: 0px; font-size: 22px;">전문분야</span>
-                                            <h5 align="center"><%= user_info.category1 %> / <%= user_info.category2 %>
+<!--                                            <img src="../img/icon/category.png" style="width: 30px; height: 30px;">-->
+                                            <span class='profilelabel' style="margin-bottom: 0px; ">전문분야</span>
+                                            <h5 style='font-size: small;' align="center"><%= user_info.category1 %> / <%= user_info.category2 %>
                                                 / <%= user_info.category3 %></h5>
                                         </center>
                                     </div>
@@ -557,9 +619,9 @@
                                     <div style="padding:5px 20px"></div>
 
                                     <center>
-                                        <img src="../img/icon/location.png" style="width: 25px; height: 25px;">
-                                        <span style="margin-bottom: 0px; font-size: 22px;">활동지역</span>
-                                        <h5 align="center" id="profileLoc"><%= user_info.location %></h5>
+<!--                                        <img src="../img/icon/location.png" style="width: 25px; height: 25px;">-->
+                                        <span class='profilelabel' style="margin-bottom: 0px;">활동지역</span>
+                                        <h5 style='font-size: small;' align="center" id="profileLoc"><%= user_info.location %></h5>
                                     </center>
 
 
@@ -580,13 +642,13 @@
                                     </div>
 
                                     <center>
-                                        <img src="../img/icon/text.png" style="width: 25px; height: 25px;">
-                                        <span style="margin-bottom: 0px; font-size: 22px;">자기소개</span>
-                                        <h5 align="center" id="introduceText"><%= user_info.introduce %></h5>
+<!--                                        <img src="../img/icon/text.png" style="width: 25px; height: 25px;">-->
+                                        <span class='profilelabel' style="margin-bottom: 0px; ">자기소개</span>
+                                        <h5 align="center" id="introduceText" style='font-size: smaller;  padding-right:40px; padding-left:40px;padding-bottom: 10px;'><%= user_info.introduce %></h5>
                                     </center>
 
                                     <div id="editProfile2" style="padding:5px 20px" align="center">
-                                        <textarea style="width: 100%; min-height: 100px;" name="introduce"
+                                        <textarea style="font-size:small; font-weight:600;width: 100%; min-height: 100px; padding-bottom: 30px;" name="introduce"
                                                   placeholder="자기소개글을 적어주세요."><%= user_info.introduce %></textarea>
                                     </div>
 
@@ -601,9 +663,9 @@
                                     <% } else { %>
                                         <% if(user_info.id == currentUser.id) { %>
                                             <center>
-                                                <input class="primary-btn" type="button" id="editButton"
+                                                <a  id="editButton"
                                                        value="프로필 수정"
-                                                       name="edit">
+                                                        name="edit">프로필수정</a>
                                                 <div style="padding:5px 20px"></div>
 
                                                 <div id="save">
@@ -624,7 +686,7 @@
                 <!--                여기까지 같다.-->
 
 
-                <div class="col-lg-8" style="max-width: 100%;">
+                <div class="col-lg-8" style="max-width: 100%; text-align: -webkit-right;">
                     <div class="about-left" style="padding-top: 0px;">
 
                         <div class="intro-item" style="height:100px">
@@ -635,18 +697,17 @@
                                 <% } else { %>
                                     <% if(user_info.id == currentUser.id) { %>
                                         <div id="writepostdiv" class="share-btn" style="font-weight: 100; margin-bottom: 0px;">
-
-
                                         <a id="writePost" style="background: #007bff" name="writePost"
                                            href="../upload" >글쓰기</a></div>
                                         <% } else { %>
+                                            <span class='animated infinite fadeInUp ' style="animation-duration:2s;position:inherit; padding:100px; font-weight: normal; color:#787878;font-size: x-large;"><i>"원하는 장소를 클릭하여 플래너에게 요청해보세요!"</i></span>
                                         <% } %>
                                         <% } %>
                                 </div>
 
                         </div>
 
-                        <div class="row" id="showPlannerImages" style="padding-bottom: 0px;">
+                        <div class="row" id="showPlannerImages" style="padding-bottom: 0px;padding-top:15px; width:750px; text-align: -webkit-right;margin-right: 0px; margin-left: 0px">
                         </div>
 
 
@@ -689,7 +750,7 @@
                                     <div class="modal-header">
 
                                         <h4 style="font-size: xx-large" class="modal-title" align="left"
-                                            id="posttitle"></h4>
+                                            id="posttitle" style="color:#787878"></h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
 
@@ -698,25 +759,28 @@
 
                                         <center><p><img id="postpath" style="width: 90%; height: 90%;"></p>
 
-                                            <table>
+                                            <table style="font-size: smaller; font-weight: bold;color: #787878">
                                                 <tr>
-                                                    <td style="width: 23%"><span><b>주소</b></span></td>
-                                                    <td><span class="content" id="postlocation"></span><br></td>
+
+                                                    <td style="width: 19%; color: #787878"><span><b>주소</b></span></td>
+                                                    <td><span style='color: #787878; font-weight: normal' class="content" id="postlocation"></span><br></td>
+
+
                                                 </tr>
 
                                                 <tr>
                                                     <td><span><b>카테고리</b></span></td>
-                                                    <td><span class="content" id="postcategory"></span><br></td>
+                                                    <td><span style='color: #787878; font-weight: normal' class="content" id="postcategory"></span><br></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><span><b>글쓴이</b></span></td>
-                                                    <td><span class="content" id="postname"></span><br></td>
+                                                    <td><span style='color: #787878; font-weight: normal'class="content" id="postname"></span><br></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><span><b>소개글</b></span><br></td>
-                                                    <td><textarea style="height: 130px; width: 100%; font-size: 18px; border: none"
+                                                    <td><textarea style="color: #787878;height: 130px; width: 100%;font-weight: normal; font-size: small; border: none"
                                                                   id="postcontent"
                                                                   class="content"
                                                                   placeholder="아직 소개글이 없습니다."></textarea><br></td>
@@ -791,7 +855,7 @@
 
 <!-- Footer Section Begin -->
 <footer class="footer-section spad">
-    <div class="container">
+    <div class="container" style="text-align: center;">
         <div class="row">
             <div class="col-lg-12">
                 <form action="#" class="newslatter-form">
