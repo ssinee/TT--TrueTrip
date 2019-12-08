@@ -496,6 +496,7 @@
                     for(var i=0; i<length; i++){
                         console.log(data.data[i]);
 
+
                         var starStr=""; //후기 별점 str.
                         for(var j=1; j<=5; j++){
                             if(j <= parseInt(data.data[i].score)){
@@ -507,6 +508,7 @@
                                     "<i class=\"fa fa-star-o\"></i>"
                             }
                         }
+
                         postsArr +=
                             "<div class=\"reviews-item\" >" +
                             "                           <div class=\"rating\">" +
@@ -759,8 +761,11 @@
 
                                             <table style="font-size: smaller; font-weight: bold;color: #787878">
                                                 <tr>
+
                                                     <td style="width: 19%; color: #787878"><span><b>주소</b></span></td>
                                                     <td><span style='color: #787878; font-weight: normal' class="content" id="postlocation"></span><br></td>
+
+
                                                 </tr>
 
                                                 <tr>
