@@ -148,7 +148,8 @@
         console.log("길이"+post_len);
         var str="";
         var test= new Array();
-        //선택장소 보여줄려고 했는데 미완성
+
+        //선택장소 보여줌
         for(var j=0; j<post_len;j++){
 
             console.log("array:"+array[j]);
@@ -182,10 +183,66 @@
                 }
 
             })
+
         }
 
-
         <% } %>
+
+        for(var i=0; i<data_length;i++){
+            $.ajax({
+                url:'/findConfirm',
+                dataType: 'json',
+                type:'Post',
+                data:{"reqid":req_ids[i]},
+                async:false,
+                success: function(data) {
+                    if(data.data==null){
+                        console.log("계획 미작성");
+                    }
+                    else{
+                        console.log("계획 작성 완료");
+                        var string="";
+                        string+=
+                        "<div>" +
+                        "  계획 작성완료 " +
+                        "                     </div>"
+
+                        $("#"+i).children(".right").children(".item1").html(string);
+
+
+                        $.ajax({
+                            url:'/reviewState',
+                            dataType: 'json',
+                            type:'Post',
+                            data:{"reqid":req_ids[i]},
+                            async:false,
+                            success: function(data) {
+                                console.log(data);
+                                if(data.data==true){
+                                    $("#"+i).children(".right").children(".item2").html("리뷰 보기");
+                                    console.log("리뷰 작성완료");
+                                }
+                                else{
+                                    console.log("리뷰 작성없음");
+                                    $("#"+i).children(".right").children(".item2").html("리뷰 기다리는중");
+                                }
+
+                            },
+                            error: function(request,status,error){
+                                alert(error);
+                            }
+
+                        })
+
+                    }
+                },
+                error: function(request,status,error){
+                    alert(error);
+                }
+
+            })
+
+        }
 
 
         //plan.js post /sendReqID로 감
@@ -303,8 +360,8 @@
                         </div>
                         <div id="test"></div>
                         <div class="right">
-                            <div class="item"><a name="accept" href="/sendReqID"><img src="/img/icon/o.jpg" width="16" height="16">요청수락</a></div><br>
-                            <div class="item"><a name="reject"href=""><img src="/img/icon/x.png" width="16" height="16">요청거부</a></div><br>
+                            <div class="item1"><a name="accept" href="/sendReqID"><img src="/img/icon/o.jpg" width="16" height="16">요청수락</a></div><br>
+                            <div class="item2"><a name="reject"href=""><img src="/img/icon/x.png" width="16" height="16">요청거부</a></div><br>
                         </div>
                     </div>
                     <% } %>

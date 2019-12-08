@@ -146,6 +146,21 @@ router.post('/findPoint', function(req,res){
 
 });
 
+router.post('/findConfirm', function(req,res){
+
+    console.log("/findConfirm 호출됨");
+
+    var request_id=req.body.reqid;
+
+    Schedule.findOne({'originRequest':request_id},function(err,data){
+        if(err) throw err;
+        console.log(data);
+        res.send({data:data});
+
+    })
+});
+
+
 
 
 module.exports = router;
