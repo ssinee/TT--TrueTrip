@@ -197,6 +197,11 @@
                 //div id 동적생성
                 plan.push("#plan"+i);
             }
+            var reviews=new Array();
+            for(var i=0; i<data_length; i++){
+                //div id 동적생성
+                reviews.push("#reviews"+i);
+            }
 
             // 계획 상태 확인하기
             //해당 request의 confirm이 false이면 거절된것
@@ -247,6 +252,37 @@
                                             "                     </a>"
                                         $(plan[j]).html(postsArr);
                                         postsArr="";
+
+                                        $.ajax({
+                                            url:'/reviewState',
+                                            dataType: 'json',
+                                            type: 'Post',
+                                            data:{"reqid":array[j]},
+                                            async: false,
+                                            success: function(data){
+                                                console.log("리뷰데이터"+data.data);
+                                                if(data.data==true){
+                                                    postsArr += " 리뷰작성완료 "
+                                                    $(reviews[j]).html(postsArr);
+                                                    postsArr="";
+
+                                                }
+                                                else if(data.data==false){
+                                                    postsArr +=
+                                                        "<a name=\"confirmPlan\" href=\"/viewPlan\">" +
+                                                        "  리뷰 남기기 " +
+                                                        "                     </a>"
+                                                    $(reviews[j]).html(postsArr);
+                                                    postsArr="";
+
+                                                }
+
+                                            },
+                                            error:function(request,status,error){
+                                                alert(error);
+                                            }
+
+                                        })
                                     }
                                 },
                                 error: function(request,status,error){
@@ -339,6 +375,7 @@
                         <div id="test"></div>
                         <div class="right">
                             <div class="item" id="plan<%=i%>"></div>
+                            <div id="reviews<%=i%>"></div>
 
                         </div>
                     </div>
