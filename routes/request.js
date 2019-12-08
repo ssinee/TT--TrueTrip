@@ -192,7 +192,7 @@ router.post('/checkPlan', function(req,res){
     // console.log(reqid);
     Schedule.find({'originRequest':reqid},function(err,data){
         if(err) throw err;
-        console.log(data);
+        // console.log(data);
         // res.render('../views/receivedPlan.ejs',{data:data});
         res.send({data:data});
 

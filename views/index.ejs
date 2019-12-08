@@ -113,6 +113,7 @@
             font-size:smaller;!important;
         }
 
+
     </style>
 
 
@@ -131,8 +132,34 @@
     <% if(isAuthenticated) { %>
         <% include header_af_login.ejs %>
     <% } else { %>
-        <% include header_bf_login.html %>
-    <% } %>
+
+
+            <div class="container-fluid">
+                <div class="logo">
+                    <a href="/main"><img style="position:absolute; top:20px;width:90px; height:65px; border-radius: 16px" src="../img/TTmainLogo.png" alt=""></a>
+                </div>
+                <nav class="main-menu mobile-menu">
+                    <ul>
+
+                    </ul>
+                </nav>
+                <div class="header-right">
+                    <div class="user-access">
+                        <!--            <a href="login.ejs">Register/</a>-->
+                        <!--            <a href="login.ejs">Login</a>-->
+                        <!--            <a href="contact.html">Request</a>-->
+                    </div>
+                    <a class="balloon" style="top:45px; left:135px;font-weight:bold;font-size:12px;padding:8px;color:#fff;">자신만의 장소를 공유해보세요</a>
+                    <a href='/plannerRegister' value="플래너 가입하기" style="font-size:smaller; font-weight: bold; color:#fff">플래너 가입하기</a>
+                    <a href="/login" class="pink_btn" style="border-radius: 5px">회원가입/로그인</a>
+
+                </div>
+
+                <div id="mobile-menu-wrap"></div>
+
+            </div>
+
+        <% } %>
 </header>
 <!-- Header End -->
 
@@ -144,8 +171,8 @@
                 <div class="hero-text">
                     <div class="filter-search" style="border-radius: 5px; width: 444px; height:500px; background-color: #FFF; opacity: 1;">
 <!--                        <h1 style="font-size:3rem;position:absolute; font-weight:900 ;margin-left:850px; width:800px">TT</h1>-->
-                        <h1 class='animated infinite flipInX delay-1s' style="font-size:120px;animation-duration:2s;margin-left:640px; margin-top:0px;font-weight: 900; position:absolute">TrueTrip</h1>
-                        <h1 class='animated infinite flipInX delay-2s'style="width:300px;margin-left:777px; font-size: 1.4rem;margin-top:150px;font-weight:400; position:absolute">For your true travel</h1>
+                        <h1 class='animated  flipInX ' style="font-size:120px;animation-duration:2s;margin-left:640px; margin-top:0px;font-weight: 900; position:absolute">TrueTrip</h1>
+                        <h1 class='animated  flipInX delay-1s'style="width:300px;margin-left:777px; font-size: 1.4rem;margin-top:150px;font-weight:400; position:absolute">For your true travel</h1>
                         <div class="location-search" style="width: 100%; padding-bottom: 30px">
                             <img src="img/placeholder.png" alt="" style="padding-top: 10px;">
                             <h4 style="color:#787878; padding-top: 15px; padding-bottom: 40px">편안한 여행을 위한 계획을 요청해보세요.</h4>

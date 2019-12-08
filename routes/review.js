@@ -16,7 +16,7 @@ router.post('/sendReview',function(req,res){
     var originRequest=req.body.originRequest;
     var planner_id=req.body.planner_id;
 
-    console.log(planner_id);
+    // console.log(planner_id);
 
     var review= new Review({
         'author': author,
