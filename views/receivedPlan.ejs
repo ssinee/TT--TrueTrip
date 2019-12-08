@@ -82,14 +82,14 @@
         }
         #test{
            position:absolute;
-            top:1200px;
+            top:1000px;
             left:200px;
         }
         #req_cont{
             position:relative;
         }
         #planalert {
-            font-size: 50px;
+            font-size: 35px;
         }
         .blog-item .blog-text {
             text-align: unset;
@@ -440,6 +440,9 @@
         if(howManyRows==1){
             $("#test").hide()
         }
+        else{
+            $("#reviewBtn").hide()
+        }
 
         // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
         var floatPosition = parseInt($("#test").css('top'))
@@ -451,14 +454,14 @@
             var newvalue=floatPosition-1000;
             var newPosition = scrollTop + newvalue + "px";
              // $("#test").css('top', newPosition);
-
-            if(scrollTop<1200){
-                newPosition=1200;
+            //
+            if(scrollTop<900){
+                newPosition=900;
             }
 
             $("#test").stop().animate({
                 "top" : newPosition
-            }, 150);
+            }, 100);
 
         }).scroll();
 
@@ -509,6 +512,7 @@
                             $(this).addClass('origin_class');
                         });
                         $("#test").hide();
+                        $("#reviewBtn").show();
                     }
                     else{
 
@@ -537,6 +541,14 @@
                         if(data){
                             if(data.data[0]==null){
                                 console.log("데이터 없음")
+                                var blur_images = $('.blur_class');
+                                blur_images.each(function () {
+                                    console.log($(this));
+                                    $(this).removeClass('blur_class');
+                                    $(this).addClass('origin_class');
+                                });
+                                $("#test").hide();
+                                $("#reviewBtn").show();
                             }
 
                         }
@@ -547,14 +559,6 @@
 
                 })
 
-
-                var blur_images = $('.blur_class');
-                blur_images.each(function () {
-                    console.log($(this));
-                    $(this).removeClass('blur_class');
-                    $(this).addClass('origin_class');
-                });
-                $("#test").hide();
 
 
             }
