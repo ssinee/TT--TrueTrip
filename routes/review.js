@@ -32,6 +32,11 @@ router.post('/sendReview',function(req,res){
         // console.log(data);
     });
 
+    Schedule.findOneAndUpdate({originRequest:originRequest},{$set:{"review":true}},function (err,data) {
+        if (err) throw err;
+
+    });
+
 });
 
 router.post('/findReview',function(req,res){
@@ -49,16 +54,16 @@ router.post('/findReview',function(req,res){
 });
 
 router.post('/reviewState',function(req,res){
-    var planner=req.body.id;
+    var reqid=req.body.reqid;
     // console.log("플래너아이디"+planner);
 
-    Review.find({originRequest:planner},function(err,data){
+    Schedule.find({originRequest:reqid},function(err,data){
         if(err) throw err;
-        var state=data[0].state;
-        // console.log("리뷰 어레이ㅣ이이이"+review_array);
-        res.send({data:state});
+        var review_state=data[0].review;
+        console.log("리뷰 데이터"+review_state);
+        res.send({data:review_state});
 
-    })
+    });
 
 });
 

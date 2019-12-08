@@ -8,7 +8,8 @@ var ScheduleSchema= new Schema({
     originRequest: String,
     plan:[String],
     done: { type: Boolean, default: true},
-    confirm: Boolean
+    confirm: Boolean,
+    review: { type: Boolean, default: false},
 
 });
 
