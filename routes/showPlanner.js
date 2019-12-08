@@ -22,32 +22,11 @@ var category = "";
 showPlannersListRouter.get('/plannerlist', function (req, res) {
     res.render('../views/plannerList.ejs', {'data': content});
 })
-// showPlannersListRouter.post('/showplanner', function (req, res) {
-//     Planner.find({'location': location}, {'id': 1, '_id': 0}, function (err, IDdata) {
-//         //사용자가 선택한 장소를 기반으로 planner의 collection안에서 filter
-//         //filter된 id바탕으로 planner의게시글 가져옴 id 통해서
-//         idcontent.push(IDdata);
-//         console.log(idcontent)
-//         for(var i=0; i<IDdata.length; i++){
-//            POSTdata= dbdata.find({'author': IDdata[i].id}, {'_id': 0, 'path': 1});
-//
-//            content.push(POSTdata)
-//             console.log(POSTdata)
-//
-//         }
-//         res.send({'data': content, 'Iddata':idcontent})
-//         idcontent=[]
-//
-//     });
-//
-//
-// })
-
 
 //planner page data 전송
 showPlannersListRouter.post('/showplanner', function (req, res) {
-    console.log(content)
-    console.log(idcontent)
+    // console.log(content)
+    // console.log(idcontent)
     res.send({'data': content, 'Iddata': idcontent, 'location': location, 'category': category})
 
 
@@ -61,22 +40,20 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
     location = req.body.location;
     var plannerquery = "{}"
     var postquery = "{}"
-    console.log(category)
-    console.log(location)
+    // console.log(category)
+    // console.log(location)
 
     if ((location == "모든지역") && (category == "모든카테고리")) {
 
         //{'location': location} planner
         // {'author': IDdata[i].id, 'theme': category} post
-        await Planner.find({}, {'id': 1, 'path': 1, '_id': 0}, async (err, IDdata) => {
+        await Planner.find({}, {'id':1,'name': 1, 'path': 1,'reviews':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author': IDdata[i].id}, {
                     '_id': 0,
                     'path': 1
                 }, function (err, POSTdata) {
-                    if(POSTdata) console.log("its it!")
-                    else console.log("its not")
                     content.push(POSTdata)
                 })
             }
@@ -86,15 +63,13 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
 
     } else if (location == "모든지역") {
 
-        await Planner.find({}, {'id': 1, 'path': 1, '_id': 0}, async (err, IDdata) => {
+        await Planner.find({}, {'id':1,'name': 1, 'path': 1,'reviews':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author': IDdata[i].id, 'theme': category}, {
                     '_id': 0,
                     'path': 1
                 }, function (err, POSTdata) {
-                    if(POSTdata) console.log("its it!")
-                    else console.log("its not")
                     content.push(POSTdata)
                 })
             }
@@ -103,42 +78,35 @@ showPlannersListRouter.post('/frommain', async (req, res) => {
             else res.send('0');
         });
     } else if (category == "모든카테고리") {
-        console.log("category all")
-        await Planner.find({'location': location}, {'id': 1, 'path': 1, '_id': 0}, async (err, IDdata) => {
+        // console.log("category all")
+        await Planner.find({'location': location}, {'id':1,'name': 1, 'path': 1,'reviews':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author': IDdata[i].id}, {
                     '_id': 0,
                     'path': 1
                 }, function (err, POSTdata) {
-                    if(POSTdata) console.log("its it!")
-                    else console.log("its not")
+
                     content.push(POSTdata)
                 })
             }
 
-            if (content.length > 0) res.send('1'); else res.send('0');
+            if (content[0].length > 0) res.send('1'); else res.send('0');
         });
     } else {
-        await Planner.find({'location': location}, {'id': 1, 'path': 1, '_id': 0}, async (err, IDdata) => {
+        await Planner.find({'location': location},{'id':1,'name': 1, 'path': 1,'reviews':1, '_id': 0}, async (err, IDdata) => {
             idcontent = IDdata;
             for (var i = 0; i < IDdata.length; i++) {
                 await dbdata.find({'author': IDdata[i].id, 'theme': category}, {
                     '_id': 0,
                     'path': 1
                 }, function (err, POSTdata) {
-                    if(!POSTdata) console.log("its it!")
-                    else console.log("its not")
                     content.push(POSTdata)
                 })
             }
-            console.log(content)
-            console.log(content.length)
             if (content.length==0 || content[0].length==0) res.send('0');
-            else res.send('1');
-
+            res.send('1');
         });
-
     }
 
 

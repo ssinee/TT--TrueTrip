@@ -28,19 +28,19 @@ router.post('/sendReview',function(req,res){
     //해당 플래너 댓글에 review 객체 추가
     Planner.findOneAndUpdate({id:planner_id},{$push:{"reviews":review}},function (err,data) {
         if (err) throw err;
-        console.log(data);
+        // console.log(data);
     });
 
 });
 
 router.post('/findReview',function(req,res){
     var planner=req.body.id;
-    console.log("플래너아이디"+planner);
+    // console.log("플래너아이디"+planner);
 
     Planner.find({id:planner},function(err,data){
         if(err) throw err;
         var review_array=data[0].reviews;
-        console.log("리뷰 어레이ㅣ이이이"+review_array);
+        // console.log("리뷰 어레이ㅣ이이이"+review_array);
         res.send({data:review_array});
        
     })

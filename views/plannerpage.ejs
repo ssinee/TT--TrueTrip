@@ -10,7 +10,7 @@
     <title>TT-TrueTrip</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
+<!--    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">-->
 
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
@@ -35,6 +35,12 @@
     <!--    </style>-->
 
     <style>
+        .about-left .client-reviews .reviews-item .rating {
+            margin-bottom: 0px;
+        }
+        .about-left .client-reviews .reviews-item {
+            margin-bottom: 0px;
+        }
 
         .about-left .client-reviews h3 {
             color: #242424;
@@ -310,23 +316,31 @@
                 var ids = new Array();
                 var objid;
                 $('#request').click(function () {
-
                     var selected_photos = $('.postpicActive');
-                    var ids = new Array();
-                    selected_photos.each(function () {
-                        var selval = $(this).attr("id");
-                        selval *= 1;
-                        objid = content[selval]._id;
-                        console.log(objid);
-                        // var id_arr = id_str.split("_");
-                        // var selval = id_arr[1];
-                        if (objid != 'undefined' && objid != '' && objid != null) {
-                            ids.push(objid);
-                        }
-                    });
-                    var request = $.post('/request', {'ids': ids});
+                    //아무것도 선택안하고 요청시에는 에러 메시지 modal로 띄움.
+                    console.log(selected_photos);
+                    if(selected_photos.length == 0){
+                        $('#chooseModal').modal('toggle');
+                        return;
+                    }
+                    //선택된 장소가 있다면,
+                    else {
+                        var ids = new Array();
+                        selected_photos.each(function () {
+                            var selval = $(this).attr("id");
+                            selval *= 1;
+                            objid = content[selval]._id;
+                            console.log(objid);
+                            // var id_arr = id_str.split("_");
+                            // var selval = id_arr[1];
+                            if (objid != 'undefined' && objid != '' && objid != null) {
+                                ids.push(objid);
+                            }
+                        });
+                        var request = $.post('/request', {'ids': ids});
+                        location.href="../requestform"
+                    }
                 })
-
             })
 
 
@@ -339,7 +353,7 @@
             $('#showPlannerImages').on('click', 'h5', function (event) {
                 postTitle = $(this).text()
                 var posting = $.post('/showpopup', {'User_ID': User_ID, 'Title': postTitle})
-                showPopup()
+                // showPopup()
             })
 
             //profile preview
@@ -420,21 +434,30 @@
                     for(var i=0; i<length; i++){
                         console.log(data.data[i]);
 
+
+                        var starStr=""; //후기 별점 str.
+                        for(var j=1; j<=5; j++){
+                            if(j <= parseInt(data.data[i].score)){
+                                starStr +=
+                                    "<i class=\"fa fa-star\"></i>"
+                            }
+                            else{
+                                starStr +=
+                                    "<i class=\"fa fa-star-o\"></i>"
+                            }
+                        }
+
                         postsArr +=
                             "<div class=\"reviews-item\" >" +
                             "                           <div class=\"rating\">" +
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
-                            "                                <i class=\"fa fa-star\"></i>"+
+                            starStr +
                             "                           </div>" +
                             "                           <p style='margin-bottom: 0px;'>"+data.data[i].comment+"</p>"+
                             "                           <div class=\"client-text\">"+
                             "                               <h5>"+data.data[i].author+"</h5>"+
                             "                               <span>"+data.data[i].date+"</span>"+
                             "                           </div>"+
-                            "                     </div><br>"
+                            "                     </div><hr>"
 
                         $(".reviews").html(postsArr);
                     }
@@ -468,7 +491,7 @@
 <!--header-->
 <header class="header-section listings">
     <% if(isAuthenticated) { %>
-        <% include header_af_login.html %>
+        <% include header_af_login.ejs %>
     <% } else { %>
         <% include header_bf_login.html %>
     <% } %>
@@ -494,7 +517,7 @@
                                          style="width: 100%; height: 100%;">
 
 
-<!--                                    로그인 시, 페이지 주인이면 profile img edit 활성화-->
+                                    <!--                                    로그인 시, 페이지 주인이면 profile img edit 활성화-->
                                     <% if (!isAuthenticated) { %>
                                     <% } else { %>
                                         <% if(user_info.id == currentUser.id) { %>
@@ -543,56 +566,56 @@
                                     <div style="padding:5px 20px"></div>
                                     <h5 id="UserID"><%= user_info.id %></h5>
                                     <div id="editProfile" align="center">
-                                        
-                                                <select id="select_loaction" name="location">
-                                                    <option value="인계동">인계동</option>
-                                                    <option value="행궁동">행궁동</option>
-                                                    <option value="영통동">영통동</option>
-                                                    <option value="우만동">우만동</option>
-                                                    <option value="매탄동">매탄동</option>
-                                                </select>
-                                                <!--                                        <input type="text" name="location" style="width: 80%;" placeholder="활동지역을 써주세요.">-->
 
-                                                <div style="padding:5px 20px"></div>
-                                            </div>
+                                        <select id="select_loaction" name="location">
+                                            <option value="인계동">인계동</option>
+                                            <option value="행궁동">행궁동</option>
+                                            <option value="영통동">영통동</option>
+                                            <option value="우만동">우만동</option>
+                                            <option value="매탄동">매탄동</option>
+                                        </select>
+                                        <!--                                        <input type="text" name="location" style="width: 80%;" placeholder="활동지역을 써주세요.">-->
 
-                                            <center>
-                                                <img src="../img/icon/text.png" style="width: 25px; height: 25px;">
-                                                <span style="margin-bottom: 0px; font-size: 22px;">자기소개</span>
-                                                <h5 align="center" id="introduceText"><%= user_info.introduce %></h5>
-                                            </center>
+                                        <div style="padding:5px 20px"></div>
+                                    </div>
 
-                                            <div id="editProfile2" style="padding:5px 20px" align="center">
+                                    <center>
+                                        <img src="../img/icon/text.png" style="width: 25px; height: 25px;">
+                                        <span style="margin-bottom: 0px; font-size: 22px;">자기소개</span>
+                                        <h5 align="center" id="introduceText"><%= user_info.introduce %></h5>
+                                    </center>
+
+                                    <div id="editProfile2" style="padding:5px 20px" align="center">
                                         <textarea style="width: 100%; min-height: 100px;" name="introduce"
                                                   placeholder="자기소개글을 적어주세요."><%= user_info.introduce %></textarea>
-                                            </div>
+                                    </div>
 
-                                            <div style="padding:5px 20px"></div>
+                                    <div style="padding:5px 20px"></div>
 
-                                            <!--                                    프로필 사진 변경 버튼-->
-                                            <!--                                    <div id="editProfile3" style="padding:5px 20px" align="center">-->
-                                            <!--                                        <input class="primary-btn" type="file" value="이미지변경" name="editImg">-->
-                                            <!--                                    </div>-->
+                                    <!--                                    프로필 사진 변경 버튼-->
+                                    <!--                                    <div id="editProfile3" style="padding:5px 20px" align="center">-->
+                                    <!--                                        <input class="primary-btn" type="file" value="이미지변경" name="editImg">-->
+                                    <!--                                    </div>-->
 
-                                            <% if (!isAuthenticated) { %>
-                                            <% } else { %>
-                                                <% if(user_info.id == currentUser.id) { %>
-                                                    <center>
-                                                        <input class="primary-btn" type="button" id="editButton"
-                                                               value="프로필 수정"
-                                                               name="edit">
-                                                        <div style="padding:5px 20px"></div>
+                                    <% if (!isAuthenticated) { %>
+                                    <% } else { %>
+                                        <% if(user_info.id == currentUser.id) { %>
+                                            <center>
+                                                <input class="primary-btn" type="button" id="editButton"
+                                                       value="프로필 수정"
+                                                       name="edit">
+                                                <div style="padding:5px 20px"></div>
 
-                                                        <div id="save">
-                                                            <input class="primary-btn" type="submit" id="saveButton"
-                                                                   value="저장"
-                                                                   name="save">
-                                                        </div>
-                                                    </center>
+                                                <div id="save">
+                                                    <input class="primary-btn" type="submit" id="saveButton"
+                                                           value="저장"
+                                                           name="save">
+                                                </div>
+                                            </center>
 
-                                                <% } else { %>
-                                                <% } %>
-                                            <% } %>
+                                        <% } else { %>
+                                        <% } %>
+                                    <% } %>
                                 </form>
                             </div>
                         </div>
@@ -606,27 +629,28 @@
 
                         <div class="intro-item" style="height:100px">
 
-                                <div class="intro-share" style="margin-top: 0px;">
-                                    <!--                                    현재 로그인한애가 페이지 주인이면, 글쓰기 버튼 활성화-->
-                                    <% if (!isAuthenticated) { %>
-                                    <% } else { %>
-                                        <% if(user_info.id == currentUser.id) { %>
-                                    <div id="writepostdiv" class="share-btn" style="font-weight: 100; margin-bottom: 0px;">
+                            <div class="intro-share" style="margin-top: 0px;">
+                                <!--                                    현재 로그인한애가 페이지 주인이면, 글쓰기 버튼 활성화-->
+                                <% if (!isAuthenticated) { %>
+                                <% } else { %>
+                                    <% if(user_info.id == currentUser.id) { %>
+                                        <div id="writepostdiv" class="share-btn" style="font-weight: 100; margin-bottom: 0px;">
+
 
                                         <a id="writePost" style="background: #007bff" name="writePost"
-                                           href="../upload" >글쓰기</a>
+                                           href="../upload" >글쓰기</a></div>
                                         <% } else { %>
                                         <% } %>
                                         <% } %>
-                                    </div>
                                 </div>
+
                         </div>
 
                         <div class="row" id="showPlannerImages" style="padding-bottom: 0px;">
                         </div>
 
 
-<!--                        request 버튼은 아래로 보냄.-->
+                        <!--                        request 버튼은 아래로 보냄.-->
                         <div class="intro-item" style="padding-top: 0px; padding-bottom: 0px; border-bottom: none;">
                             <div class="intro-share" style="margin-top: 0px;">
                                 <% if (!isAuthenticated) { %>
@@ -638,7 +662,7 @@
 
                                     <% if(currentUser.userType == "traveler") { %>
                                         <div class="share-btn" style="font-weight: 100;">
-                                            <a id="request" style="background: #007bff;" href="../requestform">계획요청</a></div>
+                                            <a id="request" style="background: #007bff; cursor: pointer;" >계획요청</a></div>
 
                                     <% } else { %>
                                     <% } %>
@@ -647,10 +671,10 @@
                         </div>
 
 
-                        <div class="client-reviews" style="margin-top: 15px;">
-                            <h3>플래너 후기</h3><hr style="margin-top: 0px; margin-bottom: 0px;">
+                        <div class="client-reviews" style="margin-top: 15px; margin-bottom: 200px;">
+                            <h3>플래너 후기</h3><hr style="margin-top: 0px;">
 
-<!--                            리뷰들 들어갈 자리임.-->
+                            <!--                            리뷰들 들어갈 자리임.-->
                             <div class="reviews">
                                 <span>아직 후기가 없습니다.</span>
                             </div>
@@ -676,7 +700,7 @@
 
                                             <table>
                                                 <tr>
-                                                    <td style="width: 19%"><span><b>주소</b></span></td>
+                                                    <td style="width: 23%"><span><b>주소</b></span></td>
                                                     <td><span class="content" id="postlocation"></span><br></td>
                                                 </tr>
 
@@ -712,7 +736,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -726,7 +749,7 @@
             <!--                모달 바디-->
             <div class="modal-body">
                 <h4 style="font-size: x-large" class="modal-title" align="left">로그인이 필요한 서비스입니다.<br>
-                로그인 하시겠습니까?</h4>
+                    로그인 하시겠습니까?</h4>
             </div>
             <!--                모달 바디-->
 
@@ -736,6 +759,28 @@
                 </button>
                 <button type="button" style="border: solid grey 2px;" class="btn btn-default"
                         data-dismiss="modal">취소
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="chooseModal" role="dialog">
+    <div class="modal-dialog" style="vertical-align: baseline">
+        <div class="modal-content">
+            <!--                모달 바디-->
+            <div class="modal-body">
+                <center>
+                <span style="font-size: x-large" class="modal-title">방문하고 싶은 </span>
+                <span style="color: blue">장소를 먼저 선택</span>
+                <span>해주세요.<br>하루에 최대 5곳까지 선택할 수 있습니다.</span>
+                </center>
+            </div>
+            <!--                모달 바디-->
+
+            <div class="modal-footer">
+                <button type="button" style="border: solid grey 2px; margin: auto;" class="btn btn-default"
+                        id="wantLogin" data-dismiss="modal">확인
                 </button>
             </div>
         </div>

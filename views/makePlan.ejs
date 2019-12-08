@@ -10,20 +10,14 @@
     <title>Local Directory | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <% include head_link.html%>
 
 
     <style>
+        .blog-item .blog-text {
+             text-align: unset;
+            padding-top: 65px;
+        }
         .requestInfo {
             padding: 10px;
             line-height: normal;
@@ -59,13 +53,14 @@
             margin: auto;
         }
         td{
-            min-width: 130px;
+            min-width: 0px;
+            padding: 5px;
+            text-align: unset;
         }
         textarea{
-            width: 90%;
-            margin: 10px;
-            align-self: center;
-            font-size: 20px;
+            width: 48%;
+            margin: 4px;
+            font-size: 13px;
             height: 100px;
             border: solid #CACDD6 2px;
         }
@@ -81,6 +76,19 @@
             border: 1px solid #999;
             border-radius: 0; /* iSO 둥근모서리 제거 */
         }
+        .arrange-pic {
+            padding: 10px;
+            padding-bottom: 0px;
+            text-align: center;
+            border: solid #CACDD6 1px;
+        }
+        h4{
+            color: dimgrey;
+        }
+        h5{
+            font-size: 20px;
+        }
+
 
 
     </style>
@@ -136,7 +144,7 @@
 <!-- Header Section Begin -->
 <header class="header-section listings">
     <% if(isAuthenticated) { %>
-        <% include header_af_login.html %>
+        <% include header_af_login.ejs %>
     <% } else { %>
         <% include header_bf_login.html %>
     <% } %>
@@ -165,7 +173,7 @@
 
 
                 </div>
-                <br><div><h2><b>계획하기</b></h2></div>
+                <br><br><br><div><h2><b>계획하기</b></h2></div>
 
 
                 <!--                chg. 1번섹션. 요청 정보가 나오게-->
@@ -192,39 +200,17 @@
                         <center><p>
                                 <input type="button" class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px; cursor: pointer;" id="addRow" value="일정 추가" onclick="addRow()" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="button" class="primary-btn" id="bt" value="계획 제출" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px; cursor: pointer;" onclick="submit_plan()" />
+                                <input type="button" class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px; cursor: pointer;background: #007bff" id="bt" value="계획 제출" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px; cursor: pointer;" onclick="submit_plan()" />
                             </p>
                             <!--                            <ps>저장 후에 F12 콘솔창에서 확인</p>-->
                         </center>
-
-
-
-
-                        <!--                        여기부터!!!!!!!!!-->
-                        <!--                        텍스트에리어에 제목들어가게...!!-->
-
-
-
-                        <!--                        계획하기 끝!!!!-->
-                        <!--                        아래 script에서 values를 DB에 저장하면 됩니다.-->
-
-
-
-
-                        <!--                        <a href="#" class="primary-btn">제출</a>-->
-                        <!--                        <a href="#" class="primary-btn">닫기</a>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Blog Section End -->
-<div class="container-fluid">
-    <div class="howit-bg">
-        <img src="img/howit-bg.png" alt="">
-    </div>
-</div>
+
 
 
 
@@ -268,7 +254,7 @@
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
                 var ele = document.createElement('input');
                 ele.setAttribute('type', 'text');
-                ele.setAttribute('placeholder', '09:00~10:30');
+                ele.setAttribute('placeholder', '09:00~10:00');
 
                 td.appendChild(ele);
             } else if (c == 1) {
@@ -276,7 +262,7 @@
                 // CREATE AND ADD TEXTBOX IN EACH CELL.
                 var ele = document.createElement('input');
                 ele.setAttribute('type', 'text');
-                ele.setAttribute('placeholder', '아주대학교');
+                ele.setAttribute('placeholder', '예시) 화성행궁');
 
                 td.appendChild(ele);
 
@@ -285,32 +271,38 @@
 
                 var textarea1 = document.createElement("textarea");
                 textarea1.setAttribute('type', 'textarea');
-                textarea1.setAttribute('placeholder', '위치 및 교통 정보를 적어주세요.');
+                textarea1.setAttribute('placeholder', '위치 및 교통정보를 적어주세요.' +
+                    '\n예시) OO 정류장에서 내려서 매표소까지 도보 6분입니다.');
                 td.appendChild(textarea1);
 
                 var textarea2 = document.createElement("textarea");
                 textarea2.setAttribute('type', 'textarea');
-                textarea2.setAttribute('placeholder', '이용료/경비를 적어주세요.');
+                textarea2.setAttribute('placeholder', '이용료/경비를 적어주세요.' +
+                    '\n예시) 성인 입장 요금은 1500원, 청소년 요금은 1000원입니다.');
                 td.appendChild(textarea2);
 
                 var textarea3 = document.createElement("textarea");
                 textarea3.setAttribute('type', 'textarea');
-                textarea3.setAttribute('placeholder', '개방 시간을 적어주세요.');
+                textarea3.setAttribute('placeholder', '개방시간을 적어주세요.' +
+                    '\n예시) 매일 09:00~18:00 입니다. 동절기(11월~2월)에는 09:00 ~ 17:00로 단축되니 주의해주세요.');
                 td.appendChild(textarea3);
 
                 var textarea4 = document.createElement("textarea");
                 textarea4.setAttribute('type', 'textarea');
-                textarea4.setAttribute('placeholder', '복잡도를 적어주세요.');
+                textarea4.setAttribute('placeholder', '복잡도를 적어주세요.' +
+                    '\n예시) 아침시간에는 사람이 별로 없으니 여유롭게 구경할 수 있어요.');
                 td.appendChild(textarea4);
 
                 var textarea5 = document.createElement("textarea");
                 textarea5.setAttribute('type', 'textarea');
-                textarea5.setAttribute('placeholder', '분위기를 적어주세요.');
+                textarea5.setAttribute('placeholder', '분위기를 적어주세요.' +
+                    '\n예시) 한산한 아침시간에는 차분하고 여유로운 분위기에요.');
                 td.appendChild(textarea5);
 
                 var textarea6 = document.createElement("textarea");
                 textarea6.setAttribute('type', 'textarea');
-                textarea6.setAttribute('placeholder', '플래너의 추천을 적어주세요.');
+                textarea6.setAttribute('placeholder', '플래너의 추천을 적어주세요.' +
+                    '\n예시) 산책으로 가볍게 걷기에 좋고, 아이들이 있다면 화성 어차를 타고 한 바퀴 둘러보는 것을 추천합니다.관광 해설은 10~16시에 안내소에서 신청이 가능해요.');
                 td.appendChild(textarea6);
             }
 
@@ -320,13 +312,12 @@
 
             // SET INPUT ATTRIBUTE.
             button.setAttribute('src', 'img/icon/x.jpg');
-            button.setAttribute('width', '120');
-            button.setAttribute('height', '90');
+            button.setAttribute('width', '100');
+            button.setAttribute('height', '75');
             button.setAttribute('style', 'cursor:pointer');
             button.setAttribute('onclick', 'removeRow(this)');
 
             td.appendChild(button);
-
         }
         }
     }
@@ -366,7 +357,7 @@
 
         //plan.js로 감
         var posting= $.post('/addPlan', {'plan_array':values,'origin_request':origin_request});
-
+        alert('계획이 제출되었습니다!')
         location.href='/';
 
 

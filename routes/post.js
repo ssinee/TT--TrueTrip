@@ -57,17 +57,17 @@ router.post('/mypage/write', upload.single('editImg'), function (req, res) {
     var plannerpost = new Planner({"location": paramlocation, "introduce": paramintroduce});
     var userid = req.user.id;
 
-    console.log(userid);
+    // console.log(userid);
     Planner.findOneAndUpdate({id: req.user.id}, {
         $set: {
             "location": paramlocation, "introduce": paramintroduce
         }
     }, function (err, post) {
         if (err) {
-            console.log(err);
+            // console.log(err);
             res.redirect('/');
         }
-        console.log("update data");
+        // console.log("update data");
         res.redirect('/post/' + req.user.id);
     });
 });
@@ -89,7 +89,7 @@ router.post('/mypage/editimg', upload.single('editImg'), function (req, res) {
             console.log(err);
             res.redirect('/');
         }
-        console.log("update data");
+        // console.log("update data");
         res.redirect('/post/' + req.user.id);
     });
 
@@ -106,7 +106,7 @@ router.get('/post/:id', function (req, res) {
         res.redirect("/");
     } else {
         if (req.params.id == "popup") {
-            console.log("id popup 호출:");
+            // console.log("id popup 호출:");
             res.redirect('/popup');
         }
         Planner.findOne({id: req.params.id}, function (err, post) {

@@ -128,22 +128,8 @@
     <meta name="keywords" content="Yoga, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Local Directory | Template</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap&subset=korean" rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
-
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>TT-TrueTrip</title>
+    <% include head_link.html%>
     <script>
 
         $(document).ready(function(){
@@ -234,7 +220,7 @@
 <!-- Header Section Begin -->
 <header class="header-section listings">
     <% if(isAuthenticated) { %>
-        <% include header_af_login.html %>
+        <% include header_af_login.ejs %>
     <% } else { %>
         <% include header_bf_login.html %>
     <% } %>
@@ -260,7 +246,6 @@
                     <div class="row">
 
 
-
                         <div class="bigBox" style="border: medium solid #CACDD6; width: 70%;">
 
 
@@ -272,6 +257,7 @@
 
 
                                 <div class="row" id="showSelectPosts"></div>
+                            </div>
 
 
                                 <!--                                    chg. 선택장소 하나씩 들어가게 해야됨.-->
@@ -476,21 +462,16 @@
 
                                     <textarea name="addition" placeholder="플래너에게 하고 싶은 말을 적어주세요." style="height: 200px; padding: 8px;
                                     margin-bottom: 0px; font-style: normal; font-weight: 100; border: 2px solid grey; font-size: 19px;" ></textarea>
-                                    <a class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px;" id="submit" href="/">완료</a>
+                                    <a class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px;" id="submit" href="/" onclick="alert('계획이 신청되었습니다!')">완료</a>
                                     <a class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;" id = "back" href="javascript:history.back();">취소</a>
 <!--                                    <input type="submit" id="submit" style="margin-bottom: 30px;">신청서 제출</input>-->
                                 </div>
-
                             </div>
-
-
-
                         </div>
-
-
+<!--                                undersection-->
+                    </div>
                     </div>
                 </form>
-
 <!--                <div class="row" id="showSelectPosts">-->
 
 <!--                </div>-->
