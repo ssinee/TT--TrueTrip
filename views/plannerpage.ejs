@@ -193,8 +193,19 @@
 
 
         }
+        .yellowRating {
+            color: #fff;
+            background: #FF5581;
+            font-size: 12px;
+            font-weight: 700;
+            /*display: inline-block;*/
+            padding: 5px 15px;
+            text-transform: uppercase;
+            position: absolute;
+            right: auto;
+            top: 10;
 
-
+        }
     </style>
 
 
@@ -420,6 +431,7 @@
             });
 
             var planner_id="<%=user_info.id%>"
+            var sumStar=0;
 
             $.ajax({
                 url:'/findReview',
@@ -429,10 +441,12 @@
                 async:false,
                 success: function(data) {
                     var postsArr="";
+
                     console.log(data.data.length);
                     var length=data.data.length;
                     for(var i=0; i<length; i++){
                         console.log(data.data[i]);
+                        sumStar += parseInt(data.data[i].score);
 
                         var starStr=""; //후기 별점 str.
                         for(var j=1; j<=5; j++){
@@ -459,6 +473,8 @@
 
                         $(".reviews").html(postsArr);
                     }
+                    sumStar = sumStar / length;
+                    $("#sumStar").text(sumStar);
                 },
                 error: function(request,status,error){
                     alert(error);
@@ -512,7 +528,8 @@
                                 <div class="map" style="border:1px solid #CACDD6; height: 400px;">
 
                                     <img id="profile_img" name="profile_img" src='<%= user_info.path %>' alt=""
-                                         style="width: 100%; height: 100%;">
+                                         style="width: 100%; height: 100%; z-index: -1;">
+                                    <div class='yellowRating' style='width:70px; padding-left:0px;padding-right:0px;'><img class='mystar' style="width: 30px;height: 30px;" src='../img/mystar.PNG' ><div id="sumStar" style="line-height: 1.2;font-size: 22px;margin-left: 30px; z-index: 2"></div></div>
 
 
                                     <!--                                    로그인 시, 페이지 주인이면 profile img edit 활성화-->
