@@ -3,6 +3,8 @@ var router = express.Router();
 var mongoose=require("mongoose");
 var Request=mongoose.model('requests');
 var Schedule=mongoose.model('schedules');
+var User=mongoose.model('users');
+var Planner=mongoose.model('planners');
 
 let req_id;
 let schedule_data;
@@ -63,6 +65,7 @@ router.post('/addPlan', function(req,res){
 });
 
 //reservation_traveler.ejs 에서 계획확인 누르면 request _id 넘김 해당 schedule 찾아서  receivedPlan.ejs 로 넘겨줌
+
 router.post('/viewPlan', function(req,res){
     // console.log("/viewPlan 호출됨");
     var reqid=req.body.reqid;
@@ -73,6 +76,7 @@ router.post('/viewPlan', function(req,res){
         schedule_data=data;
         res.render('../views/receivedPlan.ejs',{data:data});
 
+
     })
 });
 
@@ -81,6 +85,64 @@ router.get('/viewPlan', function(req,res){
     // console.log("/receivedPlan 호출됨");
     // console.log(schedule_data);
     res.render('../views/receivedPlan.ejs',{data:schedule_data});
+
+});
+
+//schedule confirm 상태 전송 receivedPlan.ejs 에서 호출됨
+router.post('/checkConfirm', function(req,res){
+    console.log("/checkConfirm 호출됨");
+
+    var schedule_id=req.body.schedule_id;
+
+    Schedule.find({'_id':schedule_id},function(err,data){
+        if(err) throw err;
+        console.log(data);
+        res.send({data:data});
+    })
+});
+
+router.post('/findPoint', function(req,res){
+    console.log("/findPoint 호출됨");
+    var planner_id=req.body.planner;
+    var traveler_id=req.body.traveler;
+    var schedule_id=req.body.schedule_id;
+
+    console.log(planner_id);
+    console.log(traveler_id);
+    console.log(schedule_id);
+    Schedule.findOneAndUpdate({_id:schedule_id},{$set:{"confirm":true}},function (err,data) {
+        if (err) throw err;
+
+    });
+    Planner.find({'id':planner_id},function(err,data){
+        if(err) throw err;
+        console.log(data);
+        var planner_point=data[0].point;
+        planner_point+=100;
+
+        Planner.findOneAndUpdate({'id':planner_id}, {$set:{"point":planner_point}}, function (err,data) {
+            if (err) throw err;
+        });
+
+    });
+
+
+    User.find({'id':traveler_id},function(err,data){
+        if(err) throw err;
+        console.log(data);
+        var traveler_point=data[0].point;
+        traveler_point-=100;
+        if(traveler_point<0){
+            traveler_point=0;
+        }
+
+        User.findOneAndUpdate({'id':traveler_id}, {$set:{"point":traveler_point}}, function (err,data,next) {
+            if (err) throw err;
+            res.send({data:data})
+        });
+
+    });
+
 
 });
 

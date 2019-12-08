@@ -131,6 +131,59 @@
             var postsArr="";
 
             <% for(var i=0; i<data_length; i++) { %>
+            var postid="<%=send_data[i].selectpost%>";
+            var array2=postid.split(",");
+            var post_len=array2.length;
+
+            var request_id="<%=send_data[i]._id%>";
+            var req_array=request_id.split(",");
+            console.log(req_array);
+
+            // req_ids.push(req_array);
+            var postsArr="";
+            console.log("길이"+post_len);
+            var str="";
+            var test= new Array();
+            //선택장소 보여줄려고 했는데 미완성
+            for(var j=0; j<post_len;j++){
+
+                console.log("array:"+array2[j]);
+
+                $.ajax({
+                    url:'/findTitle',
+                    dataType: 'json',
+                    type:'Post',
+                    data:{"postid":array2[j]},
+                    async:false,
+                    success: function(post_title) {
+                        if(post_title){
+                            // alert(result.result);
+                            console.log(post_title.post_title);
+                            console.log("성공");
+                            console.log(data_length);
+                            test.push(post_title.post_title);
+                            console.log(test);
+                            var iii="<%=i%>"
+
+                            str= "선택장소: "+test
+
+                            for(var k=0; k<post_len;k++){
+                                $("#"+iii).children(".middle").children().children("div[name=reservePlace]").html(str);
+                            }
+
+                        }
+                    },
+                    error: function(request,status,error){
+                        alert(error);
+                    }
+
+                })
+            }
+
+
+            <% } %>
+
+            <% for(var i=0; i<data_length; i++) { %>
             var req_id="<%=send_data[i]._id%>";
 
             array.push(req_id);
@@ -278,7 +331,7 @@
 <!--                                <br>-->
                                 <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
 <!--                                <br>-->
-                                <div class="item" name="reservePlace">선택장소: </div>
+                                <div class="item" name="reservePlace"></div>
 <!--                                <br>-->
                                 <div class="item" name="select_request" style="display:none"><%= send_data[i]._id%></div>
                             </a>
