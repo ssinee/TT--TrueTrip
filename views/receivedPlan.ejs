@@ -209,12 +209,16 @@
     var schedule="<%=data[0].plan%>";
     var array=schedule.split(",");
     var length=array.length;
+
+
     console.log(schedule);
     console.log(array);
     console.log(array.length);
 
     var row_num=length/8;
     console.log(row_num);
+
+
 
 
     // ARRAY FOR HEADER.
@@ -418,8 +422,70 @@
             });
         })
 
+        var schedule_id="<%=data[0]._id%>";
+        var planner="<%=data[0].planner%>";
+        var traveler="<%=data[0].traveler%>";
+        var origin_req="<%=data[0].originRequest%>";
+
+        $.ajax({
+
+            url:'/checkConfirm',
+            dataType: 'json',
+            type:'Post',
+            data:{"schedule_id":schedule_id},
+            async:false,
+            success: function(data) {
+                if(data){
+                    if(data.data[0]==null){
+                        console.log("데이터 없음")
+                    }
+                    if(data.data[0].confirm==true){
+                        var blur_images = $('.blur_class');
+                        blur_images.each(function () {
+                            console.log($(this));
+                            $(this).removeClass('blur_class');
+                            $(this).addClass('origin_class');
+                        });
+                        $("#test").hide();
+                    }
+                    else{
+
+
+                    }
+
+                }
+            },
+            error: function(request,status,error){
+                alert(error);
+            }
+
+        })
+
         $("#morePlan").click(function(){
             if(confirm("주의! 포인트가 차감됩니다. 계속 진행하시겠습니까?")){
+
+                // plan.js에 있는 /findPoint
+                $.ajax({
+                    url:'/findPoint',
+                    dataType: 'json',
+                    type:'Post',
+                    data:{"schedule_id":schedule_id,'planner':planner,'traveler':traveler},
+                    async:false,
+                    success: function(data) {
+                        if(data){
+                            if(data.data[0]==null){
+                                console.log("데이터 없음")
+                            }
+
+                        }
+                    },
+                    error: function(request,status,error){
+                        alert(error);
+                    }
+
+                })
+
+
                 var blur_images = $('.blur_class');
                 blur_images.each(function () {
                     console.log($(this));
@@ -427,15 +493,12 @@
                     $(this).addClass('origin_class');
                 });
                 $("#test").hide();
-            }
 
-            // var blur_images = $('.blur_class');
-            // blur_images.each(function () {
-            //     console.log($(this));
-            //     $(this).removeClass('blur_class');
-            //     $(this).addClass('origin_class');
-            // });
-            // $("#test").hide();
+
+            }
+            else{
+
+            }
 
 
         })
@@ -448,14 +511,14 @@
 
 
 <!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/main.js"></script>
 </body>
 
 </html>
