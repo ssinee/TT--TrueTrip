@@ -237,7 +237,8 @@
                 console.log(imagedata[i])
 
                 //게시글이 없는 planner 건너뛰기
-                if (imagedata[i] == 'none') {
+                if (imagedata[i] == "none") {
+
 
                     if ((i > 0 && i % 4 == 0) || i == idData.length - 1) {
                         stringArr[pagenum] = contentString;
@@ -338,7 +339,7 @@
             }
 
             // 딜레이 7후에 start_slick 실행.
-            window.setTimeout(start_slick, 1000);
+            window.setTimeout(start_slick, 300);
 
             //post request for planner and image data
             var posting = $.post('/showplanner', {})
@@ -371,6 +372,7 @@
                 }
                 changefilter(location, category)
                 fillcontent(imagepath, idData, result_score)
+                imagepath=[];
 
                 //set the filter section as selected data
 
@@ -394,7 +396,7 @@
 
                     if (data == '1') {
                         //time 설정 needed
-                        alert('in 1')
+
                         var posting_filter_start = $.post('/showplanner', {})
                         var temp_score = 0;
                         var result_score = new Array();
@@ -421,6 +423,7 @@
 
                             //fill body section with data
                             fillcontent(imagepath, idData, result_score)
+                            imagepath=[];
                         })
                     } else if (data == '0') {
                         //content가 없을 경우
