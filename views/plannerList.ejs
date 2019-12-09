@@ -239,12 +239,12 @@
                 //게시글이 없는 planner 건너뛰기
                 if (imagedata[i] == "none") {
 
-
-                    if ((i > 0 && i % 4 == 0) || i == idData.length - 1) {
+                    if ((i > 0 && i % 3 == 0) || i == idData.length - 1) {
                         stringArr[pagenum] = contentString;
                         pagenum++;
                         contentString = ""
                         continue;
+                        alert('아오')
                     }
                     continue;
                 }
@@ -283,7 +283,7 @@
                     "                            </div>\n" +
                     "                        </div>"
                 //한 page당 4개의 planner
-                if ((i > 0 && i % 4 == 0) || i == idData.length - 1) {
+                if ((i > 0 && i % 3 == 0) || i == idData.length - 1) {
                     stringArr[pagenum] = contentString;
                     pagenum++;
                     contentString = ""
