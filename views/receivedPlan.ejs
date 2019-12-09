@@ -162,6 +162,7 @@
                         <img src="img/icon/print.png" style="cursor:pointer" width="80px" height="80px" onclick="print_plan()"/>
                     </div>
                     <div><center><button class="primary-btn" id="reviewBtn">후기작성</button></center></div><br>
+                    <div id="hasReview"></div>
 
                 </div>
 
@@ -492,6 +493,7 @@
         }
 
 
+
         var schedule_id="<%=data[0]._id%>";
         var planner="<%=data[0].planner%>";
         var traveler="<%=data[0].traveler%>";
@@ -524,6 +526,41 @@
                     }
 
                 }
+            },
+            error: function(request,status,error){
+                alert(error);
+            }
+
+        })
+
+        $.ajax({
+            url:'/reviewState',
+            dataType: 'json',
+            type:'Post',
+            data:{"reqid":origin_req},
+            async:false,
+            success: function(data) {
+                console.log(data);
+                if(data.data==true){
+                    // $("#"+i).children(".right").children(".item2").html("리뷰 보기");
+                    console.log("리뷰 작성완료");
+                    $("#reviewBtn").hide();
+                    var postsArr="";
+                    postsArr +=
+                        "<div>" +
+                        "                                <div class=\"item\">" +
+                        "                                    <h4>리뷰를 이미 남기셨습니다.</h4>"+
+                        "                                    <a href=\"/post/"+planner+"\">"+"후기 보러가기"+"</a>" +
+                        "                                </div>" +
+                        "</div>"
+
+                    $("#hasReview").html(postsArr);
+                }
+                else{
+                    console.log("리뷰 작성없음");
+                    // $("#"+i).children(".right").children(".item2").html("리뷰 기다리는중");
+                }
+
             },
             error: function(request,status,error){
                 alert(error);
