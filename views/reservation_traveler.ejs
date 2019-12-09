@@ -382,7 +382,6 @@
                 <br><br><br>
                 <h2 style="font-weight: normal;margin-left: 6px; text-align: center; padding:35px;"><img src="img/placeholder.png" alt="" style="padding-right:20px;padding-bottom:10px;"><u><i><b><%= currentUser.name%></b></i></u><b>  님이 요청한 플랜</b></h2>
                 <div class="BigBox">
-
                     <% if ( data_length==0) {  %>
                         <h5>보낸 요청이 없습니다.</h5>
                     <% } else { %>
@@ -392,7 +391,6 @@
                         <div class="left">
                             <div class="item"><h1><%=i+1%></h1></div>
                         </div>
-
                         <div class="middle">
                             <a>
                                 <div class="item" name="reservePlanner">"<i><%= send_data[i].planner%></i>" 플래너에게 보낸 요청입니다.</div>

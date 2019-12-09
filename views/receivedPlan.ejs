@@ -15,27 +15,72 @@
 
     <style>
 
+        h5{
+            font-size:large;
+            font-weight:bold;
+            text-align: left;
+            margin-left: 5px;
+
+            color: #FF5581;
+
+        }
+        .checkPlan{
+            background: #FF5581;
+            color: #FFF;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 5px;
+            text-align: center;
+            vertical-align: middle;
+            width:50px;
+            height:40px;
+            font-weight: bold;
+            margin-left:500px;
+            padding:10px;
+        }
+        th{
+            background:whitesmoke;
+        }
         table {
             alignment: center;
-            border: solid #CACDD6 2px;
+            /*border: solid #CACDD6 2px;*/
             margin: auto;
             width: 90%;
             font-size: 30px;
             /*font: 20px "맑은 고딕";*/
+            border: solid #CACDD6 2px;
+            border-radius:5px;
         }
         th, td {
-            border: solid #CACDD6 3px;
+            border: solid #CACDD6 2px;
             border-collapse: collapse;
             padding: 2px 3px;
             text-align: center;
             alignment: center;
             margin: auto;
+            border-radius: 5px;
         }
         td {
             min-width: 110px;
             padding: 5px;
             text-align: unset;
+            border-radius: 5px;
         }
+        #reviewBtn{
+            background: #FF5581;
+            color: #FFF;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 5px;
+            text-align: center;
+            vertical-align: middle;
+
+            font-weight: bold;
+            /*margin-left:500px;*/
+            padding:10px;
+
+        }
+
 
         textarea{
             width: 48%;
@@ -44,6 +89,8 @@
             font-size: 13px;
             height: 100px;
             border: solid #CACDD6 2px;
+            border-radius: 5px;
+            background-color: rgba( 203, 193, 193, 0.25 );
         }
         input[type="text"] {
             width: 100%; /* 원하는 너비 설정 */
@@ -52,7 +99,7 @@
             font-size: 15px;
             font-family: inherit; /* 폰트 상속 */
             border: 1px solid #999;
-            border-radius: 0; /* iSO 둥근모서리 제거 */
+            border-radius: 5px; /* iSO 둥근모서리 제거 */
         }
         h2{
             font-size: 50px;
@@ -61,11 +108,16 @@
             font-size: 20px;
         }
         .blog-item .blog-text p {
+            border-radius: 5px;
             color: black;
             font-size: 30px;
             line-height: 28px;
             letter-spacing: 0.2px;
             margin-bottom: 46px;
+        }
+        .blog-item{
+            border-radius: 5px;
+            border: solid #CACDD6 2px;
         }
 
         .blur_class{
@@ -94,6 +146,9 @@
         .blog-item .blog-text {
             text-align: unset;
             padding-top: 65px;
+            /*border: solid #CACDD6 2px;*/
+            /*border-radius: 5px;*/
+
         }
         #star_grade a{
             font-size: 50px;
@@ -135,8 +190,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h2>계획 확인</h2>
-                <div class="blog-item" style="border: solid #CACDD6 2px;">
+                <h2 style="font-weight: normal;margin-left: 6px; text-align: center; padding:35px;"><img src="img/placeholder.png" alt="" style="padding-right:20px;padding-bottom:10px;"><u><i><b><%= currentUser.name%></b></i></u><b>  님의 여행계획</b></h2>
+                <div class="blog-item" >
 
 
                     <!--                    계획 들어가는 자리-->
@@ -159,9 +214,9 @@
 
                     <!--                    프린트 버튼-->
                     <div align="right" style="margin-right: 50px; margin-bottom: 30px; margin-top: 20px;">
-                        <img src="img/icon/print.png" style="cursor:pointer" width="80px" height="80px" onclick="print_plan()"/>
+                        <img src="img/icon/print.png" style="cursor:pointer" width="40px" height="40px" onclick="print_plan()"/>
                     </div>
-                    <div><center><button class="primary-btn" id="reviewBtn">후기작성</button></center></div><br>
+                    <div><center><a  id="reviewBtn">후기작성</a></center></div><br>
                     <div id="hasReview"></div>
 
                 </div>
@@ -548,9 +603,9 @@
                     var postsArr="";
                     postsArr +=
                         "<div>" +
-                        "                                <div class=\"item\">" +
-                        "                                    <h4>리뷰를 이미 남기셨습니다.</h4>"+
-                        "                                    <a href=\"/post/"+planner+"\">"+"리뷰 보러가기"+"</a>" +
+                        "                                <div style='height:150px;'class=\"item\">" +
+                        "                                    <h4 style='padding:20px;font-size:x-large; font-weight:bold; text-align:center;'>리뷰를 이미 남기셨습니다.</h4>"+
+                        "                                    <a class='checkPlan' href=\"/post/"+planner+"\">"+"리뷰 보러가기"+"</a>" +
                         "                                </div>" +
                         "</div>"
 
