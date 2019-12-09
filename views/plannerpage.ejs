@@ -374,7 +374,7 @@
 
             posting.done(function (data) {
                 content = data.data
-                console.log(content);
+
                 for (var i = 0; i < content.length; i++) {
                     postsArr +=
                         "<div class=\"col-lg-4 col-sm-6\" >" +
@@ -735,7 +735,6 @@
                                 <% if (!isAuthenticated) { %>
                                     <div class="share-btn" style="font-weight: 100;">
                                         <a id="needLogin" style="background: #007bff;cursor:pointer;" data-toggle="modal" data-target='#loginModal'>계획요청</a></div>
-
                                     <!--                                    로그인한 여행자는 request 가능한 버튼-->
                                 <% } else { %>
 

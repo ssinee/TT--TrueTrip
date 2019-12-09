@@ -23,6 +23,22 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 
     <style type ="text/css">
+        .checkplan{
+            position:relative;
+            color: #fff;
+            background: #007bff;
+            font-size: smaller;
+            right: 38px;
+            top: 41px;
+            padding: 13px 65px;
+            cursor: pointer;
+            /*border: 1px solid #FF5581;*/
+            padding-right: 15px; !important;
+            padding-left: 15px; !important;
+            border-radius: 5px;
+            font-weight: bold;
+            padding:8px;
+        }
         a {
             /*color: #007bff;*/
             color: #6699f2;
@@ -32,9 +48,13 @@
             text-decoration: underline;
         }
         h1{
-            margin-top: 28px;
+            font-size:medium;
+            margin-top: 15px;
             /*margin-bottom: 30px;*/
             color: white;
+            font-weight: bold;
+            top: 5px;
+            position:relative;
         }
         h2 {
             font-weight: 200;
@@ -43,24 +63,27 @@
             width:70%;
             min-height:200px;
             border: solid #CACDD6 2px;
+            border-radius:5px;
             alignment: center;
             margin:auto;
             postion: absolute;
         }
 
         .smallBox{
+            background-color: rgba( 203, 193, 193, 0.25 );
             width: 95%;
-            height:150px;
-            border: solid #CACDD6 2px;
+            height:200px;
+            border: solid #CACDD6 1px;
             alignment: center;
             margin: auto;
+            border-radius:5px;
             margin-top: 15px;
             margin-bottom: 15px;
             position: relative;
         }
 
         .smallBox .left{
-            width: 20%;
+            width: 1%;
             height: 140px;
             /*border: solid black 1px;*/
             float: left;
@@ -69,29 +92,32 @@
             margin-top: 3px;
             margin-bottom: 3px;
             text-align: center;
+            padding-left:10px;
         }
         .smallBox .left .item{
             background: #FF5581;
-            margin: 30px;
             color: #FFF;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
-            border-radius: 3px;
+            border-radius: 5px;
             text-align: center;
             vertical-align: middle;
+            width:30px;
+            height:30px;
         }
 
         .smallBox .middle{
-            width: 54%;
+            width: 70%;
             height: 140px;
             /*border: solid black 1px;*/
             float: left;
-            margin-left: 5px;
+            margin-left: 15px;
             margin-right: 5px;
             margin-top: 3px;
             margin-bottom: 3px;
             text-align: left;
-            padding: 10px;
+            padding: 15px;
+            text-align: center;
         }
 
         .smallBox .middle .item{
@@ -102,20 +128,35 @@
         }
 
         .smallBox .right{
+            font-size: 20px;
             width: 20%;
             height: 140px;
-            /*border: solid black 1px;*/
             float: left;
             margin-left:5px;
             margin-right:10px;
             margin-top: 3px;
             margin-bottom: 3px;
-            text-align: left;
+            text-align: -webkit-right;
+
         }
 
         .smallBox .right .item{
-            text-align: center;
-            font-size: 30px;
+            width: max-content;
+
+            position:relative;
+            color: #fff;
+            background: #007bff;
+            font-size: smaller;
+            right: 38px;
+            top: 41px;
+            padding: 13px 65px;
+            cursor: pointer;
+            /*border: 1px solid #FF5581;*/
+            padding-right: 15px; !important;
+            padding-left: 15px; !important;
+            border-radius: 5px;
+            font-weight: bold;
+            padding:8px;
         }
 
 
@@ -223,11 +264,11 @@
                         if(data.data[0].confirm==false){
                             // alert("대기중");
                             console.log("reject");
-                            $(plan[j]).html("거절됨");
+                            var string='<div class=\'item\' id=\'"'+plan[j]+'\' style=\'background:gray\'>거절됨</div>'
+                            $(plan[j]).html(string);
                         }
                         else {
                             // alert(result.result);
-                            console.log("거절 아님");
                             $.ajax({
                                 url:'/checkPlan', //request.js에 있음
                                 dataType: 'json',
@@ -240,18 +281,17 @@
 
                                     if(data.data[0]==null){
                                         // alert("대기중");
-                                        console.log("대기중");
-                                        $(plan[j]).html("대기중");
+                                        var string='<div class=\'item\' id=\'"'+plan[j]+'\' style=\'background:#ffbc00\'>대기중</div>'
+                                        $(plan[j]).html(string);
                                     }
                                     else if(data.data[0].done==true){
 
                                         // alert(result.result);
-                                        console.log("성공");
                                         //버튼 생성 누르면 plan.js /viewPlan get으로 감
 
 
                                         postsArr +=
-                                            "<a name=\"confirmPlan\" href=\"/viewPlan\">" +
+                                            "<a class='checkplan' name=\"confirmPlan\" href=\"/viewPlan\">" +
                                             "  계획 확인 " +
                                             "                     </a>"
                                         $(plan[j]).html(postsArr);
@@ -265,21 +305,8 @@
                                             async: false,
                                             success: function(data){
                                                 console.log("리뷰데이터"+data.data);
-                                                if(data.data==true){
-                                                    postsArr += " 리뷰작성완료 "
-                                                    $(reviews[j]).html(postsArr);
-                                                    postsArr="";
 
-                                                }
-                                                else if(data.data==false){
-                                                    postsArr +=
-                                                        // "<a name=\"confirmPlan\" href=\"/viewPlan\">" +
-                                                        // "  리뷰를 남겨주세요 " +
-                                                        // "                     </a>"
-                                                    $(reviews[j]).html("리뷰를 남겨주세요");
-                                                    postsArr="";
 
-                                                }
 
                                             },
                                             error:function(request,status,error){
@@ -354,9 +381,8 @@
 
                 <!--                    나의 요청. -->
                 <br><br><br>
-
+                <h2 style="font-weight: normal;margin-left: 6px; text-align: center; padding:35px;"><img src="img/placeholder.png" alt="" style="padding-right:20px;padding-bottom:10px;"><u><i><b><%= currentUser.name%></b></i></u><b>  님이 요청한 플랜</b></h2>
                 <div class="BigBox">
-                    <h2 style="margin-left: 6px;"><b>내가 보낸 플랜 요청</b></h2><hr style="margin-top: 0px; margin-bottom: 0px;">
                     <% if ( data_length==0) {  %>
                         <h5>보낸 요청이 없습니다.</h5>
                     <% } else { %>
@@ -366,10 +392,9 @@
                         <div class="left">
                             <div class="item"><h1><%=i+1%></h1></div>
                         </div>
-
                         <div class="middle">
                             <a>
-                                <div class="item" name="reservePlanner">"<%= send_data[i].planner%>" 플래너에게 보낸 요청입니다.</div>
+                                <div class="item" name="reservePlanner">"<i><%= send_data[i].planner%></i>" 플래너에게 보낸 요청입니다.</div>
 <!--                                <br>-->
                                 <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
 <!--                                <br>-->
@@ -380,8 +405,9 @@
                         </div>
                         <div id="test"></div>
                         <div class="right">
-                            <div class="item" id="plan<%=i%>"></div>
-                            <div id="reviews<%=i%>"></div>
+                            <div  id="plan<%=i%>"></div>
+
+                            <div style="margin-left:520px;margin-bottom:20px;" id="reviews<%=i%>"></div>
 
                         </div>
                     </div>
