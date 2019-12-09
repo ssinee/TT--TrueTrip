@@ -43,10 +43,11 @@
 
 .shape {
 	fill: transparent;
-	stroke-dasharray: 140 540;
+	stroke: #FF5581;
+	stroke-width: 3px;
+	stroke-dasharray: 140, 540;
 	stroke-dashoffset: -474;
-	stroke-width: 8px;
-	stroke: #19f6e8;
+
 }
 
 .text {
