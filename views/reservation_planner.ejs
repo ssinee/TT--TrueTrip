@@ -221,7 +221,12 @@
                             success: function(data) {
                                 console.log(data);
                                 if(data.data==true){
-                                    $("#"+i).children(".right").children(".item2").html("리뷰 보기");
+                                    var string="";
+                                    string +=
+                                        "<div>" +
+                                        "                                    <a href=\"/mypage\">"+"리뷰 보러가기"+"</a>" +
+                                        "</div>"
+                                    $("#"+i).children(".right").children(".item2").html(string);
                                     console.log("리뷰 작성완료");
                                 }
                                 else{
@@ -332,7 +337,7 @@
                             </div>
 
                             <div class="middle">
-                                <a href="">
+                                <a>
                                     <div class="item" name="reservePlanner">"<%= send_data[i].author%>" 님의 플랜 요청입니다.</div>
 <!--                                    <br>-->
                                     <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
@@ -355,7 +360,7 @@
                         </div>
 
                         <div class="middle">
-                            <a href="">
+                            <a>
                                 <div class="item" name="reservePlanner">"<%= send_data[i].author%>" 님의 플랜 요청입니다.</div>
 <!--                                <br>-->
                                 <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>

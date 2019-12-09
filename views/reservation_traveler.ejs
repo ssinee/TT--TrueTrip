@@ -244,6 +244,7 @@
                                         $(plan[j]).html("대기중");
                                     }
                                     else if(data.data[0].done==true){
+
                                         // alert(result.result);
                                         console.log("성공");
                                         //버튼 생성 누르면 plan.js /viewPlan get으로 감
@@ -270,10 +271,10 @@
                                                 }
                                                 else if(data.data==false){
                                                     postsArr +=
-                                                        "<a name=\"confirmPlan\" href=\"/viewPlan\">" +
-                                                        "  리뷰 남기기 " +
-                                                        "                     </a>"
-                                                    $(reviews[j]).html(postsArr);
+                                                        // "<a name=\"confirmPlan\" href=\"/viewPlan\">" +
+                                                        // "  리뷰를 남겨주세요 " +
+                                                        // "                     </a>"
+                                                    $(reviews[j]).html("리뷰를 남겨주세요");
                                                     postsArr="";
 
                                                 }
@@ -365,7 +366,7 @@
                         </div>
 
                         <div class="middle">
-                            <a href="">
+                            <a>
                                 <div class="item" name="reservePlanner">"<%= send_data[i].planner%>" 플래너에게 보낸 요청입니다.</div>
 <!--                                <br>-->
                                 <div class="item"name="reserveDate">여행날짜: <%= send_data[i].date %></div>
