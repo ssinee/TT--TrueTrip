@@ -20,13 +20,18 @@
                     <img src="/img/icon/alarm.png" style="margin-left:6px; margin-right:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='여행객들이 보낸 요청을 확인하세요.'onclick="location.href='/reservation_planner'">
                     <img src="/img/icon/mypage1.png" style="margin-left:6px; margin-right:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='마이페이지에서 서비스 장소를 추가할 수 있습니다.' onclick="location.href='/mypage'">
                     <img src="/img/icon/logout.png" style="margin-left:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='로그아웃' onclick="location.href='/logout'">
-                    <div style="text-align: right; margin-right: 175px;"><span style="font-size:16px;color:gold;"><%= currentUser.point%></span></div>
+
+                    <div class= "points" style="text-align: right; margin-right: 118px;"></div>
+
 
                     <%} else {%>
                         <img src="/img/icon/coin.png" style="margin-left:6px; margin-right:6px;width: 40px; height: 40px" data-toggle="tooltip" data-placement="bottom" title='계획을 요청하고 확인할 때에 포인트가 차감됩니다.'>
                         <img src="/img/icon/alarm.png" style="margin-left:6px; margin-right:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='플래너에게서 온 계획을 확인하세요.' onclick="location.href='/reservation_traveler'">
                         <img src="/img/icon/logout.png" style="margin-left:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='로그아웃' onclick="location.href='/logout'">
-                        <div style="text-align: right; margin-right: 118px;"><span style="font-size:16px;color:gold;"><%= currentUser.point%></span></div>
+
+                        <div class= "points" style="text-align: right; margin-right: 118px;"></div>
+<!--                        <div style="text-align: right; margin-right: 118px;"><span id="point" style="color:gold;"></span></div>-->
+
                     <%}%>
             </ul>
         </div>
@@ -34,3 +39,40 @@
     </div>
 <!--    <div id="mobile-menu-wrap"></div>-->
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+
+
+        var string="";
+        var user_id="<%=currentUser.id%>"
+        var user_type="<%=currentUser.userType%>"
+        $.ajax({
+            url:'/findUserCurrentPoint',
+            dataType: 'json',
+            type:'Post',
+            data:{"userid":user_id,"userType":user_type},
+            success: function(data) {
+                console.log(data.data);
+                var points=data.data;
+                console.log(points);
+                string= "<span id=\"point\" style=\"color:gold;\">"+points+"</span>"
+                $(".points").html(string);
+
+            },
+            error: function(request,status,error){
+                alert(error);
+            }
+
+        })
+
+
+
+
+
+    })
+
+
+</script>
