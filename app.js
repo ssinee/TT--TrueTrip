@@ -66,6 +66,7 @@ app.use('/post/css', express.static('./views/css'))
 app.use('/post/img', express.static('./views/img'))
 app.use('/post/fonts', express.static('./views/fonts'))
 app.use('/reservation_traveler/img', express.static('./views/img'))
+app.use('/reservation_planner/img', express.static('./views/img'))
 
 
 
