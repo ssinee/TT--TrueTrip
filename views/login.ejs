@@ -6,8 +6,40 @@
     <meta charset="UTF-8">
 
     <!-- Css Styles -->
-    <% include head_link.html%>
+
+
+    <!-- Css Styles -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<!--    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="-->
+<!--            crossorigin="anonymous"></script>-->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
+    <link rel="icon" href="img/favicon-32x32.png">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
+    <script>
+
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
 
     <style>
         /*@import url(https://fonts.googleapis.com/css?family=Roboto:300);*/
@@ -17,6 +49,7 @@
             padding: 8% 0 0;
             margin: auto;
         }
+
         .form {
             position: relative;
             z-index: 1;
@@ -27,6 +60,7 @@
             text-align: center;
             box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
         }
+
         .form input {
             font-family: "Do Hyeon", sans-serif;
             outline: 0;
@@ -38,6 +72,7 @@
             box-sizing: border-box;
             font-size: 20px;
         }
+
         .form button {
             font-family: "Do Hyeon", sans-serif;
             text-transform: uppercase;
@@ -52,9 +87,11 @@
             transition: all 0.3 ease;
             cursor: pointer;
         }
-        .form button:hover,.form button:active,.form button:focus {
+
+        .form button:hover, .form button:active, .form button:focus {
             background: #FF5581;
         }
+
         .form .message {
             margin: 15px 0 0;
             color: #b3b3b3;
@@ -64,21 +101,25 @@
         .form .register-form {
             display: none;
         }
+
         .container {
             position: relative;
             z-index: 1;
             max-width: 300px;
             margin: 0 auto;
         }
+
         .container:before, .container:after {
             content: "";
             display: block;
             clear: both;
         }
+
         .container .info {
             margin: 50px auto;
             text-align: center;
         }
+
         .container .info h1 {
             margin: 0 0 15px;
             padding: 0;
@@ -86,17 +127,21 @@
             font-weight: 300;
             color: #1a1a1a;
         }
+
         .container .info span {
             color: #4d4d4d;
             font-size: 12px;
         }
+
         .container .info span a {
             color: #000000;
             text-decoration: none;
         }
+
         .container .info span .fa {
             color: #EF3B3A;
         }
+
         body {
             background: #FF5581; /* fallback for old browsers */
             background: -webkit-linear-gradient(right, #FF5581, #8DC26F);
@@ -110,11 +155,11 @@
 
     </style>
 
-<!--    <script>-->
-<!--        $('.message a').click(function(){-->
-<!--            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");-->
-<!--        });-->
-<!--    </script>-->
+    <!--    <script>-->
+    <!--        $('.message a').click(function(){-->
+    <!--            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");-->
+    <!--        });-->
+    <!--    </script>-->
 
 </head>
 
@@ -154,10 +199,10 @@
         -->
 
         <form class="login-form" method="post" action="/login">
-            
+
             <img src="img/fancy_TT_logo.PNG" width="100%" height="100%">
-            <input style='border-radius: 5px;'type="text" name="id" placeholder="아이디"/>
-            <input style='border-radius: 5px;'type="password" name="pw" placeholder="비밀번호"/>
+            <input style='border-radius: 5px;' type="text" name="id" placeholder="아이디"/>
+            <input style='border-radius: 5px;' type="password" name="pw" placeholder="비밀번호"/>
             <button type="submit" style='border-radius: 5px;margin-bottom: 8px;'>로그인</button>
 
         </form>
