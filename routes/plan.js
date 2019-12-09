@@ -160,7 +160,56 @@ router.post('/findConfirm', function(req,res){
     })
 });
 
+router.post('/findUserCurrentPoint', function(req,res){
+    console.log("/findCurrentPoint 호출됨");
+    var user_id=req.body.userid
+    var user_type=req.body.userType;
 
+    if(user_type=="traveler"){
+
+        User.find({'id':user_id},function(err,data){
+            if(err) throw err;
+            console.log(data);
+            var traveler_point=data[0].point;
+            res.send({data:traveler_point})
+
+
+        });
+
+    }
+    else{
+        Planner.find({'id':user_id},function(err,data){
+            if(err) throw err;
+            console.log(data);
+            var planner_point=data[0].point;
+
+            res.send({data:planner_point})
+
+
+        });
+
+    }
+
+
+
+});
+// router.post('/findPlannerCurrentPoint', function(req,res){
+//     console.log("/findCurrentPoint 호출됨");
+//     var planner_id=req.body.userid
+//
+//
+//     Planner.find({'id':user_id},function(err,data){
+//         if(err) throw err;
+//         console.log(data);
+//         var planner_point=data[0].point;
+//
+//         res.send({data:planner_point})
+//
+//
+//     });
+//
+//
+// });
 
 
 module.exports = router;
