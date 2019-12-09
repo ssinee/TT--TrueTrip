@@ -9,10 +9,10 @@
             <ul>
                 <div class="greetings" style="float: left; margin-right: 5px; margin-top: 6px;">
                     <% if (currentUser.userType == 'planner') { %>
-                    <span style="color: white;"><%=currentUser.name%> 플래너님 반갑습니다.</span>
+                    <span style="font-size:16px;color: white;"><%=currentUser.name%> 플래너님 반갑습니다.</span>
 
                     <% } else { %>
-                    <span style="color: white;"><%=currentUser.name%> 회원님 반갑습니다.</span>
+                    <span style="font-size:16px;color: white;"><%=currentUser.name%> 회원님 반갑습니다.</span>
                     <% } %>
                 </div>
                 <% if(currentUser.userType=='planner'){ %>
@@ -20,14 +20,18 @@
                     <img src="/img/icon/alarm.png" style="margin-left:6px; margin-right:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='여행객들이 보낸 요청을 확인하세요.'onclick="location.href='/reservation_planner'">
                     <img src="/img/icon/mypage1.png" style="margin-left:6px; margin-right:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='마이페이지에서 서비스 장소를 추가할 수 있습니다.' onclick="location.href='/mypage'">
                     <img src="/img/icon/logout.png" style="margin-left:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='로그아웃' onclick="location.href='/logout'">
+
                     <div class= "points" style="text-align: right; margin-right: 118px;"></div>
+
 
                     <%} else {%>
                         <img src="/img/icon/coin.png" style="margin-left:6px; margin-right:6px;width: 40px; height: 40px" data-toggle="tooltip" data-placement="bottom" title='계획을 요청하고 확인할 때에 포인트가 차감됩니다.'>
                         <img src="/img/icon/alarm.png" style="margin-left:6px; margin-right:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='플래너에게서 온 계획을 확인하세요.' onclick="location.href='/reservation_traveler'">
                         <img src="/img/icon/logout.png" style="margin-left:6px;cursor:pointer;width: 40px; height: 40px;" data-toggle="tooltip" data-placement="bottom" title='로그아웃' onclick="location.href='/logout'">
+
                         <div class= "points" style="text-align: right; margin-right: 118px;"></div>
 <!--                        <div style="text-align: right; margin-right: 118px;"><span id="point" style="color:gold;"></span></div>-->
+
                     <%}%>
             </ul>
         </div>

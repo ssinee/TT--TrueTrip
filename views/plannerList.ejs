@@ -35,12 +35,15 @@
         * {
             box-sizing: border-box;
         }
-
+        .filterlabel{
+            color:black;
+        }
         /*슬라이더 전체 크기*/
         .slider {
             width: 95%;
             margin: 10px auto;
             /*background: yellow;*/
+
         }
 
         /*chg. 각 슬라이드의 사이 간격*/
@@ -53,6 +56,7 @@
         .slick-slide img {
             width: 100%;
             height: 100%;
+            border: 2px solid #CACDD6;
         }
 
         /*화살표 색*/
@@ -79,10 +83,11 @@
             margin-bottom: 60px;
         }
 
-        .filter-left .location-filter h3 {
-            color: #242424;
-            font-weight: 700;
+        .filter-left .location-filter h3, .filter-left .category-filter h3 {
             margin-bottom: 32px;
+            font-size:x-large;
+            font-weight:bold;
+            /*color:gray;*/
         }
 
         .filter-left .location-filter .location-option .lo-item input {
@@ -125,11 +130,14 @@
 
         .planners .planner {
             width: 100%;
-            height: 210px;
-            /*background: grey;*/
+            height: 280px;
+            background: #8e8e8e;
+            background-color: rgba( 203, 193, 193, 0.25 );
             position: relative;
-            margin-top: 70px;
-            margin-bottom: 70px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            /*border: 0.8px solid #787878;*/
 
         }
 
@@ -139,7 +147,7 @@
             /*background: red;*/
             border: solid black 1px;
             float: left;
-            margin-left: 3px;
+            margin-left: 20px;
             margin-right: 3px;
             margin-top: 15px;
             margin-bottom: auto;
@@ -149,18 +157,21 @@
         .planners .planner .profile .profile_img {
             height: 85%;
             width: 100%;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
             /*background: blue;*/
 
         }
 
 
         .planners .planner .desc {
-            width: 79%;
+            width: 77%;
             height: 100%;
             margin: auto;
             /*background: green;*/
             /*background: green;*/
             float: right;
+            padding-top:25px;
 
         }
 
@@ -174,7 +185,8 @@
             text-transform: uppercase;
             position: absolute;
             right: auto;
-            top: 10;
+            border-top-left-radius: 5px;
+
 
         }
 
@@ -193,6 +205,7 @@
             font-size: 10px;
             font-weight: 900;
             letter-spacing: 0.2px;
+
         }
 
         .planners_IDs {
@@ -218,6 +231,7 @@
             display: initial;
         }
 
+
     </style>
 
 
@@ -239,6 +253,7 @@
                 //게시글이 없는 planner 건너뛰기
                 if (imagedata[i] == "none") {
 
+
                     if ((i > 0 && i % 3 == 0) || i == idData.length - 1) {
                         stringArr[pagenum] = contentString;
                         pagenum++;
@@ -254,28 +269,28 @@
 
                     "                        <div class=\"planner\" >\n" +
                     "                            <div class=\"profile\" style=\"border:none; cursor: pointer; \">\n" +
-                    "                                <div class=\"profile_img\">\n" +
+                    "                                <div class=\"profile_img\" >\n" +
                     "                                   <div class='yellowRating' style='width:70px; padding-left:0px;padding-right:0px;'><img class='mystar' src='img/mystar.PNG' >" + score[i] + "</div>" +
-                    "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;' src='" + idData[i].path + "'>\n" +
+                    "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;border-top-left-radius: 5px;border-top-right-radius: 5px;' src='" + idData[i].path + "'>\n" +
 
-                    "                                 <div  class=\"profile_desc\" style=\"border:1px solid #CACDD6; background: #F7F8FB;\n" +
+                    "                                 <div  class=\"profile_desc\" style=\"border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;border:1px solid #CACDD6; background: #F7F8FB;\n" +
                     "\tpadding-left: 16px;\n" +
                     "\tpadding-top: 5px;\n" +
                     "\tpadding-bottom: 5px;\n" +
                     "\tpadding-right: 15px;\" >\n" +
-                    "                                    <span class='planners_names'>" + idData[i].name + "</span>\n" +
+                    "                                    <span class='planners_names' style='font-weight:bold'>" + idData[i].name + "</span>\n" +
                     "                                    <span style='display:none' class='planners_IDs'>" + idData[i].id + "</span>\n" +
                     "                                </div>\n" +
                     "                                </div>\n" +
 
                     "                            </div>\n" +
                     "\n" +
-                    "                            <div class=\"desc\" style='padding-top: 10px'>\n" +
+                    "                            <div class=\"desc\">\n" +
                     "                                <div class=\"autoplay slider\">\n"
                 for (var j = 0; j < imagedata[i].length; j++) {
                     contentString +=
                         "                                    <div>" +
-                        "                                        <img style='width:180px; height: 210px' src='" + imagedata[i][j].path + "'>" +
+                        "                                        <img style='width:180px; height: 210px;border-radius: 5px;' src='" + imagedata[i][j].path + "'>" +
                         "                                    </div>"
                 }
                 contentString +=
@@ -475,7 +490,7 @@
             <div class="col-lg-3">
                 <div class="filter-left">
                     <div class="location-filter">
-                        <h3>지역 필터</h3>
+                        <h3 class="filterlabel">지역 필터</h3>
                         <div class="location-option">
 
                             <div class="lo-item">
@@ -501,7 +516,7 @@
 
 
                     <div class="category-filter">
-                        <h3>카테고리 필터</h3>
+                        <h3 class="filterlabel">카테고리 필터</h3>
                         <div class="category-option">
                             <div class="co-item">
                                 <label class="active" id="모든카테고리"><input type="radio" name="thec"
@@ -531,86 +546,24 @@
 
                         </div>
                     </div>
-
-
-                    <div class="rating-filter">
-                        <h3>Ratings</h3>
-                        <div class="rating-option">
-                            <div class="ro-item">
-                                <input type="radio">
-                                <label class="active">5.0</label>
-                                <div class="rating-pic">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="ro-item">
-                                <input type="radio">
-                                <label>4.0</label>
-                                <div class="rating-pic">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                </div>
-                            </div>
-                            <div class="ro-item">
-                                <input type="radio">
-                                <label>3.0</label>
-                                <div class="rating-pic">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                </div>
-                            </div>
-                            <div class="ro-item">
-                                <input type="radio">
-                                <label>2.0</label>
-                                <div class="rating-pic">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                </div>
-                            </div>
-                            <div class="ro-item">
-                                <input type="radio">
-                                <label>1.0</label>
-                                <div class="rating-pic">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                    <i class="fa fa-star grey-bg"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="col-lg-9">
                 <div class="row" id="parent">
-                    <div class="col-lg-12" style="height:5px;">
-                        <form action="#" class="arrange-select">
-                            <span>Arrange by</span>
-                            <select>
-                                <option>Newest</option>
-                                <option>Oldest</option>
-                            </select>
-                        </form>
-                    </div>
+<!--                    <div class="col-lg-12" style="height:5px;">-->
+<!--                        <form action="#" class="arrange-select">-->
+<!--                            <span>Arrange by</span>-->
+<!--                            <select>-->
+<!--                                <option>Newest</option>-->
+<!--                                <option>Oldest</option>-->
+<!--                            </select>-->
+<!--                        </form>-->
+<!--                    </div>-->
 
                     <!--                    planner list 들어가는 곳-->
-                    <h2>나에게 맞는 플래너 찾기</h2>
-                    <hr>
+                    <span class='animated infinite flipInX ' style="animation-duration:2s;position:inherit; font-weight: normal; color:#787878;font-size: x-large;"><i>"자신에게 맞는 플래너를 찾아보세요. "</i></span>
+                    <hr width="100%">
                     <div id="showhere" class="planners">
                     </div>
 
