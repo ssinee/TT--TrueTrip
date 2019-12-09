@@ -62,6 +62,10 @@ app.use('/upload_profile', express.static('./upload_profile'))
 app.use('/upload', express.static('./upload'))
 app.use('/post/upload', express.static('./upload'))
 app.use('/post/upload_profile', express.static('./upload_profile'))   // 프로필 업데이트에 이용. 프로필 사진 들어가는 폴더
+app.use('/post/css', express.static('./views/css'))
+app.use('/post/img', express.static('./views/img'))
+app.use('/post/fonts', express.static('./views/fonts'))
+
 
 
 

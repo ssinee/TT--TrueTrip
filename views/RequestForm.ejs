@@ -4,13 +4,43 @@
 <head>
 
     <style type="text/css">
+        .requestButton{
+            color: #fff;
+            background: #FF5581;
+            font-size: smaller;
+            position: inherit;
+            right: 38px;
+            top: 41px;
+
+            padding: 13px 65px;
+            /*cursor: pointer;*/
+            /*border: 1px solid #FF5581;*/
+            padding-right: 15px; !important;
+            padding-left: 15px; !important;
+            border-radius: 5px;
+            font-weight: bold;
+            /*margin-left:20px;*/
+            left: 2px;
+        }
+
         span {
-            font-size: 28px;
+            font-size: large;
+           font-weight: bold;
             text-align: left;
             margin-bottom: 5px;
             margin-left: 21px;
             color: #FF5581;
+           padding-bottom: 30px;
         }
+
+       /*.underSection div{*/
+       /*    font-size: large;*/
+       /*    text-align: left;*/
+       /*    margin-bottom: 5px;*/
+       /*    margin-left: 21px;*/
+       /*    color: #FF5581;*/
+       /*    font-weight: bold;*/
+       /*}*/
 
         /*.col-lg-12 text-center textarea:focus{*/
         /*    border: solid #FF5581 3px;*/
@@ -30,7 +60,9 @@
         /*    transition: all 0.3s;*/
         /*    margin-bottom: 0px;*/
         /*}*/
-
+       .requestlabel{
+           padding-bottom:20px
+       }
 
         .chosenPlace .row {
             display: -ms-flexbox;
@@ -46,7 +78,7 @@
             text-align: left;
             width: 100%;
             /*background: grey;*/
-            height: 180px;
+            height: 270px;
             margin-bottom: 10px;
         }
 
@@ -78,13 +110,14 @@
 
         .request-item .middle{
             width: 59%;
-            height: 90%;
+            height: 265px;
             border: solid #CACDD6 2px;
             float: left;
             margin-left: 5px;
             margin-right: 5px;
             margin-top: 10px;
             margin-bottom: 10px;
+            border-radius: 5px;
             /*background: orange;*/
         }
 
@@ -152,14 +185,14 @@
                            "<div class=\"request-item\" >" +
                            "                            <div class=\"left\">" +
                            "                                <div class=\"item\">" +
-                           "                                    <img class=\"postpic\" id=\'"+i+"' src=\'" + content[0].path + "'width=100%; height=100%'>" +
+                           "                                    <img class=\"postpic\" id=\'"+i+"' src=\'" + content[0].path + "'width=100%; height=263px' style='border-radius:5px;' >" +
                            "                                </div>" +
                            "                            </div>" +
                            "                            <div class=\"middle\">" +
                            "                                <div class=\"item\">" +
-                           "                                    <h4>"+content[0].title+"</h4>" +
+                           "                                    <h4 style='color:black;font-size:large; font-weight: bold; padding-bottom:10px'>"+content[0].title+"</h4>" +
                            "                                    <hr style='border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 3px;'>" +
-                           "                                    <p style='font-size: 16px; font-weight: 100; line-height: 20px;margin-bottom: 0px; max-height: 112px; overflow: scroll'>"+content[0].text+"</p>" +
+                           "                                    <p style='font-size: 16px; font-weight: 100; line-height: 20px;margin-bottom: 0px; max-height: 112px; overflow: auto'>"+content[0].text+"</p>" +
                            "                                </div>" +
                            "                            </div>" +
                            "                     </div>"
@@ -242,21 +275,23 @@
 
                 <!--                    chg. form작성시에 이동할 페이지 써야함-->
                 <form action="#" class="contact-form">
-                    <h1 style="font-size: 50px; text-align: left; margin-bottom: 5px; margin-left: 155px;">계획 신청서</h1>
+<!--                    <img src="img/fancy_TT_logo.PNG" style='margin-left:350px;' width="400px" >-->
+
+                    <h1 style="font-size: xx-large;color:#797979; font-weight:bold; text-align: center;margin-bottom: 35px;"> <img src="img/placeholder.png" alt="" style="padding-right:20px;padding-bottom:10px;">계획 신청서</h1>
                     <div class="row">
 
 
-                        <div class="bigBox" style="border: medium solid #CACDD6; width: 70%;">
+                        <div class="bigBox" style="border-radius:5px;border: 1px solid #CACDD6; width: 70%;">
 
 
 
                             <!--                            chg. DB에서 선택한 곳 3곳 선택장소-->
-                            <div class="chosenPlace" >
-                                <h2 style="font-size: 28px; text-align: left; margin-left: 11px; padding: 10px; color: #FF5581">선택장소</h2>
+                            <div class="chosenPlace"  >
+                                <h2 style="font-size: large; font-weight: bold;text-align: left; margin-left: 11px; padding: 10px; color: #FF5581">선택장소</h2>
                                 <hr style="border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 5px;">
 
 
-                                <div class="row" id="showSelectPosts"></div>
+                                <div class="row" id="showSelectPosts" style="height: auto"></div>
                             </div>
 
 
@@ -303,15 +338,15 @@
                             <hr style="border: solid #CACDD6 1px;">
                             <div class="underSection">
                                 <!--                                날짜.-->
-                                <div style = "text-align: left">
-                                    <span>날짜 </span>
-                                    <input type="date" id="date">
-
+                                <div class="requestlabel"style = "text-align: left; padding-top:20px;">
+                                    <span >날짜 </span>
+                                    <input type="date" id="date" style="border-radius: 5px;">
+                                </div>
                                 <!--                                출발/도착시간-->
-                                <div style = "text-align: left">
-                                    <span> 출발 </span>
+                                <div class="requestlabel" style = "text-align: left">
+                                    <span > 출발 </span>
 <!--                                    <input id="start" type="time" min="00" max="24">-->
-                                    <select name="startTime">
+                                    <select name="startTime" style="border-radius: 5px">
                                         <option value="00">00</option>
                                         <option value="01">01</option>
                                         <option value="02">02</option>
@@ -338,10 +373,10 @@
                                         <option value="23">23</option>
                                     </select>&nbsp;시&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
 
-                                    <span style="margin-left: 0px"> 귀가 </span>
+                                    <span class="requestlabel"style="margin-left: 0px"> 귀가 </span>
 <!--                                    <input id="end" type="time" min="00" max="24">-->
 
-                                    <select name="endTime">
+                                    <select name="endTime"  style="border-radius: 5px">
                                         <option value="00">00</option>
                                         <option value="01">01</option>
                                         <option value="02">02</option>
@@ -372,11 +407,11 @@
                                 </div>
 
                                 <!--                                인원수-->
-                                <div style = "text-align: left">
-                                    <span>인원 </span>
+                                <div class="requestlabel" style = "text-align: left">
+                                    <span >인원 </span>
 
 
-                                    <select name="numofpeople">
+                                    <select name="numofpeople" style='border-radius: 5px'>
                                         <option value="01"selected="selected">01</option>
                                         <option value="02">02</option>
                                         <option value="03">03</option>
@@ -395,11 +430,11 @@
 
 
                                 <!--                                    나이-->
-                                <div style = "text-align: left">
-                                    <span>나이 </span>
+                                <div class="requestlabel"style = "text-align: left">
+                                    <span >나이 </span>
 
 
-                                    <select name="age">
+                                    <select name="age" style='border-radius: 5px'>
                                         <option value="10대"selected="selected">10대</option>
                                         <option value="20대">20대</option>
                                         <option value="30대">30대</option>
@@ -414,10 +449,10 @@
 
 
                                 <!--                                차량-->
-                                <div style = "text-align: left">
-                                    <span style="margin-right: 10px">자가용 이용 </span>
-                                    <input type="radio" name="usecar" value="예" checked> <span style="color: black; font-size: 20px; margin: 0px;">예&nbsp;&nbsp;</span>
-                                    <input type="radio" name="usecar" value="아니오"> <span style="color: black; font-size: 20px; margin: 0px;">아니오&nbsp;&nbsp;</span>
+                                <div class="requestlabel" style = "text-align: left">
+                                    <span  style="margin-right: 10px">자가용 이용 </span>
+                                    <input type="radio" name="usecar" value="예" checked> <span style="color: black; font-size: medium;font-weight: normal; margin: 0px;">예&nbsp;&nbsp;</span>
+                                    <input type="radio" name="usecar" value="아니오"> <span style="color: black; font-size: medium;font-weight: normal; margin: 0px;">아니오&nbsp;&nbsp;</span>
                                 </div>
                                 <br>
 
@@ -425,10 +460,10 @@
 
 
                                 <!--                                이런정보가 필요해요-->
-                                <div style="text-align: left">
+                                <div class="requestlabel" style="text-align: left">
                                     <span > "이런 정보가 필요해요" </span>
 
-                                    <div style="text-align: left; font-size: 20px;">
+                                    <div style="text-align: left; font-size: medium; ">
                                         &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="yes_info" value="주변식당">주변식당 &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="yes_info" value="대중교통">대중교통 &nbsp;&nbsp;&nbsp;
@@ -441,10 +476,10 @@
 
 
                                 <!--이런 것들은 유의해주세요-->
-                                <div style="text-align: left">
+                                <div class="requestlabel" style="text-align: left; font-size: medium;">
                                     <span > "이런 점들은 유의해주세요" </span>
 
-                                    <div style="text-align: left;font-size: 20px;">
+                                    <div style="text-align: left;font-size: medium;">
                                         &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="no_info" value="오래 걷지 못해요">오래 걷지 못해요 &nbsp;&nbsp;&nbsp;
                                         <input type="checkbox" name="no_info" value="피해야할 음식이 있어요">피해야할 음식이 있어요 &nbsp;&nbsp;&nbsp;
@@ -456,14 +491,14 @@
 
 
                                 <!--                                하고싶은말-->
-                                    <span style="text-align: left">추가 요구사항</span>
-                                <div class="col-lg-12 text-center">
+                                    <span class="requestlabel" style="text-align: left">추가 요구사항</span>
+                                <div class="col-lg-12 text-center" style="height:300px">
 
 
                                     <textarea name="addition" placeholder="플래너에게 하고 싶은 말을 적어주세요." style="height: 200px; padding: 8px;
-                                    margin-bottom: 0px; font-style: normal; font-weight: 100; border: 2px solid grey; font-size: 19px;" ></textarea>
-                                    <a class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;margin-bottom: 8px; margin-right: 50px;" id="submit" href="/" onclick="alert('계획이 신청되었습니다!')">완료</a>
-                                    <a class="primary-btn" style="font-size: 27px;padding: 12px 40px 12px;" id = "back" href="javascript:history.back();">취소</a>
+                                    margin-bottom: 0px; border-radius:5px;font-style: normal; font-weight: 100; border: 2px solid grey; font-size: 19px;" ></textarea>
+                                    <a class="requestButton" style="padding: 12px 40px 12px;margin-bottom: 8px; margin-right:10px;" id="submit" href="/" onclick="alert('계획이 신청되었습니다!')">완료</a>
+                                    <a class="requestButton" style="padding: 12px 40px 12px;" id = "back" href="javascript:history.back();">취소</a>
 <!--                                    <input type="submit" id="submit" style="margin-bottom: 30px;">신청서 제출</input>-->
                                 </div>
                             </div>
