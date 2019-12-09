@@ -56,7 +56,7 @@ router.post('/sendForm', function(req,res){
     var author=req.user.id;
     var planner=planner_id;
 
-    console.log(senddata);
+
 
     //새로운 request db 생성됨
     var request= new Request({
@@ -73,7 +73,7 @@ router.post('/sendForm', function(req,res){
     // res.render("../views/RequestForm.ejs");
     // console.log("데이터 리스트"+data_list[0]);
 
-    res.render('/');
+    res.send('1');
 });
 
 //request planner 메뉴 누르면 실행됨
