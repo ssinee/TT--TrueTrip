@@ -25,22 +25,22 @@
 
         span {
             font-size: large;
-           font-weight: bold;
+            font-weight: bold;
             text-align: left;
             margin-bottom: 5px;
             margin-left: 21px;
             color: #FF5581;
-           padding-bottom: 30px;
+            padding-bottom: 30px;
         }
 
-       /*.underSection div{*/
-       /*    font-size: large;*/
-       /*    text-align: left;*/
-       /*    margin-bottom: 5px;*/
-       /*    margin-left: 21px;*/
-       /*    color: #FF5581;*/
-       /*    font-weight: bold;*/
-       /*}*/
+        /*.underSection div{*/
+        /*    font-size: large;*/
+        /*    text-align: left;*/
+        /*    margin-bottom: 5px;*/
+        /*    margin-left: 21px;*/
+        /*    color: #FF5581;*/
+        /*    font-weight: bold;*/
+        /*}*/
 
         /*.col-lg-12 text-center textarea:focus{*/
         /*    border: solid #FF5581 3px;*/
@@ -60,9 +60,9 @@
         /*    transition: all 0.3s;*/
         /*    margin-bottom: 0px;*/
         /*}*/
-       .requestlabel{
-           padding-bottom:20px
-       }
+        .requestlabel{
+            padding-bottom:20px
+        }
 
         .chosenPlace .row {
             display: -ms-flexbox;
@@ -175,32 +175,32 @@
             var postsArr="";
 
             for(var i=0; i<select_num;i++){
-               var posting= $.post('/showRequest', {'content_id':str[i]});
-               posting.done(function(data){
-                   content=data.data;
-                   console.log(content);
-                   console.log(content[0].path);
+                var posting= $.post('/showRequest', {'content_id':str[i]});
+                posting.done(function(data){
+                    content=data.data;
+                    console.log(content);
+                    console.log(content[0].path);
 
-                       postsArr +=
-                           "<div class=\"request-item\" >" +
-                           "                            <div class=\"left\">" +
-                           "                                <div class=\"item\">" +
-                           "                                    <img class=\"postpic\" id=\'"+i+"' src=\'" + content[0].path + "'width=100%; height=263px' style='border-radius:5px;' >" +
-                           "                                </div>" +
-                           "                            </div>" +
-                           "                            <div class=\"middle\">" +
-                           "                                <div class=\"item\">" +
-                           "                                    <h4 style='color:black;font-size:large; font-weight: bold; padding-bottom:10px'>"+content[0].title+"</h4>" +
-                           "                                    <hr style='border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 3px;'>" +
-                           "                                    <p style='font-size: 16px; font-weight: 100; line-height: 20px;margin-bottom: 0px; max-height: 112px; overflow: auto'>"+content[0].text+"</p>" +
-                           "                                </div>" +
-                           "                            </div>" +
-                           "                     </div>"
+                    postsArr +=
+                        "<div class=\"request-item\" >" +
+                        "                            <div class=\"left\">" +
+                        "                                <div class=\"item\">" +
+                        "                                    <img class=\"postpic\" id=\'"+i+"' src=\'" + content[0].path + "'width=100%; height=263px' style='border-radius:5px;' >" +
+                        "                                </div>" +
+                        "                            </div>" +
+                        "                            <div class=\"middle\">" +
+                        "                                <div class=\"item\">" +
+                        "                                    <h4 style='color:black;font-size:large; font-weight: bold; padding-bottom:10px'>"+content[0].title+"</h4>" +
+                        "                                    <hr style='border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 3px;'>" +
+                        "                                    <p style='font-size: 16px; font-weight: 100; line-height: 20px;margin-bottom: 0px; max-height: 112px; overflow: auto'>"+content[0].text+"</p>" +
+                        "                                </div>" +
+                        "                            </div>" +
+                        "                     </div>"
 
-                   $('#showSelectPosts').html(postsArr)
+                    $('#showSelectPosts').html(postsArr)
 
 
-               })
+                })
             }
 
             $('#submit').click(function(){
@@ -236,6 +236,7 @@
                     'yesarray':yesarray,
                     'noarray':noarray,
                     'addition':addition
+
                     });
                 //계획 작성후에는 바로 reservation으로 보내서, 확인하도록.
                 send.done(function(data){
@@ -244,6 +245,7 @@
                         alert('계획 요청 실패!');
                     }
                 })
+
 
             })
         })
@@ -279,244 +281,172 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
+                <!--                    <img src="img/fancy_TT_logo.PNG" style='margin-left:350px;' width="400px" >-->
 
-                <!--                    chg. form작성시에 이동할 페이지 써야함-->
-                <form action="#" class="contact-form">
-<!--                    <img src="img/fancy_TT_logo.PNG" style='margin-left:350px;' width="400px" >-->
+                <h1 style="font-size: xx-large;color:#797979; font-weight:bold; text-align: center;margin-bottom: 35px;"> <img src="img/placeholder.png" alt="" style="padding-right:20px;padding-bottom:10px;">계획 신청서</h1>
+                <div class="row">
 
-                    <h1 style="font-size: xx-large;color:#797979; font-weight:bold; text-align: center;margin-bottom: 35px;"> <img src="img/placeholder.png" alt="" style="padding-right:20px;padding-bottom:10px;">계획 신청서</h1>
-                    <div class="row">
+                    <div class="bigBox" style="border-radius:5px;border: 1px solid #CACDD6; width: 70%;">
 
+                        <div class="chosenPlace"  >
+                            <h2 style="font-size: large; font-weight: bold;text-align: left; margin-left: 11px; padding: 10px; color: #FF5581">선택장소</h2>
+                            <hr style="border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 5px;">
 
-                        <div class="bigBox" style="border-radius:5px;border: 1px solid #CACDD6; width: 70%;">
-
-
-
-                            <!--                            chg. DB에서 선택한 곳 3곳 선택장소-->
-                            <div class="chosenPlace"  >
-                                <h2 style="font-size: large; font-weight: bold;text-align: left; margin-left: 11px; padding: 10px; color: #FF5581">선택장소</h2>
-                                <hr style="border: solid #CACDD6 1px; margin-top: 0px; margin-bottom: 5px;">
-
-
-                                <div class="row" id="showSelectPosts" style="height: auto"></div>
-                            </div>
-
-
-                                <!--                                    chg. 선택장소 하나씩 들어가게 해야됨.-->
-                                <!--                                    chg. 선택장소1-->
-                                <!--                                   <div class="request-item">-->
-                                <!--                                            <img src = "img/cats/cat4.jpg"-->
-                                <!--                                                 style="width: 100px; height: 100px;">-->
-                                <!--                                            <h4>제목</h4>-->
-                                <!--                                            <p>소개글 안녕하세요 반갑습니다. 또 만나요. 안녕하세요 반갑습니다. 또 만나요. 안녕하세요 반갑습니다. 또 만나요.</p>-->
-                                <!--                                            <input type="button" value="X">-->
-                                <!--                                            <hr>-->
-                                <!--                                   </div>-->
-
-                                <!--                                    chg. 선택장소 하나씩 들어가게 해야됨.-->
-                                <!--                                    chg. 선택장소1-->
-<!--                                <div class="request-item" >-->
-<!--                                    <div class="left">-->
-<!--                                        <div class="item">-->
-<!--                                            <img src="/img/cats/행.jpg" width="100%" height="100%">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="middle">-->
-<!--                                        <div class="item">-->
-<!--                                            <p><b>행궁동 행리단길</b></p>-->
-<!--                                            <p>행리단길은 일상과 특별함이 공존하는 있는 골목길입니다. <br>-->
-<!--                                                작은 화단과 벽화로 장식된 행리단길은 산책로로 제격입니다.</p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="right">-->
-<!--                                        <div class="item">-->
-<!--                                            <img src="/img/icon/x.jpg" style="cursor:pointer;" onclick="removeRow()">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-
-
-<!--                                &lt;!&ndash;                                여기까지가 선택장소 이미지랑 설명&ndash;&gt;-->
-
-<!--                            </div>-->
-                            <!--                                아래 들어갈 체크박스등.내용-->
-                            <hr style="border: solid #CACDD6 1px;">
-                            <div class="underSection">
-                                <!--                                날짜.-->
-                                <div class="requestlabel"style = "text-align: left; padding-top:20px;">
-                                    <span >날짜 </span>
-                                    <input type="date" id="date" style="border-radius: 5px;">
-                                </div>
-                                <!--                                출발/도착시간-->
-                                <div class="requestlabel" style = "text-align: left">
-                                    <span > 출발 </span>
-<!--                                    <input id="start" type="time" min="00" max="24">-->
-                                    <select name="startTime" style="border-radius: 5px">
-                                        <option value="00">00</option>
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09"selected="selected">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                    </select>&nbsp;시&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
-
-                                    <span class="requestlabel"style="margin-left: 0px"> 귀가 </span>
-<!--                                    <input id="end" type="time" min="00" max="24">-->
-
-                                    <select name="endTime"  style="border-radius: 5px">
-                                        <option value="00">00</option>
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09"selected="selected">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                    </select>&nbsp;시
-
-
-                                </div>
-
-                                <!--                                인원수-->
-                                <div class="requestlabel" style = "text-align: left">
-                                    <span >인원 </span>
-
-
-                                    <select name="numofpeople" style='border-radius: 5px'>
-                                        <option value="01"selected="selected">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10이상">10이상</option>
-                                        <option value="20이상">20이상</option>
-                                    </select>&nbsp;명&nbsp;
-
-                                </div>
-
-
-
-                                <!--                                    나이-->
-                                <div class="requestlabel"style = "text-align: left">
-                                    <span >나이 </span>
-
-
-                                    <select name="age" style='border-radius: 5px'>
-                                        <option value="10대"selected="selected">10대</option>
-                                        <option value="20대">20대</option>
-                                        <option value="30대">30대</option>
-                                        <option value="40대">40대</option>
-                                        <option value="50대">50대</option>
-                                        <option value="60대">60대</option>
-                                        <option value="70대이상">70대이상</option>
-
-                                    </select>
-
-                                </div>
-
-
-                                <!--                                차량-->
-                                <div class="requestlabel" style = "text-align: left">
-                                    <span  style="margin-right: 10px">자가용 이용 </span>
-                                    <input type="radio" name="usecar" value="예" checked> <span style="color: black; font-size: medium;font-weight: normal; margin: 0px;">예&nbsp;&nbsp;</span>
-                                    <input type="radio" name="usecar" value="아니오"> <span style="color: black; font-size: medium;font-weight: normal; margin: 0px;">아니오&nbsp;&nbsp;</span>
-                                </div>
-                                <br>
-
-
-
-
-                                <!--                                이런정보가 필요해요-->
-                                <div class="requestlabel" style="text-align: left">
-                                    <span > "이런 정보가 필요해요" </span>
-
-                                    <div style="text-align: left; font-size: medium; ">
-                                        &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info" value="주변식당">주변식당 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info" value="대중교통">대중교통 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info" value="주차공간">주차공간 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info" value="장애인 편의시설">장애인 편의시설 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="yes_info" value="휴식장소">휴식장소 &nbsp;&nbsp;&nbsp;
-                                    </div>
-                                </div>
-                                <br>
-
-
-                                <!--이런 것들은 유의해주세요-->
-                                <div class="requestlabel" style="text-align: left; font-size: medium;">
-                                    <span > "이런 점들은 유의해주세요" </span>
-
-                                    <div style="text-align: left;font-size: medium;">
-                                        &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="no_info" value="오래 걷지 못해요">오래 걷지 못해요 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="no_info" value="피해야할 음식이 있어요">피해야할 음식이 있어요 &nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox" name="no_info" value="유모차나 휠체어를 이용해요">유모차나 휠체어를 이용해요 &nbsp;&nbsp;&nbsp;
-
-                                    </div>
-                                </div>
-                                <br>
-
-
-                                <!--                                하고싶은말-->
-                                    <span class="requestlabel" style="text-align: left">추가 요구사항</span>
-                                <div class="col-lg-12 text-center" style="height:300px">
-
-
-                                    <textarea name="addition" placeholder="플래너에게 하고 싶은 말을 적어주세요." style="height: 200px; padding: 8px;
-                                    margin-bottom: 0px; border-radius:5px;font-style: normal; font-weight: 100; border: 2px solid grey; font-size: 19px;" ></textarea>
-                                    <a class="requestButton" style="padding: 12px 40px 12px;margin-bottom: 8px; margin-right:10px;" id="submit" href="/" onclick="alert('계획이 신청되었습니다!')">완료</a>
-                                    <a class="requestButton" style="padding: 12px 40px 12px;" id = "back" href="javascript:history.back();">취소</a>
-<!--                                    <input type="submit" id="submit" style="margin-bottom: 30px;">신청서 제출</input>-->
-                                </div>
-                            </div>
+                            <div class="row" id="showSelectPosts" style="height: auto"></div>
                         </div>
-<!--                                undersection-->
-                    </div>
-                    </div>
-                </form>
-<!--                <div class="row" id="showSelectPosts">-->
 
-<!--                </div>-->
+                        <hr style="border: solid #CACDD6 1px;">
+
+                        <div class="underSection">
+                            <!--                                날짜.-->
+                            <div class="requestlabel"style = "text-align: left; padding-top:20px;">
+                                <span >날짜 </span>
+                                <input type="date" id="date" style="border-radius: 5px;">
+                            </div>
+
+                            <!--                                출발/도착시간-->
+                            <div class="requestlabel" style = "text-align: left">
+                                <span > 출발 </span>
+                                <!--                                    <input id="start" type="time" min="00" max="24">-->
+                                <select name="startTime" style="border-radius: 5px">
+                                    <option value="00">00</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09"selected="selected">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>&nbsp;시&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+
+                                <span class="requestlabel"style="margin-left: 0px"> 귀가 </span>
+                                <!--                                    <input id="end" type="time" min="00" max="24">-->
+                                <select name="endTime"  style="border-radius: 5px">
+                                    <option value="00">00</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09"selected="selected">09</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                </select>&nbsp;시
+                            </div>
+
+                            <!--                                인원수-->
+                            <div class="requestlabel" style = "text-align: left">
+                                <span >인원 </span>
+                                <select name="numofpeople" style='border-radius: 5px'>
+                                    <option value="01"selected="selected">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
+                                    <option value="05">05</option>
+                                    <option value="06">06</option>
+                                    <option value="07">07</option>
+                                    <option value="08">08</option>
+                                    <option value="09">09</option>
+                                    <option value="10이상">10이상</option>
+                                    <option value="20이상">20이상</option>
+                                </select>&nbsp;명&nbsp;
+                            </div>
+
+                            <!--                                    나이-->
+                            <div class="requestlabel"style = "text-align: left">
+                                <span >나이 </span>
+                                <select name="age" style='border-radius: 5px'>
+                                    <option value="10대"selected="selected">10대</option>
+                                    <option value="20대">20대</option>
+                                    <option value="30대">30대</option>
+                                    <option value="40대">40대</option>
+                                    <option value="50대">50대</option>
+                                    <option value="60대">60대</option>
+                                    <option value="70대이상">70대이상</option>
+                                </select>
+                            </div>
+
+                            <!--                                차량-->
+                            <div class="requestlabel" style = "text-align: left">
+                                <span  style="margin-right: 10px">자가용 이용 </span>
+                                <input type="radio" name="usecar" value="예" checked> <span style="color: black; font-size: medium;font-weight: normal; margin: 0px;">예&nbsp;&nbsp;</span>
+                                <input type="radio" name="usecar" value="아니오"> <span style="color: black; font-size: medium;font-weight: normal; margin: 0px;">아니오&nbsp;&nbsp;</span>
+                            </div>
+                            <br>
+
+                            <!--                                이런정보가 필요해요-->
+                            <div class="requestlabel" style="text-align: left">
+                                <span > "이런 정보가 필요해요" </span>
+                                <div style="text-align: left;font-size: medium;">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <input type="checkbox" name="yes_info" value="주변식당">주변식당 &nbsp;&nbsp;&nbsp;
+                                    <input type="checkbox" name="yes_info" value="대중교통">대중교통 &nbsp;&nbsp;&nbsp;
+                                    <input type="checkbox" name="yes_info" value="주차공간">주차공간 &nbsp;&nbsp;&nbsp;
+                                    <input type="checkbox" name="yes_info" value="장애인 편의시설">장애인 편의시설 &nbsp;&nbsp;&nbsp;
+                                    <input type="checkbox" name="yes_info" value="휴식장소">휴식장소 &nbsp;&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            <br>
+
+                            <!--이런 것들은 유의해주세요-->
+                            <div class="requestlabel" style="text-align: left; font-size: medium;">
+                                <span > "이런 점들은 유의해주세요" </span>
+
+                                <div style="text-align: left;font-size: medium;">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <input type="checkbox" name="no_info" value="오래 걷지 못해요">오래 걷지 못해요 &nbsp;&nbsp;&nbsp;
+                                    <input type="checkbox" name="no_info" value="피해야할 음식이 있어요">피해야할 음식이 있어요 &nbsp;&nbsp;&nbsp;
+                                    <input type="checkbox" name="no_info" value="유모차나 휠체어를 이용해요">유모차나 휠체어를 이용해요 &nbsp;&nbsp;&nbsp;
+
+                                </div>
+                            </div>
+                            <br>
+
+                            <!--                                하고싶은말-->
+                            <span class="requestlabel" style="text-align: left">추가 요구사항</span>
+                            <div class="col-lg-12 text-center" style="height:300px">
+                                    <textarea name="addition" placeholder="플래너에게 하고 싶은 말을 적어주세요." style="width:100%;height: 200px; padding: 8px;
+                                    margin-bottom: 0px; border-radius:5px;font-style: normal; font-weight: 100; border: 2px solid grey; font-size: 19px;" ></textarea>
+                                <a class="requestButton" style="padding: 12px 40px 12px;margin-bottom: 8px; margin-right:10px;" id="submit" href="/" onclick="alert('계획이 신청되었습니다!')">완료</a>
+                                <a class="requestButton" style="padding: 12px 40px 12px;" id = "back" href="javascript:history.back();">취소</a>
+                            </div>
+
+                        </div>
+                        <!--                            undersection end-->
+                    </div>
+                    <!--                        bigbox end-->
+                </div>
             </div>
         </div>
     </div>

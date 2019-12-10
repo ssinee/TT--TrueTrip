@@ -30,10 +30,10 @@
     /*------------------
       Navigation
    --------------------*/
-    $(".mobile-menu").slicknav({
-        prependTo: '#mobile-menu-wrap',
-        allowParentLinks: true
-    });
+    // $(".mobile-menu").slicknav({
+    //     prependTo: '#mobile-menu-wrap',
+    //     allowParentLinks: true
+    // });
 
     $('.slicknav_nav ul ').prepend('<li class="header-right-warp"></li>');
     $('.header-right').clone().prependTo('.slicknav_nav > ul > .header-right-warp');

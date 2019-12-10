@@ -56,6 +56,8 @@ router.post('/sendForm', function(req,res){
     var author=req.user.id;
     var planner=planner_id;
 
+
+
     //새로운 request db 생성됨
     var request= new Request({
         "planner":planner_id,"author":author,"selectpost":senddata,"date":date,
@@ -203,7 +205,6 @@ router.post('/checkReject', function(req,res){
         // console.log(data);
         res.send({data:data});
     })
-
 });
 
 module.exports = router;
