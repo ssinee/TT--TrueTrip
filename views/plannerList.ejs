@@ -25,6 +25,9 @@
     <!--    <link rel="stylesheet" type="text/css" href="slick/slick.css">-->
     <!--    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css">-->
     <% include head_link.html%>
+    <script src="slick/slick.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.slicknav.js"></script>
+
     <!--    favicon-->
     <!--    <link rel="icon" href="img/favicon-32x32.png">-->
     <!--    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="-->
@@ -236,88 +239,89 @@
 
 
     <script>
-        var contentString = ""
-        var stringArr = new Array();
-        var pagenum = 0;
-
-        //fill body content
-        function fillcontent(imagedata, idData, score) {
-            contentString = " "
-            stringArr = [];
-            pagenum = 0;
-            console.log(imagedata)
-
-            for (var i = 0; i < idData.length; i++) {
-                console.log(imagedata[i])
-
-                //게시글이 없는 planner 건너뛰기
-                if (imagedata[i] == "none") {
 
 
+        jQuery(document).ready(function ($) {
+
+            var contentString = ""
+            var stringArr = new Array();
+            var pagenum = 0;
+
+            //fill body content
+            function fillcontent(imagedata, idData, score) {
+                contentString = " "
+                stringArr = [];
+                pagenum = 0;
+                console.log(imagedata)
+
+                for (var i = 0; i < idData.length; i++) {
+                    console.log(imagedata[i])
+
+                    //게시글이 없는 planner 건너뛰기
+                    if (imagedata[i] == "none") {
+
+
+                        if ((i > 0 && i % 3 == 0) || i == idData.length - 1) {
+                            stringArr[pagenum] = contentString;
+                            pagenum++;
+                            contentString = ""
+                            continue;
+                        }
+                        continue;
+                    }
+                    console.log(i)
+                    //fill the profile
+                    contentString +=
+
+                        "                        <div class=\"planner\" >\n" +
+                        "                            <div class=\"profile\" style=\"border:none; cursor: pointer; \">\n" +
+                        "                                <div class=\"profile_img\" >\n" +
+                        "                                   <div class='yellowRating' style='width:70px; padding-left:0px;padding-right:0px;'><img class='mystar' src='img/mystar.PNG' >" + score[i] + "</div>" +
+                        "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;border-top-left-radius: 5px;border-top-right-radius: 5px;' src='" + idData[i].path + "'>\n" +
+
+                        "                                 <div  class=\"profile_desc\" style=\"border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;border:1px solid #CACDD6; background: #F7F8FB;\n" +
+                        "\tpadding-left: 16px;\n" +
+                        "\tpadding-top: 5px;\n" +
+                        "\tpadding-bottom: 5px;\n" +
+                        "\tpadding-right: 15px;\" >\n" +
+                        "                                    <span class='planners_names' style='font-weight:bold'>" + idData[i].name + "</span>\n" +
+                        "                                    <span style='display:none' class='planners_IDs'>" + idData[i].id + "</span>\n" +
+                        "                                </div>\n" +
+                        "                                </div>\n" +
+
+                        "                            </div>\n" +
+                        "\n" +
+                        "                            <div class=\"desc\">\n" +
+                        "                                <div class=\"autoplay slider\">\n"
+                    for (var j = 0; j < imagedata[i].length; j++) {
+                        contentString +=
+                            "                                    <div>" +
+                            "                                        <img style='width:180px; height: 210px;border-radius: 5px;' src='" + imagedata[i][j].path + "'>" +
+                            "                                    </div>"
+                    }
+                    contentString +=
+                        "                                </div>\n" +
+                        "                            </div>\n" +
+                        "                        </div>"
+                    //한 page당 4개의 planner
                     if ((i > 0 && i % 3 == 0) || i == idData.length - 1) {
                         stringArr[pagenum] = contentString;
                         pagenum++;
                         contentString = ""
-                        continue;
-                        alert('아오')
                     }
-                    continue;
                 }
-                console.log(i)
-                //fill the profile
-                contentString +=
+                $("#showhere").html(stringArr[0]);
 
-                    "                        <div class=\"planner\" >\n" +
-                    "                            <div class=\"profile\" style=\"border:none; cursor: pointer; \">\n" +
-                    "                                <div class=\"profile_img\" >\n" +
-                    "                                   <div class='yellowRating' style='width:70px; padding-left:0px;padding-right:0px;'><img class='mystar' src='img/mystar.PNG' >" + score[i] + "</div>" +
-                    "                                    <img  style='height: 210px; width: 198px; border:1px solid #CACDD6;border-top-left-radius: 5px;border-top-right-radius: 5px;' src='" + idData[i].path + "'>\n" +
+            }//end of fill content
 
-                    "                                 <div  class=\"profile_desc\" style=\"border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;border:1px solid #CACDD6; background: #F7F8FB;\n" +
-                    "\tpadding-left: 16px;\n" +
-                    "\tpadding-top: 5px;\n" +
-                    "\tpadding-bottom: 5px;\n" +
-                    "\tpadding-right: 15px;\" >\n" +
-                    "                                    <span class='planners_names' style='font-weight:bold'>" + idData[i].name + "</span>\n" +
-                    "                                    <span style='display:none' class='planners_IDs'>" + idData[i].id + "</span>\n" +
-                    "                                </div>\n" +
-                    "                                </div>\n" +
 
-                    "                            </div>\n" +
-                    "\n" +
-                    "                            <div class=\"desc\">\n" +
-                    "                                <div class=\"autoplay slider\">\n"
-                for (var j = 0; j < imagedata[i].length; j++) {
-                    contentString +=
-                        "                                    <div>" +
-                        "                                        <img style='width:180px; height: 210px;border-radius: 5px;' src='" + imagedata[i][j].path + "'>" +
-                        "                                    </div>"
-                }
-                contentString +=
-                    "                                </div>\n" +
-                    "                            </div>\n" +
-                    "                        </div>"
-                //한 page당 4개의 planner
-                if ((i > 0 && i % 3 == 0) || i == idData.length - 1) {
-                    stringArr[pagenum] = contentString;
-                    pagenum++;
-                    contentString = ""
-                }
+            function changefilter(location, category) {
+                $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
+                $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
+                $('#' + location).addClass('active')
+                $('#' + category).addClass('active')
+
             }
-            $("#showhere").html(stringArr[0]);
-
-        }//end of fill content
-
-
-        function changefilter(location, category) {
-            $(".filter-left .location-filter .location-option .lo-item label").removeClass('active');
-            $(".filter-left .category-filter .category-option .co-item label").removeClass('active');
-            $('#' + location).addClass('active')
-            $('#' + category).addClass('active')
-
-        }
-
-        jQuery(document).ready(function ($) {
 
             //page 넘기기
             $('.pagination-num a').click(function () {
@@ -546,20 +550,82 @@
 
                         </div>
                     </div>
+
+
+                    <!--                    <div class="rating-filter">-->
+                    <!--                        <h3>Ratings</h3>-->
+                    <!--                        <div class="rating-option">-->
+                    <!--                            <div class="ro-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label class="active">5.0</label>-->
+                    <!--                                <div class="rating-pic">-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="ro-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label>4.0</label>-->
+                    <!--                                <div class="rating-pic">-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="ro-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label>3.0</label>-->
+                    <!--                                <div class="rating-pic">-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="ro-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label>2.0</label>-->
+                    <!--                                <div class="rating-pic">-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="ro-item">-->
+                    <!--                                <input type="radio">-->
+                    <!--                                <label>1.0</label>-->
+                    <!--                                <div class="rating-pic">-->
+                    <!--                                    <i class="fa fa-star"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                    <i class="fa fa-star grey-bg"></i>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
             </div>
 
             <div class="col-lg-9">
                 <div class="row" id="parent">
-<!--                    <div class="col-lg-12" style="height:5px;">-->
-<!--                        <form action="#" class="arrange-select">-->
-<!--                            <span>Arrange by</span>-->
-<!--                            <select>-->
-<!--                                <option>Newest</option>-->
-<!--                                <option>Oldest</option>-->
-<!--                            </select>-->
-<!--                        </form>-->
-<!--                    </div>-->
+                    <!--                    <div class="col-lg-12" style="height:5px;">-->
+                    <!--                        <form action="#" class="arrange-select">-->
+                    <!--                            <span>Arrange by</span>-->
+                    <!--                            <select>-->
+                    <!--                                <option>Newest</option>-->
+                    <!--                                <option>Oldest</option>-->
+                    <!--                            </select>-->
+                    <!--                        </form>-->
+                    <!--                    </div>-->
 
                     <!--                    planner list 들어가는 곳-->
                     <span class='animated infinite flipInX ' style="animation-duration:2s;position:inherit; font-weight: normal; color:#787878;font-size: x-large;"><i>"자신에게 맞는 플래너를 찾아보세요. "</i></span>
@@ -581,50 +647,145 @@
         </div>
     </div>
 </section>
-<!-- Filter Section End -->
 
-<!-- App Section Begin -->
-<section class="app-section spad listings">
+<footer class="footer-section spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-5">
-                <img src="img/phone.png" alt="">
+            <div class="col-lg-12">
+                <form action="#" class="newslatter-form">
+                    <input type="text" placeholder="Your email address">
+                    <button type="submit">Subscribe to our Newsletter</button>
+                </form>
             </div>
-            <div class="col-lg-6 offset-lg-1">
-                <div class="app-text">
-                    <div class="section-title">
-                        <h2>Get the App now!</h2>
-                        <p>Explore some of the best places in the world</p>
-                    </div>
-                    <p>Morbi id dictum quam, ut commodo lorem. Donec bibendum, enim ut luctus dictum, nisl turpis
-                        scelerisque sem, in dapibus neque odio eu sapien. Morbi ac aliquet erat. Sed dapibus, augue et
-                        malesuada maximus.</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Usefull Links</h4>
                     <ul>
-                        <li><i class="fa fa-check"></i>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis
-                            veli
-                        </li>
-                        <li><i class="fa fa-check"></i>Vestibulum malesuada aliquet libero viverra cursus</li>
-                        <li><i class="fa fa-check"></i>Urna quam, euismod sit amet mollis quis, vestibulum quis veli
-                        </li>
+                        <li>About us</li>
+                        <li>Testimonials</li>
+                        <li>How it works</li>
+                        <li>Create an account</li>
+                        <li>Our Services</li>
                     </ul>
-                    <a href="#"><img src="img/apple-store.jpg" alt=""></a>
-                    <a href="#"><img src="img/google-store.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li>Hotels</li>
+                        <li>Restaurant</li>
+                        <li>Spa & resorts</li>
+                        <li>Concert & Events</li>
+                        <li>Bars & Pubs</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>Usefull Links</h4>
+                    <ul>
+                        <li>About us</li>
+                        <li>Testimonials</li>
+                        <li>How it works</li>
+                        <li>Create an account</li>
+                        <li>Our Services</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget">
+                    <h4>From the Blog</h4>
+                    <div class="single-blog">
+                        <div class="blog-pic">
+                            <img src="img/f-blog-1.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <h6>10 Best clubs in town</h6>
+                            <span>March 27, 2019</span>
+                        </div>
+                    </div>
+                    <div class="single-blog">
+                        <div class="blog-pic">
+                            <img src="img/f-blog-2.jpg" alt="">
+                        </div>
+                        <div class="blog-text">
+                            <h6>10 Best clubs in town</h6>
+                            <span>March 27, 2019</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row footer-bottom">
+            <div class="col-lg-5 order-2 order-lg-1">
+                <div class="copyright">
+                    <p class="text-white">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i>
+                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-7 text-center text-lg-right order-1 order-lg-2">
+                <div class="footer-menu">
+                    <a href="#">Home</a>
+                    <a href="#">Explore</a>
+                    <a href="#">More Cities</a>
+                    <a href="#">News</a>
+                    <a href="#">Contact</a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</footer>
+<!-- Filter Section End -->
+
+<!-- App Section Begin -->
+<!--<section class="app-section spad listings">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-5">-->
+<!--                <img src="img/phone.png" alt="">-->
+<!--            </div>-->
+<!--            <div class="col-lg-6 offset-lg-1">-->
+<!--                <div class="app-text">-->
+<!--                    <div class="section-title">-->
+<!--                        <h2>Get the App now!</h2>-->
+<!--                        <p>Explore some of the best places in the world</p>-->
+<!--                    </div>-->
+<!--                    <p>Morbi id dictum quam, ut commodo lorem. Donec bibendum, enim ut luctus dictum, nisl turpis-->
+<!--                        scelerisque sem, in dapibus neque odio eu sapien. Morbi ac aliquet erat. Sed dapibus, augue et-->
+<!--                        malesuada maximus.</p>-->
+<!--                    <ul>-->
+<!--                        <li><i class="fa fa-check"></i>Fusce urna quam, euismod sit amet mollis quis, vestibulum quis-->
+<!--                            veli-->
+<!--                        </li>-->
+<!--                        <li><i class="fa fa-check"></i>Vestibulum malesuada aliquet libero viverra cursus</li>-->
+<!--                        <li><i class="fa fa-check"></i>Urna quam, euismod sit amet mollis quis, vestibulum quis veli-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <a href="#"><img src="img/apple-store.jpg" alt=""></a>-->
+<!--                    <a href="#"><img src="img/google-store.jpg" alt=""></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 <!-- App Section End -->
 
 
-<script src="slick/slick.js" type="text/javascript" charset="utf-8"></script>
 
 
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
+
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/jquery.nice-select.min.js"></script>
 <script src="js/mixitup.min.js"></script>
