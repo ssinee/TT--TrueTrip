@@ -246,30 +246,31 @@
             var contentString = ""
             var stringArr = new Array();
             var pagenum = 0;
+            var contentnum=0;
 
             //fill body content
             function fillcontent(imagedata, idData, score) {
                 contentString = " "
                 stringArr = [];
                 pagenum = 0;
-                console.log(imagedata)
+                contentnum=0;
 
                 for (var i = 0; i < idData.length; i++) {
-                    console.log(imagedata[i])
+                    console.log(idData.length+'idData.length');
 
                     //게시글이 없는 planner 건너뛰기
                     if (imagedata[i] == "none") {
 
 
-                        if ((i > 0 && i % 3 == 0) || i == idData.length - 1) {
+                        if ((contentnum>0&&contentnum%4==0)||i == idData.length - 1 ) {
                             stringArr[pagenum] = contentString;
-                            pagenum++;
-                            contentString = ""
+                            if(contentnum%4==0){console.log('incontentnum3 '+i);contentString = "";pagenum++; contentnum=0;}
                             continue;
                         }
+                        console.log("in none"+i)
                         continue;
                     }
-                    console.log(i)
+                    // console.log(i)
                     //fill the profile
                     contentString +=
 
@@ -303,11 +304,14 @@
                         "                                </div>\n" +
                         "                            </div>\n" +
                         "                        </div>"
+                    contentnum++;
+                    console.log("in "+i+"contentnum: "+ contentnum);
                     //한 page당 4개의 planner
-                    if ((i > 0 && i % 3 == 0) || i == idData.length - 1) {
+                    if ((i>0 && contentnum%4==0)|| i == idData.length - 1) {
                         stringArr[pagenum] = contentString;
-                        pagenum++;
-                        contentString = ""
+                        if(contentnum%4==0){console.log("dsffsfsfsf: "+i+"cdc:"+contentnum);contentString = "";pagenum++; contentnum=0;;}
+                        console.log("in pagination :"+i)
+
                     }
                 }
                 $("#showhere").html(stringArr[0]);
@@ -325,7 +329,7 @@
 
             //page 넘기기
             $('.pagination-num a').click(function () {
-                window.setTimeout(start_slick, 300);
+                window.setTimeout(start_slick, 400);
 
                 var pagenum_ = parseInt($(this).text());
                 $('#showhere').html(stringArr[pagenum_ - 1]);
@@ -358,7 +362,7 @@
             }
 
             // 딜레이 7후에 start_slick 실행.
-            window.setTimeout(start_slick, 300);
+            window.setTimeout(start_slick, 400);
 
             //post request for planner and image data
             var posting = $.post('/showplanner', {})
@@ -398,10 +402,11 @@
 
             })
 
+
             //when location filter and category filter is selected
             $('input[name="the"], input[name="thec"]').click(function () {
 
-                window.setTimeout(start_slick, 100);
+                window.setTimeout(start_slick, 500);
 
 
                 //get the id of selected filter __location and category
