@@ -418,7 +418,12 @@
                             }
                         });
                         var request = $.post('/request', {'ids': ids});
-                        location.href="../requestform"
+
+                        request.done(function(data){
+                            location.href='/requestform';
+
+                        })
+                        //
                     }
                 })
             })
