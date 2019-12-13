@@ -255,6 +255,7 @@
 
                         for(var k=0; k<post_len;k++){
                             $("#"+iii).children(".middle").children().children("div[name=reservePlace]").html(str);
+                            $("#reject"+iii).children(".middle").children().children("div[name=reservePlace]").html(str);
                         }
 
                     }
@@ -291,6 +292,10 @@
                         $("#"+i).children(".right").children(".acceptReq").html(string);
                         $("#"+i).children(".right").children(".acceptReq").css('background-color', '#007bff');
 
+                        // var content=$("#"+i).children(".right").children(".acceptReq")
+                        // $("#endPlan"+i).html(content);
+
+                        // $("#"+i).html("완료");
 
                         $.ajax({
                             url:'/reviewState',
@@ -416,7 +421,7 @@
                     <% } else { %>
                     <% for(var i=0; i<data_length; i++) { %>
                         <% if( send_data[i].confirm==false) { %> 
-			<div class="smallBox" id="<%=i%>">
+			    <div class="smallBox" id="reject<%=i%>">
                             <div class="left">
                                 <div class="item"><h1><%=i+1%></h1></div>
                             </div>
@@ -462,8 +467,16 @@
                         </div>
                     </div>
                     <% } %>
+                            <%for(var j=0 ; j<data_length; j++) { %>
+                            <div class="" id="endPlan<%=j%>">
+
+                            </div>
+                            <% } %>
+
                     <% } %>
+
                     <% } %>
+
 
                 </div>
                 <br>

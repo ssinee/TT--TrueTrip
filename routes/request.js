@@ -12,6 +12,7 @@ let planner_id;
 router.post('/request', function(req,res){
     content_id= req.body.ids;
     console.log('/request 호출됨');
+    res.send({data:content_id});
     // console.log(content_id);
     // console.log(content_id.length);
 
