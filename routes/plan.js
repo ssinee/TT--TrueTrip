@@ -72,9 +72,10 @@ router.post('/viewPlan', function(req,res){
     // console.log(reqid);
     Schedule.find({'originRequest':reqid},function(err,data){
         if(err) throw err;
-        // console.log(data);
+        console.log("scheduledata"+data);
         schedule_data=data;
-        res.render('../views/receivedPlan.ejs',{data:data});
+        plan=data[0].plan;
+        res.send({data:data});
 
 
     })
@@ -83,7 +84,7 @@ router.post('/viewPlan', function(req,res){
 // reservation_traveler.ejs 에서 계획확인 눌렀을때 페이지 변경
 router.get('/viewPlan', function(req,res){
     // console.log("/receivedPlan 호출됨");
-    // console.log(schedule_data);
+    console.log(schedule_data);
     res.render('../views/receivedPlan.ejs',{data:schedule_data});
 
 });

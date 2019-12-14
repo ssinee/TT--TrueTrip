@@ -14,15 +14,12 @@
     <% include head_link.html%>
 
     <style>
-
         h5{
             font-size:large;
             font-weight:bold;
             text-align: left;
             margin-left: 5px;
-
             color: #FF5581;
-
         }
         .checkPlan{
             background: #FF5581;
@@ -74,14 +71,10 @@
             border-radius: 5px;
             text-align: center;
             vertical-align: middle;
-
             font-weight: bold;
             /*margin-left:500px;*/
             padding:10px;
-
         }
-
-
         textarea{
             width: 48%;
             margin: 4px;
@@ -119,7 +112,6 @@
             border-radius: 5px;
             border: solid #CACDD6 2px;
         }
-
         .blur_class{
             -webkit-filter: blur(5px);
             -moz-filter: blur(5px);
@@ -130,10 +122,9 @@
             height: 100px;
             background-color: #ccc;
             /*position:relative;*/
-
         }
         #test{
-           position:absolute;
+            position:absolute;
             top:1000px;
             left:200px;
         }
@@ -148,7 +139,6 @@
             padding-top: 65px;
             /*border: solid #CACDD6 2px;*/
             /*border-radius: 5px;*/
-
         }
         #star_grade a{
             font-size: 50px;
@@ -157,34 +147,27 @@
         }
         #star_grade a.on{
             color: gold;
-
         }
-
-
     </style>
 
     <script>
-
         var schedule="<%=data[0].plan%>";
         var array=schedule.split(",");
+        // array=array.split()
         var length=array.length;
-
-
         console.log(schedule);
         console.log(array);
         console.log(array.length);
+        for (var i=0; i<array.length; i++){
+
+            array[i]=array[i].replace(/(?:&lt;br\/\&gt;)/g, " ");
+        }
 
         var row_num=length/8;
         console.log(row_num);
-
-
-
-
         // ARRAY FOR HEADER.
         var arrHead = new Array();
         arrHead = ['시간', '장소', '세부사항'];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
-
-
         // chg. DB대신 테스트할 더미 데이터. 나중에 push 중간에 들어가는 부분들만 DB값으로 교체.
         // chg. 지금은 한 row만 했는데, 실제로는 row 수만큼 push 해야됨
         // chg. DB에서 읽은 column의 길이(DBarrayLen)를 8로 나눠서 howManyRows에 대입
@@ -193,63 +176,43 @@
         var howManyRows=row_num;
         var values = array;
         var cursor = 0;
-
-
         var schedule_id="<%=data[0]._id%>";
         var planner="<%=data[0].planner%>";
         var traveler="<%=data[0].traveler%>";
         var origin_req="<%=data[0].originRequest%>";
-
-
         // chg. 이런 느낌으로
         for(var i=0; i<length; i++){
             values.push(array[i]);
         }
-
-
-
         // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
         // ADD THE TABLE TO YOUR WEB PAGE.
         function user_createTable() {
             var user_Table = document.createElement('table');
             user_Table.setAttribute('id', 'user_Table');            // SET THE TABLE ID.
-
             var tr = user_Table.insertRow(-1);
-
             for (var h = 0; h < arrHead.length; h++) {
                 var th = document.createElement('th');          // TABLE HEADER.
                 th.innerHTML = arrHead[h];
                 tr.appendChild(th);
             }
-
             var div = document.getElementById('req_cont');
             div.appendChild(user_Table);    // ADD THE TABLE TO YOUR WEB PAGE.
-
-
             // 로드시에 모든 계획을 다 불러오게 한다.
             fullLoad();
         }
-
-
-
         // 모든 계획 불러오는 함수
         function fullLoad() {
-
             for (var k=0; k < howManyRows; k++)
             {
                 var userTab = document.getElementById('user_Table');
-
                 var rowCnt = userTab.rows.length;        // GET TABLE ROW COUNT.
                 var tr = userTab.insertRow(rowCnt);      // TABLE ROW.
                 tr = userTab.insertRow(rowCnt);
-
                 for(var i=0; i< howManyRows;i++){
                     tr.id= "id"+rowCnt;
                 }
                 for(var j=0; j<howManyRows; j++){
-
                     $.ajax({
-
                         url:'/checkConfirm',
                         dataType: 'json',
                         type:'Post',
@@ -275,18 +238,13 @@
                                     else{
                                         tr.className="blur_class";
                                     }
-
                                 }
-
                             }
                         },
                         error: function(request,status,error){
                             alert(error);
                         }
-
                     })
-
-
                     // if(tr.id=="id1"){
                     //     tr.className="origin_class";
                     // }
@@ -294,34 +252,26 @@
                     //     tr.className="blur_class";
                     // }
                 }
-
-
                 for (var c = 0; c < arrHead.length; c++) {
                     var td = document.createElement('td');          // TABLE DEFINITION.
                     td = tr.insertCell(c);
                     //첫 셀
                     if (c == 0) {
-
                         var para = document.createElement("P");
                         para.innerText = values[cursor++];
                         td.appendChild(para);
                     }
-
                     //두 번째 셀
                     else if (c == 1) {
-
                         var para = document.createElement('P');
                         para.innerText = values[cursor++];
                         td.appendChild(para);
                     }
-
-
                     //세 번째 셀
                     else if (c == 2) {
                         var space = "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" +
                             "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" +
                             "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
-
                         //텍스트 위에 들어가는 타이틀. ex) 위치, 경비...
                         var title1 = document.createElement("h5");
                         title1.innerText = "\u00A0"+"위치 / 교통" + space + "\u00A0\u00A0\u00A0\u00A0"  +"이용료 / 경비";
@@ -331,13 +281,11 @@
                         textarea1.setAttribute('placeholder', '위치 및 교통 정보');
                         textarea1.innerText = values[cursor++];
                         td.appendChild(textarea1);
-
                         var textarea2 = document.createElement("textarea");
                         textarea2.setAttribute('type', 'textarea');
                         textarea2.setAttribute('placeholder', '이용료/경비');
                         textarea2.innerText = values[cursor++];
                         td.appendChild(textarea2);
-
                         var textarea3 = document.createElement("textarea");
                         var title2 = document.createElement("h5");
                         title2.innerText = "\u00A0"+"개방시간" + space + "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0" + "복잡도";
@@ -346,7 +294,6 @@
                         textarea3.setAttribute('placeholder', '개방시간');
                         textarea3.innerText = values[cursor++];
                         td.appendChild(textarea3);
-
                         var textarea4 = document.createElement("textarea");
                         // var title4 = document.createElement("h5");
                         // title4.innerText = '복잡도';
@@ -355,7 +302,6 @@
                         textarea4.setAttribute('placeholder', '복잡도');
                         textarea4.innerText = values[cursor++];
                         td.appendChild(textarea4);
-
                         var textarea5 = document.createElement("textarea");
                         // var title5 = document.createElement("h5");
                         // title5.innerText = '분위기';
@@ -367,7 +313,6 @@
                         textarea5.setAttribute('placeholder', '분위기');
                         textarea5.innerText = values[cursor++];
                         td.appendChild(textarea5);
-
                         var textarea6 = document.createElement("textarea");
                         // var title6 = document.createElement("h5");
                         // title6.innerText = '플래너의 추천';
@@ -380,32 +325,22 @@
                 }
             }
         }
-
-
         function print_plan() {
             window.print();
         }
-
         $(document).ready(function(){
-
             user_createTable();
-
             if(howManyRows==1){
                 $("#test").hide()
             }
             else{
                 $("#reviewBtn").hide()
             }
-
-
-
             var schedule_id="<%=data[0]._id%>";
             var planner="<%=data[0].planner%>";
             var traveler="<%=data[0].traveler%>";
             var origin_req="<%=data[0].originRequest%>";
-
             $.ajax({
-
                 url:'/checkConfirm',
                 dataType: 'json',
                 type:'Post',
@@ -427,17 +362,13 @@
                             $("#reviewBtn").show();
                         }
                         else{
-
                         }
-
                     }
                 },
                 error: function(request,status,error){
                     alert(error);
                 }
-
             })
-
             $.ajax({
                 url:'/reviewState',
                 dataType: 'json',
@@ -458,25 +389,20 @@
                             "                                    <a class='checkPlan' href=\"/post/"+planner+"\">"+"리뷰 보러가기"+"</a>" +
                             "                                </div>" +
                             "</div>"
-
                         $("#hasReview").html(postsArr);
                     }
                     else{
                         console.log("리뷰 작성없음");
                         // $("#"+i).children(".right").children(".item2").html("리뷰 기다리는중");
                     }
-
                 },
                 error: function(request,status,error){
                     alert(error);
                 }
-
             })
-
             // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
             var floatPosition = parseInt($("#test").css('top'))
             // 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
-
             $(window).scroll(function() {
                 // 현재 스크롤 위치를 가져온다.
                 var scrollTop = $(window).scrollTop();
@@ -487,14 +413,10 @@
                 if(scrollTop<900){
                     newPosition=900;
                 }
-
                 $("#test").stop().animate({
                     "top" : newPosition
                 }, 100);
-
             }).scroll();
-
-
             $("#submit").click(function(){
                 var origin_id="<%=data[0].originRequest%>";
                 var author="<%=data[0].traveler%>";
@@ -502,7 +424,6 @@
                 // var score=$("select[name=stars]").val();
                 var score = $('.on').length; // 별점클릭시 클래스 on됨. on의 갯수.
                 var comment=$("textarea[name=review]").val();
-
                 var send=$.post('/sendReview', {
                     'author': author,
                     'score': score,
@@ -512,14 +433,9 @@
                 });
                 alert('후기가 등록되었습니다.')
                 location.href = '/main'
-
             })
-
-
-
             $("#morePlan").click(function(){
                 if(confirm("주의! 포인트가 차감됩니다. 계속 진행하시겠습니까?")){
-
                     // plan.js에 있는 /findPoint
                     $.ajax({
                         url:'/findPoint',
@@ -540,41 +456,28 @@
                                     $("#test").hide();
                                     $("#reviewBtn").show();
                                 }
-
                             }
                         },
                         error: function(request,status,error){
                             alert(error);
                         }
-
                     })
-
-
                 }
                 else{
-
                 }
-
-
             })
-
             $("#reviewBtn").click(function () {
                 $('#reviewModal').modal().toggle();
-
             })
-
             $("#toMain").click(function () {
                 location.href = '/main'
             })
-
             $('#star_grade a').click(function(){
                 $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */
                 $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
                 return false;
             });
-
         })
-
     </script>
 
 
@@ -614,7 +517,7 @@
                         <div id="test" style="padding: 30px;">
                             <form method="" action="#">
 
-<!--                                <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="계획을 더 보고싶다면?"></textarea>-->
+                                <!--                                <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="계획을 더 보고싶다면?"></textarea>-->
 
                                 <div id="planalert">계획을 더 보려면 100 포인트가 필요합니다.</div>
                                 <br>
@@ -637,43 +540,43 @@
 
 
                 <!--                    후기작성 섹션-->
-<!--                <b><h2>리뷰 작성</h2></b>-->
-<!--                <div class="blog-item" style="border: solid #CACDD6 2px">-->
-<!--                    <div id="후기작성" style="padding: 30px;">-->
-<!--&lt;!&ndash;                        <p style="font-size: 20px; color: grey">리뷰 작성시 마일리지 2포인트가 적립됩니다.</p>&ndash;&gt;-->
+                <!--                <b><h2>리뷰 작성</h2></b>-->
+                <!--                <div class="blog-item" style="border: solid #CACDD6 2px">-->
+                <!--                    <div id="후기작성" style="padding: 30px;">-->
+                <!--&lt;!&ndash;                        <p style="font-size: 20px; color: grey">리뷰 작성시 마일리지 2포인트가 적립됩니다.</p>&ndash;&gt;-->
 
-<!--                        &lt;!&ndash;                        chg. 여기 action 바꿔줘야함.&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        chg. 후기DB에 stars랑 review값 저장. 유저ID, 플래너ID, 선택장소, 날짜도 저장&ndash;&gt;-->
-<!--                        &lt;!&ndash;                        chg. 계획요청DB에서 후기여부를 true로.&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                        chg. 여기 action 바꿔줘야함.&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                        chg. 후기DB에 stars랑 review값 저장. 유저ID, 플래너ID, 선택장소, 날짜도 저장&ndash;&gt;-->
+                <!--                        &lt;!&ndash;                        chg. 계획요청DB에서 후기여부를 true로.&ndash;&gt;-->
 
-<!--                        <form method="post" action="/main" id="AAA">-->
-<!--                            만족도&nbsp;&nbsp;-->
+                <!--                        <form method="post" action="/main" id="AAA">-->
+                <!--                            만족도&nbsp;&nbsp;-->
 
-<!--                            <select name="stars">-->
-<!--                                <option value="1">1</option>-->
-<!--                                <option value="2">2</option>-->
-<!--                                <option value="3">3</option>-->
-<!--                                <option value="4">4</option>-->
-<!--                                <option value="5">5</option>-->
+                <!--                            <select name="stars">-->
+                <!--                                <option value="1">1</option>-->
+                <!--                                <option value="2">2</option>-->
+                <!--                                <option value="3">3</option>-->
+                <!--                                <option value="4">4</option>-->
+                <!--                                <option value="5">5</option>-->
 
-<!--&lt;!&ndash;                                <option value="6">6</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option value="7">7</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option value="8">8</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option value="9">9</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option value="10" selected>10</option>&ndash;&gt;-->
-<!--                            </select>점 / 5 점-->
+                <!--&lt;!&ndash;                                <option value="6">6</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <option value="7">7</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <option value="8">8</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <option value="9">9</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;                                <option value="10" selected>10</option>&ndash;&gt;-->
+                <!--                            </select>점 / 5 점-->
 
-<!--                            <br>-->
+                <!--                            <br>-->
 
-<!--                            <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="이런 점이 좋았고 이런 점이 보완이 필요해요."></textarea>-->
-<!--                            <br>-->
-<!--                            <center>-->
-<!--                                <input id="submit" type="submit" class="primary-btn" value="확인">-->
-<!--                            </center>-->
-<!--                        </form>-->
-<!--&lt;!&ndash;                        <br>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                            <textarea name = "review" form="AAA" cols="40" rows="10" style="margin: 0px; margin-bottom: 20px;" placeholder="이런 점이 좋았고 이런 점이 보완이 필요해요."></textarea>-->
+                <!--                            <br>-->
+                <!--                            <center>-->
+                <!--                                <input id="submit" type="submit" class="primary-btn" value="확인">-->
+                <!--                            </center>-->
+                <!--                        </form>-->
+                <!--&lt;!&ndash;                        <br>&ndash;&gt;-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -697,16 +600,16 @@
                         <a href="#" value="4">★</a>
                         <a href="#" value="5">★</a>
                     </p>
-<!--                    <select name="stars">-->
-<!--                        <option value="1">1</option>-->
-<!--                        <option value="2">2</option>-->
-<!--                        <option value="3">3</option>-->
-<!--                        <option value="4">4</option>-->
-<!--                        <option value="5">5</option>-->
-<!--                    </select>-->
-                        <textarea style="height: 130px; width: 100%; font-size: 18px;"
-                                          name="review"
-                                          placeholder="이런 점이 좋았고, 이런 점은 보완이 필요해요."></textarea><br>
+                    <!--                    <select name="stars">-->
+                    <!--                        <option value="1">1</option>-->
+                    <!--                        <option value="2">2</option>-->
+                    <!--                        <option value="3">3</option>-->
+                    <!--                        <option value="4">4</option>-->
+                    <!--                        <option value="5">5</option>-->
+                    <!--                    </select>-->
+                    <textarea style="height: 130px; width: 100%; font-size: 18px;"
+                              name="review"
+                              placeholder="이런 점이 좋았고, 이런 점은 보완이 필요해요."></textarea><br>
                 </center>
             </div>
             <!--                모달 바디-->
