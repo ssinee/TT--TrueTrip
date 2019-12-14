@@ -8,7 +8,7 @@ var Planner=mongoose.model('planners');
 
 let req_id;
 let schedule_data;
-
+let reqid;
 //reservation_planner.ejs 에서 요청 수락하면 makePlan.ejs로 화면 이동
 router.post('/sendReqID', function(req,res){
 
@@ -68,24 +68,35 @@ router.post('/addPlan', function(req,res){
 
 router.post('/viewPlan', function(req,res){
     // console.log("/viewPlan 호출됨");
-    var reqid=req.body.reqid;
+    reqid=req.body.reqid;
     // console.log(reqid);
+    res.send({data:reqid});
+    // Schedule.find({'originRequest':reqid},function(err,data){
+    //     if(err) throw err;
+    //     console.log("scheduledata"+data);
+    //     schedule_data=data;
+    //     plan=data[0].plan;
+    //     res.render('../views/receivedPlan.ejs',{data:schedule_data});
+    //
+    //
+    // })
+});
+
+// reservation_traveler.ejs 에서 계획확인 눌렀을때 페이지 변경
+router.get('/viewPlan', function(req,res){
+
     Schedule.find({'originRequest':reqid},function(err,data){
         if(err) throw err;
         console.log("scheduledata"+data);
         schedule_data=data;
         plan=data[0].plan;
-        res.send({data:data});
+        res.render('../views/receivedPlan.ejs',{data:schedule_data});
 
 
     })
-});
-
-// reservation_traveler.ejs 에서 계획확인 눌렀을때 페이지 변경
-router.get('/viewPlan', function(req,res){
     // console.log("/receivedPlan 호출됨");
-    console.log(schedule_data);
-    res.render('../views/receivedPlan.ejs',{data:schedule_data});
+    // console.log(schedule_data);
+    // res.render('../views/receivedPlan.ejs',{data:schedule_data});
 
 });
 
