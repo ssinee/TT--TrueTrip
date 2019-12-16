@@ -393,12 +393,14 @@
                 $('#showPlannerImages').html(postsArr)
 
 
-                var ids = new Array();
-                var objid;
+
+
                 $('#request').click(function () {
+                    var ids = new Array();
+                    var objid="";
                     var selected_photos = $('.postpicActive');
                     //아무것도 선택안하고 요청시에는 에러 메시지 modal로 띄움.
-                    console.log(selected_photos);
+
                     if(selected_photos.length == 0){
                         $('#chooseModal').modal('toggle');
                         return;
@@ -410,7 +412,6 @@
                             var selval = $(this).attr("id");
                             selval *= 1;
                             objid = content[selval]._id;
-                            console.log(objid);
                             // var id_arr = id_str.split("_");
                             // var selval = id_arr[1];
                             if (objid != 'undefined' && objid != '' && objid != null) {
@@ -418,7 +419,10 @@
                             }
                         });
                         var request = $.post('/request', {'ids': ids});
+
+
                         location.href="../requestform"
+                        selected_photos=[];
                     }
                 })
             })

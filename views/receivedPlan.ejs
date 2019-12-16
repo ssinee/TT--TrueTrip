@@ -317,7 +317,8 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 
-    var schedule="<%=data[0].plan%>";
+    var schedule=JSON.stringify()<%=data[0].plan%>;
+    schedule= schedule.replace(/\n/g, '');
     var array=schedule.split(",");
     var length=array.length;
 
