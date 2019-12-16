@@ -420,9 +420,13 @@
                         });
                         var request = $.post('/request', {'ids': ids});
 
-
-                        location.href="../requestform"
                         selected_photos=[];
+
+                        request.done(function(data){
+                            location.href='/requestform';
+
+                        })
+
                     }
                 })
             })
@@ -590,7 +594,7 @@
             <div class="row" style="width: 100%;">
                 <div class="col-lg-4" style="max-width: 25%; padding-right: 40px; padding-left: 0px;">
                     <div class="about-right">
-                        <div class="contact-info" style="padding-top: 100px; width: 100%; left:100px;position: absolute;">
+                        <div class="contact-info" style="padding-top: 100px; width: 100%; left:100px;position: inherit;">
 
                             <!--profile image comes here-->
                             <form method="post" action="/mypage/editimg" enctype="multipart/form-data"
@@ -598,7 +602,7 @@
                                 <div class="map" style=" height: 310px;">
 
                                     <img id="profile_img" name="profile_img" src='<%= user_info.path %>' alt=""
-                                         style="width: 80%; height: 100%;border:1px solid #CACDD6;">
+                                         style="width: 90%; height: 100%;border:1px solid #CACDD6;left:20px;">
 
 
                                     <!--                                    로그인 시, 페이지 주인이면 profile img edit 활성화-->

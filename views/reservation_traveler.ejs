@@ -291,7 +291,7 @@
 
 
                                         postsArr +=
-                                            "<a class='checkplan' name=\"confirmPlan\" href=\"/viewPlan\">" +
+                                            "<a class='checkplan' name=\"confirmPlan\" href=\"\">" +
                                             "  계획 확인 " +
                                             "                     </a>"
                                         $(plan[j]).html(postsArr);
@@ -342,6 +342,10 @@
                 var send=$.post('/viewPlan', {
                    'reqid':array[id_num]
                 });
+                // // location.href="/viewPlan"
+                send.done(function(data){
+                   location.href="/viewPlan"
+                })
 
 
             })
@@ -408,6 +412,7 @@
 
                         </div>
                     </div>
+
                     <% } %>
                     <% } %>
 

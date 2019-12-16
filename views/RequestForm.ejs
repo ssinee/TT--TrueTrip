@@ -171,7 +171,7 @@
             var str=data.split(",");
             // var array=str[0];
             // console.log(array);
-            var content;
+            var content="";
             var postsArr="";
 
             for(var i=0; i<select_num;i++){
@@ -200,7 +200,11 @@
                     $('#showSelectPosts').html(postsArr)
 
 
+
                 })
+                content="";
+                postsArr="";
+
             }
 
             $('#submit').click(function(){

@@ -384,6 +384,11 @@
                     values.push(element.childNodes[0].value );
                 }
                 if (element.childNodes[0].getAttribute('type') == 'textarea') {
+                    for(var i =0; i< 6; i++){
+                        element.childNodes[i].value=element.childNodes[i].value.replace(/(?:\r\n|\r|\n)/g,'<br/>');
+                        console.log(element.childNodes[i].value);
+                    }
+                    console.log(typeof(element.childNodes[1].value));
                     values.push(element.childNodes[0].value );
                     values.push(element.childNodes[1].value );
                     values.push(element.childNodes[2].value );
@@ -396,6 +401,8 @@
         // SHOW THE RESULT IN THE CONSOLE WINDOW.
         var origin_request="<%=data[0]._id%>";
         console.log(values);
+        // values=values.replace(/\n/g," ");
+        // console.log(values);
 
         //plan.js로 감
         var posting= $.post('/addPlan', {'plan_array':values,'origin_request':origin_request});
