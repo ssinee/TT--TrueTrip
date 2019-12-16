@@ -15,16 +15,13 @@ router.post('/request', function(req,res){
     res.send({data:content_id});
     // console.log(content_id);
     // console.log(content_id.length);
-
     // res.render("../views/RequestForm.ejs");
     // console.log("데이터 리스트"+data_list[0]);
 });
 
 //plannerpage.ejs 에서 request 누르면 실행됨
 router.get('/requestform',function(req,res){
-
     res.render("../views/RequestForm.ejs",{content_id:content_id});
-
 });
 
 router.post('/showRequest',function(req,res){
@@ -87,7 +84,7 @@ router.get('/reservation_planner',function(req,res){
 
 // /reservation_planner 실행되면 해당 id의 페이지로감 오류처리 아직 안되어있음
 router.get('/reservation_planner/:id',function(req,res){
-    console.log("유저아이디 호출됨22222222ㄴ");
+
     var data_array=new Array();
     var data_length;
 

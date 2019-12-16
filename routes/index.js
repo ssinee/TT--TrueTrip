@@ -51,12 +51,10 @@ router.get('/reqForm', (req,res)=>{
     res.render('../views/RequestForm.ejs');
 })
 
-
-router.get('/testguide', (req, res)=>{
-    res.render('../views/guidepage_test.ejs')
-})
 router.get('/plannerRegister', (req,res)=>{
-    res.render('../views/plannerRegister.ejs')
+    res.render('../views/plannerRegister.ejs');
 })
+
+
 
 module.exports = router;

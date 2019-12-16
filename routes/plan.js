@@ -100,6 +100,7 @@ router.get('/viewPlan', function(req,res){
 
 });
 
+
 //schedule confirm 상태 전송 receivedPlan.ejs 에서 호출됨
 router.post('/checkConfirm', function(req,res){
     console.log("/checkConfirm 호출됨");
