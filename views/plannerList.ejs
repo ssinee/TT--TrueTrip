@@ -247,6 +247,9 @@
             var stringArr = new Array();
             var pagenum = 0;
             var contentnum=0;
+            var temp_score = 0;
+            var result_score = new Array();
+
 
             //fill body content
             function fillcontent(imagedata, idData, score) {
@@ -333,6 +336,8 @@
 
                 var pagenum_ = parseInt($(this).text());
                 $('#showhere').html(stringArr[pagenum_ - 1]);
+
+
             });
             var imagepath;
             var location;
@@ -368,20 +373,23 @@
             var posting = $.post('/showplanner', {})
 
             //post done, get data
-            var temp_score = 0;
-            var result_score = new Array();
+
 
             posting.done(function (data) {
                 imagepath = data.data//get image path
                 idData = data.Iddata// get selected ID data
                 category = data.category//get selected category data
                 location = data.location//get selected location data
+                temp_score = 0;
+                result_score = [];
                 console.log(imagepath)
                 console.log(idData)
                 console.log(category)
                 console.log(location)
                 //review check
                 for (var i = 0; i < idData.length; i++) {
+
+
                     if (idData[i].reviews.length == 0) {
                         result_score.push('NEW')
                         continue;
@@ -409,6 +417,7 @@
                 window.setTimeout(start_slick, 500);
 
 
+
                 //get the id of selected filter __location and category
                 var loc = $(".filter-left .location-filter .location-option .lo-item .active").attr('id')
                 var cat = $(".filter-left .category-filter .category-option .co-item .active").attr('id')
@@ -418,12 +427,11 @@
                 var posting_filter = $.post('/frommain', {'location': loc, 'category': cat})
                 posting_filter.done(function (data) {
 
+
                     if (data == '1') {
                         //time 설정 needed
 
                         var posting_filter_start = $.post('/showplanner', {})
-                        var temp_score = 0;
-                        var result_score = new Array();
 
                         posting_filter_start.done(function (data) {
 
@@ -432,18 +440,25 @@
                             category = data.category//get selected category data
                             location = data.location//get selected location data
 
+                            temp_score = 0;
+                            result_score = [];
                             for (var i = 0; i < idData.length; i++) {
+
+
                                 if (idData[i].reviews.length == 0) {
                                     result_score.push('NEW')
                                     continue;
                                 }
                                 for (var j = 0; j < idData[i].reviews.length; j++) {
                                     temp_score += parseInt(idData[i].reviews[j].score)
+                                    console.log(temp_score)
+                                    console.log(i+'\n\n');
                                 }
                                 result_score.push((temp_score / idData[i].reviews.length).toFixed(1))
+                                temp_score = 0;
 
                             }
-                            console.log('checkout imagepath'+imagepath)
+                            console.log("result_score:"+result_score+"\n\n");
 
                             //fill body section with data
                             fillcontent(imagepath, idData, result_score)
