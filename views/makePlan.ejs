@@ -375,6 +375,7 @@
         var myTab = document.getElementById('empTable');
         var values = new Array();
 
+        console.log("sfsdfasdfasfsafsafssubmit plan!!!!!!!!!!!!!11111\n\n")
         // LOOP THROUGH EACH ROW OF THE TABLE.
         for (row = 1; row < myTab.rows.length - 1; row++) {
             for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
@@ -409,7 +410,10 @@
         alert('계획이 제출되었습니다!')
 
         posting.done(function(data){
-            location.href='/reservation_planner';
+            if(data=='1'){
+                location.href='/reservation_planner';
+            }
+
         })
 
 

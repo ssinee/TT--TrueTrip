@@ -62,6 +62,8 @@ router.post('/addPlan', function(req,res){
         })
     });
 
+    res.send('1');
+
 });
 
 //reservation_traveler.ejs 에서 계획확인 누르면 request _id 넘김 해당 schedule 찾아서  receivedPlan.ejs 로 넘겨줌
